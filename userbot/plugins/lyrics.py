@@ -1,6 +1,6 @@
 # \\ Created by-@mrconfused -- Github.com/sandy1709 //
 # \\ Modified by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\    https://github.com/TgTHANOSPRO/THANOSBOT   //
+#  \\    https://github.com/TgCatUB/CatUserbot   //
 #   \\        Plugin for @THANOSBOT            //
 #    ````````````````````````````````````````````
 

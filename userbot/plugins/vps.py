@@ -1,5 +1,5 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgTHANOSPRO/THANOSBOT   //
+#  \\   https://github.com/TgCatUB/CatUserbot   //
 #   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
@@ -40,7 +40,7 @@ async def switch_branch():
     with open(config, "r") as f:
         configs = f.read()
     BRANCH = "master"
-    REPO = "https://github.com/TgTHANOSPRO/THANOSBOT"
+    REPO = "https://github.com/TgCatUB/CatUserbot"
     BADCAT = EXTERNAL = False
     for match in re.finditer(
         r"(?:(UPSTREAM_REPO|UPSTREAM_REPO_BRANCH|EXTERNAL_REPO|BADCAT)(?:[ = \"\']+(.*[^\"\'\n])))",
@@ -127,7 +127,7 @@ async def variable(event):  # sourcery no-metrics
         if variable not in var_checker:
             if variable == "EXTERNAL_REPO":
                 if bool(value and (value.lower() != "false")) and not url(value):
-                    value = "https://github.com/TgTHANOSPRO/CatPlugins"
+                    value = "https://github.com/TgCatUB/CatPlugins"
                 else:
                     return await edit_or_reply(
                         cat,

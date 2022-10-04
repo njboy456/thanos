@@ -110,7 +110,7 @@ async def bot_start(event):  # sourcery skip: low-code-quality
                         \n\nPowered by [THANOSBOT](https://t.me/THANOSBOT)"
         buttons = [
             (
-                Button.url("Repo", "https://github.com/TgTHANOSPRO/THANOSBOT"),
+                Button.url("Repo", "https://github.com/TgCatUB/CatUserbot"),
                 Button.url(
                     "Deploy",
                     "https://github.com/TgTHANOSPRO/nekopack",

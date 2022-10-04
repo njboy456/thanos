@@ -14,7 +14,7 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "3.2.0"
 __license__ = "GNU Affero General Public License v3.0"
-__author__ = "THANOSBOT <https://github.com/TgTHANOSPRO/THANOSBOT>"
+__author__ = "THANOSBOT <https://github.com/TgCatUB/CatUserbot>"
 __copyright__ = f"THANOSBOT Copyright (C) 2020 - 2021  {__author__}"
 
 THANOSPRO.version = __version__

@@ -1,5 +1,5 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgTHANOSPRO/THANOSBOT   //
+#  \\   https://github.com/TgCatUB/CatUserbot   //
 #   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 

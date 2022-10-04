@@ -118,11 +118,11 @@ async def very(event):  # sourcery no-metrics
     LOGO_FONT_STROKE_COLOR = gvarstatus("LOGO_FONT_STROKE_COLOR") or None
     LOGO_BACKGROUND = loader2 = (
         gvarstatus("LOGO_BACKGROUND")
-        or "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Logo/Background/black.jpg"
+        or "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Logo/Background/black.jpg"
     )
     LOGO_FONT = loader3 = (
         gvarstatus("LOGO_FONT")
-        or "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Logo/Fonts/Streamster.ttf?raw=true"
+        or "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Logo/Fonts/Streamster.ttf?raw=true"
     )
     rcheck = random_checker(LOGO_FONT, LOGO_FONT_COLOR, LOGO_BACKGROUND)
     if rcheck:
@@ -263,7 +263,7 @@ async def bad(event):
     string = (
         input_str
         if input_str in rand_bg
-        else f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Logo/Background/{input_str}.jpg"
+        else f"https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Logo/Background/{input_str}.jpg"
     )
     addgvar("LOGO_BACKGROUND", string)
     await edit_delete(event, f"**Background for logo changed to :-** `{input_str}`", 10)
@@ -310,7 +310,7 @@ async def pussy(event):  # sourcery no-metrics
     input_str = event.pattern_match.group(2)
     if cmd == "":
         source = requests.get(
-            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/tree/master/Resources/Logo/Fonts"
+            "https://github.com/TgCatUB/CatUserbot-Resources/tree/master/Resources/Logo/Fonts"
         )
         soup = BeautifulSoup(source.text, features="html.parser")
         links = soup.find_all("a", class_="js-navigation-open Link--primary")
@@ -327,7 +327,7 @@ async def pussy(event):  # sourcery no-metrics
         if input_str != "Random":
             if " " in input_str:
                 input_str = str(input_str).replace(" ", "%20")
-            string = f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Logo/Fonts/{input_str}.ttf?raw=true"
+            string = f"https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Logo/Fonts/{input_str}.ttf?raw=true"
         addgvar("LOGO_FONT", string)
         return await edit_delete(
             event, f"**Font for logo changed to :-** `{input_str}`", 10
