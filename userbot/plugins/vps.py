@@ -1,5 +1,5 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/THANOSBOT   //
+#  \\   https://github.com/TgTHANOSPRO/THANOSBOT   //
 #   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
@@ -10,7 +10,7 @@ import re
 
 from validators.url import url
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import _catutils
@@ -40,7 +40,7 @@ async def switch_branch():
     with open(config, "r") as f:
         configs = f.read()
     BRANCH = "master"
-    REPO = "https://github.com/TgCatUB/THANOSBOT"
+    REPO = "https://github.com/TgTHANOSPRO/THANOSBOT"
     BADCAT = EXTERNAL = False
     for match in re.finditer(
         r"(?:(UPSTREAM_REPO|UPSTREAM_REPO_BRANCH|EXTERNAL_REPO|BADCAT)(?:[ = \"\']+(.*[^\"\'\n])))",
@@ -68,7 +68,7 @@ async def switch_branch():
         await _catutils.runcmd("rm -rf xtraplugins")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
     command=("var", plugin_category),
     info={
@@ -127,7 +127,7 @@ async def variable(event):  # sourcery no-metrics
         if variable not in var_checker:
             if variable == "EXTERNAL_REPO":
                 if bool(value and (value.lower() != "false")) and not url(value):
-                    value = "https://github.com/TgCatUB/CatPlugins"
+                    value = "https://github.com/TgTHANOSPRO/CatPlugins"
                 else:
                     return await edit_or_reply(
                         cat,
@@ -177,7 +177,7 @@ async def variable(event):  # sourcery no-metrics
         await event.client.reload(cat)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(re|clean)load$",
     command=("reload", plugin_category),
     info={

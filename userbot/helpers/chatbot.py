@@ -3,7 +3,7 @@ import re
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.contacts import UnblockRequest as unblock
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.helpers.functions import delete_conv
 
 from ..sql_helper.globals import addgvar, gvarstatus
@@ -18,7 +18,7 @@ async def ai_api(event):
             try:
                 purgeflag = await conv.send_message("/start")
             except YouBlockedUserError:
-                await catub(unblock("Kukichatbot"))
+                await THANOSPRO(unblock("Kukichatbot"))
                 purgeflag = await conv.send_message("/start")
             await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)

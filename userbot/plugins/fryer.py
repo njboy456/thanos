@@ -7,7 +7,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.tl.types import DocumentAttributeFilename
 
-from userbot import Convert, catub
+from userbot import Convert, THANOSPRO
 
 from ..core.managers import edit_or_reply
 from ..helpers.functions import delete_conv
@@ -76,7 +76,7 @@ async def check_media(reply_message):
     return data
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="frybot",
     command=("frybot", plugin_category),
     info={
@@ -109,7 +109,7 @@ async def frybot(event):
             await edit_or_reply(
                 catevent, "**Error:** Trying to unblock & retry, wait a sec..."
             )
-            await catub(unblock("image_deepfrybot"))
+            await THANOSPRO(unblock("image_deepfrybot"))
             msg_flag = await conv.send_message("/start")
         await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
@@ -122,7 +122,7 @@ async def frybot(event):
         os.remove(output[1])
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="deepfry(?: |$)([1-9])?",
     command=("deepfry", plugin_category),
     info={

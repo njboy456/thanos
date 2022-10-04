@@ -12,7 +12,7 @@ from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..assistant.inlinefm import get_manager
 from ..Config import Config
@@ -38,7 +38,7 @@ tr = Config.COMMAND_HAND_LER
 
 
 def get_thumb(name):
-    url = f"https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Inline/{name}?raw=true"
+    url = f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Inline/{name}?raw=true"
     return types.InputWebDocument(url=url, size=0, mime_type="image/png", attributes=[])
 
 
@@ -115,16 +115,16 @@ async def article_builder(event, method):
         title = "File Manager"
         description = f"Inline file manager\nSyntax: ls (path optional)\nPath:  {path}"
         thumb = get_thumb("filemanager.jpg")
-        media = "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Inline/filemanager.jpg"
+        media = "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Inline/filemanager.jpg"
     elif method == "deploy":
-        media = "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Inline/catlogo.png"
+        media = "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Inline/catlogo.png"
         title = "𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩"
         description = "Deploy yourself."
         query = "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁."
         buttons = [
             (
-                Button.url("Source code", "https://github.com/TgCatUB/THANOSBOT"),
-                Button.url("Deploy", "https://github.com/TgCatUB/nekopack"),
+                Button.url("Source code", "https://github.com/TgTHANOSPRO/THANOSBOT"),
+                Button.url("Deploy", "https://github.com/TgTHANOSPRO/nekopack"),
             )
         ]
 
@@ -141,7 +141,7 @@ async def article_builder(event, method):
         buttons = [
             (
                 Button.inline("Stats", data="stats"),
-                Button.url("Repo", "https://github.com/TgCatUB/THANOSBOT"),
+                Button.url("Repo", "https://github.com/TgTHANOSPRO/THANOSBOT"),
             )
         ]
         try:
@@ -170,7 +170,7 @@ async def article_builder(event, method):
 
             title = "Spotify"
             description = "Get currently playing song."
-            media = "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Inline/spotify_off.png"
+            media = "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Inline/spotify_off.png"
             if (
                 not (Config.SPOTIFY_CLIENT_ID and Config.SPOTIFY_CLIENT_SECRET)
                 or SP_DATABASE is None
@@ -390,7 +390,7 @@ def paginate_help(
     return pairs
 
 
-@catub.tgbot.on(InlineQuery)
+@THANOSPRO.tgbot.on(InlineQuery)
 async def inline_handler(event):  # sourcery no-metrics
     builder = event.builder
     result = None
@@ -679,7 +679,7 @@ async def inline_handler(event):  # sourcery no-metrics
         await event.answer([result] if result else None)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"close")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(b"close")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
@@ -688,7 +688,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit("Menu Closed", buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
     text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
         \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
@@ -699,7 +699,7 @@ async def on_plugin_callback_query_handler(event):
     await event.answer(text, cache_time=0, alert=True)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
@@ -710,7 +710,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(
+@THANOSPRO.tgbot.on(
     CallbackQuery(
         data=re.compile(b"back_([a-z]+)_([a-z_1-9]+)_([0-9]+)_?([a-z1-9]+)?_?([0-9]+)?")
     )
@@ -742,14 +742,14 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
     await event.edit(_result[0], buttons=_result[1])
 
 
-@catub.tgbot.on(
+@THANOSPRO.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_prev\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -780,7 +780,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@catub.tgbot.on(
+@THANOSPRO.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_next\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -808,7 +808,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@catub.tgbot.on(
+@THANOSPRO.tgbot.on(
     CallbackQuery(
         data=re.compile(b"(.*)_cmdhelp_([a-z_1-9]+)_([0-9]+)_([a-z]+)_([0-9]+)")
     )

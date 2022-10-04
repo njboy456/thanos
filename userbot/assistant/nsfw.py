@@ -5,7 +5,7 @@ from telethon import Button
 from telethon.errors import MessageNotModifiedError
 from telethon.events import CallbackQuery
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.logger import logging
@@ -13,7 +13,7 @@ from ..core.logger import logging
 LOGS = logging.getLogger(__name__)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(r"^age_verification_true")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^age_verification_true")))
 async def age_verification_true(event: CallbackQuery):
     u_id = event.query.user_id
     if u_id != Config.OWNER_ID and u_id not in Config.SUDO_USERS:
@@ -36,7 +36,7 @@ async def age_verification_true(event: CallbackQuery):
         )
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(r"^age_verification_false")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^age_verification_false")))
 async def age_verification_false(event: CallbackQuery):
     u_id = event.query.user_id
     if u_id != Config.OWNER_ID and u_id not in Config.SUDO_USERS:
@@ -59,7 +59,7 @@ async def age_verification_false(event: CallbackQuery):
         )
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(r"^chg_of_decision_")))
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^chg_of_decision_")))
 async def chg_of_decision_(event: CallbackQuery):
     u_id = event.query.user_id
     if u_id != Config.OWNER_ID and u_id not in Config.SUDO_USERS:

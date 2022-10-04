@@ -6,7 +6,7 @@ import requests
 from github import Github
 from pySmartDL import SmartDL
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.logger import logging
@@ -21,7 +21,7 @@ plugin_category = "misc"
 GIT_TEMP_DIR = "./temp/"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="repo$",
     command=("repo", plugin_category),
     info={
@@ -35,12 +35,12 @@ async def source(e):
     "Source code link of userbot"
     await edit_or_reply(
         e,
-        "Click [here](https://github.com/TgCatUB/THANOSBOT) to open this bot source code\
-        \nClick [here](https://github.com/TgCatUB/nekopack) to open supported link for heroku",
+        "Click [here](https://github.com/TgTHANOSPRO/THANOSBOT) to open this bot source code\
+        \nClick [here](https://github.com/TgTHANOSPRO/nekopack) to open supported link for heroku",
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="github( -l(\d+))? ([\s\S]*)",
     command=("github", plugin_category),
     info={
@@ -106,7 +106,7 @@ async def _(event):
             await catevent.delete()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="commit$",
     command=("commit", plugin_category),
     info={

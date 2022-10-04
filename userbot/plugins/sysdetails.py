@@ -9,7 +9,7 @@ from datetime import datetime
 import psutil
 from telethon import __version__
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_or_reply
 from ..helpers.utils import _catutils
@@ -25,7 +25,7 @@ def get_size(inputbytes, suffix="B"):
         inputbytes /= factor
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="spc$",
     command=("spc", plugin_category),
     info={
@@ -81,7 +81,7 @@ async def psu(event):
     await event.edit(help_string)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cpu$",
     command=("cpu", plugin_category),
     info={
@@ -98,7 +98,7 @@ async def cpu(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sysd$",
     command=("sysd", plugin_category),
     info={

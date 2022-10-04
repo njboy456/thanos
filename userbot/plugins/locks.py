@@ -8,7 +8,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.types import ChatBannedRights
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 plugin_category = "admin"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lock ([\s\S]*)",
     command=("lock", plugin_category),
     info={
@@ -208,7 +208,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unlock ([\s\S]*)",
     command=("unlock", plugin_category),
     info={
@@ -394,7 +394,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="locks$",
     command=("locks", plugin_category),
     info={
@@ -452,7 +452,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, res)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="plock ([\s\S]*)",
     command=("plock", plugin_category),
     info={
@@ -697,7 +697,7 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="punlock ([\s\S]*)",
     command=("punlock", plugin_category),
     info={
@@ -946,7 +946,7 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="uperm(?:\s|$)([\s\S]*)",
     command=("uperm", plugin_category),
     info={
@@ -1021,7 +1021,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, output)
 
 
-@catub.cat_cmd(incoming=True, forword=None)
+@THANOSPRO.cat_cmd(incoming=True, forword=None)
 async def check_incoming_messages(event):  # sourcery no-metrics
     if not event.is_private:
         chat = await event.get_chat()
@@ -1087,7 +1087,7 @@ async def check_incoming_messages(event):  # sourcery no-metrics
                 update_lock(peer_id, "url", False)
 
 
-@catub.on(events.ChatAction())
+@THANOSPRO.on(events.ChatAction())
 async def _(event):
     if not event.is_private:
         chat = await event.get_chat()

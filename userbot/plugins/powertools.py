@@ -2,7 +2,7 @@ import os
 from asyncio.exceptions import CancelledError
 from time import sleep
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -18,7 +18,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="restart$",
     command=("restart", plugin_category),
     info={
@@ -47,14 +47,14 @@ async def _(event):
     except Exception as e:
         LOGS.error(e)
     try:
-        await catub.disconnect()
+        await THANOSPRO.disconnect()
     except CancelledError:
         pass
     except Exception as e:
         LOGS.error(e)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="shutdown$",
     command=("shutdown", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def _(event):
         os._exit(143)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sleep( [0-9]+)?$",
     command=("sleep", plugin_category),
     info={
@@ -98,7 +98,7 @@ async def _(event):
     await event.edit("`OK, I'm awake now.`")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="notify (on|off)$",
     command=("notify", plugin_category),
     info={

@@ -1,6 +1,6 @@
 import random
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_or_reply
 from . import catmemes
@@ -64,7 +64,7 @@ X = (
 # =========================================================================================
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="baby$",
     command=("baby", plugin_category),
     info={
@@ -77,7 +77,7 @@ async def baby(event):
     await edit_or_reply(event, S)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hbd(?:\s|$)([\s\S]*)",
     command=("hbd", plugin_category),
     info={
@@ -97,7 +97,7 @@ async def hbd(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="thanks$",
     command=("thanks", plugin_category),
     info={
@@ -110,7 +110,7 @@ async def gn(event):
     await edit_or_reply(event, X)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gm$",
     command=("gm", plugin_category),
     info={
@@ -124,7 +124,7 @@ async def morning(morning):
     await edit_or_reply(morning, txt)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnoon$",
     command=("gnoon", plugin_category),
     info={
@@ -138,7 +138,7 @@ async def noon(noon):
     await edit_or_reply(noon, txt)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gn$",
     command=("gn", plugin_category),
     info={
@@ -152,7 +152,7 @@ async def night(night):
     await edit_or_reply(night, txt)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gmg$",
     command=("gmg", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def gm(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gmg2$",
     command=("gmg2", plugin_category),
     info={
@@ -184,7 +184,7 @@ async def gm(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gmg3$",
     command=("gmg3", plugin_category),
     info={
@@ -197,7 +197,7 @@ async def gm(event):
     await edit_or_reply(event, W)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnt$",
     command=("gnt", plugin_category),
     info={
@@ -213,7 +213,7 @@ async def gn(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnt2$",
     command=("gnt2", plugin_category),
     info={
@@ -229,7 +229,7 @@ async def gn(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnt3$",
     command=("gnt3", plugin_category),
     info={
@@ -245,7 +245,7 @@ async def gn(event):
 # @PhycoNinja13b 's Part begin from here
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hi(?:\s|$)([\s\S]*)",
     command=("hi", plugin_category),
     info={
@@ -268,7 +268,7 @@ async def hi(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cheer$",
     command=("cheer", plugin_category),
     info={
@@ -284,7 +284,7 @@ async def cheer(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="getwell$",
     command=("getwell", plugin_category),
     info={
@@ -299,7 +299,7 @@ async def getwell(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="luck$",
     command=("luck", plugin_category),
     info={
@@ -314,7 +314,7 @@ async def luck(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sprinkle$",
     command=("sprinkle", plugin_category),
     info={

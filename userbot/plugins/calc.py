@@ -2,12 +2,12 @@ import io
 import sys
 import traceback
 
-from . import catub, edit_or_reply
+from . import THANOSPRO, edit_or_reply
 
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="calc ([\s\S]*)",
     command=("calc", plugin_category),
     info={

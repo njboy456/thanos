@@ -3,7 +3,7 @@
 import contextlib
 import os
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -53,7 +53,7 @@ async def file_data(reply):
     return hmm
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="minfo$",
     command=("minfo", plugin_category),
     info={

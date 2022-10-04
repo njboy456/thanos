@@ -1,13 +1,13 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..helpers.utils import get_user_from_event, reply_id
 
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(tagall|all)(?:\s|$)([\s\S]*)",
     command=("tagall", plugin_category),
     info={
@@ -30,7 +30,7 @@ async def _(event):
     await event.delete()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="report$",
     command=("report", plugin_category),
     info={
@@ -52,7 +52,7 @@ async def _(event):
     await event.delete()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="men ([\s\S]*)",
     command=("mention", plugin_category),
     info={

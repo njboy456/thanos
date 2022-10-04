@@ -3,7 +3,7 @@ import time
 
 from prettytable import PrettyTable
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
@@ -29,7 +29,7 @@ def weird_division(n, d):
     return n / d if d else 0
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="chatfs(?:\s|$)([\s\S]*)",
     command=("chatfs", plugin_category),
     info={
@@ -132,7 +132,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     await catevent.edit(result, parse_mode="HTML", link_preview=False)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="userfs(?:\s|$)([\s\S]*)",
     command=("userfs", plugin_category),
     info={

@@ -9,7 +9,7 @@ from telethon import Button
 
 from ..Config import Config
 from ..helpers.functions.functions import make_inline
-from . import catub, edit_delete, reply_id
+from . import THANOSPRO, edit_delete, reply_id
 
 plugin_category = "tools"
 # regex obtained from:
@@ -17,7 +17,7 @@ plugin_category = "tools"
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cbutton(?:\s|$)([\s\S]*)",
     command=("cbutton", plugin_category),
     info={
@@ -84,7 +84,7 @@ async def _(event):
         os.remove(tgbot_reply_message)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ibutton(?:\s|$)([\s\S]*)",
     command=("ibutton", plugin_category),
     info={

@@ -6,7 +6,7 @@ import subprocess
 
 import requests
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -24,7 +24,7 @@ link_regex = re.compile(
 )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="labstack(?:\s|$)([\s\S]*)",
     command=("labstack", plugin_category),
     info={
@@ -87,7 +87,7 @@ async def labstack(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="webupload ?(.+?|) --(fileio|anonfiles|transfer|filebin|anonymousfiles|bayfiles)",
     command=("webupload", plugin_category),
     info={

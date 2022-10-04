@@ -6,7 +6,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from ..Config import Config
 from ..sql_helper.globals import gvarstatus
-from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, catub, edit_delete, get_user_from_event
+from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, THANOSPRO, edit_delete, get_user_from_event
 
 plugin_category = "utils"
 DEFAULTUSER = gvarstatus("FIRST_NAME") or ALIVE_NAME
@@ -15,7 +15,7 @@ DEFAULTUSERBIO = (
 )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="clone(?:\s|$)([\s\S]*)",
     command=("clone", plugin_category),
     info={
@@ -59,7 +59,7 @@ async def _(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="revert$",
     command=("revert", plugin_category),
     info={

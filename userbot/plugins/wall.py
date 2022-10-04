@@ -4,7 +4,7 @@ import random
 import requests
 from bs4 import BeautifulSoup
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -32,7 +32,7 @@ async def wall_download(piclink, query):
         return None
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="wall(?:\s|$)([\s\S]*)",
     command=("wall", plugin_category),
     info={

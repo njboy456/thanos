@@ -3,7 +3,7 @@ import contextlib
 
 from telethon.tl.types import InputMediaDice
 
-from . import catub
+from . import THANOSPRO
 
 plugin_category = "fun"
 
@@ -17,7 +17,7 @@ BOWL_E_MOJI = "🎳"
 # EMOJI CONSTANTS
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern=f"({DART_E_MOJI}|dart) ([1-6])$",
     command=("dart", plugin_category),
     info={
@@ -54,7 +54,7 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern=f"({DICE_E_MOJI}|dice) ([1-6])$",
     command=("dice", plugin_category),
     info={
@@ -91,7 +91,7 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern=f"({BALL_E_MOJI}|bb) ([1-5])$",
     command=("bb", plugin_category),
     info={
@@ -128,7 +128,7 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern=f"({FOOT_E_MOJI}|fb) ([1-5])$",
     command=("fb", plugin_category),
     info={
@@ -165,7 +165,7 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern=f"({SLOT_E_MOJI}|jp) ([0-9]+)$",
     command=("jp", plugin_category),
     info={
@@ -204,7 +204,7 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern=f"({BOWL_E_MOJI}|bowl) ([1-6])$",
     command=("bowl", plugin_category),
     info={

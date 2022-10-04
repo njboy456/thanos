@@ -3,7 +3,7 @@ import os
 
 import requests
 
-from userbot import Convert, catub
+from userbot import Convert, THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -44,7 +44,7 @@ def ReTrieveURL(input_url):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(rmbg|srmbg)(?:\s|$)([\s\S]*)",
     command=("rmbg", plugin_category),
     info={

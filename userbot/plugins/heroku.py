@@ -13,7 +13,7 @@ import heroku3
 import requests
 import urllib3
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -29,7 +29,7 @@ HEROKU_APP_NAME = Config.HEROKU_APP_NAME
 HEROKU_API_KEY = Config.HEROKU_API_KEY
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
     command=("var", plugin_category),
     info={
@@ -124,7 +124,7 @@ async def variable(var):  # sourcery no-metrics
         del heroku_var[variable]
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="usage$",
     command=("usage", plugin_category),
     info={
@@ -194,7 +194,7 @@ async def dyno_usage(dyno):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(herokulogs|logs)$",
     command=("logs", plugin_category),
     info={
@@ -235,7 +235,7 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     return indentitems(items, indent, level=0)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|add|del)buildpack(?:\s|$)([\s\S]*)",
     command=("buildpack", plugin_category),
     info={

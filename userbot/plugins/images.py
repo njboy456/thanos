@@ -5,7 +5,7 @@ import shutil
 
 from telethon.errors.rpcerrorlist import MediaEmptyError
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_or_reply
 from ..helpers.google_image_download import googleimagesdownload
@@ -14,7 +14,7 @@ from ..helpers.utils import reply_id
 plugin_category = "misc"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="img(?: |$)(\d*)? ?([\s\S]*)",
     command=("img", plugin_category),
     info={

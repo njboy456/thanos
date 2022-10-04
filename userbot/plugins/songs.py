@@ -18,7 +18,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import delete_conv, yt_search
 from ..helpers.tools import media_type
 from ..helpers.utils import reply_id
-from . import catub, song_download
+from . import THANOSPRO, song_download
 
 plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
@@ -34,7 +34,7 @@ SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
 # =========================================================== #
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="song(320)?(?:\s|$)([\s\S]*)",
     command=("song", plugin_category),
     info={
@@ -82,7 +82,7 @@ async def song(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="vsong(?:\s|$)([\s\S]*)",
     command=("vsong", plugin_category),
     info={
@@ -127,7 +127,7 @@ async def vsong(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(s(ha)?z(a)?m)(?:\s|$)([\s\S]*)",
     command=("shazam", plugin_category),
     info={
@@ -183,7 +183,7 @@ async def shazamcmd(event):
             try:
                 purgeflag = await conv.send_message("/start")
             except YouBlockedUserError:
-                await catub(unblock("DeezerMusicBot"))
+                await THANOSPRO(unblock("DeezerMusicBot"))
                 purgeflag = await conv.send_message("/start")
             await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
@@ -207,7 +207,7 @@ async def shazamcmd(event):
         await delete_conv(event, chat, purgeflag)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="song2(?:\s|$)([\s\S]*)",
     command=("song2", plugin_category),
     info={
@@ -227,7 +227,7 @@ async def song2(event):
         try:
             purgeflag = await conv.send_message(song)
         except YouBlockedUserError:
-            await catub(unblock("CatMusicRobot"))
+            await THANOSPRO(unblock("CatMusicRobot"))
             purgeflag = await conv.send_message(song)
         music = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)

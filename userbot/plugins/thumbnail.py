@@ -7,7 +7,7 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -19,7 +19,7 @@ plugin_category = "utils"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="savethumb$",
     command=("savethumb", plugin_category),
     info={
@@ -49,7 +49,7 @@ async def _(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="clearthumb$",
     command=("clearthumb", plugin_category),
     info={
@@ -66,7 +66,7 @@ async def _(event):
     await edit_or_reply(event, "✅ Custom thumbnail cleared successfully.")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="getthumb$",
     command=("getthumb", plugin_category),
     info={

@@ -14,7 +14,7 @@ from ..Config import Config
 from ..core.managers import edit_or_reply
 from ..helpers.functions import get_readable_time
 from ..sql_helper.globals import gvarstatus
-from . import StartTime, catub, mention, reply_id
+from . import StartTime, THANOSPRO, mention, reply_id
 
 plugin_category = "tools"
 
@@ -26,7 +26,7 @@ if Config.BADCAT:
     temp = "__**☞ Pong**__\n➥ `{ping}` **ms**\n➥ __**Bot of **__{mention}"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ping( -a|$)",
     command=("ping", plugin_category),
     info={

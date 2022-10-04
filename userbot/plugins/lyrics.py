@@ -1,6 +1,6 @@
 # \\ Created by-@mrconfused -- Github.com/sandy1709 //
 # \\ Modified by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\    https://github.com/TgCatUB/THANOSBOT   //
+#  \\    https://github.com/TgTHANOSPRO/THANOSBOT   //
 #   \\        Plugin for @THANOSBOT            //
 #    ````````````````````````````````````````````
 
@@ -9,14 +9,14 @@ import re
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from . import LyricsGen, catub
+from . import LyricsGen, THANOSPRO
 
 GENIUS = Config.GENIUS_API_TOKEN
 
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lyrics(?:\s|$)([\s\S]*)",
     command=("lyrics", plugin_category),
     info={

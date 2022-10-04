@@ -1,13 +1,13 @@
 from asyncio import sleep
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.logger import logging
 
 plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sdm (\d*) ([\s\S]*)",
     command=("sdm", plugin_category),
     info={
@@ -28,7 +28,7 @@ async def selfdestruct(destroy):
     await smsg.delete()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="selfdm (\d*) ([\s\S]*)",
     command=("selfdm", plugin_category),
     info={

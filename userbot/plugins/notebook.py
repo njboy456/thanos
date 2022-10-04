@@ -1,5 +1,5 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/THANOSBOT   //
+#  \\   https://github.com/TgTHANOSPRO/THANOSBOT   //
 #   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
@@ -13,7 +13,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import deEmojify, higlighted_text
 from ..helpers.tools import media_type
 from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, catub, reply_id
+from . import BOTLOG, BOTLOG_CHATID, THANOSPRO, reply_id
 
 plugin_category = "tools"
 
@@ -209,7 +209,7 @@ def notebook_values(page, font):  # sourcery skip: low-code-quality
     return lines, text_wrap, font_size, linespace, position
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(write|notebook)(?:\s|$)([\s\S]*)",
     command=("write", plugin_category),
     info={
@@ -247,7 +247,7 @@ async def write_page(event):  # sourcery skip: low-code-quality
         cap = None
     if cmd == "notebook":
         text = (
-            (await catub(GetFullUserRequest(catub.uid))).full_user
+            (await THANOSPRO(GetFullUserRequest(THANOSPRO.uid))).full_user
         ).about or "This is just a Sample text\n              -by THANOSBOT"
         cap = f"**NoteBook Configs :-**\n\n**Font:** `{font}`\n**Page:** `{list(Pages.keys())[list(Pages.values()).index(page)]}`\n**Color:** `{foreground.title()}`\n**Log:**  `{log}`"
     reply_to_id = await reply_id(event)
@@ -259,12 +259,12 @@ async def write_page(event):  # sourcery skip: low-code-quality
         os.mkdir("./temp")
     if not os.path.exists(temp_name):
         urllib.request.urlretrieve(
-            f"https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Notebook/Images/{page}.jpg",
+            f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Notebook/Images/{page}.jpg",
             temp_name,
         )
     if not os.path.exists(font_name):
         urllib.request.urlretrieve(
-            f"https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Notebook/Fonts/{font}.ttf?raw=true",
+            f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Notebook/Fonts/{font}.ttf?raw=true",
             font_name,
         )
     lines, text_wrap, font_size, linespace, position = notebook_values(page, font)
@@ -294,7 +294,7 @@ async def write_page(event):  # sourcery skip: low-code-quality
         os.remove(i)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="notebook$",
     command=("notebook", plugin_category),
     info={
@@ -307,7 +307,7 @@ async def notebook(event):
     """Shows your notebook configs."""
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="nb(page|font|pen|log)(?:\s|$)([\s\S]*)",
     command=("nb", plugin_category),
     info={
@@ -393,7 +393,7 @@ async def notebook_conf(event):  # sourcery skip: low-code-quality
     await event.delete()
     file = f"{temp_page}.jpg"
     urllib.request.urlretrieve(
-        f"https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Notebook/Images/{temp_page}.jpg",
+        f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Notebook/Images/{temp_page}.jpg",
         file,
     )
     await event.client.send_file(event.chat_id, file, caption=cap, reply_to=reply_to_id)

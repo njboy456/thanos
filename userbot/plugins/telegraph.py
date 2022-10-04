@@ -15,7 +15,7 @@ from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import delete_conv
-from . import BOTLOG, BOTLOG_CHATID, catub, reply_id
+from . import BOTLOG, BOTLOG_CHATID, THANOSPRO, reply_id
 
 LOGS = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def resize_image(image):
     im.save(image, "PNG")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(t(ele)?g(raph)?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
     command=("telegraph", plugin_category),
     info={
@@ -128,7 +128,7 @@ async def _(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ctg(?: |$)([\s\S]*)",
     command=("ctg", plugin_category),
     info={
@@ -157,7 +157,7 @@ async def ctg(event):
             await edit_or_reply(
                 catevent, "**Error:** Trying to unblock & retry, wait a sec..."
             )
-            await catub(unblock("chotamreaderbot"))
+            await THANOSPRO(unblock("chotamreaderbot"))
             msg_flag = await conv.send_message(urls[0])
         response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)

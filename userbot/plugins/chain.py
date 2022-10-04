@@ -1,12 +1,12 @@
 from telethon.tl.functions.messages import SaveDraftRequest
 
 from ..core.managers import edit_delete, edit_or_reply
-from . import catub
+from . import THANOSPRO
 
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="chain$",
     command=("chain", plugin_category),
     info={
@@ -19,7 +19,7 @@ async def chain(event):
     msg = await event.get_reply_message()
     if not msg:
         return await edit_delete(event, "```reply to a message```", 10)
-    chat = (await catub.get_entity(event.chat_id)).id
+    chat = (await THANOSPRO.get_entity(event.chat_id)).id
     msg_id = msg.id
     await edit_or_reply(event, "`Counting...`")
     count = -1

@@ -12,7 +12,7 @@ import requests
 from selenium import webdriver
 from validators.url import url
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -21,13 +21,13 @@ from . import reply_id
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(ss|gis) ([\s\S]*)",
     command=("ss", plugin_category),
     info={
         "header": "To Take a screenshot of a website.",
         "usage": "{tr}ss <link>",
-        "examples": "{tr}ss https://github.com/TgCatUB/THANOSBOT",
+        "examples": "{tr}ss https://github.com/TgTHANOSPRO/THANOSBOT",
     },
 )
 async def _(event):
@@ -96,14 +96,14 @@ async def _(event):
         await catevent.edit(f"`{traceback.format_exc()}`")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="scapture ([\s\S]*)",
     command=("scapture", plugin_category),
     info={
         "header": "To Take a screenshot of a website.",
         "description": "For functioning of this command you need to set SCREEN_SHOT_LAYER_ACCESS_KEY var",
         "usage": "{tr}scapture <link>",
-        "examples": "{tr}scapture https://github.com/TgCatUB/THANOSBOT",
+        "examples": "{tr}scapture https://github.com/TgTHANOSPRO/THANOSBOT",
     },
 )
 async def _(event):

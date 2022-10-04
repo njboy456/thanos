@@ -5,7 +5,7 @@ from telethon.errors import BadRequestError
 from telethon.tl.functions.channels import EditAdminRequest
 from telethon.tl.types import ChatAdminRights
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import get_user_from_event
@@ -14,7 +14,7 @@ from . import ALIVE_NAME
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="scam(?:\s|$)([\s\S]*)",
     command=("scam", plugin_category),
     info={
@@ -80,7 +80,7 @@ async def _(event):
         return
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="prankpromote(?:\s|$)([\s\S]*)",
     command=("prankpromote", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def _(event):
     await catevent.edit("`Promoted Successfully! Now gib Party`")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="padmin$",
     command=("padmin", plugin_category),
     info={

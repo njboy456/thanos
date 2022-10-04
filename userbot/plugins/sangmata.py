@@ -2,7 +2,7 @@ import asyncio
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import get_user_from_event, sanga_seperator
@@ -11,7 +11,7 @@ from ..helpers.utils import _format
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sg(u)?(?:\s|$)([\s\S]*)",
     command=("sg", plugin_category),
     info={

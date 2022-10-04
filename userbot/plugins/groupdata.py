@@ -14,7 +14,7 @@ from telethon.tl.types import (
 )
 from telethon.utils import get_input_location
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -278,7 +278,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
     return caption
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="admins(?:\s|$)([\s\S]*)",
     command=("admins", plugin_category),
     info={
@@ -328,7 +328,7 @@ async def _(event):
     await event.delete()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="bots(?:\s|$)([\s\S]*)",
     command=("bots", plugin_category),
     info={
@@ -365,7 +365,7 @@ async def _(event):
     await edit_or_reply(event, mentions)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="users(?:\s|$)([\s\S]*)",
     command=("users", plugin_category),
     info={
@@ -413,7 +413,7 @@ async def get_users(show):
     await edit_or_reply(catevent, mentions)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="chatinfo(?:\s|$)([\s\S]*)",
     command=("chatinfo", plugin_category),
     info={
@@ -444,7 +444,7 @@ async def info(event):
         await catevent.edit("`An unexpected error has occurred.`")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="grpstat(s)?(?:\s|$)([\s\S]*)",
     command=("grpstats", plugin_category),
     info={

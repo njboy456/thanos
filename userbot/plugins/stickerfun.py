@@ -16,7 +16,7 @@ import urllib
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
 
-from userbot import Convert, catub
+from userbot import Convert, THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import (
@@ -57,13 +57,13 @@ def file_checker(template):
     urllib.request.urlretrieve(template, tempname)
     if not os.path.exists(fontname):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
             fontname,
         )
     return tempname, fontname
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(?:st|sttxt)(?:\s|$)([\s\S]*)",
     command=("sttxt", plugin_category),
     info={
@@ -89,7 +89,7 @@ async def waifu(animu):
 
 
 # 12 21 28 30
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stcr ?(?:(.*?) ?; )?([\s\S]*)",
     command=("stcr", plugin_category),
     info={
@@ -155,7 +155,7 @@ async def sticklet(event):
         os.remove(FONT_FILE)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="honk(?:\s|$)([\s\S]*)",
     command=("honk", plugin_category),
     info={
@@ -181,7 +181,7 @@ async def honk(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="twt(?:\s|$)([\s\S]*)",
     command=("twt", plugin_category),
     info={
@@ -207,7 +207,7 @@ async def twt(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="glax(|r)(?:\s|$)([\s\S]*)",
     command=("glax", plugin_category),
     info={
@@ -246,7 +246,7 @@ async def glax(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|b)quby(?:\s|$)([\s\S]*)",
     command=("quby", plugin_category),
     info={
@@ -334,7 +334,7 @@ async def quby(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|b)(blob|kirby)(?:\s|$)([\s\S]*)",
     command=("blob", plugin_category),
     info={
@@ -401,7 +401,7 @@ async def knife(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="doge(?:\s|$)([\s\S]*)",
     command=("doge", plugin_category),
     info={
@@ -477,7 +477,7 @@ async def doge(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|h)penguin(?:\s|$)([\s\S]*)",
     command=("penguin", plugin_category),
     info={
@@ -547,7 +547,7 @@ async def penguin(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|h)gandhi(?:\s|$)([\s\S]*)",
     command=("gandhi", plugin_category),
     info={

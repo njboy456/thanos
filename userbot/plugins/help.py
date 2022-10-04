@@ -1,6 +1,6 @@
 from telethon import functions
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core import CMD_INFO, PLG_INFO
@@ -14,7 +14,7 @@ cmdprefix = Config.COMMAND_HAND_LER
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="help ?(-c|-p|-t)? ?([\s\S]*)?",
     command=("help", plugin_category),
     info={
@@ -56,7 +56,7 @@ async def _(event):
     await edit_or_reply(event, outstr)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cmds(?:\s|$)([\s\S]*)",
     command=("cmds", plugin_category),
     info={
@@ -88,7 +88,7 @@ async def _(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="s ([\s\S]*)",
     command=("s", plugin_category),
     info={
@@ -108,7 +108,7 @@ async def _(event):
     await edit_or_reply(event, out)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="dc$",
     command=("dc", plugin_category),
     info={

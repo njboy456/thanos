@@ -11,7 +11,7 @@ from PIL import Image
 from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
 from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 
-from userbot import BOTLOG, BOTLOG_CHATID, Convert, catub
+from userbot import BOTLOG, BOTLOG_CHATID, Convert, THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import deEmojify
@@ -56,7 +56,7 @@ async def scam(results, lim):
     return imglinks
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gs ([\s\S]*)",
     command=("gs", plugin_category),
     info={
@@ -139,7 +139,7 @@ async def gsearch(q_event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gis ([\s\S]*)",
     command=("gis", plugin_category),
     info={
@@ -152,7 +152,7 @@ async def gis(event):
     "To search in google and send result in picture."
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="grs$",
     command=("grs", plugin_category),
     info={
@@ -233,7 +233,7 @@ async def grs(event):
     await edit_or_reply(catevent, OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="reverse(?:\s|$)([\s\S]*)",
     command=("reverse", plugin_category),
     info={
@@ -306,7 +306,7 @@ async def reverse(event):
     )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="google(?:\s|$)([\s\S]*)",
     command=("google", plugin_category),
     info={

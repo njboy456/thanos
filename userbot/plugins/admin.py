@@ -19,7 +19,7 @@ from telethon.tl.types import (
 )
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.data import _sudousers_list
 from ..core.logger import logging
@@ -68,7 +68,7 @@ plugin_category = "admin"
 # ================================================
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gpic( -s| -d)$",
     command=("gpic", plugin_category),
     info={
@@ -130,7 +130,7 @@ async def set_group_photo(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="promote(?:\s|$)([\s\S]*)",
     command=("promote", plugin_category),
     info={
@@ -175,7 +175,7 @@ async def promote(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="demote(?:\s|$)([\s\S]*)",
     command=("demote", plugin_category),
     info={
@@ -219,7 +219,7 @@ async def demote(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ban(?:\s|$)([\s\S]*)",
     command=("ban", plugin_category),
     info={
@@ -281,7 +281,7 @@ async def _ban_person(event):
             )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unban(?:\s|$)([\s\S]*)",
     command=("unban", plugin_category),
     info={
@@ -320,7 +320,7 @@ async def nothanos(event):
         await catevent.edit(f"**Error :**\n`{e}`")
 
 
-@catub.cat_cmd(incoming=True)
+@THANOSPRO.cat_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         try:
@@ -329,7 +329,7 @@ async def watcher(event):
             LOGS.info(str(e))
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="mute(?:\s|$)([\s\S]*)",
     command=("mute", plugin_category),
     info={
@@ -353,7 +353,7 @@ async def startmute(
             return await event.edit(
                 "`This user is already muted in this chat ~~lmfao sed rip~~`"
             )
-        if event.chat_id == catub.uid:
+        if event.chat_id == THANOSPRO.uid:
             return await edit_delete(event, "`You cant mute yourself`")
         try:
             mute(event.chat_id, event.chat_id)
@@ -378,7 +378,7 @@ async def startmute(
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == catub.uid:
+        if user.id == THANOSPRO.uid:
             return await edit_or_reply(event, "`Sorry, I can't mute myself`")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
@@ -431,7 +431,7 @@ async def startmute(
             )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unmute(?:\s|$)([\s\S]*)",
     command=("unmute", plugin_category),
     info={
@@ -499,7 +499,7 @@ async def endmute(event):
             )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="kick(?:\s|$)([\s\S]*)",
     command=("kick", plugin_category),
     info={
@@ -539,7 +539,7 @@ async def kick(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pin( loud|$)",
     command=("pin", plugin_category),
     info={
@@ -581,7 +581,7 @@ async def pin(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unpin( all|$)",
     command=("unpin", plugin_category),
     info={
@@ -632,7 +632,7 @@ async def unpin(event):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="undlt( -u)?(?: |$)(\d*)?",
     command=("undlt", plugin_category),
     info={

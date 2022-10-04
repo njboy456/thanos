@@ -1,6 +1,6 @@
 # Urban Dictionary for THANOSBOT by @mrconfused
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -11,7 +11,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ud ([\s\S]*)",
     command=("ud", plugin_category),
     info={
@@ -42,7 +42,7 @@ async def _(event):
         LOGS.info(e)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="meaning ([\s\S]*)",
     command=("meaning", plugin_category),
     info={

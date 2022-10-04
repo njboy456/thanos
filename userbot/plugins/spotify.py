@@ -45,7 +45,7 @@ from ..helpers.functions.functions import (
 )
 from ..helpers.utils import reply_id
 from ..sql_helper import global_collectionjson as glob_db
-from . import BOTLOG, BOTLOG_CHATID, LyricsGen, catub
+from . import BOTLOG, BOTLOG_CHATID, LyricsGen, THANOSPRO
 
 SPOTIFY_CLIENT_ID = Config.SPOTIFY_CLIENT_ID
 SPOTIFY_CLIENT_SECRET = Config.SPOTIFY_CLIENT_SECRET
@@ -153,7 +153,7 @@ def ms_converter(millis):
     return f"{minutes}:{str(seconds)}"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="spsetup$",
     command=("spsetup", plugin_category),
     info={
@@ -280,7 +280,7 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                             "**[INFO]**\n\nEverything returned back to normal, the previous spotify issue has been "
                             "resolved."
                         )
-                        await catub.send_message(BOTLOG_CHATID, string)
+                        await THANOSPRO.send_message(BOTLOG_CHATID, string)
                 elif save_spam("spotify", True):
                     # currently item is not passed when the user plays a
                     # podcast
@@ -288,12 +288,12 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                         f"**[INFO]**\n\nThe playback {received['currently_playing_type']}"
                         " didn't gave me any additional information, so I skipped updating the bio."
                     )
-                    await catub.send_message(BOTLOG_CHATID, string)
+                    await THANOSPRO.send_message(BOTLOG_CHATID, string)
             # 429 means flood limit, we need to wait
             elif r.status_code == 429:
                 to_wait = r.headers["Retry-After"]
                 LOGS.error(f"Spotify, have to wait for {str(to_wait)}")
-                await catub.send_message(
+                await THANOSPRO.send_message(
                     BOTLOG_CHATID,
                     "**[WARNING]**\n\nI caught a spotify api limit. I shall sleep for "
                     f"{str(to_wait)} seconds until I refresh again",
@@ -307,7 +307,7 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                         "**[INFO]**\n\nEverything returned back to normal, the previous spotify issue has been "
                         "resolved."
                     )
-                    await catub.send_message(BOTLOG_CHATID, stringy)
+                    await THANOSPRO.send_message(BOTLOG_CHATID, stringy)
             # 401 means our access token is expired, so we need to refresh it
             elif r.status_code == 401:
                 data = {
@@ -341,7 +341,7 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                         "**[WARNING]**\n\nSpotify returned a Bad gateway, which means they have a problem on their "
                         "servers. The bot will continue to run but may not update the bio for a short time."
                     )
-                    await catub.send_message(BOTLOG_CHATID, string)
+                    await THANOSPRO.send_message(BOTLOG_CHATID, string)
             # 503 means service unavailable
             elif r.status_code == 503:
                 if save_spam("spotify", True):
@@ -350,15 +350,15 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                         "problem on their servers. The bot will continue to run but may not update the bio for a "
                         "short time."
                     )
-                    await catub.send_message(BOTLOG_CHATID, string)
+                    await THANOSPRO.send_message(BOTLOG_CHATID, string)
             # 404 is a spotify error which isn't supposed to happen (since our URL is correct). Track the issue here:
             # https://github.com/spotify/web-api/issues/1280
             elif r.status_code == 404:
                 if save_spam("spotify", True):
                     string = "**[INFO]**\n\nSpotify returned a 404 error, which is a bug on their side."
-                    await catub.send_message(BOTLOG_CHATID, string)
+                    await THANOSPRO.send_message(BOTLOG_CHATID, string)
             else:
-                await catub.send_message(
+                await THANOSPRO.send_message(
                     BOTLOG_CHATID,
                     "**[ERROR]**\n\nOK, so something went reeeally wrong with spotify. The bot "
                     "was stopped.\nStatus code: "
@@ -373,7 +373,7 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
             # TELEGRAM
             try:
                 # full needed, since we dont get a bio with the normal request
-                full = (await catub(GetFullUserRequest(catub.uid))).full_user
+                full = (await THANOSPRO(GetFullUserRequest(THANOSPRO.uid))).full_user
                 bio = full.about
                 # to_insert means we have a successful playback
                 if to_insert:
@@ -415,14 +415,14 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                         # would be stupid
                         if new_bio != bio:
                             try:
-                                await catub(UpdateProfileRequest(about=new_bio))
+                                await THANOSPRO(UpdateProfileRequest(about=new_bio))
                                 spotify_bio.lrt = time.time()
                                 if save_spam("telegram", False):
                                     stringy = (
                                         "**[INFO]**\n\nEverything returned back to normal, the previous telegram "
                                         "issue has been resolved."
                                     )
-                                    await catub.send_message(BOTLOG_CHATID, stringy)
+                                    await THANOSPRO.send_message(BOTLOG_CHATID, stringy)
                             # this can happen if our LIMIT check failed because telegram counts emojis twice and python
                             # doesnt. Refer to the constants file to learn more
                             # about this
@@ -433,7 +433,7 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                                         "to not let that happen again in the future, please read the part about OFFSET "
                                         f"in the constants. Anyway, here is the bio I tried to insert:\n\n{new_bio}"
                                     )
-                                    await catub.send_message(BOTLOG_CHATID, stringy)
+                                    await THANOSPRO.send_message(BOTLOG_CHATID, stringy)
                     # if we dont have a bio, everything was too long, so we
                     # tell the user that
                     if not new_bio and save_spam("telegram", True):
@@ -441,25 +441,25 @@ if SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET:
                             "**[INFO]**\n\nThe current track exceeded the character limit, so the bio wasn't "
                             f"updated.\n\n Track: {title}\nInterpret: {interpret}"
                         )
-                        await catub.send_message(BOTLOG_CHATID, to_send)
+                        await THANOSPRO.send_message(BOTLOG_CHATID, to_send)
                 else:
                     if save_spam("telegram", False):
                         stringy = (
                             "**[INFO]**\n\nEverything returned back to normal, the previous telegram issue has "
                             "been resolved."
                         )
-                        await catub.send_message(BOTLOG_CHATID, stringy)
+                        await THANOSPRO.send_message(BOTLOG_CHATID, stringy)
                     old_bio = SP_DATABASE.return_bio()
                     # this means the bio is blank, so we save that as the new
                     # one
                     if not bio or "🎶" not in bio and bio != old_bio:
                         SP_DATABASE.save_bio(bio)
                     elif "🎶" in bio:
-                        await catub(UpdateProfileRequest(about=old_bio))
+                        await THANOSPRO(UpdateProfileRequest(about=old_bio))
             except FloodWaitError as e:
                 to_wait = e.seconds
                 LOGS.error(f"to wait for {str(to_wait)}")
-                await catub.send_message(
+                await THANOSPRO.send_message(
                     BOTLOG_CHATID,
                     "**[WARNING]**\n\nI caught a telegram api limit. I shall sleep "
                     f"{str(to_wait)} seconds until I refresh again",
@@ -484,7 +484,7 @@ async def sp_var_check(event):
     return True
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="spbio$",
     command=("spbio", plugin_category),
     info={
@@ -499,7 +499,7 @@ async def spotifybio(event):
     if SP_DATABASE.SPOTIFY_MODE:
         SP_DATABASE.SPOTIFY_MODE = False
         if USER_INITIAL_BIO:
-            await catub(UpdateProfileRequest(about=USER_INITIAL_BIO["bio"]))
+            await THANOSPRO(UpdateProfileRequest(about=USER_INITIAL_BIO["bio"]))
             USER_INITIAL_BIO.clear()
         await edit_delete(event, " `Spotify Bio disabled !`")
     else:
@@ -508,7 +508,7 @@ async def spotifybio(event):
             "✅ `Spotify Bio enabled` \nCurrent Spotify playback will updated in the Bio",
         )
         USER_INITIAL_BIO["bio"] = (
-            (await catub(GetFullUserRequest(catub.uid))).full_user
+            (await THANOSPRO(GetFullUserRequest(THANOSPRO.uid))).full_user
         ).about or ""
         SP_DATABASE.SPOTIFY_MODE = True
         await spotify_bio()
@@ -562,17 +562,17 @@ def file_check():
         os.mkdir("./temp")
     if not os.path.exists(logo):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Spotify/cat.png",
+            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Spotify/cat.png",
             logo,
         )
     if not os.path.exists(font_mid):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Spotify/GoogleSans-Medium.ttf?raw=true",
+            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Spotify/GoogleSans-Medium.ttf?raw=true",
             font_mid,
         )
     if not os.path.exists(font_bold):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
             font_bold,
         )
     return logo, font_bold, font_mid
@@ -631,7 +631,7 @@ async def make_thumb(url, client, song, artist, now, full):
         myphoto = await client.download_media(photos[0])
     except IndexError:
         myphoto = urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
+            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
         )
     user_lay = ellipse_layout_create(myphoto, 6, 30)
     thumbmask.paste(user_lay, (700, 450), user_lay)
@@ -663,7 +663,7 @@ async def get_spotify(event, response):
         tittle = title_fetch(dic["title"])
         thumb = await make_thumb(
             dic["image"],
-            catub,
+            THANOSPRO,
             tittle,
             dic["interpret"],
             dic["progress"],
@@ -676,7 +676,7 @@ async def get_spotify(event, response):
     return f"https://telegra.ph{url[0]}", tittle, dic, lyrics, symbol
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="spnow$",
     command=("spnow", plugin_category),
     info={
@@ -704,7 +704,7 @@ async def spotify_now(event):
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="spinfo$",
     command=("spinfo", plugin_category),
     info={
@@ -740,7 +740,7 @@ async def spotify_now(event):
     await edit_or_reply(event, result, link_preview=True)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sprecent$",
     command=("sprecent", plugin_category),
     info={
@@ -763,7 +763,7 @@ async def spotify_now(event):
     await edit_or_reply(event, song)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(i|)now(?:\s|$)([\s\S]*)",
     command=("now", plugin_category),
     info={
@@ -803,7 +803,7 @@ async def spotify_now(event):  # sourcery skip: remove-duplicate-dict-key
         try:
             purgeflag = await conv.send_message(link)
         except YouBlockedUserError:
-            await catub(unblock("CatMusicRobot"))
+            await THANOSPRO(unblock("CatMusicRobot"))
             purgeflag = await conv.send_message(link)
         song = await conv.get_response()
         if not song.media:

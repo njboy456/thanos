@@ -5,7 +5,7 @@ import shutil
 import time
 from pathlib import Path
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -15,7 +15,7 @@ from . import humanbytes
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ls(?:\s|$)([\s\S]*)",
     command=("ls", plugin_category),
     info={
@@ -105,7 +105,7 @@ async def ls(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         await edit_or_reply(event, msg)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="rem(?:\s|$)([\s\S]*)",
     command=("rem", plugin_category),
     info={
@@ -137,7 +137,7 @@ async def rem(event):
         await edit_or_reply(event, f"successfully removed `{path}` file")
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="mkdir(?:\s|$)([\s\S]*)",
     command=("mkdir", plugin_category),
     info={
@@ -174,7 +174,7 @@ async def make_dir(event):
         await edit_delete(mone, str(e), parse_mode=_format.parse_pre)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cpto(?:\s|$)([\s\S]*)",
     command=("cpto", plugin_category),
     info={
@@ -220,7 +220,7 @@ async def copy(event):
         await edit_delete(mone, str(e), parse_mode=_format.parse_pre)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="mvto(?:\s|$)([\s\S]*)",
     command=("mvto", plugin_category),
     info={

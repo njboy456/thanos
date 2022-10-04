@@ -6,7 +6,7 @@ from userbot import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
 from .Config import Config
 from .core.logger import logging
-from .core.session import catub
+from .core.session import THANOSPRO
 from .utils import (
     add_bot_to_logger_group,
     install_externalrepo,
@@ -25,7 +25,7 @@ cmdhr = Config.COMMAND_HAND_LER
 
 try:
     LOGS.info("Starting Userbot")
-    catub.loop.run_until_complete(setup_bot())
+    THANOSPRO.loop.run_until_complete(setup_bot())
     LOGS.info("TG Bot Startup Completed")
 except Exception as e:
     LOGS.error(f"{e}")
@@ -39,7 +39,7 @@ async def startup_process():
     print("============================================================")
     print("Yay your userbot is officially working.!!!")
     print(
-        f"Congratulation, now type {cmdhr}alive to see message if catub is live\
+        f"Congratulation, now type {cmdhr}alive to see message if THANOSPRO is live\
         \nIf you need assistance, head to https://t.me/THANOSBOT_support"
     )
     print("============================================================")
@@ -62,16 +62,16 @@ async def externalrepo():
         )
     if Config.VCMODE:
         await install_externalrepo(
-            "https://github.com/TgCatUB/CatVCPlayer", "test", "catvc"
+            "https://github.com/TgTHANOSPRO/CatVCPlayer", "test", "catvc"
         )
 
 
-catub.loop.run_until_complete(startup_process())
+THANOSPRO.loop.run_until_complete(startup_process())
 
-catub.loop.run_until_complete(externalrepo())
+THANOSPRO.loop.run_until_complete(externalrepo())
 
 if len(sys.argv) in {1, 3, 4}:
     with contextlib.suppress(ConnectionError):
-        catub.run_until_disconnected()
+        THANOSPRO.run_until_disconnected()
 else:
-    catub.disconnect()
+    THANOSPRO.disconnect()

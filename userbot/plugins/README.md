@@ -1,6 +1,6 @@
 ## Mandatory Imports
 ```python3
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
@@ -10,13 +10,13 @@ plugin_category="extra"
 ### Formation
 This below one is Sample format of making plugin
 ```python3
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
 plugin_category="extra"
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hibuddy(?:\s|$)([\s\S]*)",
     command=("hibuddy", plugin_category),
     info={

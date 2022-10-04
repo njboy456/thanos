@@ -3,7 +3,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from urlextract import URLExtract
 from validators.url import url
 
-from userbot import BOTLOG_CHATID, catub
+from userbot import BOTLOG_CHATID, THANOSPRO
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -52,7 +52,7 @@ oldvars = {
 }
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(set|get|del)dv(?: |$)([\s\S]*)",
     command=("dv", plugin_category),
     info={
@@ -103,8 +103,8 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
                         "**To save your Current Profile info Set the value:**\\n `.setdv DEFAULT_USER Me`",
                     )
 
-                USERINFO = await catub.get_entity(catub.uid)
-                FULL_USERINFO = (await catub(GetFullUserRequest(catub.uid))).full_user
+                USERINFO = await THANOSPRO.get_entity(THANOSPRO.uid)
+                FULL_USERINFO = (await THANOSPRO(GetFullUserRequest(THANOSPRO.uid))).full_user
                 addgvar("FIRST_NAME", USERINFO.first_name)
                 addgvar("DEFAULT_NAME", USERINFO.first_name)
                 if USERINFO.last_name:
@@ -120,8 +120,8 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 elif gvarstatus("DEFAULT_BIO"):
                     delgvar("DEFAULT_BIO")
                 try:
-                    photos = await catub.get_profile_photos(catub.uid)
-                    myphoto = await catub.download_media(photos[0])
+                    photos = await THANOSPRO.get_profile_photos(THANOSPRO.uid)
+                    myphoto = await THANOSPRO.download_media(photos[0])
                     myphoto_urls = upload_file(myphoto)
                     addgvar("DEFAULT_PIC", f"https://telegra.ph{myphoto_urls[0]}")
                 except IndexError:
@@ -205,7 +205,7 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="custom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("custom", plugin_category),
     info={
@@ -269,7 +269,7 @@ async def custom_THANOSBOT(event):
         await event.client.send_message(BOTLOG_CHATID, text, silent=True)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="delcustom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("delcustom", plugin_category),
     info={

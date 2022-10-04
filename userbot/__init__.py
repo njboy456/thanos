@@ -6,7 +6,7 @@ import heroku3
 
 from .Config import Config
 from .core.logger import logging
-from .core.session import catub
+from .core.session import THANOSPRO
 from .helpers.functions.converter import Convert
 from .helpers.functions.musictool import *
 from .helpers.utils.utils import runasync
@@ -14,13 +14,13 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "3.2.0"
 __license__ = "GNU Affero General Public License v3.0"
-__author__ = "THANOSBOT <https://github.com/TgCatUB/THANOSBOT>"
+__author__ = "THANOSBOT <https://github.com/TgTHANOSPRO/THANOSBOT>"
 __copyright__ = f"THANOSBOT Copyright (C) 2020 - 2021  {__author__}"
 
-catub.version = __version__
-catub.tgbot.version = __version__
+THANOSPRO.version = __version__
+THANOSPRO.tgbot.version = __version__
 LOGS = logging.getLogger("THANOSBOT")
-bot = catub
+bot = THANOSPRO
 
 StartTime = time.time()
 catversion = "3.2.0"
@@ -28,7 +28,7 @@ catversion = "3.2.0"
 
 def close_connection(*_):
     print("Clossing Userbot connection.")
-    runasync(catub.disconnect())
+    runasync(THANOSPRO.disconnect())
     sys.exit(143)
 
 

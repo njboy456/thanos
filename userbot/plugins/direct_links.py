@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from humanize import naturalsize
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -17,7 +17,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "misc"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="direct(?: |$)([\s\S]*)",
     command=("direct", plugin_category),
     info={

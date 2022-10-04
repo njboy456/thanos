@@ -16,7 +16,7 @@ else:
     session = "THANOSBOT"
 
 try:
-    catub = THANOSBOTClient(
+    THANOSPRO = THANOSBOTClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
@@ -31,7 +31,7 @@ except Exception as e:
     sys.exit()
 
 
-catub.tgbot = tgbot = THANOSBOTClient(
+THANOSPRO.tgbot = tgbot = THANOSBOTClient(
     session="CatTgbot",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,

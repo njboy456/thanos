@@ -1,6 +1,6 @@
 from googletrans import LANGUAGES, Translator
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions.functions import getTranslate
@@ -10,7 +10,7 @@ from . import BOTLOG, BOTLOG_CHATID, soft_deEmojify
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="tl ([\s\S]*)",
     command=("tl", plugin_category),
     info={
@@ -49,7 +49,7 @@ async def _(event):
         await edit_delete(event, f"**Error:**\n`{exc}`", time=5)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="trt(?: |$)([\s\S]*)",
     command=("trt", plugin_category),
     info={
@@ -90,7 +90,7 @@ async def translateme(trans):
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lang (ai|trt|tocr) ([\s\S]*)",
     command=("lang", plugin_category),
     info={

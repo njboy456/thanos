@@ -5,7 +5,7 @@ import time
 from subprocess import PIPE
 from subprocess import run as runapp
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -15,7 +15,7 @@ from ..helpers.tools import media_type
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hash ([\s\S]*)",
     command=("hash", plugin_category),
     info={
@@ -52,7 +52,7 @@ async def gethash(hash_q):
     await edit_or_reply(hash_q, ans)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hbase (en|de) ([\s\S]*)",
     command=("hbase", plugin_category),
     info={

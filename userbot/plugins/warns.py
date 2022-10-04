@@ -1,6 +1,6 @@
 import html
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.logger import logging
 
 from ..core.managers import edit_delete, edit_or_reply
@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 plugin_category = "admin"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="warn(?:\s|$)([\s\S]*)",
     command=("warn", plugin_category),
     info={
@@ -45,7 +45,7 @@ async def _(event):
     await edit_or_reply(event, reply)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="warns",
     command=("warns", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def _(event):
     await event.edit(text)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="r(eset)?warns$",
     command=("resetwarns", plugin_category),
     info={

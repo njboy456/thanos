@@ -9,7 +9,7 @@ import urllib3
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from userbot import HEROKU_APP, UPSTREAM_REPO_URL, catub
+from userbot import HEROKU_APP, UPSTREAM_REPO_URL, THANOSPRO
 
 from ..Config import Config
 from ..core.logger import logging
@@ -183,7 +183,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             HEROKU_APP.restart()
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="update(| now)?$",
     command=("update", plugin_category),
     info={
@@ -275,7 +275,7 @@ async def upstream(event):
     return
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="update deploy$",
 )
 async def upstream(event):
@@ -290,7 +290,7 @@ async def upstream(event):
             f"I guess you are on selfhost. For self host you need to use `{cmdhd}update now`",
         )
     event = await edit_or_reply(event, "`Pulling the nekopack repo wait a sec ....`")
-    off_repo = "https://github.com/TgCatUB/nekopack"
+    off_repo = "https://github.com/TgTHANOSPRO/nekopack"
     os.chdir("/app")
     try:
         txt = (
@@ -321,7 +321,7 @@ async def upstream(event):
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(good|bad)cat$",
     command=("switch", plugin_category),
     info={

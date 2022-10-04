@@ -32,7 +32,7 @@ from urllib.error import HTTPError
 
 from pySmartDL import SmartDL
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -62,7 +62,7 @@ async def subprocess_run(megadl, cmd):
     return stdout.decode().strip(), stderr.decode().strip(), exitCode
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="mega(?:\s|$)([\s\S]*)",
     command=("mega", plugin_category),
     info={

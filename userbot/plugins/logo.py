@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
 
-from userbot import Convert, catub
+from userbot import Convert, THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import clippy
@@ -66,7 +66,7 @@ def random_loader(Font, Color, Background, collection):
     return Font, Color, Background
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|f|s)logo(?: |$)([\s\S]*)",
     command=("logo", plugin_category),
     info={
@@ -118,16 +118,16 @@ async def very(event):  # sourcery no-metrics
     LOGO_FONT_STROKE_COLOR = gvarstatus("LOGO_FONT_STROKE_COLOR") or None
     LOGO_BACKGROUND = loader2 = (
         gvarstatus("LOGO_BACKGROUND")
-        or "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Logo/Background/black.jpg"
+        or "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Logo/Background/black.jpg"
     )
     LOGO_FONT = loader3 = (
         gvarstatus("LOGO_FONT")
-        or "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Logo/Fonts/Streamster.ttf?raw=true"
+        or "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Logo/Fonts/Streamster.ttf?raw=true"
     )
     rcheck = random_checker(LOGO_FONT, LOGO_FONT_COLOR, LOGO_BACKGROUND)
     if rcheck:
         rjson = requests.get(
-            "https://raw.githubusercontent.com/TgCatUB/THANOSBOT-Resources/master/Resources/Logo/resources.txt"
+            "https://raw.githubusercontent.com/TgTHANOSPRO/THANOSBOT-Resources/master/Resources/Logo/resources.txt"
         ).json()
     if count > 1 and not rcheck:
         count = 1
@@ -215,7 +215,7 @@ async def very(event):  # sourcery no-metrics
         os.remove(i)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|c)lbg(?:\s|$)([\s\S]*)",
     command=("lbg", plugin_category),
     info={
@@ -263,13 +263,13 @@ async def bad(event):
     string = (
         input_str
         if input_str in rand_bg
-        else f"https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Logo/Background/{input_str}.jpg"
+        else f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/raw/master/Resources/Logo/Background/{input_str}.jpg"
     )
     addgvar("LOGO_BACKGROUND", string)
     await edit_delete(event, f"**Background for logo changed to :-** `{input_str}`", 10)
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lf(|c|s|h|w|sc|sw)(?:\s|$)([\s\S]*)",
     command=("lf", plugin_category),
     info={
@@ -310,7 +310,7 @@ async def pussy(event):  # sourcery no-metrics
     input_str = event.pattern_match.group(2)
     if cmd == "":
         source = requests.get(
-            "https://github.com/TgCatUB/THANOSBOT-Resources/tree/master/Resources/Logo/Fonts"
+            "https://github.com/TgTHANOSPRO/THANOSBOT-Resources/tree/master/Resources/Logo/Fonts"
         )
         soup = BeautifulSoup(source.text, features="html.parser")
         links = soup.find_all("a", class_="js-navigation-open Link--primary")
@@ -327,7 +327,7 @@ async def pussy(event):  # sourcery no-metrics
         if input_str != "Random":
             if " " in input_str:
                 input_str = str(input_str).replace(" ", "%20")
-            string = f"https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Logo/Fonts/{input_str}.ttf?raw=true"
+            string = f"https://github.com/TgTHANOSPRO/THANOSBOT-Resources/blob/master/Resources/Logo/Fonts/{input_str}.ttf?raw=true"
         addgvar("LOGO_FONT", string)
         return await edit_delete(
             event, f"**Font for logo changed to :-** `{input_str}`", 10
@@ -411,7 +411,7 @@ async def pussy(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(g|d|r)lvar(?:\s|$)([\s\S]*)",
     command=("lvar", plugin_category),
     info={

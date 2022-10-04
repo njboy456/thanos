@@ -30,13 +30,13 @@ class Config(object):
     TZ = os.environ.get("TZ", "Asia/Kolkata")
     # set this with required cat repo link
     UPSTREAM_REPO = os.environ.get(
-        "UPSTREAM_REPO", "https://github.com/TgCatUB/THANOSBOT"
+        "UPSTREAM_REPO", "https://github.com/TgTHANOSPRO/THANOSBOT"
     )
     # External plugins repo
     EXTERNAL_REPO = os.environ.get("EXTERNAL_REPO", None)
     if bool(EXTERNAL_REPO and (EXTERNAL_REPO.lower() != "false")):
         if not url(EXTERNAL_REPO):
-            EXTERNAL_REPO = "https://github.com/TgCatUB/CatPlugins"
+            EXTERNAL_REPO = "https://github.com/TgTHANOSPRO/CatPlugins"
     else:
         EXTERNAL_REPO = None
     # if you need badcat plugins use the following vars
@@ -164,14 +164,14 @@ class Config(object):
     UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "master")
     # dont touch this at all
     SUDO_USERS: Set[int] = set()
-    CATUBLOGO = None
+    THANOSPROLOGO = None
     BOTLOG = False
     BOTLOG_CHATID = 0
     # extra plugins realted vars below  4
     EXTERNAL_REPOBRANCH = os.environ.get("EXTERNAL_REPOBRANCH", "main")
-    BADCAT_REPO = os.environ.get("BADCAT_REPO", "https://github.com/TgCatUB/CatPlugins")
+    BADCAT_REPO = os.environ.get("BADCAT_REPO", "https://github.com/TgTHANOSPRO/CatPlugins")
     if BADCAT_REPO and not url(BADCAT_REPO):
-        BADCAT_REPO = "https://github.com/TgCatUB/CatPlugins"
+        BADCAT_REPO = "https://github.com/TgTHANOSPRO/CatPlugins"
     BADCAT_REPOBRANCH = os.environ.get("BADCAT_REPOBRANCH", "badcat")
 
 

@@ -8,7 +8,7 @@ import os
 from justwatch import JustWatch, justwatchapi
 from pySmartDL import SmartDL
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.logger import logging
@@ -89,7 +89,7 @@ def get_provider(url):
     return url
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="watch ([\s\S]*)",
     command=("watch", plugin_category),
     info={

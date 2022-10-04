@@ -9,7 +9,7 @@ from telethon import Button, types
 from telethon.events import CallbackQuery
 from telethon.utils import get_attributes
 
-from userbot import catub
+from userbot import THANOSPRO
 from userbot.Config import Config
 from userbot.core.decorators import check_owner
 from userbot.helpers import humanbytes, progress
@@ -137,7 +137,7 @@ def get_manager(path, num: int):
 
 
 # BACK
-@catub.tgbot.on(CallbackQuery(pattern="fmback"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmback"))
 @check_owner
 async def back(event):
     path = PATH[0]
@@ -157,7 +157,7 @@ async def back(event):
 
 
 # UP
-@catub.tgbot.on(CallbackQuery(pattern="fmup_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmup_(.*)"))
 @check_owner
 async def up(event):
     num = event.pattern_match.group(1).decode("UTF-8")
@@ -172,7 +172,7 @@ async def up(event):
 
 
 # DOWN
-@catub.tgbot.on(CallbackQuery(pattern="fmdown_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmdown_(.*)"))
 @check_owner
 async def down(event):
     num = event.pattern_match.group(1).decode("UTF-8")
@@ -187,7 +187,7 @@ async def down(event):
 
 
 # FORTH
-@catub.tgbot.on(CallbackQuery(pattern="fmforth_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmforth_(.*)"))
 @check_owner
 async def forth(event):
     npath = event.pattern_match.group(1).decode("UTF-8")
@@ -204,7 +204,7 @@ async def forth(event):
 
 
 # REMOVE
-@catub.tgbot.on(CallbackQuery(pattern="fmrem_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmrem_(.*)"))
 @check_owner
 async def remove(event):
     fn, num = (event.pattern_match.group(1).decode("UTF-8")).split("|", 1)
@@ -232,7 +232,7 @@ async def remove(event):
 
 
 # SEND
-@catub.tgbot.on(CallbackQuery(pattern="fmsend"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmsend"))
 @check_owner
 async def send(event):
     path = PATH[0]
@@ -266,7 +266,7 @@ async def send(event):
 
 
 # CUT
-@catub.tgbot.on(CallbackQuery(pattern="fmcut_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmcut_(.*)"))
 @check_owner
 async def cut(event):
     f, n = (event.pattern_match.group(1).decode("UTF-8")).split("|", 1)
@@ -300,7 +300,7 @@ async def cut(event):
 
 
 # COPY
-@catub.tgbot.on(CallbackQuery(pattern="fmcopy_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmcopy_(.*)"))
 @check_owner
 async def copy(event):
     f, n = (event.pattern_match.group(1).decode("UTF-8")).split("|", 1)
@@ -334,7 +334,7 @@ async def copy(event):
 
 
 # PASTE
-@catub.tgbot.on(CallbackQuery(pattern="fmpaste_(.*)"))
+@THANOSPRO.tgbot.on(CallbackQuery(pattern="fmpaste_(.*)"))
 @check_owner
 async def paste(event):
     n = event.pattern_match.group(1).decode("UTF-8")

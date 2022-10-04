@@ -1,1 +1,1 @@
-from .catub_config import Config
+from .THANOSPRO_config import Config

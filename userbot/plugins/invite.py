@@ -1,13 +1,13 @@
 from telethon import functions
 
-from userbot import catub
+from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@THANOSPRO.cat_cmd(
     pattern="invite ([\s\S]*)",
     command=("invite", plugin_category),
     info={

@@ -11,7 +11,7 @@ from userbot import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
 from ..Config import Config
 from ..core.logger import logging
-from ..core.session import catub
+from ..core.session import THANOSPRO
 from ..helpers.utils import install_pip
 from ..helpers.utils.utils import runcmd
 from ..sql_helper.global_collection import (
@@ -23,7 +23,7 @@ from .pluginmanager import load_module
 from .tools import create_supergroup
 
 ENV = bool(os.environ.get("ENV", False))
-LOGS = logging.getLogger("CatUBStartUP")
+LOGS = logging.getLogger("THANOSPROStartUP")
 cmdhr = Config.COMMAND_HAND_LER
 
 if ENV:
@@ -37,25 +37,25 @@ async def setup_bot():
     To set up bot for userbot
     """
     try:
-        await catub.connect()
-        config = await catub(functions.help.GetConfigRequest())
+        await THANOSPRO.connect()
+        config = await THANOSPRO(functions.help.GetConfigRequest())
         for option in config.dc_options:
-            if option.ip_address == catub.session.server_address:
-                if catub.session.dc_id != option.id:
+            if option.ip_address == THANOSPRO.session.server_address:
+                if THANOSPRO.session.dc_id != option.id:
                     LOGS.warning(
-                        f"Fixed DC ID in session from {catub.session.dc_id}"
+                        f"Fixed DC ID in session from {THANOSPRO.session.dc_id}"
                         f" to {option.id}"
                     )
-                catub.session.set_dc(option.id, option.ip_address, option.port)
-                catub.session.save()
+                THANOSPRO.session.set_dc(option.id, option.ip_address, option.port)
+                THANOSPRO.session.save()
                 break
-        bot_details = await catub.tgbot.get_me()
+        bot_details = await THANOSPRO.tgbot.get_me()
         Config.TG_BOT_USERNAME = f"@{bot_details.username}"
-        # await catub.start(bot_token=Config.TG_BOT_USERNAME)
-        catub.me = await catub.get_me()
-        catub.uid = catub.tgbot.uid = utils.get_peer_id(catub.me)
+        # await THANOSPRO.start(bot_token=Config.TG_BOT_USERNAME)
+        THANOSPRO.me = await THANOSPRO.get_me()
+        THANOSPRO.uid = THANOSPRO.tgbot.uid = utils.get_peer_id(THANOSPRO.me)
         if Config.OWNER_ID == 0:
-            Config.OWNER_ID = utils.get_peer_id(catub.me)
+            Config.OWNER_ID = utils.get_peer_id(THANOSPRO.me)
     except Exception as e:
         LOGS.error(f"STRING_SESSION - {e}")
         sys.exit()
@@ -67,7 +67,7 @@ async def startupmessage():
     """
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await catub.tgbot.send_file(
+            Config.THANOSPROLOGO = await THANOSPRO.tgbot.send_file(
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
                 caption="**Your THANOSBOT has been started successfully.**",
@@ -85,12 +85,12 @@ async def startupmessage():
         return None
     try:
         if msg_details:
-            await catub.check_testcases()
-            message = await catub.get_messages(msg_details[0], ids=msg_details[1])
+            await THANOSPRO.check_testcases()
+            message = await THANOSPRO.get_messages(msg_details[0], ids=msg_details[1])
             text = message.text + "\n\n**Ok Bot is Back and Alive.**"
-            await catub.edit_message(msg_details[0], msg_details[1], text)
+            await THANOSPRO.edit_message(msg_details[0], msg_details[1], text)
             if gvarstatus("restartupdate") is not None:
-                await catub.send_message(
+                await THANOSPRO.send_message(
                     msg_details[0],
                     f"{cmdhr}ping",
                     reply_to=msg_details[1],
@@ -106,9 +106,9 @@ async def add_bot_to_logger_group(chat_id):
     """
     To add bot to logger groups
     """
-    bot_details = await catub.tgbot.get_me()
+    bot_details = await THANOSPRO.tgbot.get_me()
     try:
-        await catub(
+        await THANOSPRO(
             functions.messages.AddChatUserRequest(
                 chat_id=chat_id,
                 user_id=bot_details.username,
@@ -117,7 +117,7 @@ async def add_bot_to_logger_group(chat_id):
         )
     except BaseException:
         try:
-            await catub(
+            await THANOSPRO(
                 functions.channels.InviteToChannelRequest(
                     channel=chat_id,
                     users=[bot_details.username],
@@ -181,7 +181,7 @@ async def load_plugins(folder, extfolder=None):
     if extfolder:
         if not failure:
             failure.append("None")
-        await catub.tgbot.send_message(
+        await THANOSPRO.tgbot.send_message(
             BOTLOG_CHATID,
             f'Your external repo plugins have imported \n**No of imported plugins :** `{success}`\n**Failed plugins to import :** `{", ".join(failure)}`',
         )
@@ -194,7 +194,7 @@ async def verifyLoggerGroup():
     flag = False
     if BOTLOG:
         try:
-            entity = await catub.get_entity(BOTLOG_CHATID)
+            entity = await THANOSPRO.get_entity(BOTLOG_CHATID)
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
@@ -220,7 +220,7 @@ async def verifyLoggerGroup():
     else:
         descript = "Don't delete this group or change to group(If you change group all your previous snips, welcome will be lost.)"
         _, groupid = await create_supergroup(
-            "THANOSBOT BotLog Group", catub, Config.TG_BOT_USERNAME, descript
+            "THANOSBOT BotLog Group", THANOSPRO, Config.TG_BOT_USERNAME, descript
         )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print(
@@ -229,7 +229,7 @@ async def verifyLoggerGroup():
         flag = True
     if PM_LOGGER_GROUP_ID != -100:
         try:
-            entity = await catub.get_entity(PM_LOGGER_GROUP_ID)
+            entity = await THANOSPRO.get_entity(PM_LOGGER_GROUP_ID)
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
@@ -269,13 +269,13 @@ async def install_externalrepo(repo, branch, cfolder):
     response = urllib.request.urlopen(repourl)
     if response.code != 200:
         LOGS.error(errtext)
-        return await catub.tgbot.send_message(BOTLOG_CHATID, errtext)
+        return await THANOSPRO.tgbot.send_message(BOTLOG_CHATID, errtext)
     await runcmd(gcmd)
     if not os.path.exists(cfolder):
         LOGS.error(
             "There was a problem in cloning the external repo. please recheck external repo link"
         )
-        return await catub.tgbot.send_message(
+        return await THANOSPRO.tgbot.send_message(
             BOTLOG_CHATID,
             "There was a problem in cloning the external repo. please recheck external repo link",
         )
