@@ -96,12 +96,13 @@ temp = """{ALIVE_TEXT}
 
 def catalive_text():
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  Ṫ "
-    cat_caption = "**╭────⇌тнαησѕ⇋────**"
-    cat_caption = "**тнαησѕ-ν𝟐 is alive**\n"
+    cat_caption = "**╭────⇌тнαησѕ⇋────**\n"
+    cat_caption += "**тнαησѕ-ν𝟐 is alive**\n"
     cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
     cat_caption += f"**{EMOJI} тнαησѕ-ν𝟐 Version :** `{catversion}`\n"
     cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
     cat_caption += f"**{EMOJI} Master:** {mention}\n"
+    cat_caption += "**╰────⇌тнαησѕ⇋────""
     return cat_caption
 
 
