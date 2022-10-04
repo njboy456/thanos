@@ -562,17 +562,17 @@ def file_check():
         os.mkdir("./temp")
     if not os.path.exists(logo):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Spotify/cat.png",
+            "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Spotify/cat.png",
             logo,
         )
     if not os.path.exists(font_mid):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Spotify/GoogleSans-Medium.ttf?raw=true",
+            "https://github.com/rishabhanand2/THANOS-V2-Resources/blob/master/Resources/Spotify/GoogleSans-Medium.ttf?raw=true",
             font_mid,
         )
     if not os.path.exists(font_bold):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/rishabhanand2/THANOS-V2-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
             font_bold,
         )
     return logo, font_bold, font_mid
@@ -631,7 +631,7 @@ async def make_thumb(url, client, song, artist, now, full):
         myphoto = await client.download_media(photos[0])
     except IndexError:
         myphoto = urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
+            "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
         )
     user_lay = ellipse_layout_create(myphoto, 6, 30)
     thumbmask.paste(user_lay, (700, 450), user_lay)

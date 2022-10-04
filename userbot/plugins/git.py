@@ -35,7 +35,7 @@ async def source(e):
     "Source code link of userbot"
     await edit_or_reply(
         e,
-        "Click [here](https://github.com/TgCatUB/CatUserbot) to open this bot source code\
+        "Click [here](https://github.com/rishabhanand2/THANOS-V2) to open this bot source code\
         \nClick [here](https://github.com/TgTHANOSPRO/nekopack) to open supported link for heroku",
     )
 

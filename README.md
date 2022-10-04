@@ -1,19 +1,19 @@
 # THANOSBOT
 A simple Telegram userbot based on Telethon .
 ![THANOSBOT logo](https://telegra.ph/file/4860c8e1a5a56d0616b79.png)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsandy1709%2FTHANOSBOT&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/TgCatUB/CatUserbot)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsandy1709%2FTHANOSBOT&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/rishabhanand2/THANOS-V2)
 [![CodeFactor](https://www.codefactor.io/repository/github/TgTHANOSPRO/THANOSBOT/badge?&style=flat-square)](https://www.codefactor.io/repository/github/TgTHANOSPRO/THANOSBOT)
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green?&style=flat-square)](https://github.com/TgCatUB/CatUserbot/graphs/commit-activity) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green?&style=flat-square)](https://github.com/rishabhanand2/THANOS-V2/graphs/commit-activity) 
 ![Repo Size](https://img.shields.io/github/repo-size/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)
-[![GitHub license](https://img.shields.io/github/license/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/issues)
-[![PR Open](https://img.shields.io/github/issues-pr/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/pulls)
-[![PR Closed](https://img.shields.io/github/issues-pr-closed/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/pulls?q=is:closed)
-[![GitHub contributors](https://img.shields.io/github/contributors/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/graphs/contributors/)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/graphs/commit-activity)
-[![GitHub forks](https://img.shields.io/github/forks/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/fork)
-[![GitHub stars](https://img.shields.io/github/stars/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/TgCatUB/CatUserbot/stargazers)
+[![GitHub license](https://img.shields.io/github/license/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/issues)
+[![PR Open](https://img.shields.io/github/issues-pr/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/pulls)
+[![PR Closed](https://img.shields.io/github/issues-pr-closed/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/pulls?q=is:closed)
+[![GitHub contributors](https://img.shields.io/github/contributors/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/graphs/contributors/)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/graphs/commit-activity)
+[![GitHub forks](https://img.shields.io/github/forks/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/fork)
+[![GitHub stars](https://img.shields.io/github/stars/TgTHANOSPRO/THANOSBOT?&style=flat-square&logo=github)](https://github.com/rishabhanand2/THANOS-V2/stargazers)
 
 
 
@@ -56,5 +56,5 @@ Thanks for using our bot 😺
 
 ## Credits
    - Special thanks to [LonamiWebs](https://github.com/LonamiWebs/Telethon/) for Telethon library.
-   - To all devs of these [Userbots](https://github.com/TgCatUB/CatUserbot/tree/bugs#inspiration)
-   - Finally to all [contributors of THANOSBOT](https://github.com/TgCatUB/CatUserbot/graphs/contributors)
+   - To all devs of these [Userbots](https://github.com/rishabhanand2/THANOS-V2/tree/bugs#inspiration)
+   - Finally to all [contributors of THANOSBOT](https://github.com/rishabhanand2/THANOS-V2/graphs/contributors)

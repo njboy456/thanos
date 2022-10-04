@@ -38,7 +38,7 @@ tr = Config.COMMAND_HAND_LER
 
 
 def get_thumb(name):
-    url = f"https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Inline/{name}?raw=true"
+    url = f"https://github.com/rishabhanand2/THANOS-V2-Resources/blob/master/Resources/Inline/{name}?raw=true"
     return types.InputWebDocument(url=url, size=0, mime_type="image/png", attributes=[])
 
 
@@ -115,15 +115,15 @@ async def article_builder(event, method):
         title = "File Manager"
         description = f"Inline file manager\nSyntax: ls (path optional)\nPath:  {path}"
         thumb = get_thumb("filemanager.jpg")
-        media = "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/filemanager.jpg"
+        media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/filemanager.jpg"
     elif method == "deploy":
-        media = "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/catlogo.png"
+        media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/catlogo.png"
         title = "𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩"
         description = "Deploy yourself."
         query = "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁."
         buttons = [
             (
-                Button.url("Source code", "https://github.com/TgCatUB/CatUserbot"),
+                Button.url("Source code", "https://github.com/rishabhanand2/THANOS-V2"),
                 Button.url("Deploy", "https://github.com/TgTHANOSPRO/nekopack"),
             )
         ]
@@ -141,7 +141,7 @@ async def article_builder(event, method):
         buttons = [
             (
                 Button.inline("Stats", data="stats"),
-                Button.url("Repo", "https://github.com/TgCatUB/CatUserbot"),
+                Button.url("Repo", "https://github.com/rishabhanand2/THANOS-V2"),
             )
         ]
         try:
@@ -170,7 +170,7 @@ async def article_builder(event, method):
 
             title = "Spotify"
             description = "Get currently playing song."
-            media = "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/spotify_off.png"
+            media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/spotify_off.png"
             if (
                 not (Config.SPOTIFY_CLIENT_ID and Config.SPOTIFY_CLIENT_SECRET)
                 or SP_DATABASE is None

@@ -1,5 +1,5 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/CatUserbot   //
+#  \\   https://github.com/rishabhanand2/THANOS-V2   //
 #   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
@@ -259,12 +259,12 @@ async def write_page(event):  # sourcery skip: low-code-quality
         os.mkdir("./temp")
     if not os.path.exists(temp_name):
         urllib.request.urlretrieve(
-            f"https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Notebook/Images/{page}.jpg",
+            f"https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Notebook/Images/{page}.jpg",
             temp_name,
         )
     if not os.path.exists(font_name):
         urllib.request.urlretrieve(
-            f"https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Notebook/Fonts/{font}.ttf?raw=true",
+            f"https://github.com/rishabhanand2/THANOS-V2-Resources/blob/master/Resources/Notebook/Fonts/{font}.ttf?raw=true",
             font_name,
         )
     lines, text_wrap, font_size, linespace, position = notebook_values(page, font)
@@ -393,7 +393,7 @@ async def notebook_conf(event):  # sourcery skip: low-code-quality
     await event.delete()
     file = f"{temp_page}.jpg"
     urllib.request.urlretrieve(
-        f"https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Notebook/Images/{temp_page}.jpg",
+        f"https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Notebook/Images/{temp_page}.jpg",
         file,
     )
     await event.client.send_file(event.chat_id, file, caption=cap, reply_to=reply_to_id)

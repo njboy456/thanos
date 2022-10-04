@@ -1,5 +1,5 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/CatUserbot   //
+#  \\   https://github.com/rishabhanand2/THANOS-V2   //
 #   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
@@ -40,7 +40,7 @@ async def switch_branch():
     with open(config, "r") as f:
         configs = f.read()
     BRANCH = "master"
-    REPO = "https://github.com/TgCatUB/CatUserbot"
+    REPO = "https://github.com/rishabhanand2/THANOS-V2"
     BADCAT = EXTERNAL = False
     for match in re.finditer(
         r"(?:(UPSTREAM_REPO|UPSTREAM_REPO_BRANCH|EXTERNAL_REPO|BADCAT)(?:[ = \"\']+(.*[^\"\'\n])))",
