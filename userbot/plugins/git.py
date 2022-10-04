@@ -35,8 +35,7 @@ async def source(e):
     "Source code link of userbot"
     await edit_or_reply(
         e,
-        "Click [here](https://github.com/rishabhanand2/THANOS-V2) to open this bot source code\
-        \nClick [here](https://github.com/TgTHANOSPRO/nekopack) to open supported link for heroku",
+        "Click [here](https://github.com/rishabhanand2/THANOS-V2) тнαησѕ-ν❷ repo"
     )
 
 
@@ -47,7 +46,7 @@ async def source(e):
         "header": "Shows the information about an user on GitHub of given username",
         "flags": {"-l": "repo limit : default to 5"},
         "usage": ".github [flag] [username]",
-        "examples": [".github sandy1709", ".github -l5 sandy1709"],
+        "examples": [".github thanosuser", ".github -l5 thanosuser"],
     },
 )
 async def _(event):
