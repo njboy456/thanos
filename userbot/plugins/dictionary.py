@@ -1,4 +1,4 @@
-# Urban Dictionary for catuserbot by @mrconfused
+# Urban Dictionary for THANOSBOT by @mrconfused
 
 from userbot import catub
 

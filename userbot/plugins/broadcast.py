@@ -27,7 +27,7 @@ LOGS = logging.getLogger(__name__)
             "{tr}msgto <username/userid/chatid/chatusername> reply to message",
             "{tr}msgto <username/userid/chatid/chatusername> <text>",
         ],
-        "examples": "{tr}msgto @catuserbotot just a testmessage",
+        "examples": "{tr}msgto @THANOSBOTot just a testmessage",
     },
 )
 async def catbroadcast_add(event):

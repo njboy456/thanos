@@ -1,7 +1,7 @@
 # \\ Created by-@mrconfused -- Github.com/sandy1709 //
 # \\ Modified by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\    https://github.com/TgCatUB/catuserbot   //
-#   \\        Plugin for @catuserbot            //
+#  \\    https://github.com/TgCatUB/THANOSBOT   //
+#   \\        Plugin for @THANOSBOT            //
 #    ````````````````````````````````````````````
 
 

@@ -288,7 +288,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
             "{tr}admins <username/userid>",
             "{tr}admins <in group where you need>",
         ],
-        "examples": "{tr}admins @catuserbot_support",
+        "examples": "{tr}admins @THANOSBOT_support",
     },
 )
 async def _(event):
@@ -338,7 +338,7 @@ async def _(event):
             "{tr}bots <username/userid>",
             "{tr}bots <in group where you need>",
         ],
-        "examples": "{tr}bots @catuserbot_support",
+        "examples": "{tr}bots @THANOSBOT_support",
     },
 )
 async def _(event):
@@ -423,7 +423,7 @@ async def get_users(show):
             "{tr}chatinfo <username/userid>",
             "{tr}chatinfo <in group where you need>",
         ],
-        "examples": "{tr}chatinfo @catuserbot_support",
+        "examples": "{tr}chatinfo @THANOSBOT_support",
     },
 )
 async def info(event):
@@ -468,11 +468,11 @@ async def info(event):
             "{tr}grpstat <flags> <group username/gorup id>",
         ],
         "examples": [
-            "{tr}grpstats @catuserbot_support",
-            "{tr}grpstats -q2000 @catuserbot_support",
-            "{tr}grpstats -l20 @catuserbot_support",
-            "{tr}grpstats -s @catuserbotot",
-            "{tr}grpstats -s -l20 -q2000 @catuserbotot",
+            "{tr}grpstats @THANOSBOT_support",
+            "{tr}grpstats -q2000 @THANOSBOT_support",
+            "{tr}grpstats -l20 @THANOSBOT_support",
+            "{tr}grpstats -s @THANOSBOTot",
+            "{tr}grpstats -s -l20 -q2000 @THANOSBOTot",
         ],
     },
 )

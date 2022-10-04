@@ -1,6 +1,6 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/catuserbot   //
-#   \\       Plugin for @catuserbot            //
+#  \\   https://github.com/TgCatUB/THANOSBOT   //
+#   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
 import asyncio
@@ -40,7 +40,7 @@ async def switch_branch():
     with open(config, "r") as f:
         configs = f.read()
     BRANCH = "master"
-    REPO = "https://github.com/TgCatUB/catuserbot"
+    REPO = "https://github.com/TgCatUB/THANOSBOT"
     BADCAT = EXTERNAL = False
     for match in re.finditer(
         r"(?:(UPSTREAM_REPO|UPSTREAM_REPO_BRANCH|EXTERNAL_REPO|BADCAT)(?:[ = \"\']+(.*[^\"\'\n])))",

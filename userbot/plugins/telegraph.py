@@ -1,4 +1,4 @@
-# telegraph utils for catuserbot
+# telegraph utils for THANOSBOT
 import os
 import random
 import string

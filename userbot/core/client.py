@@ -48,7 +48,7 @@ REGEX_ = REGEX()
 sudo_enabledcmds = sudo_enabled_cmds()
 
 
-class CatUserBotClient(TelegramClient):
+class THANOSBOTClient(TelegramClient):
     def cat_cmd(
         self: TelegramClient,
         pattern: str or tuple = None,
@@ -180,9 +180,9 @@ class CatUserBotClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        link = "[here](https://t.me/catuserbot_support)"
+                        link = "[here](https://t.me/THANOSBOT_support)"
                         text = (
-                            "**CatUserbot Error report**\n\n"
+                            "**THANOSBOT Error report**\n\n"
                             + "If you wanna you can report it"
                         )
                         text += f"- just forward this message {link}.\n"
@@ -301,9 +301,9 @@ class CatUserBotClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        link = "[here](https://t.me/catuserbot_support)"
+                        link = "[here](https://t.me/THANOSBOT_support)"
                         text = (
-                            "**CatUserbot Error report**\n\n"
+                            "**THANOSBOT Error report**\n\n"
                             + "If you wanna you can report it"
                         )
                         text += f"- just forward this message {link}.\n"
@@ -342,14 +342,14 @@ class CatUserBotClient(TelegramClient):
         self.running_processes.clear()
 
 
-CatUserBotClient.fast_download_file = download_file
-CatUserBotClient.fast_upload_file = upload_file
-CatUserBotClient.reload = restart_script
-CatUserBotClient.get_msg_link = get_message_link
-CatUserBotClient.check_testcases = checking
+THANOSBOTClient.fast_download_file = download_file
+THANOSBOTClient.fast_upload_file = upload_file
+THANOSBOTClient.reload = restart_script
+THANOSBOTClient.get_msg_link = get_message_link
+THANOSBOTClient.check_testcases = checking
 try:
     send_message_check = TelegramClient.send_message
 except AttributeError:
-    CatUserBotClient.send_message = send_message
-    CatUserBotClient.send_file = send_file
-    CatUserBotClient.edit_message = edit_message
+    THANOSBOTClient.send_message = send_message
+    THANOSBOTClient.send_file = send_file
+    THANOSBOTClient.edit_message = edit_message

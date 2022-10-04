@@ -63,7 +63,7 @@ async def currency(event):
             f"https://free.currconv.com/api/v7/convert?q={fromcurrency}_{tocurrency}&compact=ultra&apiKey={Config.CURRENCY_API}"
         )
         symbols = await AioHttp().get_raw(
-            "https://raw.githubusercontent.com/TgCatUB/CatUserbot-Resources/master/Resources/Data/currency.py"
+            "https://raw.githubusercontent.com/TgCatUB/THANOSBOT-Resources/master/Resources/Data/currency.py"
         )
 
         symbols = json.loads(re.sub(", *\n *}", "}", symbols.decode("utf-8")))

@@ -57,7 +57,7 @@ def file_checker(template):
     urllib.request.urlretrieve(template, tempname)
     if not os.path.exists(fontname):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
             fontname,
         )
     return tempname, fontname
@@ -140,7 +140,7 @@ async def sticklet(event):
         ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
     )
     image_stream = io.BytesIO()
-    image_stream.name = "catuserbot.webp"
+    image_stream.name = "THANOSBOT.webp"
     image.save(image_stream, "WebP")
     image_stream.seek(0)
     # finally, reply the sticker
@@ -187,7 +187,7 @@ async def honk(event):
     info={
         "header": "Make a cool tweet of your account",
         "usage": "{tr}twt <text/reply to msg>",
-        "examples": "{tr}twt Catuserbot",
+        "examples": "{tr}twt THANOSBOT",
     },
 )
 async def twt(event):

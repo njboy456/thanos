@@ -38,7 +38,7 @@ tr = Config.COMMAND_HAND_LER
 
 
 def get_thumb(name):
-    url = f"https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Inline/{name}?raw=true"
+    url = f"https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Inline/{name}?raw=true"
     return types.InputWebDocument(url=url, size=0, mime_type="image/png", attributes=[])
 
 
@@ -94,11 +94,11 @@ async def article_builder(event, method):
     link_preview = False
     builder = event.builder
     title = "Cat Userbot"
-    description = "Button menu for CatUserbot"
+    description = "Button menu for THANOSBOT"
     if method == "help":
         help_info = main_menu()
         title = "Help Menu"
-        description = "Help menu for CatUserbot."
+        description = "Help menu for THANOSBOT."
         thumb = get_thumb("help.png")
         query = help_info[0]
         buttons = help_info[1]
@@ -115,15 +115,15 @@ async def article_builder(event, method):
         title = "File Manager"
         description = f"Inline file manager\nSyntax: ls (path optional)\nPath:  {path}"
         thumb = get_thumb("filemanager.jpg")
-        media = "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/filemanager.jpg"
+        media = "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Inline/filemanager.jpg"
     elif method == "deploy":
-        media = "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/catlogo.png"
+        media = "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Inline/catlogo.png"
         title = "𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩"
         description = "Deploy yourself."
         query = "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁."
         buttons = [
             (
-                Button.url("Source code", "https://github.com/TgCatUB/catuserbot"),
+                Button.url("Source code", "https://github.com/TgCatUB/THANOSBOT"),
                 Button.url("Deploy", "https://github.com/TgCatUB/nekopack"),
             )
         ]
@@ -141,7 +141,7 @@ async def article_builder(event, method):
         buttons = [
             (
                 Button.inline("Stats", data="stats"),
-                Button.url("Repo", "https://github.com/TgCatUB/catuserbot"),
+                Button.url("Repo", "https://github.com/TgCatUB/THANOSBOT"),
             )
         ]
         try:
@@ -152,7 +152,7 @@ async def article_builder(event, method):
             return None
         title = "Cat Alive"
         thumb = get_thumb("alive.png")
-        description = "Alive menu for CatUserbot."
+        description = "Alive menu for THANOSBOT."
         ALIVE_PIC = gvarstatus("ALIVE_PIC")
         IALIVE_PIC = gvarstatus("IALIVE_PIC")
         if IALIVE_PIC:
@@ -170,7 +170,7 @@ async def article_builder(event, method):
 
             title = "Spotify"
             description = "Get currently playing song."
-            media = "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Inline/spotify_off.png"
+            media = "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Inline/spotify_off.png"
             if (
                 not (Config.SPOTIFY_CLIENT_ID and Config.SPOTIFY_CLIENT_SECRET)
                 or SP_DATABASE is None
@@ -179,7 +179,7 @@ async def article_builder(event, method):
                 buttons = [
                     Button.url(
                         "Tutorial",
-                        "https://telegra.ph/Steps-of-setting-Spotify-Vars-in-Catuserbot-04-24-2",
+                        "https://telegra.ph/Steps-of-setting-Spotify-Vars-in-THANOSBOT-04-24-2",
                     )
                 ]
             else:

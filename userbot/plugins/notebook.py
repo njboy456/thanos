@@ -1,6 +1,6 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/catuserbot   //
-#   \\       Plugin for @catuserbot            //
+#  \\   https://github.com/TgCatUB/THANOSBOT   //
+#   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
 import os
@@ -248,7 +248,7 @@ async def write_page(event):  # sourcery skip: low-code-quality
     if cmd == "notebook":
         text = (
             (await catub(GetFullUserRequest(catub.uid))).full_user
-        ).about or "This is just a Sample text\n              -by Catuserbot"
+        ).about or "This is just a Sample text\n              -by THANOSBOT"
         cap = f"**NoteBook Configs :-**\n\n**Font:** `{font}`\n**Page:** `{list(Pages.keys())[list(Pages.values()).index(page)]}`\n**Color:** `{foreground.title()}`\n**Log:**  `{log}`"
     reply_to_id = await reply_id(event)
     text = deEmojify(text)
@@ -259,12 +259,12 @@ async def write_page(event):  # sourcery skip: low-code-quality
         os.mkdir("./temp")
     if not os.path.exists(temp_name):
         urllib.request.urlretrieve(
-            f"https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Notebook/Images/{page}.jpg",
+            f"https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Notebook/Images/{page}.jpg",
             temp_name,
         )
     if not os.path.exists(font_name):
         urllib.request.urlretrieve(
-            f"https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Notebook/Fonts/{font}.ttf?raw=true",
+            f"https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Notebook/Fonts/{font}.ttf?raw=true",
             font_name,
         )
     lines, text_wrap, font_size, linespace, position = notebook_values(page, font)
@@ -393,7 +393,7 @@ async def notebook_conf(event):  # sourcery skip: low-code-quality
     await event.delete()
     file = f"{temp_page}.jpg"
     urllib.request.urlretrieve(
-        f"https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Notebook/Images/{temp_page}.jpg",
+        f"https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Notebook/Images/{temp_page}.jpg",
         file,
     )
     await event.client.send_file(event.chat_id, file, caption=cap, reply_to=reply_to_id)

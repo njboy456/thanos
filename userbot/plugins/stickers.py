@@ -69,10 +69,10 @@ def verify_cond(catarray, text):
 
 def pack_name(userid, pack, is_anim, is_video):
     if is_anim:
-        return f"catuserbot_{userid}_{pack}_anim"
+        return f"THANOSBOT_{userid}_{pack}_anim"
     if is_video:
-        return f"catuserbot_{userid}_{pack}_vid"
-    return f"catuserbot_{userid}_{pack}"
+        return f"THANOSBOT_{userid}_{pack}_vid"
+    return f"THANOSBOT_{userid}_{pack}"
 
 
 def char_is_emoji(character):
@@ -772,7 +772,7 @@ async def pussycat(event):
             "{tr}gridpack -e👌 <packname>",
         ],
         "examples": [
-            "{tr}gridpack -e👌 CatUserbot",
+            "{tr}gridpack -e👌 THANOSBOT",
         ],
     },
 )
@@ -800,7 +800,7 @@ async def pic2packcmd(event):
     except Exception:
         emoji = "▫️"
     chat = "@Stickers"
-    name = "CatUserbot_" + "".join(
+    name = "THANOSBOT_" + "".join(
         random.choice(list(string.ascii_lowercase + string.ascii_uppercase))
         for _ in range(16)
     )

@@ -1,4 +1,4 @@
-# image search for catuserbot
+# image search for THANOSBOT
 import contextlib
 import os
 import shutil
@@ -22,9 +22,9 @@ plugin_category = "misc"
         "description": "To search images in google. By default will send 3 images.you can get more images(upto 10 only by changing limit value as shown in usage and examples.",
         "usage": ["{tr}img <1-10> <query>", "{tr}img <query>"],
         "examples": [
-            "{tr}img 10 catuserbot",
-            "{tr}img catuserbot",
-            "{tr}img 7 catuserbot",
+            "{tr}img 10 THANOSBOT",
+            "{tr}img THANOSBOT",
+            "{tr}img 7 THANOSBOT",
         ],
     },
 )

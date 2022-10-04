@@ -37,7 +37,7 @@ from . import BOTLOG, BOTLOG_CHATID, TMP_DOWNLOAD_DIRECTORY
 LOGS = logging.getLogger(__name__)
 plugin_category = "misc"
 
-# Catuserbot Google Drive managers  ported from Projectbish and added extra things by @mrconfused
+# THANOSBOT Google Drive managers  ported from Projectbish and added extra things by @mrconfused
 
 
 # =========================================================== #
@@ -599,7 +599,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType, dir_id=None):
         dir_id = ""
     body = {
         "name": file_name,
-        "description": "Uploaded from Telegram using Catuserbot.",
+        "description": "Uploaded from Telegram using THANOSBOT.",
         "mimeType": mimeType,
         "parents": dir_id,
     }

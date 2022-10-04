@@ -63,7 +63,7 @@ oldvars = {
             "get": "To show the already existing var value.",
             "del": "To delete the existing value",
         },
-        "var name": "**[list of vars]**(https://catuserbot.gitbook.io/catuserbot/data-vars-setup)",
+        "var name": "**[list of vars]**(https://THANOSBOT.gitbook.io/THANOSBOT/data-vars-setup)",
         "usage": [
             "{tr}setdv <var name> <var value>",
             "{tr}getdv <var name>",
@@ -209,7 +209,7 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     pattern="custom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("custom", plugin_category),
     info={
-        "header": "To customize your CatUserbot.",
+        "header": "To customize your THANOSBOT.",
         "options": {
             "pmpermit": "To customize pmpermit text. ",
             "pmblock": "To customize pmpermit block message.",
@@ -238,8 +238,8 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         "NOTE": "You can set,fetch or delete these by `{tr}setdv` , `{tr}getdv` & `{tr}deldv` as well.",
     },
 )
-async def custom_catuserbot(event):
-    "To customize your CatUserbot."
+async def custom_THANOSBOT(event):
+    "To customize your THANOSBOT."
     reply = await event.get_reply_message()
     text = None
     if reply:
@@ -273,7 +273,7 @@ async def custom_catuserbot(event):
     pattern="delcustom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("delcustom", plugin_category),
     info={
-        "header": "To delete costomization of your CatUserbot.",
+        "header": "To delete costomization of your THANOSBOT.",
         "options": {
             "pmpermit": "To delete custom pmpermit text",
             "pmblock": "To delete custom pmpermit block message",
@@ -286,8 +286,8 @@ async def custom_catuserbot(event):
         "NOTE": "You can set,fetch or delete these by `{tr}setdv` , `{tr}getdv` & `{tr}deldv` as well.",
     },
 )
-async def custom_catuserbot(event):
-    "To delete costomization of your CatUserbot."
+async def custom_THANOSBOT(event):
+    "To delete costomization of your THANOSBOT."
     input_str = event.pattern_match.group(1)
     if input_str == "pmpermit":
         if gvarstatus("pmpermit_txt") is None:

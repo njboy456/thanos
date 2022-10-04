@@ -81,7 +81,7 @@ OFFSET = 1
 LIMIT = 70 - OFFSET
 # [----------------------------------------------------------------------]
 # Errors
-no_sp_vars = "Vars `SPOTIFY_CLIENT_ID` & `SPOTIFY_CLIENT_SECRET` are missing, add them first !\n\n[Follow this tutorial](https://telegra.ph/Steps-of-setting-Spotify-Vars-in-Catuserbot-04-24-2)"
+no_sp_vars = "Vars `SPOTIFY_CLIENT_ID` & `SPOTIFY_CLIENT_SECRET` are missing, add them first !\n\n[Follow this tutorial](https://telegra.ph/Steps-of-setting-Spotify-Vars-in-THANOSBOT-04-24-2)"
 
 
 class Database:
@@ -478,7 +478,7 @@ async def sp_var_check(event):
         return False
     if SP_DATABASE is None:
         await event.edit(
-            "ERROR :: No Database was found!\n**Do `.help spsetup` for more info.**\n\n[Follow this tutorial](https://telegra.ph/Steps-of-setting-Spotify-Vars-in-Catuserbot-04-24-2)"
+            "ERROR :: No Database was found!\n**Do `.help spsetup` for more info.**\n\n[Follow this tutorial](https://telegra.ph/Steps-of-setting-Spotify-Vars-in-THANOSBOT-04-24-2)"
         )
         return False
     return True
@@ -562,17 +562,17 @@ def file_check():
         os.mkdir("./temp")
     if not os.path.exists(logo):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Spotify/cat.png",
+            "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Spotify/cat.png",
             logo,
         )
     if not os.path.exists(font_mid):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Spotify/GoogleSans-Medium.ttf?raw=true",
+            "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Spotify/GoogleSans-Medium.ttf?raw=true",
             font_mid,
         )
     if not os.path.exists(font_bold):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/TgCatUB/THANOSBOT-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
             font_bold,
         )
     return logo, font_bold, font_mid
@@ -631,7 +631,7 @@ async def make_thumb(url, client, song, artist, now, full):
         myphoto = await client.download_media(photos[0])
     except IndexError:
         myphoto = urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
+            "https://github.com/TgCatUB/THANOSBOT-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
         )
     user_lay = ellipse_layout_create(myphoto, 6, 30)
     thumbmask.paste(user_lay, (700, 450), user_lay)

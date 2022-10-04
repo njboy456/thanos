@@ -30,7 +30,7 @@ plugin_category = "utils"
 
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = os.path.join(
-    Config.TMP_DOWNLOAD_DIRECTORY, "catuserbot.media.ffmpeg"
+    Config.TMP_DOWNLOAD_DIRECTORY, "THANOSBOT.media.ffmpeg"
 )
 FINISHED_PROGRESS_STR = Config.FINISHED_PROGRESS_STR
 UN_FINISHED_PROGRESS_STR = Config.UNFINISHED_PROGRESS_STR

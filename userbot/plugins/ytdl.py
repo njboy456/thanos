@@ -170,7 +170,7 @@ async def download_audio(event):  # sourcery skip: low-code-quality
                 url, download=False
             )
         except ExtractorError:
-            vid_data = {"title": url, "uploader": "Catuserbot", "formats": []}
+            vid_data = {"title": url, "uploader": "THANOSBOT", "formats": []}
         startTime = time()
         retcode = await _mp3Dl(url=url, starttime=startTime, uid="320")
         if retcode != 0:

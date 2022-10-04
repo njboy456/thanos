@@ -1,6 +1,6 @@
 # \\ Created by-@Jisan7509 -- Github.com/Jisan09 //
-#  \\   https://github.com/TgCatUB/catuserbot   //
-#   \\       Plugin for @catuserbot            //
+#  \\   https://github.com/TgCatUB/THANOSBOT   //
+#   \\       Plugin for @THANOSBOT            //
 #    ```````````````````````````````````````````
 
 import os
@@ -16,8 +16,8 @@ from . import catub, edit_delete, edit_or_reply
 plugin_category = "utils"
 
 
-bg_url_1 = "https://raw.githubusercontent.com/TgCatUB/CatUserbot-Resources/master/Resources/App/app-full.jpg"
-bg_url_2 = "https://raw.githubusercontent.com/TgCatUB/CatUserbot-Resources/master/Resources/App/app-suggest.jpg"
+bg_url_1 = "https://raw.githubusercontent.com/TgCatUB/THANOSBOT-Resources/master/Resources/App/app-full.jpg"
+bg_url_2 = "https://raw.githubusercontent.com/TgCatUB/THANOSBOT-Resources/master/Resources/App/app-suggest.jpg"
 
 
 def text_draw(font_name, font_size, img, text, width, hight, fill="white"):

@@ -1,5 +1,5 @@
 #    Copyright (C) 2020  sandeep.n(π.$)
-# button post makker for catuserbot thanks to uniborg for the base
+# button post makker for THANOSBOT thanks to uniborg for the base
 
 # by @sandy1709 (@mrconfused)
 import os
@@ -28,7 +28,7 @@ BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>
         "usage": [
             "{tr}cbutton <text> [Name on button]<buttonurl:link you want to open>",
         ],
-        "examples": "{tr}cbutton test [google]<buttonurl:https://www.google.com> [catuserbot]<buttonurl:https://t.me/catuserbot17:same> [support]<buttonurl:https://t.me/catuserbot_support>",
+        "examples": "{tr}cbutton test [google]<buttonurl:https://www.google.com> [THANOSBOT]<buttonurl:https://t.me/THANOSBOT17:same> [support]<buttonurl:https://t.me/THANOSBOT_support>",
     },
 )
 async def _(event):
@@ -95,7 +95,7 @@ async def _(event):
             "{tr}ibutton <text> [Name on button]<buttonurl:link you want to open>",
             "{tr}ibutton <text> <media:media_path> [Name on button]<buttonurl:link you want to open>",
         ],
-        "examples": "{tr}ibutton test <media:downloads/thumb_image.jpg> [google]<buttonurl:https://www.google.com> [catuserbot]<buttonurl:https://t.me/catuserbot17:same> [support]<buttonurl:https://t.me/catuserbot_support>",
+        "examples": "{tr}ibutton test <media:downloads/thumb_image.jpg> [google]<buttonurl:https://www.google.com> [THANOSBOT]<buttonurl:https://t.me/THANOSBOT17:same> [support]<buttonurl:https://t.me/THANOSBOT_support>",
     },
 )
 async def _(event):
