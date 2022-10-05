@@ -17,9 +17,54 @@ from .utils import (
 )
 
 LOGS = logging.getLogger("THANOSBOT")
+THANOS_NAME = "✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ"
+Bot = THANOS
 
 print(userbot.__copyright__)
 print(f"Licensed under the terms of the {userbot.__license__}")
+
+async def killer():
+    THANOS_USER = bot.me.first_name
+    The_THANOSBOY = bot.uid
+    thanos_mention = f"[{THANOS_USER}](tg://user?id={The_THANOSBOY})"
+    name = f"{thanos_mention}'s Assistant"
+    description = f"I am Assistant Of {thanos_mention}.This Bot Can Help U To Chat With My Master"
+    starkbot = await THANOS.tgbot.get_me()
+    bot_name = starkbot.first_name
+    botname = f"@{starkbot.username}"
+    if bot_name.endswith("Assistant"):
+        print("Bot Starting")
+    else:
+        try:
+            await bot.send_message("@BotFather", "/setinline")
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", botname)
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", THANOS_NAME)
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", "/setname")
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", botname)
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", name)
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", "/setdescription")
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", botname)
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", description)
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", "/setuserpic")
+            await asyncio.sleep(1)
+            await bot.send_message("@BotFather", botname)
+            await asyncio.sleep(1)
+            await bot.send_file(
+                "@BotFather", "userbot/helpers/resources/pics/main.jpg"
+            )
+            await asyncio.sleep(2)
+        except Exception as e:
+            print(e)
+
 
 cmdhr = Config.COMMAND_HAND_LER
 
