@@ -30,7 +30,7 @@ LOGS = logging.getLogger(__name__)
 HEROKU_APP_NAME = Config.HEROKU_APP_NAME or None
 HEROKU_API_KEY = Config.HEROKU_API_KEY or None
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
-THANOSABUSE  = Config.THANOSABUSE 
+THANOSABUSE = Config.THANOSABUSE
 heroku_api = "https://api.heroku.com"
 
 UPSTREAM_REPO_BRANCH = Config.UPSTREAM_REPO_BRANCH
@@ -334,7 +334,7 @@ async def upstream(event):
 )
 async def variable(event):  # sourcery skip: low-code-quality
     "To switch between good & bad cat"
-    switch = "THANOSABUSE "
+    switch = "THANOSABUSE"
     config = "config.py"
     cmd = event.pattern_match.group(1).lower()
     if ENV:
@@ -346,7 +346,7 @@ async def variable(event):  # sourcery skip: low-code-quality
         app = Heroku.app(Config.HEROKU_APP_NAME)
         heroku_var = app.config()
         if cmd == "good":
-            if THANOSABUSE :
+            if THANOSABUSE:
                 await edit_or_reply(
                     event, "`Changing badcat to goodcat wait for 2-3 minutes.`"
                 )
@@ -354,7 +354,7 @@ async def variable(event):  # sourcery skip: low-code-quality
                 return
             await edit_delete(event, "`You already using GoodTHANOS`", 6)
         else:
-            if THANOSABUSE :
+            if THANOSABUSE:
                 return await edit_delete(event, "`You already using BadTHANOS`", 6)
             await edit_or_reply(
                 event, "`Changing goodcat to badcat wait for 2-3 minutes.`"
@@ -371,7 +371,7 @@ async def variable(event):  # sourcery skip: low-code-quality
             else:
                 string += f"{i}"
         if cmd == "good":
-            if match and not THANOSABUSE :
+            if match and not THANOSABUSE:
                 cat = await edit_or_reply(
                     event, "`Changing badcat to goodcat wait for 2-3 minutes.`"
                 )
@@ -382,7 +382,7 @@ async def variable(event):  # sourcery skip: low-code-quality
                 return await event.client.reload(cat)
             await edit_delete(event, "`You already using GoodTHANOS`")
         elif cmd == "bad":
-            if match and THANOSABUSE :
+            if match and THANOSABUSE:
                 return await edit_or_reply(event, "`You already using BadTHANOS`")
             string += f'    {switch} = "True"\n'
             cat = await edit_or_reply(

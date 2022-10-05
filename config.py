@@ -22,4 +22,4 @@ class Development(Config):
     # External plugins repo
     EXTERNAL_REPO = "https://github.com/rishabhanand2/thanos_plugins"
     # if you need badcat plugins set "True"
-    THANOSABUSE  = "False"
+    THANOSABUSE = "False"

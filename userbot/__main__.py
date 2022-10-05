@@ -111,9 +111,9 @@ async def externalrepo():
        # await install_externalrepo(
             #Config.EXTERNAL_REPO, Config.EXTERNAL_REPOBRANCH, "xtraplugins"
         #)
-    #if Config.THANOSABUSE :
+    #if Config.THANOSABUSE:
        # await install_externalrepo(
-           # Config.THANOSABUSE _REPO, Config.THANOSABUSE _REPOBRANCH, "badcatext"
+           # Config.THANOSABUSE_REPO, Config.THANOSABUSE_REPOBRANCH, "badcatext"
         #)
     if Config.VCMODE:
         await install_externalrepo(
