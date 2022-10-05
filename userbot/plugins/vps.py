@@ -41,18 +41,18 @@ async def switch_branch():
         configs = f.read()
     BRANCH = "master"
     REPO = "https://github.com/rishabhanand2/THANOS-V2"
-    BADCAT = EXTERNAL = False
+    THANOSABUSE  = EXTERNAL = False
     for match in re.finditer(
-        r"(?:(UPSTREAM_REPO|UPSTREAM_REPO_BRANCH|EXTERNAL_REPO|BADCAT)(?:[ = \"\']+(.*[^\"\'\n])))",
+        r"(?:(UPSTREAM_REPO|UPSTREAM_REPO_BRANCH|EXTERNAL_REPO|THANOSABUSE )(?:[ = \"\']+(.*[^\"\'\n])))",
         configs,
     ):
         BRANCH = match.group(2) if match.group(1) == "UPSTREAM_REPO_BRANCH" else BRANCH
         REPO = match.group(2) if match.group(1) == "UPSTREAM_REPO" else REPO
         EXTERNAL = match.group(2) if match.group(1) == "EXTERNAL_REPO" else EXTERNAL
-        BADCAT = (
+        THANOSABUSE  = (
             True
-            if match.group(1) == "BADCAT" and match.group(2).lower() != "false"
-            else BADCAT
+            if match.group(1) == "THANOSABUSE " and match.group(2).lower() != "false"
+            else THANOSABUSE 
         )
     if REPO:
         await _catutils.runcmd(f"git clone -b {BRANCH} {REPO} TempTHANOS")
@@ -62,7 +62,7 @@ async def switch_branch():
             await _catutils.runcmd(f"mv ./TempTHANOS/{file} ./")
         await _catutils.runcmd("pip3 install --no-cache-dir -r requirements.txt")
         await _catutils.runcmd("rm -rf TempTHANOS")
-    if not BADCAT and os.path.exists("badcatext"):
+    if not THANOSABUSE  and os.path.exists("badcatext"):
         await _catutils.runcmd("rm -rf badcatext")
     if not EXTERNAL and os.path.exists("xtraplugins"):
         await _catutils.runcmd("rm -rf xtraplugins")

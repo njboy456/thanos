@@ -185,7 +185,7 @@ async def grpinfo():
     outstr = "**Plugins in THANOSBOT are:**\n\n"
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    if Config.BADCAT:
+    if Config.THANOSABUSE :
         category.append("useless")
     for cat in category:
         plugins = GRP_INFO[cat]
@@ -199,7 +199,7 @@ async def grpinfo():
 async def cmdlist():
     outstr = "**Total list of Commands in your THANOSBOT are :**\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    if Config.BADCAT:
+    if Config.THANOSABUSE :
         category.append("tools")
     for cat in category:
         plugins = GRP_INFO[cat]

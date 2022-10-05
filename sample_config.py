@@ -40,8 +40,8 @@ class Config(object):
     else:
         EXTERNAL_REPO = None
     # if you need badcat plugins use the following vars
-    BADCAT = os.environ.get("BADCAT", False)
-    BADCAT = bool(BADCAT and (BADCAT.lower() != "false"))
+    THANOSABUSE  = os.environ.get("THANOSABUSE ", False)
+    THANOSABUSE  = bool(THANOSABUSE  and (THANOSABUSE .lower() != "false"))
     # for vc plugins
     VCMODE = os.environ.get("VCMODE", False)
     VCMODE = bool(VCMODE and (VCMODE.lower() != "false"))
@@ -169,10 +169,10 @@ class Config(object):
     BOTLOG_CHATID = 0
     # extra plugins realted vars below  4
     EXTERNAL_REPOBRANCH = os.environ.get("EXTERNAL_REPOBRANCH", "main")
-    BADCAT_REPO = os.environ.get("BADCAT_REPO", "https://github.com/rishabhanand2/thanos_plugins")
-    if BADCAT_REPO and not url(BADCAT_REPO):
-        BADCAT_REPO = "https://github.com/rishabhanand2/thanos_plugins"
-    BADCAT_REPOBRANCH = os.environ.get("BADCAT_REPOBRANCH", "badcat")
+    THANOSABUSE _REPO = os.environ.get("THANOSABUSE _REPO", "https://github.com/rishabhanand2/thanos_plugins")
+    if THANOSABUSE _REPO and not url(THANOSABUSE _REPO):
+        THANOSABUSE _REPO = "https://github.com/rishabhanand2/thanos_plugins"
+    THANOSABUSE _REPOBRANCH = os.environ.get("THANOSABUSE _REPOBRANCH", "badcat")
 
 
 class Production(Config):
