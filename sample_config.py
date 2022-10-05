@@ -172,7 +172,7 @@ class Config(object):
     THANOSABUSE_REPO = os.environ.get("THANOSABUSE_REPO", "https://github.com/rishabhanand2/thanos_plugins")
     if THANOSABUSE_REPO and not url(THANOSABUSE_REPO):
         THANOSABUSE_REPO = "https://github.com/rishabhanand2/thanos_plugins"
-    THANOSABUSE_REPOBRANCH = os.environ.get("THANOSABUSE_REPOBRANCH", "badcat")
+    THANOSABUSE_REPOBRANCH = os.environ.get("THANOSABUSE_REPOBRANCH", "THANOSABUSE")
 
 
 class Production(Config):
