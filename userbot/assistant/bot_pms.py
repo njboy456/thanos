@@ -107,7 +107,7 @@ async def bot_start(event):  # sourcery skip: low-code-quality
             start_msg = f"Hey! 👤{mention},\
                         \nI am {my_mention}'s assistant bot.\
                         \nYou can contact to my master from here.\
-                        \n\nPowered by [THANOSBOT](https://t.me/THANOSBOT)"
+                        \n\nPowered by [THANOSBOT](https://t.me/THANOSPROSSS)"
         buttons = [
             (
                 Button.url("Repo", "https://github.com/rishabhanand2/THANOS-V2"),

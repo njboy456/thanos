@@ -28,7 +28,7 @@ BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>
         "usage": [
             "{tr}cbutton <text> [Name on button]<buttonurl:link you want to open>",
         ],
-        "examples": "{tr}cbutton test [google]<buttonurl:https://www.google.com> [THANOSBOT]<buttonurl:https://t.me/THANOSBOT17:same> [support]<buttonurl:https://t.me/THANOSBOT_support>",
+        "examples": "{tr}cbutton test [google]<buttonurl:https://www.google.com> [THANOSBOT]<buttonurl:https://t.me/THANOSPROSSS17:same> [support]<buttonurl:https://t.me/THANOSPROSSS_support>",
     },
 )
 async def _(event):
@@ -95,7 +95,7 @@ async def _(event):
             "{tr}ibutton <text> [Name on button]<buttonurl:link you want to open>",
             "{tr}ibutton <text> <media:media_path> [Name on button]<buttonurl:link you want to open>",
         ],
-        "examples": "{tr}ibutton test <media:downloads/thumb_image.jpg> [google]<buttonurl:https://www.google.com> [THANOSBOT]<buttonurl:https://t.me/THANOSBOT17:same> [support]<buttonurl:https://t.me/THANOSBOT_support>",
+        "examples": "{tr}ibutton test <media:downloads/thumb_image.jpg> [google]<buttonurl:https://www.google.com> [THANOSBOT]<buttonurl:https://t.me/THANOSPROSSS17:same> [support]<buttonurl:https://t.me/THANOSPROSSS_support>",
     },
 )
 async def _(event):

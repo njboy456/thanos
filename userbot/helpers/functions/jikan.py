@@ -359,7 +359,7 @@ async def formatJSON(outData, manga=False):
     msg += f"\n**Year** : {jsonData['startDate']['year']}"
     msg += f"\n**Score** : {jsonData['averageScore']}"
     msg += f"\n**Popularity** : {jsonData['popularity']}"
-    # https://t.me/THANOSBOT_support/19496
+    # https://t.me/THANOSPROSSS_support/19496
     cat = f"{jsonData['description']}"
     msg += " __" + re.sub("<br>", "\n", cat) + "__"
     msg = re.sub("<b>", "__**", msg)

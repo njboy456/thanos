@@ -180,7 +180,7 @@ class THANOSBOTClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        link = "[here](https://t.me/THANOSBOT_support)"
+                        link = "[here](https://t.me/THANOSPROSSS_support)"
                         text = (
                             "**THANOSBOT Error report**\n\n"
                             + "If you wanna you can report it"
@@ -301,7 +301,7 @@ class THANOSBOTClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        link = "[here](https://t.me/THANOSBOT_support)"
+                        link = "[here](https://t.me/THANOSPROSSS_support)"
                         text = (
                             "**THANOSBOT Error report**\n\n"
                             + "If you wanna you can report it"
