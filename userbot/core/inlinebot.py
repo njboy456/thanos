@@ -121,7 +121,7 @@ async def article_builder(event, method):
         buttons = [
             (
                 Button.url("Source code", "https://github.com/rishabhanand2/THANOS-V2"),
-                Button.url("Deploy", "https://github.com/TgTHANOSPRO/nekopack"),
+                Button.url("Deploy", "https://github.com/rishabhanand2/THANOS-V2"),
             )
         ]
 
