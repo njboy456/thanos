@@ -70,7 +70,7 @@ async def startupmessage():
             Config.THANOSPROLOGO = await THANOSPRO.tgbot.send_file(
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/1f7b0076302734f58ce0d.jpg",
-                caption="**Your THANOSBOT has been started successfully.**",
+                caption="**Your ✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ has been started successfully.\n🏓 {ping} ms**",
                 buttons=[(Button.url("Support", "https://t.me/THANOSPROSSS"),)],
             )
     except Exception as e:
