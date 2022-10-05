@@ -115,7 +115,7 @@ async def article_builder(event, method):
         media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/filemanager.jpg"
     elif method == "deploy":
         media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/catlogo.png"
-        title = "𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩"
+        title = "ᴛʜᴀɴᴏꜱ-ᴠᄅ"
         description = "Deploy yourself."
         query = "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 тнαησѕ-ν❷."
         buttons = [
