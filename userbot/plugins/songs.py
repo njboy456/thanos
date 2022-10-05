@@ -1,4 +1,4 @@
-# by  @sandy1709 ( https://t.me/mrconfused  )
+# by  @thanosceo ( https://t.me/mrconfused  )
 
 # songs finder for THANOSBOT
 import base64

@@ -1,4 +1,4 @@
-# Made by @mrconfused and @sandy1709
+# Made by @mrconfused and @thanosceo
 # memify plugin for THANOSBOT
 import asyncio
 import base64

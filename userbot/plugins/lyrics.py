@@ -1,4 +1,4 @@
-# \\ Created by-@mrconfused -- Github.com/sandy1709 //
+# \\ Created by-@mrconfused -- Github.com/thanosceo //
 # \\ Modified by-@Jisan7509 -- Github.com/Jisan09 //
 #  \\    https://github.com/rishabhanand2/THANOS-V2   //
 #   \\        Plugin for @THANOSBOT            //

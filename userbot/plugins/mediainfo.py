@@ -1,5 +1,5 @@
 # plugin by @deleteduser420
-# ported to telethon by @mrconfused (@sandy1709)
+# ported to telethon by @mrconfused (@thanosceo)
 import contextlib
 import os
 

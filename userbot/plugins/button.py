@@ -1,7 +1,7 @@
 #    Copyright (C) 2020  sandeep.n(π.$)
 # button post makker for THANOSBOT thanks to uniborg for the base
 
-# by @sandy1709 (@mrconfused)
+# by @thanosceo (@mrconfused)
 import os
 import re
 
