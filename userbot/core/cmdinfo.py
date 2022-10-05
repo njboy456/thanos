@@ -23,7 +23,6 @@ hemojis = {
     "tools": "🧰",
     "utils": "🗂",
     "extra": "➕",
-    "useless": "⚰️",
 }
 
 
