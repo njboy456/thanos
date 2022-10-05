@@ -18,7 +18,7 @@ from .utils import (
 
 LOGS = logging.getLogger("THANOSBOT")
 THANOS_NAME = "✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ"
-Bot = THANOS
+
 
 print(userbot.__copyright__)
 print(f"Licensed under the terms of the {userbot.__license__}")
@@ -29,7 +29,7 @@ async def rishabh():
     thanos_mention = f"[{THANOS_USER}](tg://user?id={The_THANOSBOY})"
     name = f"{thanos_mention}'s Assistant"
     description = f"I am Assistant Of {thanos_mention}.This Bot Can Help U To Chat With My Master"
-    starkbot = await THANOS.tgbot.get_me()
+    starkbot = await THANOSPRO.tgbot.get_me()
     bot_name = starkbot.first_name
     botname = f"@{starkbot.username}"
     if bot_name.endswith("Assistant"):
