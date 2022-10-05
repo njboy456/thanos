@@ -102,7 +102,7 @@ def catalive_text():
     cat_caption += f"**{EMOJI} тнαησѕ-ν𝟐 Version :** `{catversion}`\n"
     cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
     cat_caption += f"**{EMOJI} Master:** {mention}\n"
-    cat_caption += "**╰────⇌тнαησѕ⇋────""
+    cat_caption += "**╰────⇌тнαησѕ⇋────**"
     return cat_caption
 
 
