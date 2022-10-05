@@ -1,12 +1,20 @@
 import contextlib
 import sys
+import asyncio
+import os
+import re
+from os import system
 
+from telethon import Button, events
+from . import *
 import userbot
 from userbot import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
+from telethon import Button, custom, events
+
 from .Config import Config
 from .core.logger import logging
-from .core.session import THANOSPRO
+from .core.session import THANOSPRO, tgbot
 from .utils import (
     add_bot_to_logger_group,
     install_externalrepo,
@@ -19,7 +27,7 @@ from .utils import (
 LOGS = logging.getLogger("THANOSBOT")
 THANOS_NAME = "✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ"
 
-
+bot = THANOSPRO
 print(userbot.__copyright__)
 print(f"Licensed under the terms of the {userbot.__license__}")
 
