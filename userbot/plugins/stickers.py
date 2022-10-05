@@ -714,7 +714,7 @@ async def pussycat(event):
         file="animate.webm",
     )
     await edit_or_reply(sticker[0], f"`{random.choice(KANGING_STR)}`")
-    packname = f"Cat_{userid}_temp_pack"
+    packname = f"THANOS_{userid}_temp_pack"
     response = urllib.request.urlopen(
         urllib.request.Request(f"http://t.me/addstickers/{packname}")
     )
@@ -738,7 +738,7 @@ async def pussycat(event):
             "/newvideo",
             event,
             1,
-            "Cat",
+            "THANOS",
             True,
             "😂",
             packname,

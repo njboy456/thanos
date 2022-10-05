@@ -220,14 +220,14 @@ async def shazamcmd(event):
 async def song2(event):
     "To search songs"
     song = event.pattern_match.group(1)
-    chat = "@CatMusicRobot"
+    chat = "@THANOSMusicRobot"
     reply_id_ = await reply_id(event)
     catevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
     async with event.client.conversation(chat) as conv:
         try:
             purgeflag = await conv.send_message(song)
         except YouBlockedUserError:
-            await THANOSPRO(unblock("CatMusicRobot"))
+            await THANOSPRO(unblock("THANOSMusicRobot"))
             purgeflag = await conv.send_message(song)
         music = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)

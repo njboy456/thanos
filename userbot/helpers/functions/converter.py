@@ -11,7 +11,7 @@ from userbot.helpers.utils.utils import runcmd
 LOGS = logging.getLogger(__name__)
 
 
-class CatConverter:
+class THANOSConverter:
     async def _media_check(self, reply, dirct, file, memetype):
         if not os.path.isdir(dirct):
             os.mkdir(dirct)
@@ -154,4 +154,4 @@ class CatConverter:
         return catevent, None
 
 
-Convert = CatConverter()
+Convert = THANOSConverter()

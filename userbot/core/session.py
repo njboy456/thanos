@@ -32,7 +32,7 @@ except Exception as e:
 
 
 THANOSPRO.tgbot = tgbot = THANOSBOTClient(
-    session="CatTgbot",
+    session="THANOSTgbot",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,
     loop=loop,

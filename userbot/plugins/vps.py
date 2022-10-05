@@ -55,13 +55,13 @@ async def switch_branch():
             else BADCAT
         )
     if REPO:
-        await _catutils.runcmd(f"git clone -b {BRANCH} {REPO} TempCat")
-        file_list = os.listdir("TempCat")
+        await _catutils.runcmd(f"git clone -b {BRANCH} {REPO} TempTHANOS")
+        file_list = os.listdir("TempTHANOS")
         for file in file_list:
             await _catutils.runcmd(f"rm -rf {file}")
-            await _catutils.runcmd(f"mv ./TempCat/{file} ./")
+            await _catutils.runcmd(f"mv ./TempTHANOS/{file} ./")
         await _catutils.runcmd("pip3 install --no-cache-dir -r requirements.txt")
-        await _catutils.runcmd("rm -rf TempCat")
+        await _catutils.runcmd("rm -rf TempTHANOS")
     if not BADCAT and os.path.exists("badcatext"):
         await _catutils.runcmd("rm -rf badcatext")
     if not EXTERNAL and os.path.exists("xtraplugins"):

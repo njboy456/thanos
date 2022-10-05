@@ -90,7 +90,7 @@ async def article_builder(event, method):
     media = thumb = photo = None
     link_preview = False
     builder = event.builder
-    title = "Cat Userbot"
+    title = "THANOS Userbot"
     description = "Button menu for THANOSBOT"
     if method == "help":
         help_info = main_menu()
@@ -147,7 +147,7 @@ async def article_builder(event, method):
             query = catalive_text()
         except Exception:
             return None
-        title = "Cat Alive"
+        title = "THANOS Alive"
         thumb = get_thumb("alive.png")
         description = "Alive menu for THANOSBOT."
         ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -701,7 +701,7 @@ async def on_plugin_callback_query_handler(event):
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     buttons = paginate_help(0, GRP_INFO[category], category)
-    text = f"**Category: **{category}\
+    text = f"**THANOSegory: **{category}\
         \n**Total plugins :** {len(GRP_INFO[category])}\
         \n**Total Commands:** {command_in_category(category)}"
     await event.edit(text, buttons=buttons)
@@ -719,7 +719,7 @@ async def on_plug_in_callback_query_handler(event):
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
-        text = f"**Category: **`{category}`\
+        text = f"**THANOSegory: **`{category}`\
             \n**Total plugins :** __{len(GRP_INFO[category])}__\
             \n**Total Commands:** __{command_in_category(category)}__"
     else:
@@ -734,7 +734,7 @@ async def on_plug_in_callback_query_handler(event):
             category_pgno=category_pgno,
         )
         text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
+                \n**THANOSegory: **__{getkey(category)}__\
                 \n**Total Commands:** __{len(PLG_INFO[category])}__"
     await event.edit(text, buttons=buttons)
 
@@ -768,7 +768,7 @@ async def on_plug_in_callback_query_handler(event):
             category_pgno=category_pgno,
         )
         text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
+                \n**THANOSegory: **__{getkey(category)}__\
                 \n**Total Commands:** __{len(PLG_INFO[category])}__"
         try:
             return await event.edit(text, buttons=buttons)
@@ -828,7 +828,7 @@ async def on_plug_in_callback_query_handler(event):
     ]
     text = f"**Command :** `{tr}{cmd}`\
         \n**Plugin :** `{category}`\
-        \n**Category :** `{category_plugins}`\
+        \n**THANOSegory :** `{category_plugins}`\
         \n\n**✘ Intro :**\n{CMD_INFO[cmd][0]}"
     await event.edit(text, buttons=buttons)
 
@@ -844,7 +844,7 @@ async def inline_search(event, query):
                 info = CMD_INFO[cmd][1]
             except IndexError:
                 info = "None"
-            description = f"Plugin:  {plugin} \nCategory:  {getkey(plugin)}\n{info}"
+            description = f"Plugin:  {plugin} \nTHANOSegory:  {getkey(plugin)}\n{info}"
             text = await cmdinfo(cmd, event)
             result = builder.article(
                 title=title,
@@ -862,7 +862,7 @@ async def inline_search(event, query):
                 text = await plugininfo(plugin, event, "-p")
                 result = builder.article(
                     title=title,
-                    description=f"Category:  {getkey(plugin)}\nTotal Cmd: {count}",
+                    description=f"THANOSegory:  {getkey(plugin)}\nTotal Cmd: {count}",
                     thumb=get_thumb("plugin.jpg"),
                     text=text,
                 )

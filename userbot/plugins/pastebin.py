@@ -80,7 +80,7 @@ def text_chunk_list(query, bits=29900):
         "examples": [
             "{tr}rayso -l",
             "{tr}rayso breeze",
-            "{tr}rayso Cat is op",
+            "{tr}rayso THANOS is op",
             "{tr}rayso <reply>",
         ],
         "usage": [

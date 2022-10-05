@@ -352,10 +352,10 @@ async def variable(event):  # sourcery skip: low-code-quality
                 )
                 del heroku_var[switch]
                 return
-            await edit_delete(event, "`You already using GoodCat`", 6)
+            await edit_delete(event, "`You already using GoodTHANOS`", 6)
         else:
             if BADCAT:
-                return await edit_delete(event, "`You already using BadCat`", 6)
+                return await edit_delete(event, "`You already using BadTHANOS`", 6)
             await edit_or_reply(
                 event, "`Changing goodcat to badcat wait for 2-3 minutes.`"
             )
@@ -380,10 +380,10 @@ async def variable(event):  # sourcery skip: low-code-quality
                     f1.close()
                 await _catutils.runcmd("rm -rf badcatext")
                 return await event.client.reload(cat)
-            await edit_delete(event, "`You already using GoodCat`")
+            await edit_delete(event, "`You already using GoodTHANOS`")
         elif cmd == "bad":
             if match and BADCAT:
-                return await edit_or_reply(event, "`You already using BadCat`")
+                return await edit_or_reply(event, "`You already using BadTHANOS`")
             string += f'    {switch} = "True"\n'
             cat = await edit_or_reply(
                 event, "`Changing goodcat to badcat wait for 2-3 minutes.`"

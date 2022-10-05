@@ -54,12 +54,12 @@ class LyricGenius:
                 link = song.song_art_image_url
         else:
             msg = f"{artist}-{title}" if artist else title
-            chat = "@CatMusicRobot"
+            chat = "@THANOSMusicRobot"
             async with event.client.conversation(chat) as conv:
                 try:
                     flag = await conv.send_message("/start")
                 except YouBlockedUserError:
-                    await event.client(unblock("CatMusicRobot"))
+                    await event.client(unblock("THANOSMusicRobot"))
                     flag = await conv.send_message("/start")
                 await conv.get_response()
                 await event.client.send_read_acknowledge(conv.chat_id)

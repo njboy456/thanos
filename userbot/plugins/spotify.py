@@ -631,7 +631,7 @@ async def make_thumb(url, client, song, artist, now, full):
         myphoto = await client.download_media(photos[0])
     except IndexError:
         myphoto = urllib.request.urlretrieve(
-            "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Spotify/SwagCat.jpg"
+            "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Spotify/SwagTHANOS.jpg"
         )
     user_lay = ellipse_layout_create(myphoto, 6, 30)
     thumbmask.paste(user_lay, (700, 450), user_lay)
@@ -782,7 +782,7 @@ async def spotify_now(event):
 )
 async def spotify_now(event):  # sourcery skip: remove-duplicate-dict-key
     "Send spotify song"
-    chat = "@CatMusicRobot"
+    chat = "@THANOSMusicRobot"
     await reply_id(event)
     cmd = event.pattern_match.group(1).lower()
     link = event.pattern_match.group(2)
@@ -803,7 +803,7 @@ async def spotify_now(event):  # sourcery skip: remove-duplicate-dict-key
         try:
             purgeflag = await conv.send_message(link)
         except YouBlockedUserError:
-            await THANOSPRO(unblock("CatMusicRobot"))
+            await THANOSPRO(unblock("THANOSMusicRobot"))
             purgeflag = await conv.send_message(link)
         song = await conv.get_response()
         if not song.media:

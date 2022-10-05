@@ -95,7 +95,7 @@ async def startup_process():
     print("Yay your userbot is officially working.!!!")
     print(
         f"Congratulation, now type {cmdhr}alive to see message if THANOSPRO is live\
-        \nIf you need assistance, head to https://t.me/CatUserbot_support"
+        \nIf you need assistance, head to https://t.me/THANOSUserbot_support"
     )
     print("============================================================")
     await verifyLoggerGroup()
@@ -117,7 +117,7 @@ async def externalrepo():
         #)
     if Config.VCMODE:
         await install_externalrepo(
-            "https://github.com/Tgcatub/CatVCPlayer", "test", "catvc"
+            "https://github.com/Tgcatub/THANOSVCPlayer", "test", "catvc"
         )
 
 
