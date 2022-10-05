@@ -200,7 +200,7 @@ async def cmdlist():
     outstr = "**Total list of Commands in your THANOSBOT are :**\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
     if Config.BADCAT:
-        category.append("useless")
+        category.append("tools")
     for cat in category:
         plugins = GRP_INFO[cat]
         outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
