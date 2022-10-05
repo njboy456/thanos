@@ -23,7 +23,7 @@ Bot = THANOS
 print(userbot.__copyright__)
 print(f"Licensed under the terms of the {userbot.__license__}")
 
-async def killer():
+async def rishabh():
     THANOS_USER = bot.me.first_name
     The_THANOSBOY = bot.uid
     thanos_mention = f"[{THANOS_USER}](tg://user?id={The_THANOSBOY})"
@@ -81,6 +81,7 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
+    await rishabh()
     print("============================================================")
     print("Yay your userbot is officially working.!!!")
     print(
