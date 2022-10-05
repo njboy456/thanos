@@ -46,12 +46,12 @@ async def amireallyalive(event):
         ANIME = f"**“{data['quote']}” - {data['character']} ({data['anime']})**"
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
-    catevent = await edit_or_reply(event, "`Checking...`")
+    catevent = await edit_or_reply(event, "`processing...`")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "  Ṫ "
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**𓆩 тнαησѕ-ν❷ IS ALIVE 𓆪**"
+    EMOJI = gvarstatus("ALIVE_EMOJI") or " ✽ "
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ ɪꜱ ᴀʟɪᴠᴇ ✽**"
     CAT_IMG = gvarstatus("ALIVE_PIC")
     caption = cat_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
@@ -86,16 +86,20 @@ async def amireallyalive(event):
 
 
 temp = """{ALIVE_TEXT}
-**{EMOJI} Database :** `{dbhealth}`
-**{EMOJI} Telethon Version :** `{telever}`
-**{EMOJI} THANOSBOT Version :** `{catver}`
-**{EMOJI} Python Version :** `{pyver}`
-**{EMOJI} Uptime :** `{uptime}`
-**{EMOJI} Master:** {mention}"""
+**✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ ɪꜱ ᴀʟɪᴠᴇ ✽**
+
+**╭────⇌тнαησѕ⇋────**
+**◈┈˃̶ ᴏᴡɴᴇʀ : {mention}**
+**◈┈˃̶ ᴘʏᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ : {pyver}**
+**◈┈˃̶ ᴛʜᴀɴᴏꜱ ᴠᴇʀꜱɪᴏɴ : Vᄅ**
+**◈┈˃̶ ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ : {telever}**
+**◈┈˃̶ ᴘɪɴɢ {ping} ᴍꜱ**
+**╰────⇌тнαησѕ⇋────**
+"""
 
 
 def catalive_text():
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "  Ṫ "
+    EMOJI = gvarstatus("ALIVE_EMOJI") or " ✽ "
     cat_caption = "**╭────⇌тнαησѕ⇋────**\n"
     cat_caption += "**тнαησѕ-ν𝟐 is alive**\n"
     cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
