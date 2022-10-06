@@ -1,4 +1,4 @@
-# collage plugin for THANOSBOT by @catceo
+# collage plugin for THANOSBOT by @thanosceo
 
 # Copyright (C) 2020 Alfiananda P.A
 #

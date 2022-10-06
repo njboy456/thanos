@@ -46,7 +46,7 @@ async def source(e):
         "header": "Shows the information about an user on GitHub of given username",
         "flags": {"-l": "repo limit : default to 5"},
         "usage": ".github [flag] [username]",
-        "examples": [".github catuser", ".github -l5 catuser"],
+        "examples": [".github thanosuser", ".github -l5 thanosuser"],
     },
 )
 async def _(event):

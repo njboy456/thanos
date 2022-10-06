@@ -1,4 +1,4 @@
-# pm and tagged messages logger for THANOSBOT by @mrconfused (@catceo)
+# pm and tagged messages logger for THANOSBOT by @mrconfused (@thanosceo)
 import asyncio
 
 from userbot import THANOSPRO
