@@ -10,7 +10,7 @@ from . import BOTLOG, BOTLOG_CHATID, soft_deEmojify
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="tl ([\s\S]*)",
     command=("tl", plugin_category),
     info={
@@ -49,7 +49,7 @@ async def _(event):
         await edit_delete(event, f"**Error:**\n`{exc}`", time=5)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="trt(?: |$)([\s\S]*)",
     command=("trt", plugin_category),
     info={
@@ -90,7 +90,7 @@ async def translateme(trans):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lang (ai|trt|tocr) ([\s\S]*)",
     command=("lang", plugin_category),
     info={

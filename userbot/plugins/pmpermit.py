@@ -404,7 +404,7 @@ async def do_pm_spam_action(event, chat):
         return
 
 
-@THANOSPRO.cat_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@THANOSPRO.rishabh_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def on_new_private_message(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -428,7 +428,7 @@ async def on_new_private_message(event):
     await do_pm_permit_action(event, chat)
 
 
-@THANOSPRO.cat_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
+@THANOSPRO.rishabh_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def you_dm_other(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -612,7 +612,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pmguard (on|off)$",
     command=("pmguard", plugin_category),
     info={
@@ -640,7 +640,7 @@ async def pmpermit_on(event):
         await edit_delete(event, "__Pmpermit is already disabled for your account__")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pmmenu (on|off)$",
     command=("pmmenu", plugin_category),
     info={
@@ -673,7 +673,7 @@ async def pmpermit_on(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(a|approve)(?:\s|$)([\s\S]*)",
     command=("approve", plugin_category),
     info={
@@ -749,7 +749,7 @@ async def approve_p_m(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="t(emp)?(a|approve)(?:\s|$)([\s\S]*)",
     command=("tapprove", plugin_category),
     info={
@@ -831,7 +831,7 @@ async def tapprove_pm(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(da|disapprove)(?:\s|$)([\s\S]*)",
     command=("disapprove", plugin_category),
     info={
@@ -888,7 +888,7 @@ async def disapprove_p_m(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="block(?:\s|$)([\s\S]*)",
     command=("block", plugin_category),
     info={
@@ -939,7 +939,7 @@ async def block_p_m(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unblock(?:\s|$)([\s\S]*)",
     command=("unblock", plugin_category),
     info={
@@ -968,7 +968,7 @@ async def unblock_pm(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="l(ist)?a(pproved)?$",
     command=("listapproved", plugin_category),
     info={

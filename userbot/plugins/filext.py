@@ -8,7 +8,7 @@ from ..core.managers import edit_or_reply
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="filext(?:\s|$)([\s\S]*)",
     command=("filext", plugin_category),
     info={

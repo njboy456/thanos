@@ -28,7 +28,7 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     return str(path.absolute()) if full else path.stem + path.suffix
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="d(own)?l(oad)?(?:\s|$)([\s\S]*)",
     command=("download", plugin_category),
     info={
@@ -172,7 +172,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         await mone.edit("`Reply to a message to download to my local server.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="d(own)?l(oad)?to(?:\s|$)([\s\S]*)",
     command=("dlto", plugin_category),
     info={

@@ -26,7 +26,7 @@ if Config.THANOSABUSE:
     temp = "__**☞ Pong**__\n➥ `{ping}` **ms**\n➥ __**Bot of **__{mention}"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ping( -a|$)",
     command=("ping", plugin_category),
     info={

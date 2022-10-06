@@ -112,7 +112,7 @@ async def bot_broadcast(event):
     await br_cast.edit(b_info, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="bot_users$",
     command=("bot_users", plugin_category),
     info={
@@ -187,7 +187,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="bblist$",
     command=("bblist", plugin_category),
     info={
@@ -207,7 +207,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="bot_antif (on|off)$",
     command=("bot_antif", plugin_category),
     info={

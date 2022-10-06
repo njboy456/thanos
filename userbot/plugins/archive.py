@@ -27,7 +27,7 @@ def zipdir(dirName):
     return filePaths
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="zip(?:\s|$)([\s\S]*)",
     command=("zip", plugin_category),
     info={
@@ -68,7 +68,7 @@ async def zip_file(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="tar(?:\s|$)([\s\S]*)",
     command=("tar", plugin_category),
     info={
@@ -110,7 +110,7 @@ async def tar_file(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unzip(?:\s|$)([\s\S]*)",
     command=("unzip", plugin_category),
     info={
@@ -194,7 +194,7 @@ async def zip_file(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="untar(?:\s|$)([\s\S]*)",
     command=("untar", plugin_category),
     info={

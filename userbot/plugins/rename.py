@@ -15,7 +15,7 @@ plugin_category = "utils"
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="rnup ?(-f)? ([\s\S]*)",
     command=("rnup", plugin_category),
     info={

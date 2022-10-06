@@ -42,7 +42,7 @@ purgetype = {
 }
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="del(\s*| \d+)$",
     command=("del", plugin_category),
     info={
@@ -89,7 +89,7 @@ async def delete_it(event):
         await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="purgefrom$",
     command=("purgefrom", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def purge_from(event):
         await edit_delete(event, "`Reply to a message to let me know what to delete.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="purgeto$",
     command=("purgeto", plugin_category),
     info={
@@ -165,7 +165,7 @@ async def purge_to(event):
         await edit_delete(event, f"**Error**\n`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="purgeme",
     command=("purgeme", plugin_category),
     info={
@@ -200,7 +200,7 @@ async def purgeme(event):
 
 
 # TODO: only sticker messages.
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="purge(?:\s|$)([\s\S]*)",
     command=("purge", plugin_category),
     info={
@@ -454,7 +454,7 @@ async def fastpurger(event):  # sourcery no-metrics # sourcery skip: low-code-qu
     await hi.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="upurge( -a)?(?:\s|$)([\s\S]*)",
     command=("upurge", plugin_category),
     info={

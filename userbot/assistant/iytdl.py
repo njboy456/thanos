@@ -44,7 +44,7 @@ PATH = "./userbot/cache/ytsearch.json"
 plugin_category = "bot"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="iytdl(?:\s|$)([\s\S]*)",
     command=("iytdl", plugin_category),
     info={

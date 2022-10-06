@@ -14,7 +14,7 @@ from . import deEmojify, phcomment, threats, trap, trash
 plugin_category = "fun"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="trash$",
     command=("trash", plugin_category),
     info={
@@ -54,7 +54,7 @@ async def _(event):
     await event.client.send_file(event.chat_id, cat, reply_to=catid)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="threats$",
     command=("threats", plugin_category),
     info={
@@ -94,7 +94,7 @@ async def _(event):
     await event.client.send_file(event.chat_id, cat, reply_to=catid)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="trap(?:\s|$)([\s\S]*)",
     command=("trap", plugin_category),
     info={
@@ -144,7 +144,7 @@ async def _(event):
     await event.client.send_file(event.chat_id, cat, reply_to=catid)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="phub(?:\s|$)([\s\S]*)",
     command=("phub", plugin_category),
     info={

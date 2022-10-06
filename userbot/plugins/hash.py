@@ -15,7 +15,7 @@ from ..helpers.tools import media_type
 plugin_category = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="hash ([\s\S]*)",
     command=("hash", plugin_category),
     info={
@@ -52,7 +52,7 @@ async def gethash(hash_q):
     await edit_or_reply(hash_q, ans)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="hbase (en|de) ([\s\S]*)",
     command=("hbase", plugin_category),
     info={

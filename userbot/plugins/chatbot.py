@@ -30,7 +30,7 @@ tired_response = [
 ]
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="addai$",
     command=("addai", plugin_category),
     info={
@@ -69,7 +69,7 @@ async def add_chatbot(event):
         await edit_or_reply(catevent, "Hi")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="rmai$",
     command=("rmai", plugin_category),
     info={
@@ -97,7 +97,7 @@ async def remove_chatbot(event):
         await edit_or_reply(event, "The user is not activated with ai")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="delai( -a)?",
     command=("delai", plugin_category),
     info={
@@ -138,7 +138,7 @@ async def delete_chatbot(event):
             await edit_or_reply(event, "Deleted ai for all enabled users in this chat")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="listai( -a)?$",
     command=("listai", plugin_category),
     info={
@@ -201,7 +201,7 @@ async def list_chatbot(event):  # sourcery no-metrics
     await edit_or_reply(event, output_str)
 
 
-@THANOSPRO.cat_cmd(incoming=True, edited=False)
+@THANOSPRO.rishabh_cmd(incoming=True, edited=False)
 async def ai_reply(event):
     if is_added(event.chat_id, event.sender_id) and (event.message.text):
         response = requests.get(

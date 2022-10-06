@@ -7,7 +7,7 @@ from ..helpers.utils import get_user_from_event, reply_id
 plugin_category = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(tagall|all)(?:\s|$)([\s\S]*)",
     command=("tagall", plugin_category),
     info={
@@ -30,7 +30,7 @@ async def _(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="report$",
     command=("report", plugin_category),
     info={
@@ -52,7 +52,7 @@ async def _(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="men ([\s\S]*)",
     command=("mention", plugin_category),
     info={

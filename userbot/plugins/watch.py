@@ -89,7 +89,7 @@ def get_provider(url):
     return url
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="watch ([\s\S]*)",
     command=("watch", plugin_category),
     info={

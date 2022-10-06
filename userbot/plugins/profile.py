@@ -29,7 +29,7 @@ USERNAME_TAKEN = "```This username is already taken.```"
 # ===============================================================
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pbio ([\s\S]*)",
     command=("pbio", plugin_category),
     info={
@@ -47,7 +47,7 @@ async def _(event):
         await edit_or_reply(event, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pname ([\s\S]*)",
     command=("pname", plugin_category),
     info={
@@ -73,7 +73,7 @@ async def _(event):
         await edit_or_reply(event, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ppic$",
     command=("ppic", plugin_category),
     info={
@@ -129,7 +129,7 @@ async def _(event):
         LOGS.info(str(e))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pusername ([\s\S]*)",
     command=("pusername", plugin_category),
     info={
@@ -149,7 +149,7 @@ async def update_username(event):
         await edit_or_reply(event, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="count$",
     command=("count", plugin_category),
     info={
@@ -193,7 +193,7 @@ async def count(event):
     await catevent.edit(result)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="delpfp ?([\s\S]*)",
     command=("delpfp", plugin_category),
     info={
@@ -228,7 +228,7 @@ async def remove_profilepic(delpfp):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="myusernames$",
     command=("myusernames", plugin_category),
     info={

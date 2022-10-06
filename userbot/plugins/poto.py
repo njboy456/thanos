@@ -12,7 +12,7 @@ plugin_category = "extra"
 name = "Profile Photos"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="poto(?:\s|$)([\s\S]*)",
     command=("poto", plugin_category),
     info={
@@ -80,7 +80,7 @@ async def potocmd(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="blur(?:\s|$)([\s\S]*)",
     command=("blur", plugin_category),
     info={

@@ -18,7 +18,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="restart$",
     command=("restart", plugin_category),
     info={
@@ -54,7 +54,7 @@ async def _(event):
         LOGS.error(e)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="shutdown$",
     command=("shutdown", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def _(event):
         os._exit(143)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sleep( [0-9]+)?$",
     command=("sleep", plugin_category),
     info={
@@ -98,7 +98,7 @@ async def _(event):
     await event.edit("`OK, I'm awake now.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="notify (on|off)$",
     command=("notify", plugin_category),
     info={

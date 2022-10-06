@@ -68,7 +68,7 @@ async def switch_branch():
         await _catutils.runcmd("rm -rf xtraplugins")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
     command=("var", plugin_category),
     info={
@@ -177,7 +177,7 @@ async def variable(event):  # sourcery no-metrics
         await event.client.reload(cat)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(re|clean)load$",
     command=("reload", plugin_category),
     info={

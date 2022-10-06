@@ -24,7 +24,7 @@ link_regex = re.compile(
 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="labstack(?:\s|$)([\s\S]*)",
     command=("labstack", plugin_category),
     info={
@@ -87,7 +87,7 @@ async def labstack(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="webupload ?(.+?|) --(fileio|anonfiles|transfer|filebin|anonymousfiles|bayfiles)",
     command=("webupload", plugin_category),
     info={

@@ -39,7 +39,7 @@ def get_warp_length(width):
     return int((20.0 / 1024.0) * (width + 0.0))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="qpic(?:\s|$)([\s\S]*)",
     command=("qpic", plugin_category),
     info={
@@ -159,7 +159,7 @@ async def q_pic(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
             os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(q|rq|fq|frq)(?:\s|$)([\s\S]*)",
     command=("q", plugin_category),
     info={
@@ -233,7 +233,7 @@ async def stickerchat(catquotes):
     os.remove(endfi[1])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="qbot(?:\s|$)([\s\S]*)",
     command=("qbot", plugin_category),
     info={

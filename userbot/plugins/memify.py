@@ -48,7 +48,7 @@ font_list = [
 ]
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pframe(f|-f)?$",
     command=("pframe", plugin_category),
     info={
@@ -127,7 +127,7 @@ async def maccmd(event):  # sourcery no-metrics
     await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(mmf|mms)(?:\s|$)([\s\S]*)",
     command=("mmf", plugin_category),
     info={
@@ -201,7 +201,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cfont(?:\s|$)([\s\S]*)",
     command=("cfont", plugin_category),
     info={
@@ -226,7 +226,7 @@ async def lang(event):
         await edit_or_reply(event, f"**Fonts for Memify changed to :-** `{input_str}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ascii(?:\s|$)([\s\S]*)",
     command=("ascii", plugin_category),
     info={
@@ -284,7 +284,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="invert$",
     command=("invert", plugin_category),
     info={
@@ -333,7 +333,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="solarize$",
     command=("solarize", plugin_category),
     info={
@@ -382,7 +382,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="mirror$",
     command=("mirror", plugin_category),
     info={
@@ -431,7 +431,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="flip$",
     command=("flip", plugin_category),
     info={
@@ -480,7 +480,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gray$",
     command=("gray", plugin_category),
     info={
@@ -529,7 +529,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="zoom ?([\s\S]*)",
     command=("zoom", plugin_category),
     info={
@@ -586,7 +586,7 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="frame ?([\s\S]*)",
     command=("frame", plugin_category),
     info={

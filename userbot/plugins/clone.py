@@ -15,7 +15,7 @@ DEFAULTUSERBIO = (
 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="clone(?:\s|$)([\s\S]*)",
     command=("clone", plugin_category),
     info={
@@ -59,7 +59,7 @@ async def _(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="revert$",
     command=("revert", plugin_category),
     info={

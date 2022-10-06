@@ -55,7 +55,7 @@ async def ban_user(chat_id, i, rights):
         return False, str(exc)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kickme$",
     command=("kickme", plugin_category),
     info={
@@ -72,7 +72,7 @@ async def kickme(leave):
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kickall$",
     command=("kickall", plugin_category),
     info={
@@ -114,7 +114,7 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="banall$",
     command=("banall", plugin_category),
     info={
@@ -158,7 +158,7 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unbanall$",
     command=("unbanall", plugin_category),
     info={
@@ -214,7 +214,7 @@ async def _(event):
 
 
 # Ported by ©[NIKITA](t.me/kirito6969) and ©[EYEPATCH](t.me/NeoMatrix90)
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="zombies( -r| )? ?([\s\S]*)",
     command=("zombies", plugin_category),
     info={
@@ -381,7 +381,7 @@ async def rm_deletedacc(show):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ikuck ?([\s\S]*)",
     command=("ikuck", plugin_category),
     info={

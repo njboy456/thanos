@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 plugin_category = "admin"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lock ([\s\S]*)",
     command=("lock", plugin_category),
     info={
@@ -208,7 +208,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unlock ([\s\S]*)",
     command=("unlock", plugin_category),
     info={
@@ -394,7 +394,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="locks$",
     command=("locks", plugin_category),
     info={
@@ -452,7 +452,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, res)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="plock ([\s\S]*)",
     command=("plock", plugin_category),
     info={
@@ -697,7 +697,7 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="punlock ([\s\S]*)",
     command=("punlock", plugin_category),
     info={
@@ -946,7 +946,7 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="uperm(?:\s|$)([\s\S]*)",
     command=("uperm", plugin_category),
     info={
@@ -1021,7 +1021,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, output)
 
 
-@THANOSPRO.cat_cmd(incoming=True, forword=None)
+@THANOSPRO.rishabh_cmd(incoming=True, forword=None)
 async def check_incoming_messages(event):  # sourcery no-metrics
     if not event.is_private:
         chat = await event.get_chat()

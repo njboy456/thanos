@@ -31,7 +31,7 @@ def text_draw(font_name, font_size, img, text, width, hight, fill="white"):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="app ([\s\S]*)",
     command=("app", plugin_category),
     info={

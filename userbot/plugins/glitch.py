@@ -16,7 +16,7 @@ from ..helpers import reply_id, unsavegif
 plugin_category = "fun"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="glitch(s)?(?: |$)([1-8])?",
     command=("glitch", plugin_category),
     info={

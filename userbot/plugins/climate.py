@@ -44,7 +44,7 @@ def sun(unix, ctimezone):
     return datetime.fromtimestamp(unix, tz=ctimezone).strftime("%I:%M %p")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="climate(?:\s|$)([\s\S]*)",
     command=("climate", plugin_category),
     info={
@@ -132,7 +132,7 @@ async def get_weather(event):  # sourcery no-metrics
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="setcity(?:\s|$)([\s\S]*)",
     command=("setcity", plugin_category),
     info={
@@ -181,7 +181,7 @@ async def set_default_city(event):
     await edit_or_reply(event, f"`Set default event as {cityname}, {fullc_n}.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="weather(?:\s|$)([\s\S]*)",
     command=("weather", plugin_category),
     info={
@@ -202,7 +202,7 @@ async def _(event):
     await edit_or_reply(event, output, parse_mode=_format.parse_pre)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="wttr(?:\s|$)([\s\S]*)",
     command=("wttr", plugin_category),
     info={

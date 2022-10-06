@@ -127,7 +127,7 @@ async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
         UPLOAD_.uploaded += 1
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="upload( -f)? ([\s\S]*)",
     command=("upload", plugin_category),
     info={

@@ -161,7 +161,7 @@ def parse(message, old_entities=None):
         LOGS.info(str(e))
 
 
-@THANOSPRO.cat_cmd(outgoing=True)
+@THANOSPRO.rishabh_cmd(outgoing=True)
 async def reparse(event):
     old_entities = event.message.entities or []
     parser = partial(parse, old_entities=old_entities)
@@ -183,7 +183,7 @@ async def reparse(event):
         raise events.StopPropagation
 
 
-@THANOSPRO.cat_cmd(outgoing=True)
+@THANOSPRO.rishabh_cmd(outgoing=True)
 async def mention(event):
     newstr = event.text
     if event.entities:

@@ -29,7 +29,7 @@ plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cur(?:\s|$)([\s\S]*)",
     command=("cur", plugin_category),
     info={
@@ -88,7 +88,7 @@ async def currency(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="scan( -i)?$",
     command=("scan", plugin_category),
     info={
@@ -138,7 +138,7 @@ async def scan(event):
         await delete_conv(event, chat, flag)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="decode$",
     command=("decode", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def parseqr(event):
         await edit_or_reply(catevent, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="barcode ?([\s\S]*)",
     command=("barcode", plugin_category),
     info={
@@ -220,7 +220,7 @@ async def _(event):
     await edit_delete(catevent, f"Created BarCode in {ms} seconds")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="makeqr(?: |$)([\s\S]*)",
     command=("makeqr", plugin_category),
     info={
@@ -264,7 +264,7 @@ async def make_qr(makeqr):
     await makeqr.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cal ([\s\S]*)",
     command=("cal", plugin_category),
     info={
@@ -289,7 +289,7 @@ async def _(event):
         await edit_delete(event, f"**Error:**\n`{e}`", 5)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ip(?:\s|$)([\s\S]*)",
     command=("ip", plugin_category),
     info={
@@ -375,7 +375,7 @@ async def spy(event):
     await edit_or_reply(event, string, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ifsc ([\s\S]*)",
     command=("ifsc", plugin_category),
     info={
@@ -397,7 +397,7 @@ async def _(event):
     await edit_or_reply(event, str(a))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="color ([\s\S]*)",
     command=("color", plugin_category),
     info={
@@ -433,7 +433,7 @@ async def _(event):
         await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="xkcd(?:\s|$)([\s\S]*)",
     command=("xkcd", plugin_category),
     info={

@@ -66,7 +66,7 @@ def random_loader(Font, Color, Background, collection):
     return Font, Color, Background
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(|f|s)logo(?: |$)([\s\S]*)",
     command=("logo", plugin_category),
     info={
@@ -215,7 +215,7 @@ async def very(event):  # sourcery no-metrics
         os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(|c)lbg(?:\s|$)([\s\S]*)",
     command=("lbg", plugin_category),
     info={
@@ -269,7 +269,7 @@ async def bad(event):
     await edit_delete(event, f"**Background for logo changed to :-** `{input_str}`", 10)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lf(|c|s|h|w|sc|sw)(?:\s|$)([\s\S]*)",
     command=("lf", plugin_category),
     info={
@@ -411,7 +411,7 @@ async def pussy(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(g|d|r)lvar(?:\s|$)([\s\S]*)",
     command=("lvar", plugin_category),
     info={

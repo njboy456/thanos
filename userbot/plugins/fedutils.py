@@ -27,7 +27,7 @@ fbanresults = [
 unfbanresults = ["I'll give", "Un-FedBan", "un-FedBan"]
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="fban(?:\s|$)([\s\S]*)",
     command=("fban", plugin_category),
     info={
@@ -113,7 +113,7 @@ async def group_fban(event):
     await edit_or_reply(catevent, success_report)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unfban(?:\s|$)([\s\S]*)",
     command=("unfban", plugin_category),
     info={
@@ -199,7 +199,7 @@ async def group_unfban(event):
     await edit_or_reply(catevent, success_report)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="addfedto (\w+|-all) ([-\w]+)",
     command=("addfedto", plugin_category),
     info={
@@ -315,7 +315,7 @@ async def quote_search(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="rmfedfrom (\w+|-all) ([-\w]+)",
     command=("rmfedfrom", plugin_category),
     info={
@@ -381,7 +381,7 @@ async def quote_search(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="listfed(s)?(?:\s|$)([\s\S]*)",
     command=("listfed", plugin_category),
     info={
@@ -427,7 +427,7 @@ async def quote_search(event):
     await edit_or_reply(event, output)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="f(ed)?info(?:\s|$)([\s\S]*)",
     command=("fedinfo", plugin_category),
     info={
@@ -461,7 +461,7 @@ async def fetch_fedinfo(event):
         conv.cancel()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="f(ed)?admins(?:\s|$)([\s\S]*)",
     command=("fadmins", plugin_category),
     info={
@@ -500,7 +500,7 @@ async def fetch_fedinfo(event):
         conv.cancel()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="myfeds$",
     command=("myfeds", plugin_category),
     info={
@@ -544,7 +544,7 @@ async def myfeds_fedinfo(event):
         conv.cancel()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="f(ed)?stat(?:\s|$)([\s\S]*)",
     command=("fstat", plugin_category),
     info={

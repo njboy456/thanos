@@ -34,7 +34,7 @@ class AFK:
 AFK_ = AFK()
 
 
-@THANOSPRO.cat_cmd(outgoing=True, edited=False)
+@THANOSPRO.rishabh_cmd(outgoing=True, edited=False)
 async def set_not_afk(event):
     if AFK_.afk_on is False:
         return
@@ -80,7 +80,7 @@ async def set_not_afk(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     incoming=True, func=lambda e: bool(e.mentioned or e.is_private), edited=False
 )
 async def on_afk(event):  # sourcery no-metrics
@@ -166,7 +166,7 @@ async def on_afk(event):  # sourcery no-metrics
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="afk(?:\s|$)([\s\S]*)",
     command=("afk", plugin_category),
     info={
@@ -226,7 +226,7 @@ async def _(event):
                 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="mafk(?:\s|$)([\s\S]*)",
     command=("mafk", plugin_category),
     info={

@@ -21,7 +21,7 @@ NO_ADMIN = "`I am not an admin nub nibba!`"
 NO_PERM = "`I don't have sufficient permissions! This is so sed. Alexa play despacito`"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="tmute(?:\s|$)([\s\S]*)",
     command=("tmute", plugin_category),
     info={
@@ -108,7 +108,7 @@ async def tmuter(event):  # sourcery no-metrics
         return await catevent.edit(f"`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="tban(?:\s|$)([\s\S]*)",
     command=("tban", plugin_category),
     info={

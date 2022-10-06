@@ -29,7 +29,7 @@ def weird_division(n, d):
     return n / d if d else 0
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="chatfs(?:\s|$)([\s\S]*)",
     command=("chatfs", plugin_category),
     info={
@@ -132,7 +132,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     await catevent.edit(result, parse_mode="HTML", link_preview=False)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="userfs(?:\s|$)([\s\S]*)",
     command=("userfs", plugin_category),
     info={

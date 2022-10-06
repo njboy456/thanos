@@ -44,7 +44,7 @@ def ReTrieveURL(input_url):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(rmbg|srmbg)(?:\s|$)([\s\S]*)",
     command=("rmbg", plugin_category),
     info={

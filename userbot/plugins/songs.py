@@ -34,7 +34,7 @@ SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
 # =========================================================== #
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="song(320)?(?:\s|$)([\s\S]*)",
     command=("song", plugin_category),
     info={
@@ -82,7 +82,7 @@ async def song(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="vsong(?:\s|$)([\s\S]*)",
     command=("vsong", plugin_category),
     info={
@@ -127,7 +127,7 @@ async def vsong(event):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(s(ha)?z(a)?m)(?:\s|$)([\s\S]*)",
     command=("shazam", plugin_category),
     info={
@@ -207,7 +207,7 @@ async def shazamcmd(event):
         await delete_conv(event, chat, purgeflag)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="song2(?:\s|$)([\s\S]*)",
     command=("song2", plugin_category),
     info={

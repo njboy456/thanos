@@ -25,7 +25,7 @@ from . import mention
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="alive$",
     command=("alive", plugin_category),
     info={
@@ -110,7 +110,7 @@ def catalive_text():
     return cat_caption
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ialive$",
     command=("ialive", plugin_category),
     info={

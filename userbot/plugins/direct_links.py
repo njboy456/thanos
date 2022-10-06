@@ -17,7 +17,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "misc"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="direct(?: |$)([\s\S]*)",
     command=("direct", plugin_category),
     info={

@@ -7,7 +7,7 @@ from ..core.managers import edit_delete, edit_or_reply
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lmg(?: |$)([\s\S]*)",
     command=("lmg", plugin_category),
     info={
@@ -32,7 +32,7 @@ async def googal(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lmy(?: |$)([\s\S]*)",
     command=("lmy", plugin_category),
     info={
@@ -59,7 +59,7 @@ async def uthoob(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ddg(?: |$)([\s\S]*)",
     command=("ddg", plugin_category),
     info={
@@ -86,7 +86,7 @@ async def dukdukgo(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lmalt(?: |$)([\s\S]*)",
     command=("lmalt", plugin_category),
     info={
@@ -111,7 +111,7 @@ async def news(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lmvar ([\s\S]*)",
     command=("lmvar", plugin_category),
     info={
@@ -133,7 +133,7 @@ async def var(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lmlog ([\s\S]*)",
     command=("lmlog", plugin_category),
     info={
@@ -153,7 +153,7 @@ async def log(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="dyno ([\s\S]*)",
     command=("dyno", plugin_category),
     info={
@@ -179,7 +179,7 @@ async def dyno(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lmkp(?: |$)([\s\S]*)",
     command=("lmkp", plugin_category),
     info={
@@ -204,7 +204,7 @@ async def kanun(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gem(?: |$)([\s\S]*)",
     command=("gem", plugin_category),
     info={
@@ -229,7 +229,7 @@ async def gem(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="archive(?: |$)([\s\S]*)",
     command=("archive", plugin_category),
     info={

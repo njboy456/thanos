@@ -89,7 +89,7 @@ async def on_edit(event):
             break
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="^s/((?:\\/|[^/])+)/((?:\\/|[^/])*)(/.*)?",
     command=("sed", plugin_category),
     info={

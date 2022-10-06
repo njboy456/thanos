@@ -277,7 +277,7 @@ async def autopfp_start():
         AUTOPFP_START = gvarstatus("autopfp_strings") is not None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="batmanpfp$",
     command=("batmanpfp", plugin_category),
     info={
@@ -298,7 +298,7 @@ async def _(event):
     await autopfp_start()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="thorpfp$",
     command=("thorpfp", plugin_category),
     info={
@@ -319,7 +319,7 @@ async def _(event):
     await autopfp_start()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="autopic ?([\s\S]*)",
     command=("autopic", plugin_category),
     info={
@@ -365,7 +365,7 @@ async def _(event):
     await autopicloop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="digitalpfp$",
     command=("digitalpfp", plugin_category),
     info={
@@ -389,7 +389,7 @@ async def _(event):
     await digitalpicloop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="bloom$",
     command=("bloom", plugin_category),
     info={
@@ -420,7 +420,7 @@ async def _(event):
     await bloom_pfploop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="c(ustom)?pfp(?: |$)([\s\S]*)",
     command=("custompfp", plugin_category),
     info={
@@ -506,7 +506,7 @@ async def useless(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="autoname$",
     command=("autoname", plugin_category),
     info={
@@ -525,7 +525,7 @@ async def _(event):
     await autoname_loop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="autobio$",
     command=("autobio", plugin_category),
     info={
@@ -544,7 +544,7 @@ async def _(event):
     await autobio_loop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="end ([\s\S]*)",
     command=("end", plugin_category),
     info={

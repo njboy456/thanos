@@ -153,7 +153,7 @@ def ms_converter(millis):
     return f"{minutes}:{str(seconds)}"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spsetup$",
     command=("spsetup", plugin_category),
     info={
@@ -484,7 +484,7 @@ async def sp_var_check(event):
     return True
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spbio$",
     command=("spbio", plugin_category),
     info={
@@ -676,7 +676,7 @@ async def get_spotify(event, response):
     return f"https://telegra.ph{url[0]}", tittle, dic, lyrics, symbol
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spnow$",
     command=("spnow", plugin_category),
     info={
@@ -704,7 +704,7 @@ async def spotify_now(event):
     await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spinfo$",
     command=("spinfo", plugin_category),
     info={
@@ -740,7 +740,7 @@ async def spotify_now(event):
     await edit_or_reply(event, result, link_preview=True)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sprecent$",
     command=("sprecent", plugin_category),
     info={
@@ -763,7 +763,7 @@ async def spotify_now(event):
     await edit_or_reply(event, song)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(i|)now(?:\s|$)([\s\S]*)",
     command=("now", plugin_category),
     info={

@@ -32,7 +32,7 @@ def resize_image(image):
     im.save(image, "PNG")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(t(ele)?g(raph)?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
     command=("telegraph", plugin_category),
     info={
@@ -128,7 +128,7 @@ async def _(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ctg(?: |$)([\s\S]*)",
     command=("ctg", plugin_category),
     info={

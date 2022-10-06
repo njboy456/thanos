@@ -8,7 +8,7 @@ from ..core.managers import edit_delete, edit_or_reply
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="dns(?:\s|$)([\s\S]*)",
     command=("dns", plugin_category),
     info={
@@ -42,7 +42,7 @@ async def _(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="short(?:\s|$)([\s\S]*)",
     command=("short", plugin_category),
     info={
@@ -78,7 +78,7 @@ async def _(event):
         await edit_or_reply(event, "`Something is wrong, please try again later.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unshort(?:\s|$)([\s\S]*)",
     command=("unshort", plugin_category),
     info={
@@ -119,7 +119,7 @@ async def _(event):
 
 
 # By Priyam Kalra
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="hl(?:\s|$)([\s\S]*)",
     command=("hl", plugin_category),
     info={

@@ -52,7 +52,7 @@ oldvars = {
 }
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(set|get|del)dv(?: |$)([\s\S]*)",
     command=("dv", plugin_category),
     info={
@@ -205,7 +205,7 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="custom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("custom", plugin_category),
     info={
@@ -269,7 +269,7 @@ async def custom_THANOSBOT(event):
         await event.client.send_message(BOTLOG_CHATID, text, silent=True)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="delcustom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("delcustom", plugin_category),
     info={

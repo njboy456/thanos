@@ -17,7 +17,7 @@ from . import deEmojify, reply_id
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="tts(?:\s|$)([\s\S]*)",
     command=("tts", plugin_category),
     info={

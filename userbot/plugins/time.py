@@ -42,7 +42,7 @@ async def get_tz(con):
         return
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="time(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
     command=("time", plugin_category),
     info={
@@ -109,7 +109,7 @@ async def time_func(tdata):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(s|p|c)time(?:\s|$)([\s\S]*)",
     command=("stime", plugin_category),
     info={

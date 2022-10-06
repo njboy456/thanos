@@ -71,7 +71,7 @@ def text_chunk_list(query, bits=29900):
     return text_list
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="rayso(?:\s|$)([\s\S]*)",
     command=("rayso", plugin_category),
     info={
@@ -171,7 +171,7 @@ async def rayso_by_pro_odi(event):  # By @feelded
         os.remove(name)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pcode(?:\s|$)([\s\S]*)",
     command=("pcode", plugin_category),
     info={
@@ -232,7 +232,7 @@ async def paste_img(event):
         await edit_delete(catevent, f"**Error:**\n`{e}`", time=10)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(d|p|s|n)?(paste|neko)(?:\s|$)([\S\s]*)",
     command=("paste", plugin_category),
     info={
@@ -306,7 +306,7 @@ async def paste_bin(event):
         await edit_delete(catevent, f"**Error while pasting text:**\n`{e}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     command=("neko", plugin_category),
     info={
         "header": "To paste text to a neko bin.",
@@ -323,7 +323,7 @@ async def _(event):
     # just to show in help menu as seperate
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="g(et)?paste(?:\s|$)([\s\S]*)",
     command=("getpaste", plugin_category),
     info={
@@ -383,7 +383,7 @@ async def get_dogbin_content(event):
     await edit_or_reply(catevent, reply_text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="paster(?:\s|$)([\s\S]*)",
     command=("paster", plugin_category),
     info={

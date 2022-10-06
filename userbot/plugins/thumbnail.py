@@ -19,7 +19,7 @@ plugin_category = "utils"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="savethumb$",
     command=("savethumb", plugin_category),
     info={
@@ -49,7 +49,7 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="clearthumb$",
     command=("clearthumb", plugin_category),
     info={
@@ -66,7 +66,7 @@ async def _(event):
     await edit_or_reply(event, "✅ Custom thumbnail cleared successfully.")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="getthumb$",
     command=("getthumb", plugin_category),
     info={

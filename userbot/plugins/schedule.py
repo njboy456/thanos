@@ -5,7 +5,7 @@ from userbot import THANOSPRO
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="schd (\d*) ([\s\S]*)",
     command=("schd", plugin_category),
     info={

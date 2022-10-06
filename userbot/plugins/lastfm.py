@@ -159,7 +159,7 @@ async def get_curr_track(lfmbio):  # sourcery no-metrics
     LASTFM_.RUNNING = False
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lastfm$",
     command=("lastfm", plugin_category),
     info={
@@ -206,7 +206,7 @@ async def last_fm(lastFM):
         await edit_or_reply(lastFM, f"{output}", parse_mode="md")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lastbio (on|off)",
     command=("lastbio", plugin_category),
     info={
@@ -239,7 +239,7 @@ async def lastbio(lfmbio):
         await edit_or_reply(lfmbio, LFM_BIO_ERR)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lastlog (on|off)",
     command=("lastlog", plugin_category),
     info={

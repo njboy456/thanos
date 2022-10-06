@@ -21,7 +21,7 @@ from . import reply_id
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(ss|gis) ([\s\S]*)",
     command=("ss", plugin_category),
     info={
@@ -96,7 +96,7 @@ async def _(event):
         await catevent.edit(f"`{traceback.format_exc()}`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="scapture ([\s\S]*)",
     command=("scapture", plugin_category),
     info={

@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 plugin_category = "admin"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="warn(?:\s|$)([\s\S]*)",
     command=("warn", plugin_category),
     info={
@@ -45,7 +45,7 @@ async def _(event):
     await edit_or_reply(event, reply)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="warns",
     command=("warns", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def _(event):
     await event.edit(text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="r(eset)?warns$",
     command=("resetwarns", plugin_category),
     info={

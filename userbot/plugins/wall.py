@@ -32,7 +32,7 @@ async def wall_download(piclink, query):
         return None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="wall(?:\s|$)([\s\S]*)",
     command=("wall", plugin_category),
     info={

@@ -11,7 +11,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ud ([\s\S]*)",
     command=("ud", plugin_category),
     info={
@@ -42,7 +42,7 @@ async def _(event):
         LOGS.info(e)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="meaning ([\s\S]*)",
     command=("meaning", plugin_category),
     info={

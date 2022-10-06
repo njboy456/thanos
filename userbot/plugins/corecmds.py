@@ -22,7 +22,7 @@ def plug_checker(plugin):
     return plug_path
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="install$",
     command=("install", plugin_category),
     info={
@@ -58,7 +58,7 @@ async def install(event):
             os.remove(downloaded_file_name)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="load ([\s\S]*)",
     command=("load", plugin_category),
     info={
@@ -82,7 +82,7 @@ async def load(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="send ([\s\S]*)",
     command=("send", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def send(event):
         await edit_or_reply(event, "404: File Not Found")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="unload ([\s\S]*)",
     command=("unload", plugin_category),
     info={
@@ -132,7 +132,7 @@ async def unload(event):
         await edit_or_reply(event, f"Successfully unload {shortname}\n{e}")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="uninstall ([\s\S]*)",
     command=("uninstall", plugin_category),
     info={

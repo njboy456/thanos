@@ -17,7 +17,7 @@ from . import BOTLOG, BOTLOG_CHATID
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(incoming=True)
+@THANOSPRO.rishabh_cmd(incoming=True)
 async def filter_incoming_handler(event):  # sourcery no-metrics
     if event.sender_id == event.client.uid:
         return
@@ -78,7 +78,7 @@ async def filter_incoming_handler(event):  # sourcery no-metrics
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="filter (.*)",
     command=("filter", plugin_category),
     info={
@@ -143,7 +143,7 @@ async def add_new_filter(event):
     await edit_or_reply(event, f"Error while setting filter for {keyword}")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="filters$",
     command=("filters", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def on_snip_list(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="stop ([\s\S]*)",
     command=("stop", plugin_category),
     info={
@@ -185,7 +185,7 @@ async def remove_a_filter(event):
         await event.edit(f"Filter `{filt} `was deleted successfully")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="rmfilters$",
     command=("rmfilters", plugin_category),
     info={

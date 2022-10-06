@@ -10,7 +10,7 @@ from ..core.managers import edit_delete, edit_or_reply
 plugin_category = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="magisk$",
     command=("magisk", plugin_category),
     info={
@@ -37,7 +37,7 @@ async def kakashi(event):
     await edit_or_reply(event, releases)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="device(?: |$)(\S*)",
     command=("device", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def device_info(event):
     await edit_or_reply(event, reply)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="codename(?: |)([\S]*)(?: |)([\s\S]*)",
     command=("codename", plugin_category),
     info={
@@ -125,7 +125,7 @@ async def codename_info(event):
     await edit_or_reply(event, reply)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="twrp(?: |$)(\S*)",
     command=("twrp", plugin_category),
     info={

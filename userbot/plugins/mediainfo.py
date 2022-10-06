@@ -53,7 +53,7 @@ async def file_data(reply):
     return hmm
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="minfo$",
     command=("minfo", plugin_category),
     info={

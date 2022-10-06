@@ -44,7 +44,7 @@ PATH = os.path.join("./temp", "temp_vid.mp4")
 thumb_loc = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spin(?: |$)((-)?(s)?)$",
     command=("spin", plugin_category),
     info={
@@ -140,7 +140,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
             os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="circle ?((-)?s)?$",
     command=("circle", plugin_category),
     info={
@@ -293,7 +293,7 @@ async def video_catfile(event):  # sourcery no-metrics
     await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(stoi|mtoi)$",
     command=("mtoi", plugin_category),
     info={
@@ -325,7 +325,7 @@ async def _(event):
     await output[0].delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="itos$",
     command=("itos", plugin_category),
     info={
@@ -361,7 +361,7 @@ async def _(event):
     await output[0].delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ttf ([\s\S]*)",
     command=("ttf", plugin_category),
     info={
@@ -387,7 +387,7 @@ async def get(event):
         await edit_or_reply(event, "reply to text message as `.ttf <file name>`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ftt$",
     command=("ftt", plugin_category),
     info={
@@ -435,7 +435,7 @@ async def get(event):
         os.remove(file_loc)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ftoi$",
     command=("ftoi", plugin_category),
     info={
@@ -476,7 +476,7 @@ async def on_file_to_photo(event):
     await catt.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(gif|vtog)$",
     command=("gif", plugin_category),
     info={
@@ -524,7 +524,7 @@ async def _(event):  # sourcery no-metrics
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="nfc (mp3|voice)",
     command=("nfc", plugin_category),
     info={
@@ -635,7 +635,7 @@ async def _(event):
             await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="itog(?: |$)((-)?(r|l|u|d|s|i)?)$",
     command=("itog", plugin_category),
     info={

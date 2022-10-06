@@ -21,7 +21,7 @@ plugin_category = "misc"
 GIT_TEMP_DIR = "./temp/"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="repo$",
     command=("repo", plugin_category),
     info={
@@ -39,7 +39,7 @@ async def source(e):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="github( -l(\d+))? ([\s\S]*)",
     command=("github", plugin_category),
     info={
@@ -105,7 +105,7 @@ async def _(event):
             await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="commit$",
     command=("commit", plugin_category),
     info={

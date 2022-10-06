@@ -62,7 +62,7 @@ async def subprocess_run(megadl, cmd):
     return stdout.decode().strip(), stderr.decode().strip(), exitCode
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="mega(?:\s|$)([\s\S]*)",
     command=("mega", plugin_category),
     info={

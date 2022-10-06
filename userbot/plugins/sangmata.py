@@ -11,7 +11,7 @@ from ..helpers.utils import _format
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sg(u)?(?:\s|$)([\s\S]*)",
     command=("sg", plugin_category),
     info={

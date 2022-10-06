@@ -102,7 +102,7 @@ if Config.ANTISPAMBOT_BAN:
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cascheck$",
     command=("cascheck", plugin_category),
     info={
@@ -149,7 +149,7 @@ async def caschecker(event):
     await catevent.edit(text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spamcheck$",
     command=("spamcheck", plugin_category),
     info={

@@ -17,7 +17,7 @@ plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="msgto(?:\s|$)([\s\S]*)",
     command=("msgto", plugin_category),
     info={
@@ -60,7 +60,7 @@ async def catbroadcast_add(event):
     await edit_delete(event, "__Successfully sent the message.__")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="addto(?:\s|$)([\s\S]*)",
     command=("addto", plugin_category),
     info={
@@ -107,7 +107,7 @@ async def catbroadcast_add(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="list(?:\s|$)([\s\S]*)",
     command=("list", plugin_category),
     info={
@@ -156,7 +156,7 @@ async def catbroadcast_list(event):
     await edit_or_reply(catevent, finaloutput)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="listall$",
     command=("listall", plugin_category),
     info={
@@ -179,7 +179,7 @@ async def catbroadcast_list(event):
     await edit_or_reply(event, resultext)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sendto(?:\s|$)([\s\S]*)",
     command=("sendto", plugin_category),
     info={
@@ -242,7 +242,7 @@ async def catbroadcast_send(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="fwdto(?:\s|$)([\s\S]*)",
     command=("fwdto", plugin_category),
     info={
@@ -305,7 +305,7 @@ async def catbroadcast_send(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="rmfrom(?:\s|$)([\s\S]*)",
     command=("rmfrom", plugin_category),
     info={
@@ -353,7 +353,7 @@ async def catbroadcast_remove(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="frmfrom(?:\s|$)([\s\S]*)",
     command=("frmfrom", plugin_category),
     info={
@@ -422,7 +422,7 @@ async def catbroadcast_remove(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="delc(?:\s|$)([\s\S]*)",
     command=("delc", plugin_category),
     info={

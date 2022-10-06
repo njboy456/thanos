@@ -13,7 +13,7 @@ from ..helpers import media_type
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="stt$",
     command=("stt", plugin_category),
     info={

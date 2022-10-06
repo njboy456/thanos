@@ -15,7 +15,7 @@ plugin_category = "utils"
 CARBONLANG = "auto"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="carbon(?:\s|$)([\s\S]*)",
     command=("carbon", plugin_category),
     info={
@@ -90,7 +90,7 @@ async def carbon_api(event):
     await cat.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kar1(?:\s|$)([\s\S]*)",
     command=("kar1", plugin_category),
     info={
@@ -161,7 +161,7 @@ async def kar1_api(event):
     await cat.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kar2(?:\s|$)([\s\S]*)",
     command=("kar2", plugin_category),
     info={
@@ -232,7 +232,7 @@ async def kar2_api(event):
     await cat.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kar3(?:\s|$)([\s\S]*)",
     command=("kar3", plugin_category),
     info={
@@ -304,7 +304,7 @@ async def kar3_api(event):
     await cat.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kar4(?:\s|$)([\s\S]*)",
     command=("kar4", plugin_category),
     info={
@@ -374,7 +374,7 @@ async def kar4_api(event):
     await cat.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kargb(?:\s|$)([\s\S]*)",
     command=("kargb", plugin_category),
     info={

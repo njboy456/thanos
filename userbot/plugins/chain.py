@@ -6,7 +6,7 @@ from . import THANOSPRO
 plugin_category = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="chain$",
     command=("chain", plugin_category),
     info={

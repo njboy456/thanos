@@ -144,7 +144,7 @@ async def fix_attributes(
     return new_attributes, mime_type
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="yta(?:\s|$)([\s\S]*)",
     command=("yta", plugin_category),
     info={
@@ -230,7 +230,7 @@ async def download_audio(event):  # sourcery skip: low-code-quality
     await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ytv(?:\s|$)([\s\S]*)",
     command=("ytv", plugin_category),
     info={
@@ -303,7 +303,7 @@ async def download_video(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="insta(?: |$)([\s\S]*)",
     command=("insta", plugin_category),
     info={
@@ -390,7 +390,7 @@ async def insta_dl(event):
             await delete_conv(event, v2, v2_flag)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="yts(?: |$)(\d*)? ?([\s\S]*)",
     command=("yts", plugin_category),
     info={

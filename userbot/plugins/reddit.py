@@ -21,7 +21,7 @@ API = "https://meme-api.herokuapp.com/gimme"
 plugin_category = "misc"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="reddit(?:\s|$)([\s\S]*)",
     command=("reddit", plugin_category),
     info={

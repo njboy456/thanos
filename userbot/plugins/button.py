@@ -17,7 +17,7 @@ plugin_category = "tools"
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cbutton(?:\s|$)([\s\S]*)",
     command=("cbutton", plugin_category),
     info={
@@ -84,7 +84,7 @@ async def _(event):
         os.remove(tgbot_reply_message)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ibutton(?:\s|$)([\s\S]*)",
     command=("ibutton", plugin_category),
     info={

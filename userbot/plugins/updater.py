@@ -183,7 +183,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             HEROKU_APP.restart()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="update(| now)?$",
     command=("update", plugin_category),
     info={
@@ -275,7 +275,7 @@ async def upstream(event):
     return
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="update deploy$",
 )
 async def upstream(event):
@@ -321,7 +321,7 @@ async def upstream(event):
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(good|bad)cat$",
     command=("switch", plugin_category),
     info={

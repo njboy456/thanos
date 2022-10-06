@@ -10,7 +10,7 @@ plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(get_id|id)(?:\s|$)([\s\S]*)",
     command=("id", plugin_category),
     info={

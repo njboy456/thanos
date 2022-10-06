@@ -64,7 +64,7 @@ X = (
 # =========================================================================================
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="baby$",
     command=("baby", plugin_category),
     info={
@@ -77,7 +77,7 @@ async def baby(event):
     await edit_or_reply(event, S)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="hbd(?:\s|$)([\s\S]*)",
     command=("hbd", plugin_category),
     info={
@@ -97,7 +97,7 @@ async def hbd(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="thanks$",
     command=("thanks", plugin_category),
     info={
@@ -110,7 +110,7 @@ async def gn(event):
     await edit_or_reply(event, X)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gm$",
     command=("gm", plugin_category),
     info={
@@ -124,7 +124,7 @@ async def morning(morning):
     await edit_or_reply(morning, txt)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gnoon$",
     command=("gnoon", plugin_category),
     info={
@@ -138,7 +138,7 @@ async def noon(noon):
     await edit_or_reply(noon, txt)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gn$",
     command=("gn", plugin_category),
     info={
@@ -152,7 +152,7 @@ async def night(night):
     await edit_or_reply(night, txt)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gmg$",
     command=("gmg", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def gm(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gmg2$",
     command=("gmg2", plugin_category),
     info={
@@ -184,7 +184,7 @@ async def gm(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gmg3$",
     command=("gmg3", plugin_category),
     info={
@@ -197,7 +197,7 @@ async def gm(event):
     await edit_or_reply(event, W)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gnt$",
     command=("gnt", plugin_category),
     info={
@@ -213,7 +213,7 @@ async def gn(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gnt2$",
     command=("gnt2", plugin_category),
     info={
@@ -229,7 +229,7 @@ async def gn(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gnt3$",
     command=("gnt3", plugin_category),
     info={
@@ -245,7 +245,7 @@ async def gn(event):
 # @PhycoNinja13b 's Part begin from here
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="hi(?:\s|$)([\s\S]*)",
     command=("hi", plugin_category),
     info={
@@ -268,7 +268,7 @@ async def hi(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cheer$",
     command=("cheer", plugin_category),
     info={
@@ -284,7 +284,7 @@ async def cheer(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="getwell$",
     command=("getwell", plugin_category),
     info={
@@ -299,7 +299,7 @@ async def getwell(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="luck$",
     command=("luck", plugin_category),
     info={
@@ -314,7 +314,7 @@ async def luck(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sprinkle$",
     command=("sprinkle", plugin_category),
     info={

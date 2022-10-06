@@ -42,7 +42,7 @@ async def ocr_space_file(
     return r.json()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(|t)ocr(?:\s|$)([\s\S]*)",
     command=("ocr", plugin_category),
     info={
@@ -100,7 +100,7 @@ async def ocr(event):
         os.remove(output_file[1])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="tocr",
     command=("tocr", plugin_category),
     info={

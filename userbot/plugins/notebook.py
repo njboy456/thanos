@@ -209,7 +209,7 @@ def notebook_values(page, font):  # sourcery skip: low-code-quality
     return lines, text_wrap, font_size, linespace, position
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(write|notebook)(?:\s|$)([\s\S]*)",
     command=("write", plugin_category),
     info={
@@ -294,7 +294,7 @@ async def write_page(event):  # sourcery skip: low-code-quality
         os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="notebook$",
     command=("notebook", plugin_category),
     info={
@@ -307,7 +307,7 @@ async def notebook(event):
     """Shows your notebook configs."""
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="nb(page|font|pen|log)(?:\s|$)([\s\S]*)",
     command=("nb", plugin_category),
     info={

@@ -29,7 +29,7 @@ HEROKU_APP_NAME = Config.HEROKU_APP_NAME
 HEROKU_API_KEY = Config.HEROKU_API_KEY
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
     command=("var", plugin_category),
     info={
@@ -124,7 +124,7 @@ async def variable(var):  # sourcery no-metrics
         del heroku_var[variable]
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="usage$",
     command=("usage", plugin_category),
     info={
@@ -194,7 +194,7 @@ async def dyno_usage(dyno):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(herokulogs|logs)$",
     command=("logs", plugin_category),
     info={
@@ -235,7 +235,7 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     return indentitems(items, indent, level=0)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(|add|del)buildpack(?:\s|$)([\s\S]*)",
     command=("buildpack", plugin_category),
     info={

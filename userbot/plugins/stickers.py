@@ -285,7 +285,7 @@ async def add_to_pack(
     return pack, packname
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="kang(?:\s|$)([\s\S]*)",
     command=("kang", plugin_category),
     info={
@@ -488,7 +488,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="pkang(?:\s|$)([\s\S]*)",
     command=("pkang", plugin_category),
     info={
@@ -688,7 +688,7 @@ async def pack_kang(event):  # sourcery no-metrics
     await catevent.edit(result)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="vas$",
     command=("vas", plugin_category),
     info={
@@ -759,7 +759,7 @@ async def pussycat(event):
         os.remove(sticker[1])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gridpack(?:\s|$)([\s\S]*)",
     command=("gridpack", plugin_category),
     info={
@@ -865,7 +865,7 @@ async def pic2packcmd(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="stkrinfo$",
     command=("stkrinfo", plugin_category),
     info={
@@ -920,7 +920,7 @@ async def get_pack_info(event):
     await catevent.edit(OUTPUT)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="stickers ?([\s\S]*)",
     command=("stickers", plugin_category),
     info={

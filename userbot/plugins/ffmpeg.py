@@ -118,7 +118,7 @@ async def cult_small_video(
     return None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(|f)compress(?:\s|$)([\s\S]*)",
     command=("compress", plugin_category),
     info={
@@ -246,7 +246,7 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
     await edit_or_reply(catt, cap)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ffmpegsave(?:\s|$)([\s\S]*)",
     command=("ffmpegsave", plugin_category),
     info={
@@ -311,7 +311,7 @@ async def ff_mpeg_trim_cmd(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="vtrim(?:\s|$)([\s\S]*)",
     command=("vtrim", plugin_category),
     info={
@@ -397,7 +397,7 @@ async def ff_mpeg_trim_cmd(event):
     await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="atrim(?:\s|$)([\s\S]*)",
     command=("atrim", plugin_category),
     info={
@@ -462,7 +462,7 @@ async def ff_mpeg_trim_cmd(event):
     await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ffmpegclear$",
     command=("ffmpegclear", plugin_category),
     info={

@@ -43,7 +43,7 @@ def user_full_name(user):
     return " ".join(names)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="stat$",
     command=("stat", plugin_category),
     info={
@@ -143,7 +143,7 @@ async def stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="(|p)stat (g|ga|go|c|ca|co)$",
 )
 async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
@@ -253,7 +253,7 @@ async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-qu
             reply_to_msg = new_event.id
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ustat(?:\s|$)([\s\S]*)",
     command=("ustat", plugin_category),
     info={

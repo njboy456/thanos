@@ -25,7 +25,7 @@ def get_size(inputbytes, suffix="B"):
         inputbytes /= factor
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="spc$",
     command=("spc", plugin_category),
     info={
@@ -81,7 +81,7 @@ async def psu(event):
     await event.edit(help_string)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cpu$",
     command=("cpu", plugin_category),
     info={
@@ -98,7 +98,7 @@ async def cpu(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sysd$",
     command=("sysd", plugin_category),
     info={

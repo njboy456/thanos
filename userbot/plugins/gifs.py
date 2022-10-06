@@ -11,7 +11,7 @@ from . import THANOSPRO
 plugin_category = "Extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gifs(?:\s|$)([\s\S]*)",
     command=("gifs", plugin_category),
     info={

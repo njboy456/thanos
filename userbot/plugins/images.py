@@ -14,7 +14,7 @@ from ..helpers.utils import reply_id
 plugin_category = "misc"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="img(?: |$)(\d*)? ?([\s\S]*)",
     command=("img", plugin_category),
     info={

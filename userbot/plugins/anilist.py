@@ -50,7 +50,7 @@ anime_path = os.path.join(os.getcwd(), "temp", "animeresult.jpg")
 plugin_category = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="aq$",
     command=("aq", plugin_category),
     info={
@@ -71,7 +71,7 @@ async def anime_quote(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="aluser(?:\s|$)([\s\S]*)",
     command=("aluser", plugin_category),
     info={
@@ -110,7 +110,7 @@ async def anilist_usersearch(event):
     await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="mal(?:\s|$)([\s\S]*)",
     command=("mal", plugin_category),
     info={
@@ -176,7 +176,7 @@ async def user(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="airing(?:\s|$)([\s\S]*)",
     command=("airing", plugin_category),
     info={
@@ -207,7 +207,7 @@ async def anilist(event):
     await edit_or_reply(event, ms_g)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="anime(?:\s|$)([\s\S]*)",
     command=("anime", plugin_category),
     info={
@@ -323,7 +323,7 @@ async def anilist(event):  # sourcery no-metrics
         await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="manga(?:\s|$)([\s\S]*)",
     command=("manga", plugin_category),
     info={
@@ -439,7 +439,7 @@ async def anilist(event):  # sourcery no-metrics
         await catevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="fillers(?:\s|$)([\s\S]*)",
     command=("fillers", plugin_category),
     info={
@@ -521,7 +521,7 @@ async def get_anime(event):
     await edit_or_reply(event, msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="char(?:\s|$)([\s\S]*)",
     command=("char", plugin_category),
     info={
@@ -638,7 +638,7 @@ async def anilist(event):  # sourcery no-metrics
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="a(kaizoku|kayo|indi)(?: |$)([\S\s]*)",
     command=("akaizoku", plugin_category),
     info={
@@ -716,7 +716,7 @@ async def anime_download(event):  # sourcery no-metrics
     await catevent.edit(result, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="upcoming$",
     command=("upcoming", plugin_category),
     info={
@@ -738,7 +738,7 @@ async def upcoming(event):
     await edit_or_reply(event, rep, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="aschedule(?: |$)([\S\s]*)",
     command=("aschedule", plugin_category),
     info={
@@ -763,7 +763,7 @@ async def aschedule_fetch(event):
     await edit_or_reply(event, result[0])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="w(hat)?anime$",
     command=("whatanime", plugin_category),
     info={

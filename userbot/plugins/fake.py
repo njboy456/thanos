@@ -14,7 +14,7 @@ from . import ALIVE_NAME
 plugin_category = "fun"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="scam(?:\s|$)([\s\S]*)",
     command=("scam", plugin_category),
     info={
@@ -80,7 +80,7 @@ async def _(event):
         return
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="prankpromote(?:\s|$)([\s\S]*)",
     command=("prankpromote", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def _(event):
     await catevent.edit("`Promoted Successfully! Now gib Party`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="padmin$",
     command=("padmin", plugin_category),
     info={

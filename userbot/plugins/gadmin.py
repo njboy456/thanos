@@ -41,7 +41,7 @@ UNBAN_RIGHTS = ChatBannedRights(
 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gban(?:\s|$)([\s\S]*)",
     command=("gban", plugin_category),
     info={
@@ -123,7 +123,7 @@ async def catgban(event):  # sourcery no-metrics
                 await reply.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ungban(?:\s|$)([\s\S]*)",
     command=("ungban", plugin_category),
     info={
@@ -200,7 +200,7 @@ async def catgban(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="listgban$",
     command=("listgban", plugin_category),
     info={
@@ -225,7 +225,7 @@ async def gablist(event):
     await edit_or_reply(event, GBANNED_LIST)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gmute(?:\s|$)([\s\S]*)",
     command=("gmute", plugin_category),
     info={
@@ -291,7 +291,7 @@ async def startgmute(event):
             await reply.forward_to(BOTLOG_CHATID)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="ungmute(?:\s|$)([\s\S]*)",
     command=("ungmute", plugin_category),
     info={
@@ -353,13 +353,13 @@ async def endgmute(event):
             )
 
 
-@THANOSPRO.cat_cmd(incoming=True)
+@THANOSPRO.rishabh_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gkick(?:\s|$)([\s\S]*)",
     command=("gkick", plugin_category),
     info={

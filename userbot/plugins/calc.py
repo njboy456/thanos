@@ -7,7 +7,7 @@ from . import THANOSPRO, edit_or_reply
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="calc ([\s\S]*)",
     command=("calc", plugin_category),
     info={

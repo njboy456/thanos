@@ -71,7 +71,7 @@ async def fetch_info(replied_user, event):
     return photo, caption
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="userinfo(?:\s|$)([\s\S]*)",
     command=("userinfo", plugin_category),
     info={
@@ -142,7 +142,7 @@ async def _(event):
     await edit_or_reply(catevent, caption)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="whois(?:\s|$)([\s\S]*)",
     command=("whois", plugin_category),
     info={
@@ -181,7 +181,7 @@ async def who(event):
         await cat.edit(caption, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="link(?:\s|$)([\s\S]*)",
     command=("link", plugin_category),
     info={

@@ -76,7 +76,7 @@ async def check_media(reply_message):
     return data
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="frybot",
     command=("frybot", plugin_category),
     info={
@@ -122,7 +122,7 @@ async def frybot(event):
         os.remove(output[1])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="deepfry(?: |$)([1-9])?",
     command=("deepfry", plugin_category),
     info={

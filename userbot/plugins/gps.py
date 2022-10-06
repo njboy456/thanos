@@ -10,7 +10,7 @@ from ..helpers import reply_id
 plugin_category = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="gps ([\s\S]*)",
     command=("gps", plugin_category),
     info={

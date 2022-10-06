@@ -16,7 +16,7 @@ GENIUS = Config.GENIUS_API_TOKEN
 plugin_category = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="lyrics(?:\s|$)([\s\S]*)",
     command=("lyrics", plugin_category),
     info={

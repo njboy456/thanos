@@ -12,7 +12,7 @@ from ..Config import Config
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="otransfer ([\s\S]*)",
     command=("otransfer", plugin_category),
     info={

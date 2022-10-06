@@ -14,7 +14,7 @@ cmdprefix = Config.COMMAND_HAND_LER
 plugin_category = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="help ?(-c|-p|-t)? ?([\s\S]*)?",
     command=("help", plugin_category),
     info={
@@ -56,7 +56,7 @@ async def _(event):
     await edit_or_reply(event, outstr)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="cmds(?:\s|$)([\s\S]*)",
     command=("cmds", plugin_category),
     info={
@@ -88,7 +88,7 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="s ([\s\S]*)",
     command=("s", plugin_category),
     info={
@@ -108,7 +108,7 @@ async def _(event):
     await edit_or_reply(event, out)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="dc$",
     command=("dc", plugin_category),
     info={

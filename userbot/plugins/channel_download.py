@@ -17,7 +17,7 @@ from . import THANOSPRO, edit_or_reply
 plugin_category = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="getc(?:\s|$)([\s\S]*)",
     command=("getc", plugin_category),
     info={
@@ -57,7 +57,7 @@ async def get_media(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="geta(?:\s|$)([\s\S]*)",
     command=("geta", plugin_category),
     info={

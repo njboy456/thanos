@@ -15,7 +15,7 @@ from ..helpers import _catutils, meme_type, reply_id
 plugin_category = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="collage(?:\s|$)([\s\S]*)",
     command=("collage", plugin_category),
     info={

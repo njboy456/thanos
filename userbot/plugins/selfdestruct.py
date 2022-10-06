@@ -7,7 +7,7 @@ plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="sdm (\d*) ([\s\S]*)",
     command=("sdm", plugin_category),
     info={
@@ -28,7 +28,7 @@ async def selfdestruct(destroy):
     await smsg.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="selfdm (\d*) ([\s\S]*)",
     command=("selfdm", plugin_category),
     info={

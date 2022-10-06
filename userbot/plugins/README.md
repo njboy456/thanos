@@ -16,7 +16,7 @@ from ..core.managers import edit_delete, edit_or_reply
 
 plugin_category="extra"
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="hibuddy(?:\s|$)([\s\S]*)",
     command=("hibuddy", plugin_category),
     info={
@@ -39,7 +39,7 @@ async def hi_buddy(event):
 For more information refer this [Docs](https://docs.telethon.dev/en/latest/)
 
 
-Arguments in cat_cmd are as follows:
+Arguments in rishabh_cmd are as follows:
 ```
 
 pattern="Regex for command"

@@ -8,7 +8,7 @@ from ..utils.tools import create_supergroup
 plugin_category = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="create (b|g|c) ([\s\S]*)",
     command=("create", plugin_category),
     info={

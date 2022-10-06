@@ -81,7 +81,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="savepwel(?:\s|$)([\s\S]*)",
     command=("savepwel", plugin_category),
     info={
@@ -144,7 +144,7 @@ async def save_welcome(event):
     await edit_or_reply("Error while setting welcome in this group")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="clearpwel$",
     command=("clearpwel", plugin_category),
     info={
@@ -161,7 +161,7 @@ async def del_welcome(event):
         await edit_or_reply(event, "`Do I have a welcome note here ?`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.rishabh_cmd(
     pattern="listpwel$",
     command=("listpwel", plugin_category),
     info={
