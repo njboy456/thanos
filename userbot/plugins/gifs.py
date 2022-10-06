@@ -8,18 +8,18 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import reply_id, unsavegif
 from . import THANOSPRO
 
-plugin_category = "Extra"
+plugin_thanosegory = "Extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gifs(?:\s|$)([\s\S]*)",
-    command=("gifs", plugin_category),
+    command=("gifs", plugin_thanosegory),
     info={
         "header": "Sends random gifs",
         "usage": "Search and send your desire gif randomly and in bulk",
         "examples": [
-            "{tr}gifs cat",
-            "{tr}gifs cat ; <1-20>",
+            "{tr}gifs thanos",
+            "{tr}gifs thanos ; <1-20>",
         ],
     },
 )
@@ -34,7 +34,7 @@ async def some(event):
         inpt, count = inpt.split(";")
     if int(count) < 0 and int(count) > 20:
         await edit_delete(event, "`Give value in range 1-20`")
-    catevent = await edit_or_reply(event, "`Sending gif....`")
+    thanosevent = await edit_or_reply(event, "`Sending gif....`")
     res = requests.get("https://giphy.com/")
     res = res.text.split("GIPHY_FE_WEB_API_KEY =")[1].split("\n")[0]
     api_key = res[2:-1]
@@ -50,4 +50,4 @@ async def some(event):
             reply_to=reply_to_id,
         )
         await unsavegif(event, nood)
-    await catevent.delete()
+    await thanosevent.delete()

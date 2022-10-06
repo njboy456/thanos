@@ -18,7 +18,7 @@ from ..sql_helper import pmpermit_sql
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import BOTLOG_CHATID, mention
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 LOGS = logging.getLogger(__name__)
 cmdhd = Config.COMMAND_HAND_LER
 
@@ -404,7 +404,7 @@ async def do_pm_spam_action(event, chat):
         return
 
 
-@THANOSPRO.cat_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@THANOSPRO.thanos_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def on_new_private_message(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -428,7 +428,7 @@ async def on_new_private_message(event):
     await do_pm_permit_action(event, chat)
 
 
-@THANOSPRO.cat_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
+@THANOSPRO.thanos_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def you_dm_other(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -612,9 +612,9 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="pmguard (on|off)$",
-    command=("pmguard", plugin_category),
+    command=("pmguard", plugin_thanosegory),
     info={
         "header": "To turn on or turn off pmpermit.",
         "usage": "{tr}pmguard on/off",
@@ -640,9 +640,9 @@ async def pmpermit_on(event):
         await edit_delete(event, "__Pmpermit is already disabled for your account__")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="pmmenu (on|off)$",
-    command=("pmmenu", plugin_category),
+    command=("pmmenu", plugin_thanosegory),
     info={
         "header": "To turn on or turn off pmmenu.",
         "usage": "{tr}pmmenu on/off",
@@ -673,9 +673,9 @@ async def pmpermit_on(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(a|approve)(?:\s|$)([\s\S]*)",
-    command=("approve", plugin_category),
+    command=("approve", plugin_thanosegory),
     info={
         "header": "To approve user to direct message you.",
         "usage": [
@@ -749,9 +749,9 @@ async def approve_p_m(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="t(emp)?(a|approve)(?:\s|$)([\s\S]*)",
-    command=("tapprove", plugin_category),
+    command=("tapprove", plugin_thanosegory),
     info={
         "header": "To approve user to direct message you for temporarily.",
         "note": "Heroku restarts every 24 hours so with every restart it dissapproves every temp approved user",
@@ -831,9 +831,9 @@ async def tapprove_pm(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(da|disapprove)(?:\s|$)([\s\S]*)",
-    command=("disapprove", plugin_category),
+    command=("disapprove", plugin_thanosegory),
     info={
         "header": "To disapprove user to direct message you.",
         "note": "This command works only for approved users",
@@ -888,9 +888,9 @@ async def disapprove_p_m(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="block(?:\s|$)([\s\S]*)",
-    command=("block", plugin_category),
+    command=("block", plugin_thanosegory),
     info={
         "header": "To block user to direct message you.",
         "usage": [
@@ -939,9 +939,9 @@ async def block_p_m(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="unblock(?:\s|$)([\s\S]*)",
-    command=("unblock", plugin_category),
+    command=("unblock", plugin_thanosegory),
     info={
         "header": "To unblock a user.",
         "usage": [
@@ -968,9 +968,9 @@ async def unblock_pm(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="l(ist)?a(pproved)?$",
-    command=("listapproved", plugin_category),
+    command=("listapproved", plugin_thanosegory),
     info={
         "header": "To see list of approved users.",
         "usage": [

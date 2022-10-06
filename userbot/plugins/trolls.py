@@ -11,12 +11,12 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import reply_id
 from . import deEmojify, phcomment, threats, trap, trash
 
-plugin_category = "fun"
+plugin_thanosegory = "fun"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="trash$",
-    command=("trash", plugin_category),
+    command=("trash", plugin_thanosegory),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
         "usage": "{tr}trash",
@@ -25,7 +25,7 @@ plugin_category = "fun"
 async def _(event):
     "image meme creator."
     replied = await event.get_reply_message()
-    catid = await reply_id(event)
+    thanosid = await reply_id(event)
     if not replied:
         return await edit_or_reply(event, "reply to a supported media file")
     output = await Convert.to_image(
@@ -47,16 +47,16 @@ async def _(event):
     except exceptions.TelegraphException as exc:
         os.remove(output[1])
         return await output[0].edit(f"**Error: **\n`{exc}`")
-    cat = f"https://telegra.ph{response[0]}"
-    cat = await trash(cat)
+    thanos = f"https://telegra.ph{response[0]}"
+    thanos = await trash(thanos)
     os.remove(output[1])
     await output[0].delete()
-    await event.client.send_file(event.chat_id, cat, reply_to=catid)
+    await event.client.send_file(event.chat_id, thanos, reply_to=thanosid)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="threats$",
-    command=("threats", plugin_category),
+    command=("threats", plugin_thanosegory),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
         "usage": "{tr}threats",
@@ -65,7 +65,7 @@ async def _(event):
 async def _(event):
     "image meme creator."
     replied = await event.get_reply_message()
-    catid = await reply_id(event)
+    thanosid = await reply_id(event)
     if not replied:
         return await edit_or_reply(event, "reply to a supported media file")
     output = await Convert.to_image(
@@ -87,16 +87,16 @@ async def _(event):
     except exceptions.TelegraphException as exc:
         os.remove(output[1])
         return await output[0].edit(f"**Error: **\n`{exc}`")
-    cat = f"https://telegra.ph{response[0]}"
-    cat = await threats(cat)
+    thanos = f"https://telegra.ph{response[0]}"
+    thanos = await threats(thanos)
     await output[0].delete()
     os.remove(output[1])
-    await event.client.send_file(event.chat_id, cat, reply_to=catid)
+    await event.client.send_file(event.chat_id, thanos, reply_to=thanosid)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="trap(?:\s|$)([\s\S]*)",
-    command=("trap", plugin_category),
+    command=("trap", plugin_thanosegory),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
         "Description": "creates a trap card",
@@ -115,7 +115,7 @@ async def _(event):
             "**Syntax :** reply to image or sticker with `.trap (name of the person to trap);(trapper name)`",
         )
     replied = await event.get_reply_message()
-    catid = await reply_id(event)
+    thanosid = await reply_id(event)
     if not replied:
         return await edit_or_reply(event, "reply to a supported media file")
     output = await Convert.to_image(
@@ -137,16 +137,16 @@ async def _(event):
     except exceptions.TelegraphException as exc:
         os.remove(output[1])
         return await output[0].edit(f"**Error: **\n`{exc}`")
-    cat = f"https://telegra.ph{response[0]}"
-    cat = await trap(text1, text2, cat)
+    thanos = f"https://telegra.ph{response[0]}"
+    thanos = await trap(text1, text2, thanos)
     await output[0].delete()
     os.remove(output[1])
-    await event.client.send_file(event.chat_id, cat, reply_to=catid)
+    await event.client.send_file(event.chat_id, thanos, reply_to=thanosid)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="phub(?:\s|$)([\s\S]*)",
-    command=("phub", plugin_category),
+    command=("phub", plugin_thanosegory),
     info={
         "header": "Reply to image/sticker to get meme on that image.",
         "description": "pornhub comment creator",
@@ -165,7 +165,7 @@ async def _(event):
             "**Syntax :** reply to image or sticker with `.phub (username);(text in comment)`",
         )
     replied = await event.get_reply_message()
-    catid = await reply_id(event)
+    thanosid = await reply_id(event)
     if not replied:
         return await edit_or_reply(event, "reply to a supported media file")
     output = await Convert.to_image(
@@ -188,8 +188,8 @@ async def _(event):
     except exceptions.TelegraphException as exc:
         os.remove(output[1])
         return await output[0].edit(f"**Error: **\n`{exc}`")
-    cat = f"https://telegra.ph{response[0]}"
-    cat = await phcomment(cat, text, username)
+    thanos = f"https://telegra.ph{response[0]}"
+    thanos = await phcomment(thanos, text, username)
     await output[0].delete()
     os.remove(output[1])
-    await event.client.send_file(event.chat_id, cat, reply_to=catid)
+    await event.client.send_file(event.chat_id, thanos, reply_to=thanosid)

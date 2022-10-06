@@ -13,8 +13,8 @@ from ..core.logger import logging
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^age_verification_true")))
-async def age_verification_true(event: CallbackQuery):
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^age_verifithanosion_true")))
+async def age_verifithanosion_true(event: CallbackQuery):
     u_id = event.query.user_id
     if u_id != Config.OWNER_ID and u_id not in Config.SUDO_USERS:
         return await event.answer(
@@ -36,8 +36,8 @@ async def age_verification_true(event: CallbackQuery):
         )
 
 
-@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^age_verification_false")))
-async def age_verification_false(event: CallbackQuery):
+@THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(r"^age_verifithanosion_false")))
+async def age_verifithanosion_false(event: CallbackQuery):
     u_id = event.query.user_id
     if u_id != Config.OWNER_ID and u_id not in Config.SUDO_USERS:
         return await event.answer(
@@ -70,8 +70,8 @@ async def chg_of_decision_(event: CallbackQuery):
     await event.answer("Unsure", alert=False)
     buttons = [
         (
-            Button.inline(text="Yes I'm 18+", data="age_verification_true"),
-            Button.inline(text="No I'm Not", data="age_verification_false"),
+            Button.inline(text="Yes I'm 18+", data="age_verifithanosion_true"),
+            Button.inline(text="No I'm Not", data="age_verifithanosion_false"),
         )
     ]
     with contextlib.suppress(MessageNotModifiedError):

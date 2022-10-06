@@ -5,12 +5,12 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..utils.tools import create_supergroup
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="create (b|g|c) ([\s\S]*)",
-    command=("create", plugin_category),
+    command=("create", plugin_thanosegory),
     info={
         "header": "To create a private group/channel with userbot.",
         "description": "Use this cmd to create super group , normal group or channel.",

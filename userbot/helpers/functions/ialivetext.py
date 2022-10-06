@@ -41,7 +41,7 @@ def check_data_base_heal_th():
     return is_database_working, output
 
 
-async def catalive(StartTime):
+async def thanosalive(StartTime):
     _, check_sgnirts = check_data_base_heal_th()
     sudo = "Enabled" if Config.SUDO_USERS else "Disabled"
     uptime = await get_readable_time((time.time() - StartTime))
@@ -55,7 +55,7 @@ async def catalive(StartTime):
         headers = {
             "User-Agent": useragent,
             "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
-            "Accept": "application/vnd.heroku+json; version=3.account-quotas",
+            "Accept": "applithanosion/vnd.heroku+json; version=3.account-quotas",
         }
         path = f"/accounts/{user_id}/actions/get-quota"
         r = requests.get(heroku_api + path, headers=headers)

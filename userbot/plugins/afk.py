@@ -12,7 +12,7 @@ from ..helpers.tools import media_type
 from ..helpers.utils import _format
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 LOGS = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ class AFK:
 AFK_ = AFK()
 
 
-@THANOSPRO.cat_cmd(outgoing=True, edited=False)
+@THANOSPRO.thanos_cmd(outgoing=True, edited=False)
 async def set_not_afk(event):
     if AFK_.afk_on is False:
         return
@@ -80,7 +80,7 @@ async def set_not_afk(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     incoming=True, func=lambda e: bool(e.mentioned or e.is_private), edited=False
 )
 async def on_afk(event):  # sourcery no-metrics
@@ -166,9 +166,9 @@ async def on_afk(event):  # sourcery no-metrics
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="afk(?:\s|$)([\s\S]*)",
-    command=("afk", plugin_category),
+    command=("afk", plugin_thanosegory),
     info={
         "header": "Enables afk for your account",
         "description": "When you are in afk if any one tags you then your bot will reply as he is offline.\
@@ -226,9 +226,9 @@ async def _(event):
                 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="mafk(?:\s|$)([\s\S]*)",
-    command=("mafk", plugin_category),
+    command=("mafk", plugin_thanosegory),
     info={
         "header": "Enables afk for your account",
         "description": "When you are in afk if any one tags you then your bot will reply as he is offline.\

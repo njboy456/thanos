@@ -7,7 +7,7 @@ from ..core import CMD_INFO, PLG_INFO
 from ..utils import load_module, remove_plugin
 from . import CMD_HELP, CMD_LIST, SUDO_LIST, THANOSPRO, edit_delete, edit_or_reply, reply_id
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
@@ -18,16 +18,16 @@ def plug_checker(plugin):
     if not os.path.exists(plug_path):
         plug_path = f"./xtraplugins/{plugin}.py"
     if not os.path.exists(plug_path):
-        plug_path = f"./badcatext/{plugin}.py"
+        plug_path = f"./badthanosext/{plugin}.py"
     return plug_path
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="install$",
-    command=("install", plugin_category),
+    command=("install", plugin_thanosegory),
     info={
         "header": "To install an external plugin.",
-        "description": "Reply to any external plugin(supported by cat) to install it in your bot.",
+        "description": "Reply to any external plugin(supported by thanos) to install it in your bot.",
         "usage": "{tr}install",
     },
 )
@@ -58,9 +58,9 @@ async def install(event):
             os.remove(downloaded_file_name)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="load ([\s\S]*)",
-    command=("load", plugin_category),
+    command=("load", plugin_thanosegory),
     info={
         "header": "To load a plugin again. if you have unloaded it",
         "description": "To load a plugin again which you unloaded by {tr}unload",
@@ -82,9 +82,9 @@ async def load(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="send ([\s\S]*)",
-    command=("send", plugin_category),
+    command=("send", plugin_thanosegory),
     info={
         "header": "To upload a plugin file to telegram chat",
         "usage": "{tr}send <plugin name>",
@@ -112,9 +112,9 @@ async def send(event):
         await edit_or_reply(event, "404: File Not Found")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="unload ([\s\S]*)",
-    command=("unload", plugin_category),
+    command=("unload", plugin_thanosegory),
     info={
         "header": "To unload a plugin temporarily.",
         "description": "You can load this unloaded plugin by restarting or using {tr}load cmd. Useful for cases like seting notes in rose bot({tr}unload markdown).",
@@ -132,9 +132,9 @@ async def unload(event):
         await edit_or_reply(event, f"Successfully unload {shortname}\n{e}")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="uninstall ([\s\S]*)",
-    command=("uninstall", plugin_category),
+    command=("uninstall", plugin_thanosegory),
     info={
         "header": "To uninstall a plugin temporarily.",
         "description": "To stop functioning of that plugin and remove that plugin from bot.",

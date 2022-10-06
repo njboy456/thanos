@@ -15,7 +15,7 @@ from . import BOTLOG, BOTLOG_CHATID
 
 LOGS = logging.getLogger(__name__)
 
-plugin_category = "bot"
+plugin_thanosegory = "bot"
 botusername = Config.TG_BOT_USERNAME
 
 

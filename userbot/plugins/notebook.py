@@ -15,7 +15,7 @@ from ..helpers.tools import media_type
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, THANOSPRO, reply_id
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Pages = {
@@ -209,9 +209,9 @@ def notebook_values(page, font):  # sourcery skip: low-code-quality
     return lines, text_wrap, font_size, linespace, position
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(write|notebook)(?:\s|$)([\s\S]*)",
-    command=("write", plugin_category),
+    command=("write", plugin_thanosegory),
     info={
         "header": "To write down your text in notebook.",
         "description": "Give text to it or reply to message, it will write that in notebook.",
@@ -252,7 +252,7 @@ async def write_page(event):  # sourcery skip: low-code-quality
         cap = f"**NoteBook Configs :-**\n\n**Font:** `{font}`\n**Page:** `{list(Pages.keys())[list(Pages.values()).index(page)]}`\n**Color:** `{foreground.title()}`\n**Log:**  `{log}`"
     reply_to_id = await reply_id(event)
     text = deEmojify(text)
-    catevent = await edit_or_reply(event, "**Processing....**")
+    thanosevent = await edit_or_reply(event, "**Processing....**")
     temp_name = "./temp/nbpage.jpg"
     font_name = "./temp/nbfont.ttf"
     if not os.path.isdir("./temp"):
@@ -285,7 +285,7 @@ async def write_page(event):  # sourcery skip: low-code-quality
     await event.client.send_file(
         event.chat_id, image, caption=cap, reply_to=reply_to_id
     )
-    await catevent.delete()
+    await thanosevent.delete()
     if log == "On" and cmd != "notebook" and BOTLOG_CHATID != event.chat_id:
         await event.client.send_file(
             BOTLOG_CHATID, image, caption=f"#NOTE_BOOK\n\n{cap}"
@@ -294,9 +294,9 @@ async def write_page(event):  # sourcery skip: low-code-quality
         os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="notebook$",
-    command=("notebook", plugin_category),
+    command=("notebook", plugin_thanosegory),
     info={
         "header": "To show your notebook configs.",
         "description": "Shows current notebook configs like font, color, page...",
@@ -307,9 +307,9 @@ async def notebook(event):
     """Shows your notebook configs."""
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="nb(page|font|pen|log)(?:\s|$)([\s\S]*)",
-    command=("nb", plugin_category),
+    command=("nb", plugin_thanosegory),
     info={
         "header": "Change configuration of notebook",
         "description": "Customise Notebook font, page, pen color, log .... to see full list of available options you have to use the cmd without input.",

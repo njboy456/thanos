@@ -14,7 +14,7 @@ from ..utils import is_admin
 from . import BOTLOG, BOTLOG_CHATID, THANOSPRO, edit_or_reply, logging, spamwatch
 
 LOGS = logging.getLogger(__name__)
-plugin_category = "admin"
+plugin_thanosegory = "admin"
 if Config.ANTISPAMBOT_BAN:
 
     @THANOSPRO.on(ChatAction())
@@ -23,10 +23,10 @@ if Config.ANTISPAMBOT_BAN:
         if not event.user_joined and not event.user_added:
             return
         user = await event.get_user()
-        catadmin = await is_admin(event.client, event.chat_id, event.client.uid)
-        if not catadmin:
+        thanosadmin = await is_admin(event.client, event.chat_id, event.client.uid)
+        if not thanosadmin:
             return
-        catbanned = None
+        thanosbanned = None
         adder = None
         ignore = None
         if event.user_added:
@@ -43,10 +43,10 @@ if Config.ANTISPAMBOT_BAN:
         if ignore:
             return
         if is_gbanned(user.id):
-            catgban = get_gbanuser(user.id)
-            if catgban.reason:
+            thanosgban = get_gbanuser(user.id)
+            if thanosgban.reason:
                 hmm = await event.reply(
-                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{catgban.reason}`"
+                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{thanosgban.reason}`"
                 )
             else:
                 hmm = await event.reply(
@@ -56,10 +56,10 @@ if Config.ANTISPAMBOT_BAN:
                 await event.client.edit_permissions(
                     event.chat_id, user.id, view_messages=False
                 )
-                catbanned = True
+                thanosbanned = True
             except Exception as e:
                 LOGS.info(e)
-        if spamwatch and not catbanned:
+        if spamwatch and not thanosbanned:
             if ban := spamwatch.get_ban(user.id):
                 hmm = await event.reply(
                     f"[{user.first_name}](tg://user?id={user.id}) was banned by spamwatch for the reason `{ban.reason}`"
@@ -68,10 +68,10 @@ if Config.ANTISPAMBOT_BAN:
                     await event.client.edit_permissions(
                         event.chat_id, user.id, view_messages=False
                     )
-                    catbanned = True
+                    thanosbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if not catbanned:
+        if not thanosbanned:
             try:
                 casurl = f"https://api.cas.chat/check?user_id={user.id}"
                 data = get(casurl).json()
@@ -89,10 +89,10 @@ if Config.ANTISPAMBOT_BAN:
                     await event.client.edit_permissions(
                         event.chat_id, user.id, view_messages=False
                     )
-                    catbanned = True
+                    thanosbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if BOTLOG and catbanned:
+        if BOTLOG and thanosbanned:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#ANTISPAMBOT\n"
@@ -102,9 +102,9 @@ if Config.ANTISPAMBOT_BAN:
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="cascheck$",
-    command=("cascheck", plugin_category),
+    command=("cascheck", plugin_thanosegory),
     info={
         "header": "To check the users who are banned in cas",
         "description": "When you use this cmd it will check every user in the group where you used whether \
@@ -115,7 +115,7 @@ if Config.ANTISPAMBOT_BAN:
 )
 async def caschecker(event):
     "Searches for cas(combot antispam service) banned users in group and shows you the list"
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
         "`checking any cas(combot antispam service) banned users here, this may take several minutes too......`",
     )
@@ -141,17 +141,17 @@ async def caschecker(event):
         if not cas_count:
             text = "No CAS Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await catevent.edit("`CAS check failed: Admin privileges are required`")
+        await thanosevent.edit("`CAS check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await catevent.edit("`CAS check failed`")
+        await thanosevent.edit("`CAS check failed`")
         return
-    await catevent.edit(text)
+    await thanosevent.edit(text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spamcheck$",
-    command=("spamcheck", plugin_category),
+    command=("spamcheck", plugin_thanosegory),
     info={
         "header": "To check the users who are banned in spamwatch",
         "description": "When you use this command it will check every user in the group where you used whether \
@@ -163,7 +163,7 @@ async def caschecker(event):
 async def caschecker(event):
     "Searches for spamwatch federation banned users in group and shows you the list"
     text = ""
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
         "`checking any spamwatch banned users here, this may take several minutes too......`",
     )
@@ -190,12 +190,12 @@ async def caschecker(event):
         if not cas_count:
             text = "No spamwatch Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await catevent.edit("`spamwatch check failed: Admin privileges are required`")
+        await thanosevent.edit("`spamwatch check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await catevent.edit("`spamwatch check failed`")
+        await thanosevent.edit("`spamwatch check failed`")
         return
-    await catevent.edit(text)
+    await thanosevent.edit(text)
 
 
 def banchecker(user_id):

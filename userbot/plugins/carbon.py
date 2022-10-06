@@ -10,14 +10,14 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from . import THANOSPRO, deEmojify
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 CARBONLANG = "auto"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="carbon(?:\s|$)([\s\S]*)",
-    command=("carbon", plugin_category),
+    command=("carbon", plugin_thanosegory),
     info={
         "header": "Carbon generators for given text (Fixed style)",
         "usage": [
@@ -43,11 +43,11 @@ async def carbon_api(event):
         )
     pcode = deEmojify(pcode)
     code = quote_plus(pcode)
-    cat = await edit_or_reply(event, "`Carbonizing...\n25%`")
+    thanos = await edit_or_reply(event, "`Carbonizing...\n25%`")
     url = CARBON.format(code=code, lang=CARBONLANG)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.binary_location = Config.CHROME_BIN
+    chrome_options.binary_lothanosion = Config.CHROME_BIN
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
@@ -58,7 +58,7 @@ async def carbon_api(event):
         executable_path=Config.CHROME_DRIVER, options=chrome_options
     )
     driver.get(url)
-    await edit_or_reply(cat, "`Be Patient...\n50%`")
+    await edit_or_reply(thanos, "`Be Patient...\n50%`")
     download_path = "./"
     driver.command_executor._commands["send_command"] = (
         "POST",
@@ -71,12 +71,12 @@ async def carbon_api(event):
     driver.execute("send_command", params)
     driver.find_element("xpath", "//button[contains(text(),'Export')]").click()
 
-    await edit_or_reply(cat, "`Processing..\n75%`")
+    await edit_or_reply(thanos, "`Processing..\n75%`")
 
     await asyncio.sleep(2)
-    await edit_or_reply(cat, "`Done Dana Done...\n100%`")
+    await edit_or_reply(thanos, "`Done Dana Done...\n100%`")
     file = "./carbon.png"
-    await edit_or_reply(cat, "`Uploading..`")
+    await edit_or_reply(thanos, "`Uploading..`")
     await event.client.send_file(
         event.chat_id,
         file,
@@ -87,12 +87,12 @@ async def carbon_api(event):
     os.remove("./carbon.png")
     driver.quit()
 
-    await cat.delete()
+    await thanos.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="kar1(?:\s|$)([\s\S]*)",
-    command=("kar1", plugin_category),
+    command=("kar1", plugin_thanosegory),
     info={
         "header": "Carbon generators for given text (Fixed style)",
         "usage": [
@@ -103,8 +103,8 @@ async def carbon_api(event):
 )
 async def kar1_api(event):
     """A Wrapper for carbon.now.sh"""
-    cat = await edit_or_reply(event, "🔲🔲🔲🔲🔲")
-    CARBON = "https://carbon.now.sh/?bg=rgba(249%2C237%2C212%2C0)&t=synthwave-84&wt=none&l=application%2Fjson&ds=true&dsyoff=20px&dsblur=0px&wc=true&wa=true&pv=56px&ph=0px&ln=false&fl=1&fm=IBM%20Plex%20Mono&fs=14.5px&lh=153%25&si=false&es=4x&wm=false&code={code}"
+    thanos = await edit_or_reply(event, "🔲🔲🔲🔲🔲")
+    CARBON = "https://carbon.now.sh/?bg=rgba(249%2C237%2C212%2C0)&t=synthwave-84&wt=none&l=applithanosion%2Fjson&ds=true&dsyoff=20px&dsblur=0px&wc=true&wa=true&pv=56px&ph=0px&ln=false&fl=1&fm=IBM%20Plex%20Mono&fs=14.5px&lh=153%25&si=false&es=4x&wm=false&code={code}"
     textx = await event.get_reply_message()
     pcode = event.text
     if pcode[6:]:
@@ -113,20 +113,20 @@ async def kar1_api(event):
         pcode = str(textx.message)
     else:
         return await edit_delete(
-            cat, "`No text is given. Either pass text along with cmd or reply to text`"
+            thanos, "`No text is given. Either pass text along with cmd or reply to text`"
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.binary_location = Config.CHROME_BIN
+    chrome_options.binary_lothanosion = Config.CHROME_BIN
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    await edit_or_reply(cat, "🔳🔳🔲🔲🔲")
+    await edit_or_reply(thanos, "🔳🔳🔲🔲🔲")
 
     driver = webdriver.Chrome(
         executable_path=Config.CHROME_DRIVER, options=chrome_options
@@ -145,11 +145,11 @@ async def kar1_api(event):
 
     driver.find_element("xpath", "//button[contains(text(),'Export')]").click()
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🔳🔳🔳🔲🔲")
+    await edit_or_reply(thanos, "🔳🔳🔳🔲🔲")
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🔳🔳🔳🔳🔳")
+    await edit_or_reply(thanos, "🔳🔳🔳🔳🔳")
     file = "./carbon.png"
-    await edit_or_reply(cat, "☣️Karbon1 Completed, Uploading Karbon☣️")
+    await edit_or_reply(thanos, "☣️Karbon1 Completed, Uploading Karbon☣️")
     await event.client.send_file(
         event.chat_id,
         file,
@@ -158,12 +158,12 @@ async def kar1_api(event):
     )
     os.remove("./carbon.png")
 
-    await cat.delete()
+    await thanos.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="kar2(?:\s|$)([\s\S]*)",
-    command=("kar2", plugin_category),
+    command=("kar2", plugin_thanosegory),
     info={
         "header": "Carbon generators for given text (Fixed style)",
         "usage": [
@@ -174,8 +174,8 @@ async def kar1_api(event):
 )
 async def kar2_api(event):
     """A Wrapper for carbon.now.sh"""
-    cat = await edit_or_reply(event, "📛📛📛📛📛")
-    CARBON = "https://carbon.now.sh/?bg=rgba(239%2C40%2C44%2C1)&t=one-light&wt=none&l=application%2Ftypescript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=143%25&si=false&es=2x&wm=false&code={code}"
+    thanos = await edit_or_reply(event, "📛📛📛📛📛")
+    CARBON = "https://carbon.now.sh/?bg=rgba(239%2C40%2C44%2C1)&t=one-light&wt=none&l=applithanosion%2Ftypescript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=143%25&si=false&es=2x&wm=false&code={code}"
     textx = await event.get_reply_message()
     pcode = event.text
     if pcode[6:]:
@@ -184,20 +184,20 @@ async def kar2_api(event):
         pcode = str(textx.message)
     else:
         return await edit_delete(
-            cat, "`No text is given. Either pass text along with cmd or reply to text`"
+            thanos, "`No text is given. Either pass text along with cmd or reply to text`"
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.binary_location = Config.CHROME_BIN
+    chrome_options.binary_lothanosion = Config.CHROME_BIN
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    await edit_or_reply(cat, "🔘🔘📛📛📛")
+    await edit_or_reply(thanos, "🔘🔘📛📛📛")
     driver = webdriver.Chrome(
         executable_path=Config.CHROME_DRIVER, options=chrome_options
     )
@@ -214,11 +214,11 @@ async def kar2_api(event):
     driver.execute("send_command", params)
     driver.find_element("xpath", "//button[contains(text(),'Export')]").click()
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🔘🔘🔘📛📛")
+    await edit_or_reply(thanos, "🔘🔘🔘📛📛")
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🔘🔘🔘🔘🔘")
+    await edit_or_reply(thanos, "🔘🔘🔘🔘🔘")
     file = "./carbon.png"
-    await edit_or_reply(cat, "☣️Karbon2 Completed, Uploading Karbon☣️")
+    await edit_or_reply(thanos, "☣️Karbon2 Completed, Uploading Karbon☣️")
     await event.client.send_file(
         event.chat_id,
         file,
@@ -229,12 +229,12 @@ async def kar2_api(event):
 
     os.remove("./carbon.png")
 
-    await cat.delete()
+    await thanos.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="kar3(?:\s|$)([\s\S]*)",
-    command=("kar3", plugin_category),
+    command=("kar3", plugin_thanosegory),
     info={
         "header": "Carbon generators for given text (Fixed style)",
         "usage": [
@@ -245,7 +245,7 @@ async def kar2_api(event):
 )
 async def kar3_api(event):
     """A Wrapper for carbon.now.sh"""
-    cat = await edit_or_reply(event, "🎛🎛🎛🎛🎛")
+    thanos = await edit_or_reply(event, "🎛🎛🎛🎛🎛")
     CARBON = "https://carbon.now.sh/?bg=rgba(74%2C144%2C226%2C1)&t=material&wt=none&l=auto&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code={code}"
     textx = await event.get_reply_message()
     pcode = event.text
@@ -255,20 +255,20 @@ async def kar3_api(event):
         pcode = str(textx.message)
     else:
         return await edit_delete(
-            cat, "`No text is given. Either pass text along with cmd or reply to text`"
+            thanos, "`No text is given. Either pass text along with cmd or reply to text`"
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.binary_location = Config.CHROME_BIN
+    chrome_options.binary_lothanosion = Config.CHROME_BIN
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    await edit_or_reply(cat, "🔵🔵🎛🎛🎛")
+    await edit_or_reply(thanos, "🔵🔵🎛🎛🎛")
 
     driver = webdriver.Chrome(
         executable_path=Config.CHROME_DRIVER, options=chrome_options
@@ -287,11 +287,11 @@ async def kar3_api(event):
 
     driver.find_element("xpath", "//button[contains(text(),'Export')]").click()
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🔵🔵🔵🎛🎛")
+    await edit_or_reply(thanos, "🔵🔵🔵🎛🎛")
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🔵🔵🔵🔵🔵")
+    await edit_or_reply(thanos, "🔵🔵🔵🔵🔵")
     file = "./carbon.png"
-    await edit_or_reply(cat, "☣️Karbon3 Completed, Uploading Karbon⬆️")
+    await edit_or_reply(thanos, "☣️Karbon3 Completed, Uploading Karbon⬆️")
     await event.client.send_file(
         event.chat_id,
         file,
@@ -301,12 +301,12 @@ async def kar3_api(event):
     )
 
     os.remove("./carbon.png")
-    await cat.delete()
+    await thanos.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="kar4(?:\s|$)([\s\S]*)",
-    command=("kar4", plugin_category),
+    command=("kar4", plugin_thanosegory),
     info={
         "header": "Carbon generators for given text (Fixed style)",
         "usage": [
@@ -317,8 +317,8 @@ async def kar3_api(event):
 )
 async def kar4_api(event):
     """A Wrapper for carbon.now.sh"""
-    cat = await edit_or_reply(event, "🌚🌚🌚🌚🌚")
-    CARBON = "https://carbon.now.sh/?bg=rgba(29%2C40%2C104%2C1)&t=one-light&wt=none&l=application%2Ftypescript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=143%25&si=false&es=2x&wm=false&code={code}"
+    thanos = await edit_or_reply(event, "🌚🌚🌚🌚🌚")
+    CARBON = "https://carbon.now.sh/?bg=rgba(29%2C40%2C104%2C1)&t=one-light&wt=none&l=applithanosion%2Ftypescript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=143%25&si=false&es=2x&wm=false&code={code}"
     textx = await event.get_reply_message()
     pcode = event.text
     if pcode[6:]:
@@ -327,20 +327,20 @@ async def kar4_api(event):
         pcode = str(textx.message)
     else:
         return await edit_delete(
-            cat, "`No text is given. Either pass text along with cmd or reply to text`"
+            thanos, "`No text is given. Either pass text along with cmd or reply to text`"
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.binary_location = Config.CHROME_BIN
+    chrome_options.binary_lothanosion = Config.CHROME_BIN
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    await edit_or_reply(cat, "🌝🌝🌚🌚🌚")
+    await edit_or_reply(thanos, "🌝🌝🌚🌚🌚")
     driver = webdriver.Chrome(
         executable_path=Config.CHROME_DRIVER, options=chrome_options
     )
@@ -357,11 +357,11 @@ async def kar4_api(event):
     driver.execute("send_command", params)
     driver.find_element("xpath", "//button[contains(text(),'Export')]").click()
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🌝🌝🌝🌚🌚")
+    await edit_or_reply(thanos, "🌝🌝🌝🌚🌚")
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "🌝🌝🌝🌝🌝")
+    await edit_or_reply(thanos, "🌝🌝🌝🌝🌝")
     file = "./carbon.png"
-    await edit_or_reply(cat, "✅Karbon4 Completed, Uploading Karbon✅")
+    await edit_or_reply(thanos, "✅Karbon4 Completed, Uploading Karbon✅")
     await event.client.send_file(
         event.chat_id,
         file,
@@ -371,12 +371,12 @@ async def kar4_api(event):
     )
 
     os.remove("./carbon.png")
-    await cat.delete()
+    await thanos.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="kargb(?:\s|$)([\s\S]*)",
-    command=("kargb", plugin_category),
+    command=("kargb", plugin_thanosegory),
     info={
         "header": "Carbon generators for given text (random from some selected themes)",
         "usage": [
@@ -423,7 +423,7 @@ async def kargb_api(event):
     ]
     CUNTHE = random.randint(0, len(THEME) - 1)
     The = THEME[CUNTHE]
-    cat = await edit_or_reply(event, "⬜⬜⬜⬜⬜")
+    thanos = await edit_or_reply(event, "⬜⬜⬜⬜⬜")
     CARBON = "https://carbon.now.sh/?bg=rgba({R}%2C{G}%2C{B}%2C1)&t={T}&wt=none&l=auto&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code={code}"
     textx = await event.get_reply_message()
     pcode = event.text
@@ -433,20 +433,20 @@ async def kargb_api(event):
         pcode = str(textx.message)
     else:
         return await edit_delete(
-            cat, "`No text is given. Either pass text along with cmd or reply to text`"
+            thanos, "`No text is given. Either pass text along with cmd or reply to text`"
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, R=RED, G=GREEN, B=BLUE, T=The, lang=CARBONLANG)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    chrome_options.binary_location = Config.CHROME_BIN
+    chrome_options.binary_lothanosion = Config.CHROME_BIN
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    await edit_or_reply(cat, "⬛⬛⬜⬜⬜")
+    await edit_or_reply(thanos, "⬛⬛⬜⬜⬜")
     driver = webdriver.Chrome(
         executable_path=Config.CHROME_DRIVER, options=chrome_options
     )
@@ -463,11 +463,11 @@ async def kargb_api(event):
     driver.execute("send_command", params)
     driver.find_element("xpath", "//button[contains(text(),'Export')]").click()
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "⬛⬛⬛⬜⬜")
+    await edit_or_reply(thanos, "⬛⬛⬛⬜⬜")
     await asyncio.sleep(1)
-    await edit_or_reply(cat, "⬛⬛⬛⬛⬛")
+    await edit_or_reply(thanos, "⬛⬛⬛⬛⬛")
     file = "./carbon.png"
-    await edit_or_reply(cat, "✅RGB Karbon Completed, Uploading Karbon✅")
+    await edit_or_reply(thanos, "✅RGB Karbon Completed, Uploading Karbon✅")
     await event.client.send_file(
         event.chat_id,
         file,
@@ -477,4 +477,4 @@ async def kargb_api(event):
     )
 
     os.remove("./carbon.png")
-    await cat.delete()
+    await thanos.delete()

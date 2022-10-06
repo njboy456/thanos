@@ -116,12 +116,12 @@ async def post_to_telegraph(
 
 
 # ----------------------------------------------## Media ##-----------------------------------------------------------#
-async def age_verification(event, reply_to_id):
+async def age_verifithanosion(event, reply_to_id):
     ALLOW_NSFW = gvarstatus("ALLOW_NSFW") or "False"
     if ALLOW_NSFW.lower() == "true":
         return False
     results = await event.client.inline_query(
-        Config.TG_BOT_USERNAME, "age_verification_alert"
+        Config.TG_BOT_USERNAME, "age_verifithanosion_alert"
     )
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
@@ -170,15 +170,15 @@ async def clippy(borg, msg, chat_id, reply_to_id):
 
 async def hide_inlinebot(borg, bot_name, text, chat_id, reply_to_id, c_lick=0):
     sticcers = await borg.inline_query(bot_name, f"{text}.")
-    cat = await sticcers[c_lick].click("me", hide_via=True)
-    if cat:
-        await borg.send_file(int(chat_id), cat, reply_to=reply_to_id)
-        await cat.delete()
+    thanos = await sticcers[c_lick].click("me", hide_via=True)
+    if thanos:
+        await borg.send_file(int(chat_id), thanos, reply_to=reply_to_id)
+        await thanos.delete()
 
 
 async def make_inline(text, borg, chat_id, reply_to_id):
-    catinput = f"Inline buttons {text}"
-    results = await borg.inline_query(Config.TG_BOT_USERNAME, catinput)
+    thanosinput = f"Inline buttons {text}"
+    results = await borg.inline_query(Config.TG_BOT_USERNAME, thanosinput)
     await results[0].click(chat_id, reply_to=reply_to_id)
 
 
@@ -400,7 +400,7 @@ def higlighted_text(
             )
             source_img = Image.alpha_composite(source_img, trans)
             output_text.append(list_text[i])
-        output_img = f"./temp/cat{pic_no}.jpg"
+        output_img = f"./temp/thanos{pic_no}.jpg"
         output.append(output_img)
         source_img.save(output_img, "png")
         if album_limit and (album_limit - 1) == pic_no:
@@ -450,7 +450,7 @@ async def waifutxt(text, chat_id, reply_to_id, bot):
         63,
     ]
     sticcers = await bot.inline_query("stickerizerbot", f"#{choice(animus)}{text}")
-    cat = await sticcers[0].click("me", hide_via=True)
-    if cat:
-        await bot.send_file(int(chat_id), cat, reply_to=reply_to_id)
-        await cat.delete()
+    thanos = await sticcers[0].click("me", hide_via=True)
+    if thanos:
+        await bot.send_file(int(chat_id), thanos, reply_to=reply_to_id)
+        await thanos.delete()

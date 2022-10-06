@@ -12,9 +12,9 @@ from telethon import __version__
 from userbot import THANOSPRO
 
 from ..core.managers import edit_or_reply
-from ..helpers.utils import _catutils
+from ..helpers.utils import _thanosutils
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
 def get_size(inputbytes, suffix="B"):
@@ -25,16 +25,16 @@ def get_size(inputbytes, suffix="B"):
         inputbytes /= factor
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spc$",
-    command=("spc", plugin_category),
+    command=("spc", plugin_thanosegory),
     info={
-        "header": "To show system specification.",
+        "header": "To show system specifithanosion.",
         "usage": "{tr}spc",
     },
 )
 async def psu(event):
-    "shows system specification"
+    "shows system specifithanosion"
     uname = platform.uname()
     softw = "**System Information**\n"
     softw += f"`System   : {uname.system}`\n"
@@ -81,9 +81,9 @@ async def psu(event):
     await event.edit(help_string)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="cpu$",
-    command=("cpu", plugin_category),
+    command=("cpu", plugin_thanosegory),
     info={
         "header": "To show cpu information.",
         "usage": "{tr}cpu",
@@ -91,16 +91,16 @@ async def psu(event):
 )
 async def cpu(event):
     "shows cpu information"
-    cmd = "cat /proc/cpuinfo | grep 'model name'"
-    o = (await _catutils.runcmd(cmd))[0]
+    cmd = "thanos /proc/cpuinfo | grep 'model name'"
+    o = (await _thanosutils.runcmd(cmd))[0]
     await edit_or_reply(
         event, f"**[THANOS's](tg://need_update_for_some_feature/) CPU Model:**\n{o}"
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="sysd$",
-    command=("sysd", plugin_category),
+    command=("sysd", plugin_thanosegory),
     info={
         "header": "Shows system information using neofetch",
         "usage": "{tr}cpu",
@@ -108,11 +108,11 @@ async def cpu(event):
 )
 async def sysdetails(sysd):
     "Shows system information using neofetch"
-    catevent = await edit_or_reply(sysd, "`Fetching system information.`")
+    thanosevent = await edit_or_reply(sysd, "`Fetching system information.`")
     cmd = "git clone https://github.com/dylanaraps/neofetch.git"
-    await _catutils.runcmd(cmd)
+    await _thanosutils.runcmd(cmd)
     neo = "neofetch/neofetch --off --color_blocks off --bold off --cpu_temp C \
                     --cpu_speed on --cpu_cores physical --kernel_shorthand off --stdout"
-    a, b, c, d = await _catutils.runcmd(neo)
+    a, b, c, d = await _thanosutils.runcmd(neo)
     result = str(a) + str(b)
-    await edit_or_reply(catevent, f"**Neofetch Result:** `{result}`")
+    await edit_or_reply(thanosevent, f"**Neofetch Result:** `{result}`")

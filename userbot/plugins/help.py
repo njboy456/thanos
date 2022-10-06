@@ -11,12 +11,12 @@ from ..helpers.utils import reply_id
 cmdprefix = Config.COMMAND_HAND_LER
 
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="help ?(-c|-p|-t)? ?([\s\S]*)?",
-    command=("help", plugin_category),
+    command=("help", plugin_thanosegory),
     info={
         "header": "To get guide for THANOSBOT.",
         "description": "To get information or guide for the command or plugin",
@@ -56,9 +56,9 @@ async def _(event):
     await edit_or_reply(event, outstr)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="cmds(?:\s|$)([\s\S]*)",
-    command=("cmds", plugin_category),
+    command=("cmds", plugin_thanosegory),
     info={
         "header": "To show list of cmds.",
         "description": "if no input is given then will show list of all commands.",
@@ -88,9 +88,9 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="s ([\s\S]*)",
-    command=("s", plugin_category),
+    command=("s", plugin_thanosegory),
     info={
         "header": "To search commands.",
         "examples": "{tr}s song",
@@ -108,9 +108,9 @@ async def _(event):
     await edit_or_reply(event, out)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="dc$",
-    command=("dc", plugin_category),
+    command=("dc", plugin_thanosegory),
     info={
         "header": "To show dc of your account.",
         "description": "Dc of your account and list of dc's will be showed",

@@ -7,16 +7,16 @@ import traceback
 from ..helpers.utils import _format
 from . import *
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="exec(?:\s|$)([\s\S]*)",
-    command=("exec", plugin_category),
+    command=("exec", plugin_thanosegory),
     info={
         "header": "To Execute terminal commands in a subprocess.",
         "usage": "{tr}exec <command>",
-        "examples": "{tr}exec cat stringsetup.py",
+        "examples": "{tr}exec thanos stringsetup.py",
     },
 )
 async def _(event):
@@ -24,21 +24,21 @@ async def _(event):
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await edit_delete(event, "`What should i execute?..`")
-    catevent = await edit_or_reply(event, "`Executing.....`")
+    thanosevent = await edit_or_reply(event, "`Executing.....`")
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    stdout, stderr = await process.communicate()
+    stdout, stderr = await process.communithanose()
     result = str(stdout.decode().strip()) + str(stderr.decode().strip())
-    catuser = await event.client.get_me()
-    curruser = catuser.username or "THANOSBOT"
+    thanosuser = await event.client.get_me()
+    curruser = thanosuser.username or "THANOSBOT"
     uid = os.geteuid()
     if uid == 0:
         cresult = f"```{curruser}:~#``` ```{cmd}```\n```{result}```"
     else:
         cresult = f"```{curruser}:~$``` ```{cmd}```\n```{result}```"
     await edit_or_reply(
-        catevent,
+        thanosevent,
         text=cresult,
         aslink=True,
         linktext=f"**•  Exec : **\n```{cmd}``` \n\n**•  Result : **\n",
@@ -49,9 +49,9 @@ async def _(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="eval(?:\s|$)([\s\S]*)",
-    command=("eval", plugin_category),
+    command=("eval", plugin_thanosegory),
     info={
         "header": "To Execute python script/statements in a subprocess.",
         "usage": "{tr}eval <command>",
@@ -68,7 +68,7 @@ async def _(event):
         .replace("sendfile", "send_file")
         .replace("editmessage", "edit_message")
     )
-    catevent = await edit_or_reply(event, "`Running ...`")
+    thanosevent = await edit_or_reply(event, "`Running ...`")
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
@@ -95,7 +95,7 @@ async def _(event):
         f"**•  Eval : **\n```{cmd}``` \n\n**•  Result : **\n```{evaluation}``` \n"
     )
     await edit_or_reply(
-        catevent,
+        thanosevent,
         text=final_output,
         aslink=True,
         linktext=f"**•  Eval : **\n```{cmd}``` \n\n**•  Result : **\n",

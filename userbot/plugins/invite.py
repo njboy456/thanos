@@ -4,12 +4,12 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="invite ([\s\S]*)",
-    command=("invite", plugin_category),
+    command=("invite", plugin_thanosegory),
     info={
         "header": "Add the given user/users to the group where u used the command.",
         "description": "Adds only mentioned person or bot not all members",

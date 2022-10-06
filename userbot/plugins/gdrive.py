@@ -35,7 +35,7 @@ from ..sql_helper import google_drive_sql as helper
 from . import BOTLOG, BOTLOG_CHATID, TMP_DOWNLOAD_DIRECTORY
 
 LOGS = logging.getLogger(__name__)
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 # THANOSBOT Google Drive managers  ported from Projectbish and added extra things by @mrconfused
 
@@ -117,7 +117,7 @@ async def create_app(gdrive):
     """Create google drive service app"""
     hmm = gdrive.client.uid
     creds = helper.get_credentials(str(hmm))
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if creds is not None:
         """Repack credential objects from strings"""
         creds = pickle.loads(base64.b64decode(creds.encode()))
@@ -133,8 +133,8 @@ async def create_app(gdrive):
             await gdrive.edit("`Credentials is empty, please generate it...`")
             return False
     with contextlib.suppress(BaseException):
-        cat = Get(cat)
-        await gdrive.client(cat)
+        thanos = Get(thanos)
+        await gdrive.client(thanos)
     return build("drive", "v3", credentials=creds, cache_discovery=False)
 
 
@@ -172,11 +172,11 @@ async def download(
         try:
             from .torrentutils import aria2, check_metadata
 
-            cattorrent = True
+            thanostorrent = True
         except Exception:
-            cattorrent = False
+            thanostorrent = False
         full_path = os.path.join(os.getcwd(), TMP_DOWNLOAD_DIRECTORY)
-        if cattorrent:
+        if thanostorrent:
             LOGS.info("torrentutils exists")
             if os.path.isfile(uri) and uri.endswith(".torrent"):
                 downloads = aria2.add_torrent(
@@ -191,7 +191,7 @@ async def download(
             LOGS.info("No torrentutils")
             await edit_or_reply(
                 gdrive,
-                "`To use torrent files or download files from link install torrentutils from` @catplugins",
+                "`To use torrent files or download files from link install torrentutils from` @thanosplugins",
             )
             return "install torrentutils"
         from .torrentutils import aria2, check_metadata
@@ -431,7 +431,7 @@ async def gdrive_download(
     else:
         file_name = file.get("name")
         mimeType = file.get("mimeType")
-        if mimeType == "application/vnd.google-apps.folder":
+        if mimeType == "applithanosion/vnd.google-apps.folder":
             file_name = file.get("name").replace(" ", "_")
             newpath = await create_server_dir(service, path, file_name)
             filespath_d = await list_drive_dir(service, file_Id)
@@ -508,7 +508,7 @@ async def download_gdrive(gdrive, service, uri, dir_id=GDRIVE_.parent_Id):
             .get(fileId=file_Id, fields="name, mimeType", supportsTeamDrives=True)
             .execute()
         )
-        if file["mimeType"] == "application/vnd.google-apps.folder":
+        if file["mimeType"] == "applithanosion/vnd.google-apps.folder":
             folder = await create_dir(service, file["name"], dir_id)
             filespath_d = await list_drive_dir(service, file_Id)
             for nfileid in filespath_d:
@@ -565,7 +565,7 @@ async def get_information(service, Id):
 async def create_dir(service, folder_name, dir_id=None):
     metadata = {
         "name": folder_name,
-        "mimeType": "application/vnd.google-apps.folder",
+        "mimeType": "applithanosion/vnd.google-apps.folder",
     }
     if not dir_id:
         try:
@@ -725,7 +725,7 @@ async def get_output(service, file_id, event):
     file_name = file_.get("name")
     file_size = humanbytes(int(file_.get("size", 0)))
     mime_type = file_.get("mimeType")
-    if mime_type == "application/vnd.google-apps.folder":
+    if mime_type == "applithanosion/vnd.google-apps.folder":
         out = G_DRIVE_FOLDER_LINK.format(file_name, file_id)
     else:
         out = G_DRIVE_FILE_LINK.format(file_name, file_id, file_size)
@@ -762,7 +762,7 @@ async def get_output(service, file_id, event):
                 Config.G_DRIVE_INDEX_LINK.rstrip("/"),
                 quote(get_file_path(service, file_id, file_name)),
             )
-        if mime_type == "application/vnd.google-apps.folder":
+        if mime_type == "applithanosion/vnd.google-apps.folder":
             link += "/"
         out += f"\n👥 __[Shareable Link]({link})__"
     return out
@@ -919,7 +919,7 @@ async def glists(gdrive):
             if len(result) >= page_size:
                 break
             file_name = files.get("name")
-            if files.get("mimeType") == "application/vnd.google-apps.folder":
+            if files.get("mimeType") == "applithanosion/vnd.google-apps.folder":
                 link = files.get("webViewLink")
                 folder += f"<a href = {link}>📁️ • {file_name}</a>\n"
             else:
@@ -950,9 +950,9 @@ async def glists(gdrive):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gauth$",
-    command=("gauth", plugin_category),
+    command=("gauth", plugin_thanosegory),
     info={
         "header": "To authenciate gdrive credentials.",
         "description": "Generate token to enable all cmd google drive service. This only need to run once in life time.",
@@ -964,7 +964,7 @@ async def generate_credentials(gdrive):
     if not BOTLOG:
         await edit_delete(
             gdrive,
-            "for authencation you need to set PRIVATE_GROUP_BOT_API_ID in heroku",
+            "for authenthanosion you need to set PRIVATE_GROUP_BOT_API_ID in heroku",
             time=10,
         )
     hmm = gdrive.client.uid
@@ -1006,7 +1006,7 @@ async def generate_credentials(gdrive):
     )
     auth_url, _ = flow.authorization_url(access_type="offline", prompt="consent")
     msg = await gdrive.respond(
-        "`Go to your Private log group to authenticate token...`"
+        "`Go to your Private log group to authentithanose token...`"
     )
     async with gdrive.client.conversation(BOTLOG_CHATID) as conv:
         url_msg = await conv.send_message(
@@ -1037,9 +1037,9 @@ async def generate_credentials(gdrive):
     await gdrive.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="greset",
-    command=("greset", plugin_category),
+    command=("greset", plugin_thanosegory),
     info={
         "header": "To reset gdrive credentials.",
         "description": "reset your token if something bad happened or change drive acc.",
@@ -1057,9 +1057,9 @@ async def reset_credentials(gdrive):
     return
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="glist(?: |$)(-l \d+)?(?: |$)?([\s\S]*)?(?: |$)",
-    command=("glist", plugin_category),
+    command=("glist", plugin_thanosegory),
     info={
         "header": "Get list of folders and files with default size 50",
         "flags": {
@@ -1079,14 +1079,14 @@ async def reset_credentials(gdrive):
         ],
     },
 )
-async def catlists(gdrive):
+async def thanoslists(gdrive):
     "To get list of files and folers"
     await glists(gdrive)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gdf (mkdir|rm|info) ([\s\S]*)",
-    command=("gdf", plugin_category),
+    command=("gdf", plugin_thanosegory),
     info={
         "header": "Google Drive folder/file management",
         "description": "To create or delete or check folders/files in gdrive.",
@@ -1126,7 +1126,7 @@ async def google_drive_managers(gdrive):  # sourcery no-metrics
             name_or_id, _ = (name_or_id, "unknown")
         metadata = {
             "name": name_or_id,
-            "mimeType": "application/vnd.google-apps.folder",
+            "mimeType": "applithanosion/vnd.google-apps.folder",
         }
         try:
             len(GDRIVE_.parent_Id)
@@ -1190,7 +1190,7 @@ async def google_drive_managers(gdrive):  # sourcery no-metrics
                     continue
             name = f.get("name")
             mimeType = f.get("mimeType")
-            if mimeType == "application/vnd.google-apps.folder":
+            if mimeType == "applithanosion/vnd.google-apps.folder":
                 status = "FOLDER - DELETION"
             else:
                 status = "FILE - DELETION"
@@ -1225,7 +1225,7 @@ async def google_drive_managers(gdrive):  # sourcery no-metrics
             webViewLink = f.get("webViewLink")
             downloadURL = f.get("webContentLink")
             description = f.get("description")
-            if mimeType == "application/vnd.google-apps.folder":
+            if mimeType == "applithanosion/vnd.google-apps.folder":
                 status = "**FOLDER - EXIST **"
             else:
                 status = "**FILE - EXIST **"
@@ -1234,7 +1234,7 @@ async def google_drive_managers(gdrive):  # sourcery no-metrics
                 f"**Name  : **`{name_or_id}`\n"
                 f"**ID    :** `{f_id}`\n"
             )
-            if mimeType != "application/vnd.google-apps.folder":
+            if mimeType != "applithanosion/vnd.google-apps.folder":
                 msg += f"**Size  :** `{humanbytes(int(f_size))}`\n"
                 msg += f"**Link  :** [{name_or_id}]({downloadURL})\n\n"
             else:
@@ -1246,9 +1246,9 @@ async def google_drive_managers(gdrive):  # sourcery no-metrics
     await gdrive.edit(reply)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gabort$",
-    command=("gabort", plugin_category),
+    command=("gabort", plugin_thanosegory),
     info={
         "header": "Abort process uploading or downloading process.",
         "usage": "{tr}gabort",
@@ -1271,9 +1271,9 @@ async def cancel_process(gdrive):
     await gdrive.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ugd(?:\s|$)([\s\S]*)",
-    command=("ugd", plugin_category),
+    command=("ugd", plugin_thanosegory),
     info={
         "header": "upload files/folders to gdrive.",
         "description": "Upload file from local or uri/url/drivelink into google drive."
@@ -1331,7 +1331,7 @@ async def google_drive(gdrive):  # sourcery no-metrics
         else:
             await gdrive.edit(
                 "<b>[FOLDER - UPLOAD]</b>\n\n"
-                f"<b>Location: </b><a href='{webViewURL}'>{folder_name}</a>\n"
+                f"<b>Lothanosion: </b><a href='{webViewURL}'>{folder_name}</a>\n"
                 "<b>Status : </b><code>Successfully uploaded.</code>",
                 parse_mode="HTML",
             )
@@ -1442,9 +1442,9 @@ async def google_drive(gdrive):  # sourcery no-metrics
     return
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gclear$",
-    command=("gclear", plugin_category),
+    command=("gclear", plugin_thanosegory),
     info={
         "header": "to clear the temparary upload directory.",
         "description": "that is directory set by command gset . when you used this command it will make your parent directory as G_DRIVE_FOLDER_ID",
@@ -1478,9 +1478,9 @@ async def set_upload_folder(gdrive):
         return None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gset(?:\s|$)([\s\S]*)",
-    command=("gset", plugin_category),
+    command=("gset", plugin_thanosegory),
     info={
         "header": "To set temparary parent id.",
         "description": "Change upload directory in gdrive",
@@ -1516,9 +1516,9 @@ async def set_upload_folder(gdrive):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gdown ?(-u)? ([\s\S]*)",
-    command=("gdown", plugin_category),
+    command=("gdown", plugin_thanosegory),
     info={
         "header": "To download files form gdrive.",
         "description": "G-Drive File Downloader Plugin For Userbot. only gdrive files are supported now",
@@ -1538,16 +1538,16 @@ async def g_download(event):
         return None
     cmd = event.pattern_match.group(1)
     drive_link = event.pattern_match.group(2)
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event, "`Downloading Requested File from G-Drive...`"
     )
-    file_name, catprocess = await gdrive_download(event, catevent, service, drive_link)
-    if catprocess is not None:
-        return await edit_delete(catevent, file_name)
+    file_name, thanosprocess = await gdrive_download(event, thanosevent, service, drive_link)
+    if thanosprocess is not None:
+        return await edit_delete(thanosevent, file_name)
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     if not cmd:
-        await catevent.edit(
-            "**File Downloaded.\nLocation : **`"
+        await thanosevent.edit(
+            "**File Downloaded.\nLothanosion : **`"
             + str(os.path.relpath(file_name, start=os.curdir))
             + "`"
         )
@@ -1561,12 +1561,12 @@ async def g_download(event):
             force_document=False,
             supports_streaming=True,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, catevent, c_time, "Uploading...", file_name)
+                progress(d, t, thanosevent, c_time, "Uploading...", file_name)
             ),
         )
         os.remove(file_name)
         await edit_delete(
-            catevent,
+            thanosevent,
             "**File Downloaded and uploaded.\nName : **`"
             + str(os.path.relpath(file_name, start=os.curdir))
             + "`",
@@ -1574,21 +1574,21 @@ async def g_download(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gshare ([\s\S]*)",
-    command=("gshare", plugin_category),
+    command=("gshare", plugin_thanosegory),
     info={
         "header": "To share the team drive files.",
         "description": "Get sharable link for team drive files need to set G_DRIVE_INDEX_LINK",
         "usage": "{tr}gshare <folder/file link>",
     },
 )
-async def catshare(event):
+async def thanosshare(event):
     "To share the team drive files."
     service = await create_app(event)
     if service is False:
         return None
     input_str = event.pattern_match.group(1)
-    catevent = await edit_or_reply(event, "`Creating sharable link...`")
+    thanosevent = await edit_or_reply(event, "`Creating sharable link...`")
     await asyncio.sleep(2)
-    await gshare(service, catevent, input_str)
+    await gshare(service, thanosevent, input_str)

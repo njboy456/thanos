@@ -11,15 +11,15 @@ from ..Config import Config
 from ..helpers.functions.functions import make_inline
 from . import THANOSPRO, edit_delete, reply_id
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 # regex obtained from:
 # https://github.com/PaulSonOfLars/tgbot/blob/master/tg_bot/modules/helper_funcs/string_handling.py#L23
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="cbutton(?:\s|$)([\s\S]*)",
-    command=("cbutton", plugin_category),
+    command=("cbutton", plugin_thanosegory),
     info={
         "header": "To create button posts",
         "note": f"For working of this you need your bot ({Config.TG_BOT_USERNAME}) in the group/channel \
@@ -84,9 +84,9 @@ async def _(event):
         os.remove(tgbot_reply_message)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ibutton(?:\s|$)([\s\S]*)",
-    command=("ibutton", plugin_category),
+    command=("ibutton", plugin_thanosegory),
     info={
         "header": "To create button posts via inline",
         "note": "Markdown is Default to html",

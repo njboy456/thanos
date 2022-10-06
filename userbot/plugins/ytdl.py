@@ -37,7 +37,7 @@ BASE_YT_URL = "https://www.youtube.com/watch?v="
 extractor = URLExtract()
 LOGS = logging.getLogger(__name__)
 
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 
 video_opts = {
@@ -47,12 +47,12 @@ video_opts = {
     "writethumbnail": True,
     "prefer_ffmpeg": True,
     "geo_bypass": True,
-    "nocheckcertificate": True,
+    "nocheckcertifithanose": True,
     "postprocessors": [
         {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"},
         {"key": "FFmpegMetadata"},
     ],
-    "outtmpl": "cat_ytv.mp4",
+    "outtmpl": "thanos_ytv.mp4",
     "logtostderr": False,
     "quiet": True,
 }
@@ -70,7 +70,7 @@ async def ytdl_down(event, opts, url):
         await event.edit("`The download content was too short.`")
     except GeoRestrictedError:
         await event.edit(
-            "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`"
+            "`Video is not available from your geographic lothanosion due to geographic restrictions imposed by a website.`"
         )
     except MaxDownloadsReached:
         await event.edit("`Max-downloads limit has been reached.`")
@@ -144,9 +144,9 @@ async def fix_attributes(
     return new_attributes, mime_type
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="yta(?:\s|$)([\s\S]*)",
-    command=("yta", plugin_category),
+    command=("yta", plugin_thanosegory),
     info={
         "header": "To download audio from many sites like Youtube, Facebook, Instagram, etc.",
         "description": "downloads the audio from the given link ([Supported Sites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md))",
@@ -162,7 +162,7 @@ async def download_audio(event):  # sourcery skip: low-code-quality
     urls = extractor.find_urls(msg)
     if not urls:
         return await edit_or_reply(event, "What I am Supposed to do? Give link")
-    catevent = await edit_or_reply(event, "`Preparing to download...`")
+    thanosevent = await edit_or_reply(event, "`Preparing to download...`")
     reply_to_id = await reply_id(event)
     for url in urls:
         try:
@@ -183,8 +183,8 @@ async def download_audio(event):  # sourcery skip: low-code-quality
             else:
                 _fpath = _path
         if not _fpath:
-            return await edit_delete(catevent, "__Unable to upload file__")
-        await catevent.edit(
+            return await edit_delete(thanosevent, "__Unable to upload file__")
+        await thanosevent.edit(
             f"`Preparing to upload video:`\
             \n**{vid_data['title']}***"
         )
@@ -202,7 +202,7 @@ async def download_audio(event):  # sourcery skip: low-code-quality
                 progress(
                     d,
                     t,
-                    catevent,
+                    thanosevent,
                     startTime,
                     "trying to upload",
                     file_name=os.path.basename(pathlib.Path(_fpath)),
@@ -227,12 +227,12 @@ async def download_audio(event):  # sourcery skip: low-code-quality
         )
         for _path in [_fpath, thumb_pic]:
             os.remove(_path)
-    await catevent.delete()
+    await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ytv(?:\s|$)([\s\S]*)",
-    command=("ytv", plugin_category),
+    command=("ytv", plugin_thanosegory),
     info={
         "header": "To download video from many sites like Youtube, Facebook, Instagram",
         "description": "downloads the video from the given link ([Supported Sites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md))",
@@ -251,21 +251,21 @@ async def download_video(event):
     urls = extractor.find_urls(msg)
     if not urls:
         return await edit_or_reply(event, "What I am Supposed to do? Give link")
-    catevent = await edit_or_reply(event, "`Preparing to download...`")
+    thanosevent = await edit_or_reply(event, "`Preparing to download...`")
     reply_to_id = await reply_id(event)
     for url in urls:
-        ytdl_data = await ytdl_down(catevent, video_opts, url)
+        ytdl_data = await ytdl_down(thanosevent, video_opts, url)
         if ytdl_down is None:
             return
         try:
-            f = pathlib.Path("cat_ytv.mp4")
+            f = pathlib.Path("thanos_ytv.mp4")
             print(f)
-            catthumb = pathlib.Path("cat_ytv.jpg")
-            if not os.path.exists(catthumb):
-                catthumb = pathlib.Path("cat_ytv.webp")
-            if not os.path.exists(catthumb):
-                catthumb = None
-            await catevent.edit(
+            thanosthumb = pathlib.Path("thanos_ytv.jpg")
+            if not os.path.exists(thanosthumb):
+                thanosthumb = pathlib.Path("thanos_ytv.webp")
+            if not os.path.exists(thanosthumb):
+                thanosthumb = None
+            await thanosevent.edit(
                 f"`Preparing to upload video:`\
                 \n**{ytdl_data['title']}**"
             )
@@ -278,7 +278,7 @@ async def download_video(event):
                 file=ul,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(
-                        d, t, catevent, c_time, "Upload :", file_name=ytdl_data["title"]
+                        d, t, thanosevent, c_time, "Upload :", file_name=ytdl_data["title"]
                     )
                 ),
             )
@@ -293,19 +293,19 @@ async def download_video(event):
                 file=media,
                 reply_to=reply_to_id,
                 caption=f'**Title :** `{ytdl_data["title"]}`',
-                thumb=catthumb,
+                thumb=thanosthumb,
             )
             os.remove(f)
-            if catthumb:
-                os.remove(catthumb)
+            if thanosthumb:
+                os.remove(thanosthumb)
         except TypeError:
             await asyncio.sleep(2)
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="insta(?: |$)([\s\S]*)",
-    command=("insta", plugin_category),
+    command=("insta", plugin_thanosegory),
     info={
         "header": "To download instagram video/photo",
         "description": "Note downloads only public profile photos/videos.",
@@ -330,7 +330,7 @@ async def insta_dl(event):
     v1 = "@IgGramBot"
     v2 = "@videomaniacbot"
     media_list = []
-    catevent = await edit_or_reply(event, "**Downloading.....**")
+    thanosevent = await edit_or_reply(event, "**Downloading.....**")
     async with event.client.conversation(v1) as conv:
         try:
             v1_flag = await conv.send_message("/start")
@@ -354,7 +354,7 @@ async def insta_dl(event):
                     except asyncio.TimeoutError:
                         break
                 details = media_list[0].message.splitlines()
-                await catevent.delete()
+                await thanosevent.delete()
                 await event.client.send_file(
                     event.chat_id,
                     media_list,
@@ -363,7 +363,7 @@ async def insta_dl(event):
                 return await delete_conv(event, v1, v1_flag)
         except asyncio.TimeoutError:
             await delete_conv(event, v1, v1_flag)
-        await edit_or_reply(catevent, "**Switching v2...**")
+        await edit_or_reply(thanosevent, "**Switching v2...**")
         async with event.client.conversation(v2) as conv:
             try:
                 v2_flag = await conv.send_message("/start")
@@ -379,20 +379,20 @@ async def insta_dl(event):
             media = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
             if media.media:
-                await catevent.delete()
+                await thanosevent.delete()
                 await event.client.send_file(event.chat_id, media)
             else:
                 await edit_delete(
-                    catevent,
+                    thanosevent,
                     f"**#ERROR\nv1 :** __Not valid URL__\n\n**v2 :**__ {media.text}__",
                     40,
                 )
             await delete_conv(event, v2, v2_flag)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="yts(?: |$)(\d*)? ?([\s\S]*)",
-    command=("yts", plugin_category),
+    command=("yts", plugin_thanosegory),
     info={
         "header": "To search youtube videos",
         "description": "Fetches youtube search results with views and duration with required no of count results by default it fetches 10 results",

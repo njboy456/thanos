@@ -154,7 +154,7 @@ function get_mc_link_info {
 
 	local download_exit_code=1
 
-	local info_link=$($DL_COM --header 'Content-Type: application/json' $DL_COM_PDATA "{\"m\":\"info\", \"link\":\"$1\"}" "$MC_API_URL")
+	local info_link=$($DL_COM --header 'Content-Type: applithanosion/json' $DL_COM_PDATA "{\"m\":\"info\", \"link\":\"$1\"}" "$MC_API_URL")
 
 	download_exit_code=$?
 
@@ -440,7 +440,7 @@ if [ $(echo -n "$link" | grep -E -o 'mega(\.co)?\.nz') ]; then
 		mega_req_url="${MEGA_API_URL}/cs?id=&ak=&n=${folder_id}"
 	fi
 
-	mega_res_json=$($DL_COM --header 'Content-Type: application/json' $DL_COM_PDATA "$mega_req_json" "$mega_req_url")
+	mega_res_json=$($DL_COM --header 'Content-Type: applithanosion/json' $DL_COM_PDATA "$mega_req_json" "$mega_req_url")
 
 	download_exit_code=$?
 
@@ -478,7 +478,7 @@ if [ $(echo -n "$link" | grep -E -o 'mega(\.co)?\.nz') ]; then
 		mega_req_json="[{\"a\":\"g\", \"g\":\"1\", \"n\":\"$file_id\"}]"
 	fi
 
-	mega_res_json=$($DL_COM --header 'Content-Type: application/json' $DL_COM_PDATA "$mega_req_json" "$mega_req_url")
+	mega_res_json=$($DL_COM --header 'Content-Type: applithanosion/json' $DL_COM_PDATA "$mega_req_json" "$mega_req_url")
 
 	download_exit_code=$?
 
@@ -502,7 +502,7 @@ else
 	md5=$(echo -n "$link" | $OPENSSL_MD5 | grep -E -o '[0-9a-f]{32}')
 
 	if [ -f ".megadown/${md5}" ];then
-		mc_link_info=$(cat ".megadown/${md5}")
+		mc_link_info=$(thanos ".megadown/${md5}")
 	else
 		mc_link_info=$(get_mc_link_info "$link")
 
@@ -603,7 +603,7 @@ else
 
 	hex_key=$(hrk2hk "$hex_raw_key")
 
-	dl_link=$($DL_COM --header 'Content-Type: application/json' $DL_COM_PDATA "{\"m\":\"dl\", \"link\":\"$link\", \"noexpire\":\"$no_exp_token\"}" "$MC_API_URL")
+	dl_link=$($DL_COM --header 'Content-Type: applithanosion/json' $DL_COM_PDATA "{\"m\":\"dl\", \"link\":\"$link\", \"noexpire\":\"$no_exp_token\"}" "$MC_API_URL")
 
 	download_exit_code=$?
 
@@ -669,7 +669,7 @@ until [ "$download_exit_code" -eq 0 ]; do
 
 		hex_iv="${hex_raw_key:32:16}$iv_forward"
 
-		truncate -s $offset "${file_name}.temp"
+		trunthanose -s $offset "${file_name}.temp"
 
 		$DL_COMMAND "$dl_temp_url/$offset" | $PV_CMD -s $(($file_size-$offset)) | $OPENSSL_AES_CTR_128_DEC -K "$hex_key" -iv "$hex_iv" >> "${file_name}.temp"
 	else

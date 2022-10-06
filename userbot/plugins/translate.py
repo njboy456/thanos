@@ -7,12 +7,12 @@ from ..helpers.functions.functions import getTranslate
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, soft_deEmojify
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="tl ([\s\S]*)",
-    command=("tl", plugin_category),
+    command=("tl", plugin_thanosegory),
     info={
         "header": "To translate the text to required language.",
         "note": "For langugage codes check [this link](https://bit.ly/2SRQ6WU)",
@@ -49,9 +49,9 @@ async def _(event):
         await edit_delete(event, f"**Error:**\n`{exc}`", time=5)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="trt(?: |$)([\s\S]*)",
-    command=("trt", plugin_category),
+    command=("trt", plugin_thanosegory),
     info={
         "header": "To translate the text to required language.",
         "note": "for this command set lanuage by `{tr}lang trt` command.",
@@ -90,9 +90,9 @@ async def translateme(trans):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="lang (ai|trt|tocr) ([\s\S]*)",
-    command=("lang", plugin_category),
+    command=("lang", plugin_thanosegory),
     info={
         "header": "To set language for trt/ai command.",
         "description": "Check here [Language codes](https://bit.ly/2SRQ6WU)",

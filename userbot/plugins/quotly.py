@@ -25,7 +25,7 @@ from ..helpers.utils import get_user_from_event, reply_id
 
 LOGS = logging.getLogger(__name__)
 
-plugin_category = "fun"
+plugin_thanosegory = "fun"
 
 
 class Forward_Lock:
@@ -39,9 +39,9 @@ def get_warp_length(width):
     return int((20.0 / 1024.0) * (width + 0.0))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="qpic(?:\s|$)([\s\S]*)",
-    command=("qpic", plugin_category),
+    command=("qpic", plugin_thanosegory),
     info={
         "header": "Makes quote pic.",
         "flags": {
@@ -71,7 +71,7 @@ async def q_pic(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
             event, "__Provide input along with cmd or reply to text message.__"
         )
     text = soft_deEmojify(text)
-    catevent = await edit_or_reply(event, "__Making Quote pic....__")
+    thanosevent = await edit_or_reply(event, "__Making Quote pic....__")
     file_check(re=False, me=False, mo=False, it=False)
     mediatype = await media_type(reply)
     if (
@@ -80,7 +80,7 @@ async def q_pic(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
         or (mediatype not in ["Photo", "Sticker"])
         or (
             mediatype == "Sticker"
-            and reply.document.mime_type == "application/i-tgsticker"
+            and reply.document.mime_type == "applithanosion/i-tgsticker"
         )
     ):
         user = reply.sender_id if reply else event.client.uid
@@ -153,15 +153,15 @@ async def q_pic(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
         img.save(output, "PNG")
     output.seek(0)
     await event.client.send_file(event.chat_id, output, reply_to=reply_to)
-    await catevent.delete()
+    await thanosevent.delete()
     for i in [pfp]:
         if os.path.lexists(i):
             os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(q|rq|fq|frq)(?:\s|$)([\s\S]*)",
-    command=("q", plugin_category),
+    command=("q", plugin_thanosegory),
     info={
         "header": "Makes your message as sticker quote.",
         "flags": {
@@ -177,15 +177,15 @@ async def q_pic(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
         "examples": ["{tr}fq @jisan7509 hello bad boys and girls"],
     },
 )
-async def stickerchat(catquotes):
+async def stickerchat(thanosquotes):
     "Makes your message as sticker quote"
-    reply = await catquotes.get_reply_message()
-    cmd = catquotes.pattern_match.group(1)
+    reply = await thanosquotes.get_reply_message()
+    cmd = thanosquotes.pattern_match.group(1)
     mediatype = None
     if cmd in ["rq", "q", "frq"]:
         if not reply:
             return await edit_or_reply(
-                catquotes, "`I cant quote the message . reply to a message`"
+                thanosquotes, "`I cant quote the message . reply to a message`"
             )
         fetchmsg = reply.message
         mediatype = await media_type(reply)
@@ -196,19 +196,19 @@ async def stickerchat(catquotes):
     else:
         repliedreply = None
     if mediatype and mediatype in ["Photo", "Round Video", "Gif"]:
-        return await edit_or_reply(catquotes, "`Replied message is not supported now`")
-    catevent = await edit_or_reply(catquotes, "`Making quote...`")
+        return await edit_or_reply(thanosquotes, "`Replied message is not supported now`")
+    thanosevent = await edit_or_reply(thanosquotes, "`Making quote...`")
     if cmd in ["rq", "q"]:
         try:
             user = (
-                await catquotes.client.get_entity(reply.forward.sender)
+                await thanosquotes.client.get_entity(reply.forward.sender)
                 if reply.fwd_from
                 else reply.sender
             )
         except TypeError:
             user = Forward_Lock(reply.fwd_from.from_name)
     else:
-        user, rank = await get_user_from_event(catquotes, secondgroup=True)
+        user, rank = await get_user_from_event(thanosquotes, secondgroup=True)
         if not user:
             return
         fetchmsg = rank
@@ -216,26 +216,26 @@ async def stickerchat(catquotes):
             fetchmsg = reply.message
         if not fetchmsg:
             return await edit_or_reply(
-                catquotes, "`I cant quote the message . no text is given`"
+                thanosquotes, "`I cant quote the message . no text is given`"
             )
-    res, catmsg = await process(
-        fetchmsg, user, catquotes.client, reply, catquotes, repliedreply
+    res, thanosmsg = await process(
+        fetchmsg, user, thanosquotes.client, reply, thanosquotes, repliedreply
     )
     if not res:
         return
     outfi = os.path.join("./temp", "sticker.png")
-    catmsg.save(outfi)
+    thanosmsg.save(outfi)
     endfi = await Convert.to_sticker(
-        catquotes, outfi, file="stickerchat.webp", noedits=True
+        thanosquotes, outfi, file="stickerchat.webp", noedits=True
     )
-    await catquotes.client.send_file(catquotes.chat_id, endfi[1], reply_to=reply)
-    await catevent.delete()
+    await thanosquotes.client.send_file(thanosquotes.chat_id, endfi[1], reply_to=reply)
+    await thanosevent.delete()
     os.remove(endfi[1])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="qbot(?:\s|$)([\s\S]*)",
-    command=("qbot", plugin_category),
+    command=("qbot", plugin_thanosegory),
     info={
         "header": "Makes your message as sticker quote by @quotlybot",
         "usage": "{tr}qbot",
@@ -270,7 +270,7 @@ async def _(event):
             event, "`Either reply to message or give input to function properly`"
         )
     chat = "@QuotLyBot"
-    catevent = await edit_or_reply(event, "```Making a Quote```")
+    thanosevent = await edit_or_reply(event, "```Making a Quote```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -282,13 +282,13 @@ async def _(event):
                 await event.client.send_message(conv.chat_id, message)
             else:
                 return await edit_delete(
-                    catevent, "`I guess you have used a invalid syntax`"
+                    thanosevent, "`I guess you have used a invalid syntax`"
                 )
             response = await response
         except YouBlockedUserError:
-            return await catevent.edit("```Please unblock me (@QuotLyBot) u Nigga```")
+            return await thanosevent.edit("```Please unblock me (@QuotLyBot) u Nigga```")
         await event.client.send_read_acknowledge(conv.chat_id)
-        await catevent.delete()
+        await thanosevent.delete()
         await event.client.send_message(
             event.chat_id, response.message, reply_to=reply_to
         )

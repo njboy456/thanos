@@ -10,7 +10,7 @@ from ..helpers.tools import media_type
 from ..helpers.utils import _format
 from . import humanbytes
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
 TYPES = [
@@ -29,9 +29,9 @@ def weird_division(n, d):
     return n / d if d else 0
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="chatfs(?:\s|$)([\s\S]*)",
-    command=("chatfs", plugin_category),
+    command=("chatfs", plugin_thanosegory),
     info={
         "header": "Shows you the complete media/file summary of the that group.",
         "description": "As of now limited to last 10000 in the group u used",
@@ -70,7 +70,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             link = chatdata.title
     else:
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
         f"<code>Counting files and file size of </code><b>{link}</b>\n<code>This may take some time also depends on number of group messages</code>",
         parse_mode="HTML",
@@ -129,12 +129,12 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     result += f"<code>{x}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
-    await catevent.edit(result, parse_mode="HTML", link_preview=False)
+    await thanosevent.edit(result, parse_mode="HTML", link_preview=False)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="userfs(?:\s|$)([\s\S]*)",
-    command=("userfs", plugin_category),
+    command=("userfs", plugin_thanosegory),
     info={
         "header": "Shows you the complete media/file summary of the that user in that group.",
         "description": "As of now limited to last 10000 messages of that person in the group u used",
@@ -194,7 +194,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             link = chatdata.title
     else:
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
         f"<code>Counting files and file size by </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
         parse_mode="HTML",
@@ -256,4 +256,4 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     result += f"<code>{x}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
-    await catevent.edit(result, parse_mode="HTML", link_preview=False)
+    await thanosevent.edit(result, parse_mode="HTML", link_preview=False)

@@ -22,7 +22,7 @@ from ..sql_helper.globals import gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, edit_or_reply
 
 LOGS = logging.getLogger(__name__)
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 DEFAULT_BIO = gvarstatus("DEFAULT_BIO")
 BIO_PREFIX = Config.BIO_PREFIX
@@ -159,9 +159,9 @@ async def get_curr_track(lfmbio):  # sourcery no-metrics
     LASTFM_.RUNNING = False
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="lastfm$",
-    command=("lastfm", plugin_category),
+    command=("lastfm", plugin_thanosegory),
     info={
         "header": "To fetch scrobble data from last.fm",
         "description": "Shows currently scrobbling track or most recent scrobbles if nothing is playing.",
@@ -206,9 +206,9 @@ async def last_fm(lastFM):
         await edit_or_reply(lastFM, f"{output}", parse_mode="md")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="lastbio (on|off)",
-    command=("lastbio", plugin_category),
+    command=("lastbio", plugin_thanosegory),
     info={
         "header": "To Enable or Disable the last.fm current playing to bio",
         "usage": [
@@ -239,9 +239,9 @@ async def lastbio(lfmbio):
         await edit_or_reply(lfmbio, LFM_BIO_ERR)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="lastlog (on|off)",
-    command=("lastlog", plugin_category),
+    command=("lastlog", plugin_thanosegory),
     info={
         "header": "To Enable or Disable the last.fm current playing to bot log group",
         "usage": [

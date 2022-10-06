@@ -26,9 +26,9 @@ from ..sql_helper.global_list import (
     rm_from_list,
 )
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, _catutils, THANOSPRO, edit_delete, logging
+from . import BOTLOG, BOTLOG_CHATID, _thanosutils, THANOSPRO, edit_delete, logging
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
 DEFAULTUSER = gvarstatus("DEFAULT_NAME") or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
@@ -141,10 +141,10 @@ async def digitalpicloop():
         current_time = datetime.now().strftime("%H:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
-        cat = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
+        thanos = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
             2:36
         ]
-        fnt = ImageFont.truetype(cat, 200)
+        fnt = ImageFont.truetype(thanos, 200)
         drawn_text.text((350, 100), current_time, font=fnt, fill=(124, 252, 0))
         img.save(autophoto_path)
         file = await THANOSPRO.upload_file(autophoto_path)
@@ -272,14 +272,14 @@ async def autopfp_start():
             )
         i += 1
         await THANOSPRO(functions.photos.UploadProfilePhotoRequest(file))
-        await _catutils.runcmd("rm -rf donottouch.jpg")
+        await _thanosutils.runcmd("rm -rf donottouch.jpg")
         await asyncio.sleep(CHANGE_TIME)
         AUTOPFP_START = gvarstatus("autopfp_strings") is not None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="batmanpfp$",
-    command=("batmanpfp", plugin_category),
+    command=("batmanpfp", plugin_thanosegory),
     info={
         "header": "Changes profile pic with random batman pics every 1 minute",
         "description": "Changes your profile pic every 1 minute with random batman pics.\
@@ -298,9 +298,9 @@ async def _(event):
     await autopfp_start()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="thorpfp$",
-    command=("thorpfp", plugin_category),
+    command=("thorpfp", plugin_thanosegory),
     info={
         "header": "Changes profile pic with random thor pics every 1 minute",
         "description": "Changes your profile pic every 1 minute with random thor pics.\
@@ -319,9 +319,9 @@ async def _(event):
     await autopfp_start()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="autopic ?([\s\S]*)",
-    command=("autopic", plugin_category),
+    command=("autopic", plugin_thanosegory),
     info={
         "header": "Changes profile pic every 1 minute with the custom pic with time",
         "description": "If you like to change the time interval for every new pic change \
@@ -365,9 +365,9 @@ async def _(event):
     await autopicloop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="digitalpfp$",
-    command=("digitalpfp", plugin_category),
+    command=("digitalpfp", plugin_thanosegory),
     info={
         "header": "Updates your profile pic every 1 minute with time on it",
         "description": "Deletes old profile pic and Update profile pic with new image with time on it.\
@@ -389,9 +389,9 @@ async def _(event):
     await digitalpicloop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="bloom$",
-    command=("bloom", plugin_category),
+    command=("bloom", plugin_thanosegory),
     info={
         "header": "Changes profile pic every 1 minute with the random colour pic with time on it",
         "description": "If you like to change the time interval for every new pic chnage \
@@ -420,9 +420,9 @@ async def _(event):
     await bloom_pfploop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="c(ustom)?pfp(?: |$)([\s\S]*)",
-    command=("custompfp", plugin_category),
+    command=("custompfp", plugin_thanosegory),
     info={
         "header": "Set Your Custom pfps",
         "description": "Set links of pic to use them as auto profile. You can use cpfp or custompfp as command",
@@ -506,9 +506,9 @@ async def useless(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="autoname$",
-    command=("autoname", plugin_category),
+    command=("autoname", plugin_thanosegory),
     info={
         "header": "Changes your name with time",
         "description": "Updates your profile name along with time. Set DEFAULT_USER var in Database.",
@@ -525,9 +525,9 @@ async def _(event):
     await autoname_loop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="autobio$",
-    command=("autobio", plugin_category),
+    command=("autobio", plugin_thanosegory),
     info={
         "header": "Changes your bio with time",
         "description": "Updates your profile bio along with time. Set DEFAULT_BIO var in Database with your fav bio,",
@@ -544,9 +544,9 @@ async def _(event):
     await autobio_loop()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="end ([\s\S]*)",
-    command=("end", plugin_category),
+    command=("end", plugin_thanosegory),
     info={
         "header": "To stop the functions of autoprofile",
         "description": "If you want to stop autoprofile functions then use this cmd.",

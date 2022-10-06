@@ -3,12 +3,12 @@ from telethon.tl.functions.messages import SaveDraftRequest
 from ..core.managers import edit_delete, edit_or_reply
 from . import THANOSPRO
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="chain$",
-    command=("chain", plugin_category),
+    command=("chain", plugin_thanosegory),
     info={
         "header": "Reply this command to any converstion(or message) and it will find the chain length of that message",
         "usage": "{tr}chain <reply>",

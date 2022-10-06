@@ -27,7 +27,7 @@ from userbot.core.logger import logging
 
 LOGS = logging.getLogger(__name__)
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 usernexp = re.compile(r"@(\w{3,32})\[(.+?)\]")
 nameexp = re.compile(r"\[([\w\S]+)\]\(tg://user\?id=(\d+)\)\[(.+?)\]")
@@ -161,7 +161,7 @@ def parse(message, old_entities=None):
         LOGS.info(str(e))
 
 
-@THANOSPRO.cat_cmd(outgoing=True)
+@THANOSPRO.thanos_cmd(outgoing=True)
 async def reparse(event):
     old_entities = event.message.entities or []
     parser = partial(parse, old_entities=old_entities)
@@ -183,7 +183,7 @@ async def reparse(event):
         raise events.StopPropagation
 
 
-@THANOSPRO.cat_cmd(outgoing=True)
+@THANOSPRO.thanos_cmd(outgoing=True)
 async def mention(event):
     newstr = event.text
     if event.entities:

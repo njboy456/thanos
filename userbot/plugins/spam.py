@@ -16,15 +16,15 @@ from ..helpers import media_type, unsavegif
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 
-async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=False):
+async def spam_function(event, sandy, thanos, sleeptimem, sleeptimet, DelaySpam=False):
     # sourcery skip: low-code-quality
     # sourcery no-metrics
-    counter = int(cat[0])
-    if len(cat) == 2:
-        spam_message = str(cat[1])
+    counter = int(thanos[0])
+    if len(thanos) == 2:
+        spam_message = str(thanos[1])
         for _ in range(counter):
             if gvarstatus("spamwork") is None:
                 return
@@ -114,9 +114,9 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spam ([\s\S]*)",
-    command=("spam", plugin_category),
+    command=("spam", plugin_thanosegory),
     info={
         "header": "Floods the text in the chat !! with given number of times.",
         "description": "Sends the replied media/message <count> times !! in the chat.",
@@ -128,9 +128,9 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
 async def spammer(event):
     "Floods the text in the chat !!"
     sandy = await event.get_reply_message()
-    cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
+    thanos = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
     try:
-        counter = int(cat[0])
+        counter = int(thanos[0])
     except Exception:
         return await edit_delete(
             event, "__Use proper syntax to spam. For syntax refer help menu.__"
@@ -143,12 +143,12 @@ async def spammer(event):
         sleeptimem = 0.3
     await event.delete()
     addgvar("spamwork", True)
-    await spam_function(event, sandy, cat, sleeptimem, sleeptimet)
+    await spam_function(event, sandy, thanos, sleeptimem, sleeptimet)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spspam$",
-    command=("spspam", plugin_category),
+    command=("spspam", plugin_thanosegory),
     info={
         "header": "To spam the chat with stickers.",
         "description": "To spam chat with all stickers in that replied message sticker pack.",
@@ -169,7 +169,7 @@ async def stickerpack_spam(event):
     hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
         stickerset_attr = reply.document.attributes[1]
-        catevent = await edit_or_reply(
+        thanosevent = await edit_or_reply(
             event, "`Fetching details of the sticker pack, please wait..`"
         )
     except BaseException:
@@ -187,7 +187,7 @@ async def stickerpack_spam(event):
         )
     except Exception:
         return await edit_delete(
-            catevent,
+            thanosevent,
             "`I guess this sticker is not part of any pack so i cant kang this sticker pack try kang for this sticker`",
         )
     with contextlib.suppress(BaseException):
@@ -210,7 +210,7 @@ async def stickerpack_spam(event):
         except ForbiddenError:
             pass
         await asyncio.sleep(0.7)
-    await catevent.delete()
+    await thanosevent.delete()
     if BOTLOG:
         if event.is_private:
             await event.client.send_message(
@@ -227,9 +227,9 @@ async def stickerpack_spam(event):
         await event.client.send_file(BOTLOG_CHATID, reqd_sticker_set.documents[0])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="cspam ([\s\S]*)",
-    command=("cspam", plugin_category),
+    command=("cspam", plugin_thanosegory),
     info={
         "header": "Spam the text letter by letter",
         "description": "Spam the chat with every letter in given text as new message.",
@@ -262,9 +262,9 @@ async def tmeme(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="wspam ([\s\S]*)",
-    command=("wspam", plugin_category),
+    command=("wspam", plugin_thanosegory),
     info={
         "header": "Spam the text word by word.",
         "description": "Spams the chat with every word in given text as new message.",
@@ -297,9 +297,9 @@ async def tmeme(event):
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(delayspam|dspam) ([\s\S]*)",
-    command=("delayspam", plugin_category),
+    command=("delayspam", plugin_thanosegory),
     info={
         "header": "To spam the chat with count number of times with given text and given delay sleep time.",
         "description": "For example if you see this dspam 2 10 hi. Then you will send 10 hi text messages with 2 seconds gap between each message.",
@@ -320,21 +320,21 @@ async def spammer(event):
         return await edit_delete(
             event, "__Use proper syntax to spam. For syntax refer help menu.__"
         )
-    cat = input_str[1:]
+    thanos = input_str[1:]
     try:
-        int(cat[0])
+        int(thanos[0])
     except Exception:
         return await edit_delete(
             event, "__Use proper syntax for delay spam. For syntax refer help menu.__"
         )
     await event.delete()
     addgvar("spamwork", True)
-    await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
+    await spam_function(event, reply, thanos, sleeptimem, sleeptimet, DelaySpam=True)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(r(eact)?spam$)",
-    command=("rspam", plugin_category),
+    command=("rspam", plugin_thanosegory),
     info={
         "header": "React spam to message",
         "notes": "This a really annyoing spam, so added filter to work with mutual contats only\nUse  <{tr}stop spam> to stop it",
@@ -349,7 +349,7 @@ async def react_spam(event):  # By @FeelDeD
     msg = await event.get_reply_message()
     if not msg:
         return await edit_delete(event, "```Reply to a message..```", 10)
-    catevent = await edit_or_reply(event, "Processing...")
+    thanosevent = await edit_or_reply(event, "Processing...")
     # checker = (await event.client.get_entity(msg.from_id)).mutual_contact
     # if not checker:
     # return await edit_delete(event,"`The user isn't your mutual contact, both need to be in each others contact for this plugin to work..`")
@@ -381,7 +381,7 @@ async def react_spam(event):  # By @FeelDeD
             )
         emoji = grp_emoji
     addgvar("spamwork", True)
-    await catevent.delete()
+    await thanosevent.delete()
     while gvarstatus("spamwork"):
         for i in emoji:
             await asyncio.sleep(0.2)

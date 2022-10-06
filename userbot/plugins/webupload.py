@@ -12,7 +12,7 @@ from userbot.core.logger import logging
 from ..Config import Config
 from ..core.managers import edit_or_reply
 
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 LOGS = logging.getLogger(__name__)
 
 # originally created by
@@ -24,9 +24,9 @@ link_regex = re.compile(
 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="labstack(?:\s|$)([\s\S]*)",
-    command=("labstack", plugin_category),
+    command=("labstack", plugin_thanosegory),
     info={
         "header": "To upload media to labstack.",
         "description": "Will upload media to labstack and shares you link so that you can share with friends and it expires automatically after 7 days",
@@ -87,9 +87,9 @@ async def labstack(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="webupload ?(.+?|) --(fileio|anonfiles|transfer|filebin|anonymousfiles|bayfiles)",
-    command=("webupload", plugin_category),
+    command=("webupload", plugin_thanosegory),
     info={
         "header": "To upload media to some online media sharing platforms.",
         "description": "you can upload media to any of the sites mentioned. so you can share link to others.",
@@ -113,7 +113,7 @@ async def _(event):
     editor = await edit_or_reply(event, "processing ...")
     input_str = event.pattern_match.group(1)
     selected_transfer = event.pattern_match.group(2)
-    catcheck = None
+    thanoscheck = None
     if input_str:
         file_name = input_str
     else:
@@ -121,7 +121,7 @@ async def _(event):
         file_name = await event.client.download_media(
             reply.media, Config.TMP_DOWNLOAD_DIRECTORY
         )
-        catcheck = True
+        thanoscheck = True
     # a dictionary containing the shell commands
     CMD_WEB = {
         "fileio": 'curl -F "file=@{full_file_path}" https://file.io',
@@ -146,7 +146,7 @@ async def _(event):
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    stdout, stderr = await process.communicate()
+    stdout, stderr = await process.communithanose()
     error = stderr.decode().strip()
     if t_response := stdout.decode().strip():
         try:
@@ -163,5 +163,5 @@ async def _(event):
         await editor.edit(result)
     else:
         await editor.edit(error)
-    if catcheck:
+    if thanoscheck:
         os.remove(file_name)

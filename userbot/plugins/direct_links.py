@@ -14,12 +14,12 @@ from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 
 LOGS = logging.getLogger(__name__)
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="direct(?: |$)([\s\S]*)",
-    command=("direct", plugin_category),
+    command=("direct", plugin_thanosegory),
     info={
         "header": "To generate a direct download link from a URL.",
         "description": "Reply to a link or paste a URL to generate a direct download link.",
@@ -46,12 +46,12 @@ async def direct_link_generator(event):
             message = textx.text
         else:
             return await edit_delete(event, "`Usage: .direct <url>`")
-    catevent = await edit_or_reply(event, "`Processing...`")
+    thanosevent = await edit_or_reply(event, "`Processing...`")
     reply = ""
     links = re.findall(r"\bhttps?://.*\.\S+", message)
     if not links:
         reply = "`No links found!`"
-        await catevent.edit(reply)
+        await thanosevent.edit(reply)
     for link in links:
         if "drive.google.com" in link:
             reply += gdrive(link)
@@ -75,7 +75,7 @@ async def direct_link_generator(event):
             reply += androidfilehost(link)
         else:
             reply += re.findall(r"\bhttps?://(.*?[^/]+)", link)[0] + "is not supported"
-    await catevent.edit(reply)
+    await thanosevent.edit(reply)
 
 
 def gdrive(url: str) -> str:
@@ -99,7 +99,7 @@ def gdrive(url: str) -> str:
     cookies = download.cookies
     try:
         # In case of small file size, Google downloads directly
-        dl_url = download.headers["location"]
+        dl_url = download.headers["lothanosion"]
         if "accounts.google.com" in dl_url:  # non-public file
             reply += "`Link is not public!`\n"
             return reply
@@ -112,7 +112,7 @@ def gdrive(url: str) -> str:
         response = requests.get(
             export, stream=True, allow_redirects=False, cookies=cookies
         )
-        dl_url = response.headers["location"]
+        dl_url = response.headers["lothanosion"]
         if "accounts.google.com" in dl_url:
             reply += "Link is not public!"
             return reply
@@ -295,7 +295,7 @@ def github(url: str) -> str:
     dl_url = ""
     download = requests.get(url, stream=True, allow_redirects=False)
     try:
-        dl_url = download.headers["location"]
+        dl_url = download.headers["lothanosion"]
     except KeyError:
         reply += "`Error: Can't extract the link`\n"
     name = link.split("/")[-1]
@@ -320,7 +320,7 @@ def androidfilehost(url: str) -> str:
         "accept-encoding": "gzip, deflate, br",
         "accept-language": "en-US,en;q=0.9",
         "user-agent": user_agent,
-        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "content-type": "applithanosion/x-www-form-urlencoded; charset=UTF-8",
         "x-mod-sbb-ctype": "xhr",
         "accept": "*/*",
         "referer": f"https://androidfilehost.com/?fid={fid}",

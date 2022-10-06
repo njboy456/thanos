@@ -14,7 +14,7 @@ from ..sql_helper.welcomesql import (
 )
 from . import BOTLOG_CHATID
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
 @THANOSPRO.on(events.ChatAction)
@@ -81,9 +81,9 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="savepwel(?:\s|$)([\s\S]*)",
-    command=("savepwel", plugin_category),
+    command=("savepwel", plugin_thanosegory),
     info={
         "header": "To welcome user(sends welcome message to here private messages).",
         "description": "Saves the message as a welcome note in the chat. And will send welcome message to every new user who ever joins newly in group.",
@@ -144,9 +144,9 @@ async def save_welcome(event):
     await edit_or_reply("Error while setting welcome in this group")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="clearpwel$",
-    command=("clearpwel", plugin_category),
+    command=("clearpwel", plugin_thanosegory),
     info={
         "header": "To turn off private welcome message.",
         "description": "Deletes the private welcome note for the current chat.",
@@ -161,9 +161,9 @@ async def del_welcome(event):
         await edit_or_reply(event, "`Do I have a welcome note here ?`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="listpwel$",
-    command=("listpwel", plugin_category),
+    command=("listpwel", plugin_thanosegory),
     info={
         "header": "To check current private welcome message in group.",
         "usage": "{tr}listpwel",

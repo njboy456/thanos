@@ -146,9 +146,9 @@ async def cmdinfo(input_str, event, plugin=False):
     plugin = get_key(input_str)
     if plugin is not None:
         outstr += f"**Plugin :** `{plugin}`\n"
-        category = getkey(plugin)
-        if category is not None:
-            outstr += f"**THANOSegory :** `{category}`\n\n"
+        thanosegory = getkey(plugin)
+        if thanosegory is not None:
+            outstr += f"**THANOSegory :** `{thanosegory}`\n\n"
     outstr += f"**✘  Intro :**\n{about[0]}"
     return outstr
 
@@ -167,9 +167,9 @@ async def plugininfo(input_str, event, flag):
         return outstr
     outstr = f"**Plugin : **`{input_str}`\n"
     outstr += f"**Commands Available :** `{len(cmds)}`\n"
-    category = getkey(input_str)
-    if category is not None:
-        outstr += f"**THANOSegory :** `{category}`\n\n"
+    thanosegory = getkey(input_str)
+    if thanosegory is not None:
+        outstr += f"**THANOSegory :** `{thanosegory}`\n\n"
     for cmd in sorted(cmds):
         outstr += f"•  **cmd :** `{cmdprefix}{cmd}`\n"
         try:
@@ -184,12 +184,12 @@ async def plugininfo(input_str, event, flag):
 async def grpinfo():
     outstr = "**Plugins in THANOSBOT are:**\n\n"
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
-    category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
+    thanosegory = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
     if Config.THANOSABUSE:
-        category.append("useless")
-    for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} **({len(plugins)})\n"
+        thanosegory.append("useless")
+    for thanos in thanosegory:
+        plugins = GRP_INFO[thanos]
+        outstr += f"**{hemojis[thanos]} {thanos.title()} **({len(plugins)})\n"
         for plugin in plugins:
             outstr += f"`{plugin}`  "
         outstr += "\n\n"
@@ -198,12 +198,12 @@ async def grpinfo():
 
 async def cmdlist():
     outstr = "**Total list of Commands in your THANOSBOT are :**\n\n"
-    category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
+    thanosegory = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
     if Config.THANOSABUSE:
-        category.append("tools")
-    for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
+        thanosegory.append("tools")
+    for thanos in thanosegory:
+        plugins = GRP_INFO[thanos]
+        outstr += f"**{hemojis[thanos]} {thanos.title()} ** - {len(plugins)}\n\n"
         for plugin in plugins:
             cmds = PLG_INFO[plugin]
             outstr += f"• **{plugin.title()} has {len(cmds)} commands**\n"

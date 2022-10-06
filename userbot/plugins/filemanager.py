@@ -9,15 +9,15 @@ from userbot import THANOSPRO
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import _catutils, _format
+from ..helpers.utils import _thanosutils, _format
 from . import humanbytes
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ls(?:\s|$)([\s\S]*)",
-    command=("ls", plugin_category),
+    command=("ls", plugin_thanosegory),
     info={
         "header": "To list all files and folders.",
         "description": "Will show all files and folders if no path is given or folder path is given else will show file details(if file path os given).",
@@ -27,17 +27,17 @@ plugin_category = "tools"
 )
 async def ls(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     "To list all files and folders."
-    cat = "".join(event.text.split(maxsplit=1)[1:])
-    path = cat or os.getcwd()
+    thanos = "".join(event.text.split(maxsplit=1)[1:])
+    path = thanos or os.getcwd()
     if not os.path.exists(path):
         await edit_or_reply(
             event,
-            f"there is no such directory or file with the name `{cat}` check again",
+            f"there is no such directory or file with the name `{thanos}` check again",
         )
         return
-    path = Path(cat) if cat else os.getcwd()
+    path = Path(thanos) if thanos else os.getcwd()
     if os.path.isdir(path):
-        if cat:
+        if thanos:
             msg = "Folders and Files in `{}` :\n".format(path)
         else:
             msg = "Folders and Files in Current Directory :\n"
@@ -45,9 +45,9 @@ async def ls(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         files = ""
         folders = ""
         for contents in sorted(lists):
-            catpath = os.path.join(path, contents)
-            if not os.path.isdir(catpath):
-                size = os.stat(catpath).st_size
+            thanospath = os.path.join(path, contents)
+            if not os.path.isdir(thanospath):
+                size = os.stat(thanospath).st_size
                 if str(contents).endswith((".mp3", ".flac", ".wav", ".m4a")):
                     files += f"🎵`{contents}`\n"
                 if str(contents).endswith((".opus")):
@@ -85,7 +85,7 @@ async def ls(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         time.ctime(os.path.getctime(path))
         time2 = time.ctime(os.path.getmtime(path))
         time3 = time.ctime(os.path.getatime(path))
-        msg += f"**Location :** `{path}`\n"
+        msg += f"**Lothanosion :** `{path}`\n"
         msg += f"**icon :** `{mode}`\n"
         msg += f"**Size :** `{humanbytes(size)}`\n"
         msg += f"**Last Modified Time:** `{time2}`\n"
@@ -105,9 +105,9 @@ async def ls(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         await edit_or_reply(event, msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="rem(?:\s|$)([\s\S]*)",
-    command=("rem", plugin_category),
+    command=("rem", plugin_thanosegory),
     info={
         "header": "To delete a file or folder from the server",
         "usage": "{tr}rem <path>",
@@ -116,34 +116,34 @@ async def ls(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
 )
 async def rem(event):
     "To delete a file or folder."
-    cat = event.pattern_match.group(1)
-    if cat:
-        path = Path(cat)
+    thanos = event.pattern_match.group(1)
+    if thanos:
+        path = Path(thanos)
     else:
         await edit_or_reply(event, "what should i delete")
         return
     if not os.path.exists(path):
         await edit_or_reply(
             event,
-            f"there is no such directory or file with the name `{cat}` check again",
+            f"there is no such directory or file with the name `{thanos}` check again",
         )
         return
-    catcmd = f"rm -rf '{path}'"
+    thanoscmd = f"rm -rf '{path}'"
     if os.path.isdir(path):
-        await _catutils.runcmd(catcmd)
+        await _thanosutils.runcmd(thanoscmd)
         await edit_or_reply(event, f"successfully removed `{path}` directory")
     else:
-        await _catutils.runcmd(catcmd)
+        await _thanosutils.runcmd(thanoscmd)
         await edit_or_reply(event, f"successfully removed `{path}` file")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="mkdir(?:\s|$)([\s\S]*)",
-    command=("mkdir", plugin_category),
+    command=("mkdir", plugin_thanosegory),
     info={
         "header": "To create a new directory.",
         "usage": "{tr}mkdir <topic>",
-        "examples": "{tr}mkdir cat",
+        "examples": "{tr}mkdir thanos",
     },
 )
 async def make_dir(event):
@@ -168,15 +168,15 @@ async def make_dir(event):
     )
     await asyncio.sleep(2)
     try:
-        await _catutils.runcmd(f"mkdir {original}")
+        await _thanosutils.runcmd(f"mkdir {original}")
         await mone.edit(f"Successfully created the directory `{original}`")
     except Exception as e:
         await edit_delete(mone, str(e), parse_mode=_format.parse_pre)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="cpto(?:\s|$)([\s\S]*)",
-    command=("cpto", plugin_category),
+    command=("cpto", plugin_thanosegory),
     info={
         "header": "To copy a file from one directory to other directory",
         "usage": "{tr}cpto from ; to destination",
@@ -201,7 +201,7 @@ async def copy(event):
             parse_mode=_format.parse_pre,
         )
     original = os.path.join(pwd, loc[0].strip())
-    location = os.path.join(pwd, loc[1].strip())
+    lothanosion = os.path.join(pwd, loc[1].strip())
 
     if not os.path.exists(original):
         await edit_delete(
@@ -214,15 +214,15 @@ async def copy(event):
     )
     await asyncio.sleep(2)
     try:
-        await _catutils.runcmd(f"cp -r {original} {location}")
-        await mone.edit(f"Successfully copied the `{original}` to `{location}`")
+        await _thanosutils.runcmd(f"cp -r {original} {lothanosion}")
+        await mone.edit(f"Successfully copied the `{original}` to `{lothanosion}`")
     except Exception as e:
         await edit_delete(mone, str(e), parse_mode=_format.parse_pre)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="mvto(?:\s|$)([\s\S]*)",
-    command=("mvto", plugin_category),
+    command=("mvto", plugin_thanosegory),
     info={
         "header": "To move a file from one directory to other directory.",
         "usage": "{tr}mvto frompath ; topath",
@@ -247,7 +247,7 @@ async def move(event):
             parse_mode=_format.parse_pre,
         )
     original = os.path.join(pwd, loc[0].strip())
-    location = os.path.join(pwd, loc[1].strip())
+    lothanosion = os.path.join(pwd, loc[1].strip())
 
     if not os.path.exists(original):
         return await edit_delete(
@@ -259,7 +259,7 @@ async def move(event):
     )
     await asyncio.sleep(2)
     try:
-        shutil.move(original, location)
-        await mone.edit(f"Successfully moved the `{original}` to `{location}`")
+        shutil.move(original, lothanosion)
+        await mone.edit(f"Successfully moved the `{original}` to `{lothanosion}`")
     except Exception as e:
         await edit_delete(mone, str(e), parse_mode=_format.parse_pre)

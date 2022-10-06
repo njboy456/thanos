@@ -9,10 +9,10 @@ from ..helpers.utils import reply_id
 from ..sql_helper.snip_sql import add_note, get_note, get_notes, rm_note
 from . import BOTLOG, BOTLOG_CHATID, get_message_link
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="\#(\S+)",
 )
 async def incom_note(event):
@@ -46,9 +46,9 @@ async def incom_note(event):
                     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="snips (\w*)",
-    command=("snips", plugin_category),
+    command=("snips", plugin_thanosegory),
     info={
         "header": "To save notes to the bot.",
         "description": "Saves the replied message as a note with the notename. (Works with pics, docs, and stickers too!. and get them by using #notename",
@@ -106,9 +106,9 @@ async def add_snip(event):
     return await edit_or_reply(event, success.format(keyword, "added", keyword))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="snipl$",
-    command=("snipl", plugin_category),
+    command=("snipl", plugin_thanosegory),
     info={
         "header": "To list all notes in bot.",
         "usage": "{tr}snipl",
@@ -134,9 +134,9 @@ async def on_snip_list(event):
     await edit_or_reply(event, message)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="snipd (\S+)",
-    command=("snipd", plugin_category),
+    command=("snipd", plugin_thanosegory),
     info={
         "header": "To delete paticular note in bot.",
         "usage": "{tr}snipd <keyword>",
@@ -146,7 +146,7 @@ async def on_snip_delete(event):
     "To delete paticular note in bot."
     name = event.pattern_match.group(1)
     name = name.lower()
-    if catsnip := get_note(name):
+    if thanossnip := get_note(name):
         rm_note(name)
     else:
         return await edit_or_reply(

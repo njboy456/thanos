@@ -19,12 +19,12 @@ from . import BOTLOG, get_user_from_event
 
 logger = logging.getLogger(__name__)
 
-plugin_category = "admin"
+plugin_thanosegory = "admin"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="lock ([\s\S]*)",
-    command=("lock", plugin_category),
+    command=("lock", plugin_thanosegory),
     info={
         "header": "To lock the given permission for entire group.",
         "description": "Db options will lock for admins also,",
@@ -61,7 +61,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     if not event.is_group:
         return await edit_delete(event, "`Idiot! ,This is not a group to lock things `")
     chat_per = (await event.get_chat()).default_banned_rights
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, True)
         await edit_or_reply(event, f"`Locked {input_str}`")
@@ -177,8 +177,8 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         else:
             return await edit_or_reply(event, "`I can't lock nothing !!`")
         with contextlib.suppress(BaseException):
-            cat = Get(cat)
-            await event.client(cat)
+            thanos = Get(thanos)
+            await event.client(thanos)
         lock_rights = ChatBannedRights(
             until_date=None,
             send_messages=msg,
@@ -208,9 +208,9 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="unlock ([\s\S]*)",
-    command=("unlock", plugin_category),
+    command=("unlock", plugin_thanosegory),
     info={
         "header": "To unlock the given permission for entire group.",
         "description": "Db options/api options will unlock only if they are locked.",
@@ -246,7 +246,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     peer_id = event.chat_id
     if not event.is_group:
         return await edit_delete(event, "`Idiot! ,This is not a group to lock things `")
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     chat_per = (await event.get_chat()).default_banned_rights
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, False)
@@ -363,8 +363,8 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         else:
             return await edit_or_reply(event, "`I can't unlock nothing !!`")
         with contextlib.suppress(BaseException):
-            cat = Get(cat)
-            await event.client(cat)
+            thanos = Get(thanos)
+            await event.client(thanos)
         unlock_rights = ChatBannedRights(
             until_date=None,
             send_messages=msg,
@@ -394,9 +394,9 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="locks$",
-    command=("locks", plugin_category),
+    command=("locks", plugin_thanosegory),
     info={
         "header": "To see the active locks in the current group",
         "usage": "{tr}locks",
@@ -452,9 +452,9 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, res)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="plock ([\s\S]*)",
-    command=("plock", plugin_category),
+    command=("plock", plugin_thanosegory),
     info={
         "header": "To lock the given permission for replied person only.",
         "api options": {
@@ -486,7 +486,7 @@ async def _(event):  # sourcery no-metrics
     admincheck = await is_admin(event.client, peer_id, reply.from_id)
     if admincheck:
         return await edit_delete(event, "`This user is admin you cant play with him`")
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     msg = chat_per.send_messages
     media = chat_per.send_media
     sticker = chat_per.send_stickers
@@ -668,8 +668,8 @@ async def _(event):  # sourcery no-metrics
     else:
         return await edit_or_reply(event, "`I can't lock nothing !!`")
     try:
-        cat = Get(cat)
-        await event.client(cat)
+        thanos = Get(thanos)
+        await event.client(thanos)
     except BaseException:
         pass
     lock_rights = ChatBannedRights(
@@ -697,9 +697,9 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="punlock ([\s\S]*)",
-    command=("punlock", plugin_category),
+    command=("punlock", plugin_thanosegory),
     info={
         "header": "To unlock the given permission for replied person only.",
         "note": "If entire group is locked with that permission then you cant unlock that permission only for him.",
@@ -732,7 +732,7 @@ async def _(event):  # sourcery no-metrics
     admincheck = await is_admin(event.client, peer_id, reply.from_id)
     if admincheck:
         return await edit_delete(event, "`This user is admin you cant play with him`")
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     msg = chat_per.send_messages
     media = chat_per.send_media
     sticker = chat_per.send_stickers
@@ -917,8 +917,8 @@ async def _(event):  # sourcery no-metrics
     else:
         return await edit_or_reply(event, "`I can't lock nothing !!`")
     try:
-        cat = Get(cat)
-        await event.client(cat)
+        thanos = Get(thanos)
+        await event.client(thanos)
     except BaseException:
         pass
     lock_rights = ChatBannedRights(
@@ -946,9 +946,9 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="uperm(?:\s|$)([\s\S]*)",
-    command=("uperm", plugin_category),
+    command=("uperm", plugin_thanosegory),
     info={
         "header": "To get permissions of replied user or mentioned user in that group.",
         "usage": "{tr}uperm <reply/username>",
@@ -1021,7 +1021,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, output)
 
 
-@THANOSPRO.cat_cmd(incoming=True, forword=None)
+@THANOSPRO.thanos_cmd(incoming=True, forword=None)
 async def check_incoming_messages(event):  # sourcery no-metrics
     if not event.is_private:
         chat = await event.get_chat()

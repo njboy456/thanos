@@ -28,7 +28,7 @@ class Config(object):
     TG_BOT_USERNAME = None
     # get this value from http://www.timezoneconverter.com/cgi-bin/findzone.tzc
     TZ = os.environ.get("TZ", "Asia/Kolkata")
-    # set this with required cat repo link
+    # set this with required thanos repo link
     UPSTREAM_REPO = os.environ.get(
         "UPSTREAM_REPO", "https://github.com/rishabhanand2/THANOS-V2"
     )
@@ -39,7 +39,7 @@ class Config(object):
             EXTERNAL_REPO = "https://github.com/rishabhanand2/thanos_plugins"
     else:
         EXTERNAL_REPO = None
-    # if you need badcat plugins use the following vars
+    # if you need badthanos plugins use the following vars
     THANOSABUSE = os.environ.get("THANOSABUSE", False)
     THANOSABUSE = bool(THANOSABUSE and (THANOSABUSE.lower() != "false"))
     # for vc plugins
@@ -119,7 +119,7 @@ class Config(object):
     G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID", None)
     G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA", None)
     G_DRIVE_INDEX_LINK = os.environ.get("G_DRIVE_INDEX_LINK", None)
-    # For transfer channel 2 step verification code of telegram
+    # For transfer channel 2 step verifithanosion code of telegram
     TG_2STEP_VERIFITHANOSSION_CODE = os.environ.get("TG_2STEP_VERIFITHANOSSION_CODE", None)
     # JustWatch Country for watch plugin
     WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "IN")

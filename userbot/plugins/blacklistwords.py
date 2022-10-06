@@ -9,15 +9,15 @@ from ..sql_helper import blacklist_sql as sql
 from ..utils import is_admin
 from . import BOTLOG_CHATID
 
-plugin_category = "admin"
+plugin_thanosegory = "admin"
 
 
-@THANOSPRO.cat_cmd(incoming=True, groups_only=True)
+@THANOSPRO.thanos_cmd(incoming=True, groups_only=True)
 async def on_new_message(event):
     name = event.raw_text
     snips = sql.get_chat_blacklist(event.chat_id)
-    catadmin = await is_admin(event.client, event.chat_id, event.client.uid)
-    if not catadmin:
+    thanosadmin = await is_admin(event.client, event.chat_id, event.client.uid)
+    if not thanosadmin:
         return
     for snip in snips:
         pattern = f"( |^|[^\\w]){re.escape(snip)}( |$|[^\\w])"
@@ -35,9 +35,9 @@ async def on_new_message(event):
             break
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="addblacklist(?:\s|$)([\s\S]*)",
-    command=("addblacklist", plugin_category),
+    command=("addblacklist", plugin_thanosegory),
     info={
         "header": "To add blacklist words to database",
         "description": "The given word or words will be added to blacklist in that specific chat if any user sends then the message gets deleted.",
@@ -64,9 +64,9 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="rmblacklist(?:\s|$)([\s\S]*)",
-    command=("rmblacklist", plugin_category),
+    command=("rmblacklist", plugin_thanosegory),
     info={
         "header": "To remove blacklist words from database",
         "description": "The given word or words will be removed from blacklist in that specific chat",
@@ -93,9 +93,9 @@ async def _(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="listblacklist$",
-    command=("listblacklist", plugin_category),
+    command=("listblacklist", plugin_thanosegory),
     info={
         "header": "To show the black list words",
         "description": "Shows you the list of blacklist words in that specific chat",

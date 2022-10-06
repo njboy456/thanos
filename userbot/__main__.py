@@ -116,11 +116,11 @@ async def externalrepo():
         #)
     #if Config.THANOSABUSE:
        # await install_externalrepo(
-           # Config.THANOSABUSE_REPO, Config.THANOSABUSE_REPOBRANCH, "badcatext"
+           # Config.THANOSABUSE_REPO, Config.THANOSABUSE_REPOBRANCH, "badthanosext"
         #)
     if Config.VCMODE:
         await install_externalrepo(
-            "https://github.com/Tgcatub/THANOSVCPlayer", "test", "catvc"
+            "https://github.com/thanosuser/THANOS-PRO", "test", "thanosvc"
         )
 
 

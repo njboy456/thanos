@@ -9,7 +9,7 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
 # this method will call the API, and return in the appropriate format
@@ -44,9 +44,9 @@ def ReTrieveURL(input_url):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(rmbg|srmbg)(?:\s|$)([\s\S]*)",
-    command=("rmbg", plugin_category),
+    command=("rmbg", plugin_thanosegory),
     info={
         "header": "To remove background of a image/sticker/image link.",
         "options": {
@@ -74,7 +74,7 @@ async def remove_background(event):
     message_id = await reply_id(event)
     if event.reply_to_msg_id and not input_str:
         reply_message = await event.get_reply_message()
-        catevent = await edit_or_reply(event, "`Analysing this Media...`")
+        thanosevent = await edit_or_reply(event, "`Analysing this Media...`")
         file_name = await Convert.to_image(
             event, reply_message, dirct="./temp", file="rmbgimage.png", noedits=True
         )
@@ -85,7 +85,7 @@ async def remove_background(event):
         response = ReTrieveFile(file_name[1])
         os.remove(file_name[1])
     elif input_str:
-        catevent = await edit_or_reply(event, "`Removing Background of this media`")
+        thanosevent = await edit_or_reply(event, "`Removing Background of this media`")
         response = ReTrieveURL(input_str)
     else:
         return await edit_delete(
@@ -95,14 +95,14 @@ async def remove_background(event):
     contentType = response.headers.get("content-type")
     remove_bg_image = "./temp/backgroundless.png"
     if "image" not in contentType:
-        return await edit_delete(catevent, f"`{response.content.decode('UTF-8')}`", 5)
+        return await edit_delete(thanosevent, f"`{response.content.decode('UTF-8')}`", 5)
     with open("./temp/backgroundless.png", "wb") as file:
         file.write(response.content)
-    await catevent.delete()
+    await thanosevent.delete()
     if cmd == "srmbg":
         file = (
             await Convert.to_sticker(
-                catevent, remove_bg_image, file="rmbgsticker.webp", noedits=True
+                thanosevent, remove_bg_image, file="rmbgsticker.webp", noedits=True
             )
         )[1]
         await event.client.send_file(

@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 from ..helpers import ellipse_create, file_check
 from . import THANOSPRO, edit_delete, edit_or_reply
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
 bg_url_1 = "https://raw.githubusercontent.com/TgTHANOSPRO/THANOSBOT-Resources/master/Resources/App/app-full.jpg"
@@ -31,9 +31,9 @@ def text_draw(font_name, font_size, img, text, width, hight, fill="white"):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="app ([\s\S]*)",
-    command=("app", plugin_category),
+    command=("app", plugin_thanosegory),
     info={
         "header": "To search any app in playstore",
         "description": "Searches the app in the playstore and provides the link to the app in playstore and fetchs app details",

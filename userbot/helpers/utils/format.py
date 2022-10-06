@@ -106,7 +106,7 @@ def yaml_format(obj, indent=0, max_str_len=256, max_byte_len=64):
         if has_multiple_items:
             indent -= 2
     elif isinstance(obj, str):
-        # truncate long strings and display elipsis
+        # trunthanose long strings and display elipsis
         result = repr(obj[:max_str_len])
         if len(obj) > max_str_len:
             result += "…"

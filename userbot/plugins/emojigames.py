@@ -5,7 +5,7 @@ from telethon.tl.types import InputMediaDice
 
 from . import THANOSPRO
 
-plugin_category = "fun"
+plugin_thanosegory = "fun"
 
 # EMOJI CONSTANTS
 DART_E_MOJI = "🎯"
@@ -17,9 +17,9 @@ BOWL_E_MOJI = "🎳"
 # EMOJI CONSTANTS
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern=f"({DART_E_MOJI}|dart) ([1-6])$",
-    command=("dart", plugin_category),
+    command=("dart", plugin_thanosegory),
     info={
         "header": "To get specific dart animation.",
         "description": "will send and delete the dart emoji animation until the selected outcome comes.",
@@ -54,9 +54,9 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern=f"({DICE_E_MOJI}|dice) ([1-6])$",
-    command=("dice", plugin_category),
+    command=("dice", plugin_thanosegory),
     info={
         "header": "To get specific dice animation.",
         "description": "will send and delete the dice emoji animation until the selected outcome comes.",
@@ -91,9 +91,9 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern=f"({BALL_E_MOJI}|bb) ([1-5])$",
-    command=("bb", plugin_category),
+    command=("bb", plugin_thanosegory),
     info={
         "header": "To get specific basket ball animation.",
         "description": "will send and delete the basket ball emoji animation until the selected outcome comes.",
@@ -128,9 +128,9 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern=f"({FOOT_E_MOJI}|fb) ([1-5])$",
-    command=("fb", plugin_category),
+    command=("fb", plugin_thanosegory),
     info={
         "header": "To get specific football animation.",
         "description": "will send and delete the football emoji animation until the selected outcome comes.",
@@ -165,9 +165,9 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern=f"({SLOT_E_MOJI}|jp) ([0-9]+)$",
-    command=("jp", plugin_category),
+    command=("jp", plugin_thanosegory),
     info={
         "header": "To get specific jackpot animation.",
         "description": "will send and delete the jackpot emoji animation until the selected outcome comes.",
@@ -204,9 +204,9 @@ async def _(event):
         await event.reply(file=InputMediaDice(emoticon=emoticon))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern=f"({BOWL_E_MOJI}|bowl) ([1-6])$",
-    command=("bowl", plugin_category),
+    command=("bowl", plugin_thanosegory),
     info={
         "header": "To get specific bowling animation.",
         "description": "will send and delete the bowling emoji animation until the selected outcome comes.",

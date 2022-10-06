@@ -15,7 +15,7 @@ from userbot.helpers import delete_conv
 from ..sql_helper import global_collectionjson as sql
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 # =========================================================== #
 #                           STRINGS                           #
@@ -43,9 +43,9 @@ def user_full_name(user):
     return " ".join(names)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="stat$",
-    command=("stat", plugin_category),
+    command=("stat", plugin_thanosegory),
     info={
         "header": "To get statistics of your telegram account.",
         "description": "Shows you the count of  your groups, channels, private chats...etc if no input is given.",
@@ -64,7 +64,7 @@ def user_full_name(user):
 )
 async def stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
     "To get statistics of your telegram account."
-    cat = await edit_or_reply(event, STAT_INDITHANOSSION)
+    thanos = await edit_or_reply(event, STAT_INDITHANOSSION)
     start_time = time.time()
     private_chats = 0
     bots = 0
@@ -127,7 +127,7 @@ async def stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
     response += f"**Unread:** {unread} \n"
     response += f"**Unread Mentions:** {unread_mentions} \n\n"
     response += f"📌 __It Took:__ {stop_time:.02f}s \n"
-    await cat.edit(response)
+    await thanos.edit(response)
     try:
         agc = sql.get_collection("admin_list").json
     except AttributeError:
@@ -143,13 +143,13 @@ async def stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(|p)stat (g|ga|go|c|ca|co)$",
 )
 async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-quality
     flag = event.pattern_match.group(1)
-    catcmd = event.pattern_match.group(2)
-    catevent = await edit_or_reply(event, STAT_INDITHANOSSION)
+    thanoscmd = event.pattern_match.group(2)
+    thanosevent = await edit_or_reply(event, STAT_INDITHANOSSION)
     start_time = time.time()
     grp = []
     message = []
@@ -157,36 +157,36 @@ async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-qu
         entity = dialog.entity
         if isinstance(entity, Channel) and entity.broadcast:
             if flag == "":
-                if catcmd == "c":
+                if thanoscmd == "c":
                     grp.append(
                         f"<a href = https://t.me/c/{entity.id}/1>{entity.title}</a>"
                     )
                     output = CHANNELS_STR
-                if (entity.creator or entity.admin_rights) and catcmd == "ca":
+                if (entity.creator or entity.admin_rights) and thanoscmd == "ca":
                     grp.append(
                         f"<a href = https://t.me/c/{entity.id}/1>{entity.title}</a>"
                     )
                     output = CHANNELS_ADMINSTR
-                if entity.creator and catcmd == "co":
+                if entity.creator and thanoscmd == "co":
                     grp.append(
                         f"<a href = https://t.me/c/{entity.id}/1>{entity.title}</a>"
                     )
                     output = CHANNELS_OWNERSTR
             elif flag == "p":
                 with contextlib.suppress(AttributeError):
-                    if entity.username and catcmd == "c":
+                    if entity.username and thanoscmd == "c":
                         grp.append(
                             f"<a href = https://t.me/{entity.username}>{entity.title}</a>"
                         )
                         output = CHANNELS_STR
                     if (
                         (entity.creator or entity.admin_rights) and entity.username
-                    ) and catcmd == "ca":
+                    ) and thanoscmd == "ca":
                         grp.append(
                             f"<a href = https://t.me/{entity.username}>{entity.title}</a>"
                         )
                         output = CHANNELS_ADMINSTR
-                    if (entity.creator and entity.username) and catcmd == "co":
+                    if (entity.creator and entity.username) and thanoscmd == "co":
                         grp.append(
                             f"<a href = https://t.me/{entity.username}>{entity.title}</a>"
                         )
@@ -199,36 +199,36 @@ async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-qu
             and isinstance(entity, Chat)
         ):
             if flag == "":
-                if catcmd == "g":
+                if thanoscmd == "g":
                     grp.append(
                         f"<a href = https://t.me/c/{entity.id}/1>{entity.title}</a>"
                     )
                     output = GROUPS_STR
-                if (entity.creator or entity.admin_rights) and catcmd == "ga":
+                if (entity.creator or entity.admin_rights) and thanoscmd == "ga":
                     grp.append(
                         f"<a href = https://t.me/c/{entity.id}/1>{entity.title}</a>"
                     )
                     output = GROUPS_ADMINSTR
-                if entity.creator and catcmd == "go":
+                if entity.creator and thanoscmd == "go":
                     grp.append(
                         f"<a href = https://t.me/c/{entity.id}/1>{entity.title}</a>"
                     )
                     output = GROUPS_OWNERSTR
             elif flag == "p":
                 with contextlib.suppress(AttributeError):
-                    if entity.username and catcmd == "g":
+                    if entity.username and thanoscmd == "g":
                         grp.append(
                             f"<a href = https://t.me/{entity.username}>{entity.title}</a>"
                         )
                         output = GROUPS_STR
                     if (
                         (entity.creator or entity.admin_rights) and entity.username
-                    ) and catcmd == "ga":
+                    ) and thanoscmd == "ga":
                         grp.append(
                             f"<a href = https://t.me/{entity.username}>{entity.title}</a>"
                         )
                         output = GROUPS_ADMINSTR
-                    if (entity.creator and entity.username) and catcmd == "go":
+                    if (entity.creator and entity.username) and thanoscmd == "go":
                         grp.append(
                             f"<a href = https://t.me/{entity.username}>{entity.title}</a>"
                         )
@@ -243,7 +243,7 @@ async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-qu
         message.append(output)
     count = len(message)
     message[count - 1] = f"{message[count-1]}\n<b>Time Taken : </b> {stop_time:.02f}s"
-    await catevent.edit(message[0], parse_mode="html")
+    await thanosevent.edit(message[0], parse_mode="html")
     reply_to_msg = event.id
     if count > 1:
         for i in range(1, count):
@@ -253,9 +253,9 @@ async def full_stats(event):  # sourcery no-metrics # sourcery skip: low-code-qu
             reply_to_msg = new_event.id
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ustat(?:\s|$)([\s\S]*)",
-    command=("ustat", plugin_category),
+    command=("ustat", plugin_thanosegory),
     info={
         "header": "To get list of public groups of repled person or mentioned person.",
         "usage": "{tr}ustat <reply/userid/username>",
@@ -284,7 +284,7 @@ async def ustat(event):
     else:
         uid = reply_message.sender_id
     chat = "@BRScan_bot"
-    catevent = await edit_or_reply(event, "`Processing...`")
+    thanosevent = await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
             purgeflag = await conv.send_message(f"/search {uid}")
@@ -303,7 +303,7 @@ async def ustat(event):
         await event.client.send_read_acknowledge(conv.chat_id)
     await delete_conv(event, chat, purgeflag)
     if "user is not in my database" in chat_list[0]:
-        return await edit_delete(catevent, "`User not found in database!`")
+        return await edit_delete(thanosevent, "`User not found in database!`")
     rng = 5 if chat_list[4] == "" else 4
     for i in chat_list[:4]:
         msg += f"{i}\n"
@@ -316,7 +316,7 @@ async def ustat(event):
     if msg:
         msg_list.append(msg)
     checker = len(msg_list)
-    await catevent.edit(msg_list[0])
+    await thanosevent.edit(msg_list[0])
     reply_to_msg = event.id
     if checker > 1:
         for i in range(1, checker):

@@ -11,7 +11,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
 
 LOGS = logging.getLogger(os.path.basename(__name__))
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 
 async def wall_download(piclink, query):
@@ -32,9 +32,9 @@ async def wall_download(piclink, query):
         return None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="wall(?:\s|$)([\s\S]*)",
-    command=("wall", plugin_category),
+    command=("wall", plugin_thanosegory),
     info={
         "header": "Searches and uploads wallpaper",
         "usage": ["{tr}wall <query>", "{tr}wall <query> ; <1-10>"],
@@ -52,7 +52,7 @@ async def noods(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
         query, limit = query.split(";")
     if int(limit) > 10:
         return await edit_delete(event, "`Wallpaper search limit is 1-10`", 10)
-    catevent = await edit_or_reply(event, "🔍 `Searching...`")
+    thanosevent = await edit_or_reply(event, "🔍 `Searching...`")
     r = requests.get(
         f"https://wall.alphacoders.com/search.php?search={query.replace(' ','+')}"
     )
@@ -60,13 +60,13 @@ async def noods(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
     walls = soup.find_all("img", class_="img-responsive")
     if not walls:
         return await edit_delete(
-            catevent, f"**Can't find anything with** `{query}`", 10
+            thanosevent, f"**Can't find anything with** `{query}`", 10
         )
     i = count = 0
     piclist = []
     piclinks = []
     captionlist = []
-    await edit_or_reply(catevent, "⏳ `Processing..`")
+    await edit_or_reply(thanosevent, "⏳ `Processing..`")
     url2 = "https://api.alphacoders.com/content/get-download-link"
     for x in walls:
         wall = random.choice(walls)["src"][8:-4]
@@ -81,11 +81,11 @@ async def noods(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
         res = requests.post(url2, data=data)
         a = res.json()["link"]
         if "We are sorry," not in requests.get(a).text and a not in piclinks:
-            await edit_or_reply(catevent, "📥** Downloading...**")
+            await edit_or_reply(thanosevent, "📥** Downloading...**")
             pic = await wall_download(a, query)
             if pic is None:
                 return await edit_delete(
-                    catevent, "__Sorry i can't download wallpaper.__"
+                    thanosevent, "__Sorry i can't download wallpaper.__"
                 )
             piclist.append(pic)
             piclinks.append(a)
@@ -95,14 +95,14 @@ async def noods(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
         else:
             i += 1
         await edit_or_reply(
-            catevent, f"**📥 Downloaded : {count}/{limit}\n\n❌ Errors : {i}/5**"
+            thanosevent, f"**📥 Downloaded : {count}/{limit}\n\n❌ Errors : {i}/5**"
         )
         if count == int(limit):
             break
         if i == 5:
-            await edit_or_reply(catevent, "`Max search error limit exceed..`")
+            await edit_or_reply(thanosevent, "`Max search error limit exceed..`")
     try:
-        await edit_or_reply(catevent, "`Sending...`")
+        await edit_or_reply(thanosevent, "`Sending...`")
         captionlist[-1] = f"**➥ Query :-** `{query.title()}`"
         await event.client.send_file(
             event.chat_id,
@@ -111,7 +111,7 @@ async def noods(event):  # sourcery no-metrics  # sourcery skip: low-code-qualit
             reply_to=reply_to_id,
             force_document=True,
         )
-        await catevent.delete()
+        await thanosevent.delete()
     except Exception as e:
         LOGS.info(str(e))
     for i in piclist:

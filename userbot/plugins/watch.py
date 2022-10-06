@@ -15,7 +15,7 @@ from ..core.logger import logging
 from ..core.managers import edit_or_reply
 
 LOGS = logging.getLogger(__name__)
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 moviepath = os.path.join(os.getcwd(), "temp", "moviethumb.jpg")
 
@@ -89,9 +89,9 @@ def get_provider(url):
     return url
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="watch ([\s\S]*)",
-    command=("watch", plugin_category),
+    command=("watch", plugin_thanosegory),
     info={
         "header": "To search online streaming sites for that movie.",
         "description": "Fetches the list of sites(standard) where you can watch that movie.",

@@ -15,7 +15,7 @@ from ..sql_helper.global_collectionjson import add_collection, get_collection
 LOGS = logging.getLogger(__name__)
 FBAN_GROUP_ID = Config.FBAN_GROUP_ID
 
-plugin_category = "admin"
+plugin_thanosegory = "admin"
 rose = "@MissRose_bot"
 
 fbanresults = [
@@ -27,13 +27,13 @@ fbanresults = [
 unfbanresults = ["I'll give", "Un-FedBan", "un-FedBan"]
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="fban(?:\s|$)([\s\S]*)",
-    command=("fban", plugin_category),
+    command=("fban", plugin_thanosegory),
     info={
         "header": "Ban the person in your database federations",
-        "description": "Will fban the person in the all feds of given category which you stored in database.",
-        "usage": "{tr}fban <userid/username/reply> <category> <reason>",
+        "description": "Will fban the person in the all feds of given thanosegory which you stored in database.",
+        "usage": "{tr}fban <userid/username/reply> <thanosegory> <reason>",
     },
 )
 async def group_fban(event):
@@ -50,7 +50,7 @@ async def group_fban(event):
         return await edit_delete(event, "__You can't fban yourself.__")
     if not reason:
         return await edit_delete(
-            event, "__You haven't mentioned category name and reason for fban__"
+            event, "__You haven't mentioned thanosegory name and reason for fban__"
         )
     reasons = reason.split(" ", 1)
     fedgroup = reasons[0]
@@ -65,7 +65,7 @@ async def group_fban(event):
         return await edit_delete(
             event, f"__There is no such '{fedgroup}' named fedgroup in your database.__"
         )
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event, f"Fbanning {_format.mentionuser(user.first_name ,user.id)}.."
     )
     fedchat = FBAN_GROUP_ID
@@ -86,7 +86,7 @@ async def group_fban(event):
                     not in reply.text
                 ):
                     return await edit_delete(
-                        catevent,
+                        thanosevent,
                         "__You must be owner of the group(FBAN_GROUP_ID) to perform this action__",
                         10,
                     )
@@ -110,16 +110,16 @@ async def group_fban(event):
         success_report += "\n**Error:**"
         for txt in errors:
             success_report += f"\n☞ __{txt}__"
-    await edit_or_reply(catevent, success_report)
+    await edit_or_reply(thanosevent, success_report)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="unfban(?:\s|$)([\s\S]*)",
-    command=("unfban", plugin_category),
+    command=("unfban", plugin_thanosegory),
     info={
         "header": "UnBan the person in your database federations",
-        "description": "Will unfban the person in the all feds of given category which you stored in database.",
-        "usage": "{tr}unfban <userid/username/reply> <category> <reason>",
+        "description": "Will unfban the person in the all feds of given thanosegory which you stored in database.",
+        "usage": "{tr}unfban <userid/username/reply> <thanosegory> <reason>",
     },
 )
 async def group_unfban(event):
@@ -136,7 +136,7 @@ async def group_unfban(event):
         return await edit_delete(event, "__You can't unfban yourself.__")
     if not reason:
         return await edit_delete(
-            event, "__You haven't mentioned category name and reason for unfban__"
+            event, "__You haven't mentioned thanosegory name and reason for unfban__"
         )
     reasons = reason.split(" ", 1)
     fedgroup = reasons[0]
@@ -151,7 +151,7 @@ async def group_unfban(event):
         return await edit_delete(
             event, f"__There is no such '{fedgroup}' named fedgroup in your database.__"
         )
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event, f"Unfbanning {_format.mentionuser(user.first_name ,user.id)}.."
     )
     fedchat = FBAN_GROUP_ID
@@ -172,7 +172,7 @@ async def group_unfban(event):
                     not in reply.text
                 ):
                     return await edit_delete(
-                        catevent,
+                        thanosevent,
                         "__You must be owner of the group(FBAN_GROUP_ID) to perform this action__",
                         10,
                     )
@@ -196,21 +196,21 @@ async def group_unfban(event):
         success_report += "\n**Error:**"
         for txt in errors:
             success_report += f"\n☞ __{txt}__"
-    await edit_or_reply(catevent, success_report)
+    await edit_or_reply(thanosevent, success_report)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="addfedto (\w+|-all) ([-\w]+)",
-    command=("addfedto", plugin_category),
+    command=("addfedto", plugin_thanosegory),
     info={
-        "header": "Add the federation to given category in database.",
-        "description": "You can add multiple federations to one category like a group of feds under one category. And you can access all thoose feds by that name.",
+        "header": "Add the federation to given thanosegory in database.",
+        "description": "You can add multiple federations to one thanosegory like a group of feds under one thanosegory. And you can access all thoose feds by that name.",
         "flags": {
-            "-all": "If you want to add all your feds to database then use this as {tr}addfedto -all <category name>"
+            "-all": "If you want to add all your feds to database then use this as {tr}addfedto -all <thanosegory name>"
         },
         "usage": [
-            "{tr}addfedto <category name> <fedid>",
-            "{tr}addfedto -all <category name>",
+            "{tr}addfedto <thanosegory name> <fedid>",
+            "{tr}addfedto -all <thanosegory name>",
         ],
     },
 )
@@ -224,7 +224,7 @@ async def quote_search(event):  # sourcery no-metrics
     else:
         feds = {}
     if fedgroup == "-all":
-        catevent = await edit_or_reply(event, "`Adding all your feds to database...`")
+        thanosevent = await edit_or_reply(event, "`Adding all your feds to database...`")
         fedidstoadd = []
         async with event.client.conversation("@MissRose_bot") as conv:
             try:
@@ -238,11 +238,11 @@ async def quote_search(event):  # sourcery no-metrics
                     response = await conv.get_response()
                 except asyncio.exceptions.TimeoutError:
                     return await edit_or_reply(
-                        catevent,
+                        thanosevent,
                         "__Rose bot is not responding try again later.__",
                     )
                 if "can only" in response.text:
-                    return await edit_delete(catevent, f"__{response.text}__")
+                    return await edit_delete(thanosevent, f"__{response.text}__")
                 if "make a file" in response.text or "Looks like" in response.text:
                     await response.click(0)
                     await asyncio.sleep(2)
@@ -268,19 +268,19 @@ async def quote_search(event):  # sourcery no-metrics
                     )
             except Exception as e:
                 await edit_delete(
-                    catevent, f"**Error while fecthing myfeds:**\n__{e}__", 10
+                    thanosevent, f"**Error while fecthing myfeds:**\n__{e}__", 10
                 )
             await event.client.send_read_acknowledge(conv.chat_id)
             conv.cancel()
         if not fedidstoadd:
             return await edit_or_reply(
-                catevent,
+                thanosevent,
                 "__I have failed to fetch your feds or you are not admin of any fed.__",
             )
         feds[fedid] = fedidstoadd
         add_collection("fedids", feds)
         await edit_or_reply(
-            catevent,
+            thanosevent,
             f"__Successfully added all your feds to database group__ **{fedid}**.",
         )
         if BOTLOG:
@@ -288,14 +288,14 @@ async def quote_search(event):  # sourcery no-metrics
                 BOTLOG_CHATID,
                 f"#ADDFEDID\
                 \n**Fed Group:** `{fedid}`\
-                \nSuccessfully added all your feds to above database category.",
+                \nSuccessfully added all your feds to above database thanosegory.",
             )
         return
     if fedgroup in feds:
         fed_ids = feds[fedgroup]
         if fedid in fed_ids:
             return await edit_delete(
-                event, "__This fed is already part of this fed category.__"
+                event, "__This fed is already part of this fed thanosegory.__"
             )
         fed_ids.append(fedid)
         feds[fedgroup] = fed_ids
@@ -303,7 +303,7 @@ async def quote_search(event):  # sourcery no-metrics
         feds[fedgroup] = [fedid]
     add_collection("fedids", feds)
     await edit_or_reply(
-        event, "__The given fed is succesfully added to fed category.__"
+        event, "__The given fed is succesfully added to fed thanosegory.__"
     )
     if BOTLOG:
         await event.client.send_message(
@@ -311,22 +311,22 @@ async def quote_search(event):  # sourcery no-metrics
             f"#ADDFEDID\
             \n**Fedid:** `{fedid}`\
             \n**Fed Group:** `{fedgroup}`\
-            \nThe above fedid is sucessfully added to that fed category.",
+            \nThe above fedid is sucessfully added to that fed thanosegory.",
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="rmfedfrom (\w+|-all) ([-\w]+)",
-    command=("rmfedfrom", plugin_category),
+    command=("rmfedfrom", plugin_thanosegory),
     info={
-        "header": "Remove the federation from given category in database.",
-        "description": "To remove given fed from the given category name",
+        "header": "Remove the federation from given thanosegory in database.",
+        "description": "To remove given fed from the given thanosegory name",
         "flags": {
-            "-all": "If you want to delete compelete category then use this flag as {tr}rmfedfrom -all <category name>"
+            "-all": "If you want to delete compelete thanosegory then use this flag as {tr}rmfedfrom -all <thanosegory name>"
         },
         "usage": [
-            "{tr}rmfedfrom <category name> <fedid>",
-            "{tr}rmfedfrom -all <category name>",
+            "{tr}rmfedfrom <thanosegory name> <fedid>",
+            "{tr}rmfedfrom -all <thanosegory name>",
         ],
     },
 )
@@ -346,14 +346,14 @@ async def quote_search(event):
         feds[fedid] = []
         add_collection("fedids", feds)
         await edit_or_reply(
-            event, f"__Succesfully removed all feds in the category {fedid}__"
+            event, f"__Succesfully removed all feds in the thanosegory {fedid}__"
         )
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 f"#REMOVEFEDID\
             \n**Fed Group:** `{fedid}`\
-            \nDeleted this Fed category in your database.",
+            \nDeleted this Fed thanosegory in your database.",
             )
         return
     if fedgroup not in feds:
@@ -363,13 +363,13 @@ async def quote_search(event):
     fed_ids = feds[fedgroup]
     if fedid not in fed_ids:
         return await edit_delete(
-            event, "__This fed is not part of given fed category.__"
+            event, "__This fed is not part of given fed thanosegory.__"
         )
     fed_ids.remove(fedid)
     feds[fedgroup] = fed_ids
     add_collection("fedids", feds)
     await edit_or_reply(
-        event, "__The given fed is succesfully removed from fed category.__"
+        event, "__The given fed is succesfully removed from fed thanosegory.__"
     )
     if BOTLOG:
         await event.client.send_message(
@@ -377,17 +377,17 @@ async def quote_search(event):
             f"#REMOVEFEDID\
         \n**Fedid:** `{fedid}`\
         \n**Fed Group:** `{fedgroup}`\
-        \nThe above fedid is sucessfully removed that fed category.",
+        \nThe above fedid is sucessfully removed that fed thanosegory.",
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="listfed(s)?(?:\s|$)([\s\S]*)",
-    command=("listfed", plugin_category),
+    command=("listfed", plugin_thanosegory),
     info={
         "header": "To list all feds in your database.",
-        "description": "if you give input then will show only feds in that category else will show all feds in your database",
-        "usage": ["{tr}listfed", "{tr}listfed <category name>"],
+        "description": "if you give input then will show only feds in that thanosegory else will show all feds in your database",
+        "usage": ["{tr}listfed", "{tr}listfed <thanosegory name>"],
     },
 )
 async def quote_search(event):
@@ -416,7 +416,7 @@ async def quote_search(event):
             event, "__There is no such fedgroup in your database.__"
         )
     if output != "" and fedgroup:
-        output = f"**The list of feds in the category** `{fedgroup}` **are:**\n{output}"
+        output = f"**The list of feds in the thanosegory** `{fedgroup}` **are:**\n{output}"
 
     elif output != "":
         output = "**The list of all feds in your database are :**\n" + output
@@ -427,9 +427,9 @@ async def quote_search(event):
     await edit_or_reply(event, output)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="f(ed)?info(?:\s|$)([\s\S]*)",
-    command=("fedinfo", plugin_category),
+    command=("fedinfo", plugin_thanosegory),
     info={
         "header": "To get fedinfo from rose.",
         "description": "If no reply is given then shows you fedinfo of which you created",
@@ -443,7 +443,7 @@ async def fetch_fedinfo(event):
         if event.pattern_match.group(2) is not None
         else ""
     )
-    catevent = await edit_or_reply(event, "`Fetching info about given fed...`")
+    thanosevent = await edit_or_reply(event, "`Fetching info about given fed...`")
     async with event.client.conversation(rose) as conv:
         try:
             try:
@@ -452,18 +452,18 @@ async def fetch_fedinfo(event):
                 await THANOSPRO(unblock("MissRose_bot"))
                 await conv.send_message(f"/fedinfo {input_str}")
             response = await conv.get_response()
-            await edit_or_reply(catevent, response.text)
+            await edit_or_reply(thanosevent, response.text)
         except Exception as e:
             await edit_delete(
-                catevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10
+                thanosevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10
             )
         await event.client.send_read_acknowledge(conv.chat_id)
         conv.cancel()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="f(ed)?admins(?:\s|$)([\s\S]*)",
-    command=("fadmins", plugin_category),
+    command=("fadmins", plugin_thanosegory),
     info={
         "header": "To get fed admins from rose.",
         "description": "If no reply is given then shows you fedinfo of which you created",
@@ -477,7 +477,7 @@ async def fetch_fedinfo(event):
         if event.pattern_match.group(2) is not None
         else ""
     )
-    catevent = await edit_or_reply(event, "`Fetching admins list of given fed...`")
+    thanosevent = await edit_or_reply(event, "`Fetching admins list of given fed...`")
     async with event.client.conversation(rose) as conv:
         try:
             try:
@@ -487,22 +487,22 @@ async def fetch_fedinfo(event):
                 await conv.send_message(f"/fedadmins {input_str}")
             response = await conv.get_response()
             await edit_or_reply(
-                catevent,
+                thanosevent,
                 f"**Fedid:** ```{input_str}```\n\n{response.text}"
                 if input_str
                 else response.text,
             )
         except Exception as e:
             await edit_delete(
-                catevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10
+                thanosevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10
             )
         await event.client.send_read_acknowledge(conv.chat_id)
         conv.cancel()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="myfeds$",
-    command=("myfeds", plugin_category),
+    command=("myfeds", plugin_thanosegory),
     info={
         "header": "To get all feds where you are admin.",
         "usage": "{tr}myfeds",
@@ -510,7 +510,7 @@ async def fetch_fedinfo(event):
 )
 async def myfeds_fedinfo(event):
     "list all feds in which you are admin."
-    catevent = await edit_or_reply(event, "`Fetching list of feds...`")
+    thanosevent = await edit_or_reply(event, "`Fetching list of feds...`")
     replyid = await reply_id(event)
     async with event.client.conversation(rose) as conv:
         try:
@@ -521,7 +521,7 @@ async def myfeds_fedinfo(event):
                 await conv.send_message("/myfeds")
             response = await conv.get_response()
             if "can only" in response.text:
-                return await edit_delete(catevent, f"__{response.text}__")
+                return await edit_delete(thanosevent, f"__{response.text}__")
             if "Looks like" in response.text:
                 await response.click(0)
                 response = await conv.get_response()
@@ -533,20 +533,20 @@ async def myfeds_fedinfo(event):
                     caption=f"List of feds in which {_format.mentionuser('I am' ,user.id)} admin are.",
                     reply_to=replyid,
                 )
-                await catevent.delete()
+                await thanosevent.delete()
                 return
-            await edit_or_reply(catevent, response.text)
+            await edit_or_reply(thanosevent, response.text)
         except Exception as e:
             await edit_delete(
-                catevent, f"**Error while fecthing myfeds:**\n__{e}__", 10
+                thanosevent, f"**Error while fecthing myfeds:**\n__{e}__", 10
             )
         await event.client.send_read_acknowledge(conv.chat_id)
         conv.cancel()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="f(ed)?stat(?:\s|$)([\s\S]*)",
-    command=("fstat", plugin_category),
+    command=("fstat", plugin_thanosegory),
     info={
         "header": "To get fedstat data from rose.",
         "description": "If you haven't replied to any user or mentioned any user along with command then by default you will be input else mentioned user or replied user.",
@@ -560,9 +560,9 @@ async def myfeds_fedinfo(event):
 )
 async def fstat_rose(event):
     "To get fedstat data from rose."
-    catevent = await edit_or_reply(event, "`Fetching fedstat from given deatils...`")
+    thanosevent = await edit_or_reply(event, "`Fetching fedstat from given deatils...`")
     user, fedid = await get_user_from_event(
-        event, catevent, secondgroup=True, noedits=True
+        event, thanosevent, secondgroup=True, noedits=True
     )
     if user is None:
         user = await event.client.get_me()
@@ -579,7 +579,7 @@ async def fstat_rose(event):
             response = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
             if "can only" in response.text:
-                return await edit_delete(catevent, f"__{response.text}__")
+                return await edit_delete(thanosevent, f"__{response.text}__")
             if fedid == "":
                 response = await conv.get_edit()
                 result = f"**List of feds** {_format.mentionuser(user.first_name ,user.id)} **has been banned in are.**\n\n"
@@ -595,12 +595,12 @@ async def fstat_rose(event):
                     caption=f"List of feds {_format.mentionuser(user.first_name ,user.id)} has been banned in are.",
                     reply_to=replyid,
                 )
-                await catevent.delete()
+                await thanosevent.delete()
                 return
-            await edit_or_reply(catevent, result + response.text)
+            await edit_or_reply(thanosevent, result + response.text)
         except Exception as e:
             await edit_delete(
-                catevent, f"**Error while fecthing fedstat:**\n__{e}__", 10
+                thanosevent, f"**Error while fecthing fedstat:**\n__{e}__", 10
             )
         await event.client.send_read_acknowledge(conv.chat_id)
         conv.cancel()

@@ -10,7 +10,7 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 LOGS = logging.getLogger(__name__)
 cmdhd = Config.COMMAND_HAND_LER
 
@@ -52,9 +52,9 @@ oldvars = {
 }
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(set|get|del)dv(?: |$)([\s\S]*)",
-    command=("dv", plugin_category),
+    command=("dv", plugin_thanosegory),
     info={
         "header": "Set vars in database or Check or Delete",
         "description": "Set , Fetch or Delete values or vars directly in database without restart or heroku vars.\n\nYou can set multiple pics by giving space after links in alive, ialive, pm permit.",
@@ -133,7 +133,7 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 vinfo = f'**Name:** `{gvarstatus("DEFAULT_NAME")}`\n**First Name:** `{gvarstatus("FIRST_NAME")}`\n**Last Name:** `{usrln}`\n**Bio:** `{usrbio}`\n**Photo:** `{usrphoto}`'
             else:
                 if not vinfo and vname in ["ALIVE_TEMPLATE", "PING_TEMPLATE"]:
-                    return await edit_delete(event, "Check @cat_alive")
+                    return await edit_delete(event, "Check @thanos_alive")
                 if not vinfo:
                     return await edit_delete(
                         event,
@@ -205,9 +205,9 @@ async def bad(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="custom (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("custom", plugin_category),
+    command=("custom", plugin_thanosegory),
     info={
         "header": "To customize your THANOSBOT.",
         "options": {
@@ -269,9 +269,9 @@ async def custom_THANOSBOT(event):
         await event.client.send_message(BOTLOG_CHATID, text, silent=True)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="delcustom (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("delcustom", plugin_category),
+    command=("delcustom", plugin_thanosegory),
     info={
         "header": "To delete costomization of your THANOSBOT.",
         "options": {

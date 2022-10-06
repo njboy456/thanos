@@ -12,14 +12,14 @@ from ..helpers.utils import _format, get_user_from_event
 from ..sql_helper import broadcast_sql as sql
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="msgto(?:\s|$)([\s\S]*)",
-    command=("msgto", plugin_category),
+    command=("msgto", plugin_thanosegory),
     info={
         "header": "To message to person or to a chat.",
         "description": "Suppose you want to message directly to a person/chat from a paticular chat. Then simply reply to a person with this cmd and text or to a text with cmd and username/userid/chatid,",
@@ -30,7 +30,7 @@ LOGS = logging.getLogger(__name__)
         "examples": "{tr}msgto @THANOSBOTot just a testmessage",
     },
 )
-async def catbroadcast_add(event):
+async def thanosbroadcast_add(event):
     "To message to person or to a chat."
     user, reason = await get_user_from_event(event)
     reply = await event.get_reply_message()
@@ -60,35 +60,35 @@ async def catbroadcast_add(event):
     await edit_delete(event, "__Successfully sent the message.__")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="addto(?:\s|$)([\s\S]*)",
-    command=("addto", plugin_category),
+    command=("addto", plugin_thanosegory),
     info={
-        "header": "Will add the specific chat to the mentioned category",
-        "usage": "{tr}addto <category name>",
+        "header": "Will add the specific chat to the mentioned thanosegory",
+        "usage": "{tr}addto <thanosegory name>",
         "examples": "{tr}addto test",
     },
 )
-async def catbroadcast_add(event):
-    "To add the chat to the mentioned category"
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
+async def thanosbroadcast_add(event):
+    "To add the chat to the mentioned thanosegory"
+    thanosinput_str = event.pattern_match.group(1)
+    if not thanosinput_str:
         return await edit_delete(
             event,
-            "In which category should i add this chat",
+            "In which thanosegory should i add this chat",
             parse_mode=_format.parse_pre,
         )
-    keyword = catinput_str.lower()
+    keyword = thanosinput_str.lower()
     if check := sql.is_in_broadcastlist(keyword, event.chat_id):
         return await edit_delete(
             event,
-            f"This chat is already in this category {keyword}",
+            f"This chat is already in this thanosegory {keyword}",
             parse_mode=_format.parse_pre,
         )
     sql.add_to_broadcastlist(keyword, event.chat_id)
     await edit_delete(
         event,
-        f"This chat is Now added to category {keyword}",
+        f"This chat is Now added to thanosegory {keyword}",
         parse_mode=_format.parse_pre,
     )
     chat = await event.get_chat()
@@ -96,48 +96,48 @@ async def catbroadcast_add(event):
         try:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"The Chat {get_display_name(await event.get_chat())} is added to category {keyword}",
+                f"The Chat {get_display_name(await event.get_chat())} is added to thanosegory {keyword}",
                 parse_mode=_format.parse_pre,
             )
         except Exception:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"The user {chat.first_name} is added to category {keyword}",
+                f"The user {chat.first_name} is added to thanosegory {keyword}",
                 parse_mode=_format.parse_pre,
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="list(?:\s|$)([\s\S]*)",
-    command=("list", plugin_category),
+    command=("list", plugin_thanosegory),
     info={
-        "header": "will show the list of all chats in the given category",
-        "usage": "{tr}list <category name>",
+        "header": "will show the list of all chats in the given thanosegory",
+        "usage": "{tr}list <thanosegory name>",
         "examples": "{tr}list test",
     },
 )
-async def catbroadcast_list(event):
-    "To list the all chats in the mentioned category."
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
+async def thanosbroadcast_list(event):
+    "To list the all chats in the mentioned thanosegory."
+    thanosinput_str = event.pattern_match.group(1)
+    if not thanosinput_str:
         return await edit_delete(
             event,
-            "Which category Chats should i list ?\nCheck .listall",
+            "Which thanosegory Chats should i list ?\nCheck .listall",
             parse_mode=_format.parse_pre,
         )
-    keyword = catinput_str.lower()
+    keyword = thanosinput_str.lower()
     no_of_chats = sql.num_broadcastlist_chat(keyword)
     if no_of_chats == 0:
         return await edit_delete(
             event,
-            f"There is no category with name {keyword}. Check '.listall'",
+            f"There is no thanosegory with name {keyword}. Check '.listall'",
             parse_mode=_format.parse_pre,
         )
     chats = sql.get_chat_broadcastlist(keyword)
-    catevent = await edit_or_reply(
-        event, f"Fetching info of the category {keyword}", parse_mode=_format.parse_pre
+    thanosevent = await edit_or_reply(
+        event, f"Fetching info of the thanosegory {keyword}", parse_mode=_format.parse_pre
     )
-    resultlist = f"**The category '{keyword}' have '{no_of_chats}' chats and these are listed below :**\n\n"
+    resultlist = f"**The thanosegory '{keyword}' have '{no_of_chats}' chats and these are listed below :**\n\n"
     errorlist = ""
     for chat in chats:
         try:
@@ -153,71 +153,71 @@ async def catbroadcast_list(event):
             errorlist += f" 👉 __This id {int(chat)} in database probably you may left the chat/channel or may be invalid id.\
                             \nRemove this id from the database by using this command__ `.frmfrom {keyword} {int(chat)}` \n\n"
     finaloutput = resultlist + errorlist
-    await edit_or_reply(catevent, finaloutput)
+    await edit_or_reply(thanosevent, finaloutput)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="listall$",
-    command=("listall", plugin_category),
+    command=("listall", plugin_thanosegory),
     info={
-        "header": "Will show the list of all category names.",
+        "header": "Will show the list of all thanosegory names.",
         "usage": "{tr}listall",
     },
 )
-async def catbroadcast_list(event):
-    "To list all the category names."
+async def thanosbroadcast_list(event):
+    "To list all the thanosegory names."
     if sql.num_broadcastlist_chats() == 0:
         return await edit_delete(
             event,
-            "you haven't created at least one category  check info for more help",
+            "you haven't created at least one thanosegory  check info for more help",
             parse_mode=_format.parse_pre,
         )
     chats = sql.get_broadcastlist_chats()
-    resultext = "**Here are the list of your category's :**\n\n"
+    resultext = "**Here are the list of your thanosegory's :**\n\n"
     for i in chats:
         resultext += f" 👉 `{i}` __contains {sql.num_broadcastlist_chat(i)} chats__\n"
     await edit_or_reply(event, resultext)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="sendto(?:\s|$)([\s\S]*)",
-    command=("sendto", plugin_category),
+    command=("sendto", plugin_thanosegory),
     info={
-        "header": "will send the replied message to all chats in the given category",
-        "usage": "{tr}sendto <category name>",
+        "header": "will send the replied message to all chats in the given thanosegory",
+        "usage": "{tr}sendto <thanosegory name>",
         "examples": "{tr}sendto test",
     },
 )
-async def catbroadcast_send(event):
-    "To send the message to all chats in the mentioned category."
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
+async def thanosbroadcast_send(event):
+    "To send the message to all chats in the mentioned thanosegory."
+    thanosinput_str = event.pattern_match.group(1)
+    if not thanosinput_str:
         return await edit_delete(
             event,
-            "To which category should i send this message",
+            "To which thanosegory should i send this message",
             parse_mode=_format.parse_pre,
         )
     reply = await event.get_reply_message()
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not reply:
         return await edit_delete(
             event,
-            "what should i send to to this category ?",
+            "what should i send to to this thanosegory ?",
             parse_mode=_format.parse_pre,
         )
-    keyword = catinput_str.lower()
+    keyword = thanosinput_str.lower()
     no_of_chats = sql.num_broadcastlist_chat(keyword)
-    group_ = Get(cat)
+    group_ = Get(thanos)
     if no_of_chats == 0:
         return await edit_delete(
             event,
-            f"There is no category with name {keyword}. Check '.listall'",
+            f"There is no thanosegory with name {keyword}. Check '.listall'",
             parse_mode=_format.parse_pre,
         )
     chats = sql.get_chat_broadcastlist(keyword)
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
-        "sending this message to all groups in the category",
+        "sending this message to all groups in the thanosegory",
         parse_mode=_format.parse_pre,
     )
     with contextlib.suppress(BaseException):
@@ -232,55 +232,55 @@ async def catbroadcast_send(event):
         except Exception as e:
             LOGS.info(str(e))
         await sleep(0.5)
-    resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
-    await edit_delete(catevent, resultext)
+    resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in thanosegory {keyword}.`"
+    await edit_delete(thanosevent, resultext)
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"A message is sent to {i} chats out of {no_of_chats} chats in category {keyword}",
+            f"A message is sent to {i} chats out of {no_of_chats} chats in thanosegory {keyword}",
             parse_mode=_format.parse_pre,
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="fwdto(?:\s|$)([\s\S]*)",
-    command=("fwdto", plugin_category),
+    command=("fwdto", plugin_thanosegory),
     info={
-        "header": "Will forward the replied message to all chats in the given category",
-        "usage": "{tr}fwdto <category name>",
+        "header": "Will forward the replied message to all chats in the given thanosegory",
+        "usage": "{tr}fwdto <thanosegory name>",
         "examples": "{tr}fwdto test",
     },
 )
-async def catbroadcast_send(event):
-    "To forward the message to all chats in the mentioned category."
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
+async def thanosbroadcast_send(event):
+    "To forward the message to all chats in the mentioned thanosegory."
+    thanosinput_str = event.pattern_match.group(1)
+    if not thanosinput_str:
         return await edit_delete(
             event,
-            "To which category should i send this message",
+            "To which thanosegory should i send this message",
             parse_mode=_format.parse_pre,
         )
     reply = await event.get_reply_message()
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not reply:
         return await edit_delete(
             event,
-            "what should i send to to this category ?",
+            "what should i send to to this thanosegory ?",
             parse_mode=_format.parse_pre,
         )
-    keyword = catinput_str.lower()
+    keyword = thanosinput_str.lower()
     no_of_chats = sql.num_broadcastlist_chat(keyword)
-    group_ = Get(cat)
+    group_ = Get(thanos)
     if no_of_chats == 0:
         return await edit_delete(
             event,
-            f"There is no category with name {keyword}. Check '.listall'",
+            f"There is no thanosegory with name {keyword}. Check '.listall'",
             parse_mode=_format.parse_pre,
         )
     chats = sql.get_chat_broadcastlist(keyword)
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
-        "sending this message to all groups in the category",
+        "sending this message to all groups in the thanosegory",
         parse_mode=_format.parse_pre,
     )
     with contextlib.suppress(BaseException):
@@ -295,46 +295,46 @@ async def catbroadcast_send(event):
         except Exception as e:
             LOGS.info(str(e))
         await sleep(0.5)
-    resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
-    await edit_delete(catevent, resultext)
+    resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in thanosegory {keyword}.`"
+    await edit_delete(thanosevent, resultext)
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"A message is forwared to {i} chats out of {no_of_chats} chats in category {keyword}",
+            f"A message is forwared to {i} chats out of {no_of_chats} chats in thanosegory {keyword}",
             parse_mode=_format.parse_pre,
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="rmfrom(?:\s|$)([\s\S]*)",
-    command=("rmfrom", plugin_category),
+    command=("rmfrom", plugin_thanosegory),
     info={
-        "header": "Will remove the specific chat to the mentioned category",
-        "usage": "{tr}rmfrom <category name>",
+        "header": "Will remove the specific chat to the mentioned thanosegory",
+        "usage": "{tr}rmfrom <thanosegory name>",
         "examples": "{tr}rmfrom test",
     },
 )
-async def catbroadcast_remove(event):
-    "To remove the chat from the mentioned category"
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
+async def thanosbroadcast_remove(event):
+    "To remove the chat from the mentioned thanosegory"
+    thanosinput_str = event.pattern_match.group(1)
+    if not thanosinput_str:
         return await edit_delete(
             event,
-            "From which category should i remove this chat",
+            "From which thanosegory should i remove this chat",
             parse_mode=_format.parse_pre,
         )
-    keyword = catinput_str.lower()
+    keyword = thanosinput_str.lower()
     check = sql.is_in_broadcastlist(keyword, event.chat_id)
     if not check:
         return await edit_delete(
             event,
-            f"This chat is not in the category {keyword}",
+            f"This chat is not in the thanosegory {keyword}",
             parse_mode=_format.parse_pre,
         )
     sql.rm_from_broadcastlist(keyword, event.chat_id)
     await edit_delete(
         event,
-        f"This chat is Now removed from the category {keyword}",
+        f"This chat is Now removed from the thanosegory {keyword}",
         parse_mode=_format.parse_pre,
     )
     chat = await event.get_chat()
@@ -342,41 +342,41 @@ async def catbroadcast_remove(event):
         try:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"The Chat {get_display_name(await event.get_chat())} is removed from category {keyword}",
+                f"The Chat {get_display_name(await event.get_chat())} is removed from thanosegory {keyword}",
                 parse_mode=_format.parse_pre,
             )
         except Exception:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"The user {chat.first_name} is removed from category {keyword}",
+                f"The user {chat.first_name} is removed from thanosegory {keyword}",
                 parse_mode=_format.parse_pre,
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="frmfrom(?:\s|$)([\s\S]*)",
-    command=("frmfrom", plugin_category),
+    command=("frmfrom", plugin_thanosegory),
     info={
-        "header": " To force remove the given chat from a category.",
-        "description": "Suppose if you are muted or group/channel is deleted you cant send message there so you can use this cmd to the chat from that category",
-        "usage": "{tr}frmfrom <category name> <chatid>",
+        "header": " To force remove the given chat from a thanosegory.",
+        "description": "Suppose if you are muted or group/channel is deleted you cant send message there so you can use this cmd to the chat from that thanosegory",
+        "usage": "{tr}frmfrom <thanosegory name> <chatid>",
         "examples": "{tr}frmfrom test -100123456",
     },
 )
-async def catbroadcast_remove(event):
-    "To force remove the given chat from a category."
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
+async def thanosbroadcast_remove(event):
+    "To force remove the given chat from a thanosegory."
+    thanosinput_str = event.pattern_match.group(1)
+    if not thanosinput_str:
         return await edit_delete(
             event,
-            "From which category should i remove this chat",
+            "From which thanosegory should i remove this chat",
             parse_mode=_format.parse_pre,
         )
-    args = catinput_str.split(" ")
+    args = thanosinput_str.split(" ")
     if len(args) != 2:
         return await edit_delete(
             event,
-            "Use proper syntax as shown .frmfrom category_name groupid",
+            "Use proper syntax as shown .frmfrom thanosegory_name groupid",
             parse_mode=_format.parse_pre,
         )
     try:
@@ -389,7 +389,7 @@ async def catbroadcast_remove(event):
         except ValueError:
             return await edit_delete(
                 event,
-                "Use proper syntax as shown .frmfrom category_name groupid",
+                "Use proper syntax as shown .frmfrom thanosegory_name groupid",
                 parse_mode=_format.parse_pre,
             )
     keyword = keyword.lower()
@@ -397,13 +397,13 @@ async def catbroadcast_remove(event):
     if not check:
         return await edit_delete(
             event,
-            f"This chat {groupid} is not in the category {keyword}",
+            f"This chat {groupid} is not in the thanosegory {keyword}",
             parse_mode=_format.parse_pre,
         )
     sql.rm_from_broadcastlist(keyword, groupid)
     await edit_delete(
         event,
-        f"This chat {groupid} is Now removed from the category {keyword}",
+        f"This chat {groupid} is Now removed from the thanosegory {keyword}",
         parse_mode=_format.parse_pre,
     )
     chat = await event.get_chat()
@@ -411,41 +411,41 @@ async def catbroadcast_remove(event):
         try:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"The Chat {get_display_name(await event.get_chat())} is removed from category {keyword}",
+                f"The Chat {get_display_name(await event.get_chat())} is removed from thanosegory {keyword}",
                 parse_mode=_format.parse_pre,
             )
         except Exception:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"The user {chat.first_name} is removed from category {keyword}",
+                f"The user {chat.first_name} is removed from thanosegory {keyword}",
                 parse_mode=_format.parse_pre,
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="delc(?:\s|$)([\s\S]*)",
-    command=("delc", plugin_category),
+    command=("delc", plugin_thanosegory),
     info={
-        "header": "To Deletes the category completely from database",
-        "usage": "{tr}delc <category name>",
+        "header": "To Deletes the thanosegory completely from database",
+        "usage": "{tr}delc <thanosegory name>",
         "examples": "{tr}delc test",
     },
 )
-async def catbroadcast_delete(event):
-    "To delete a category completely."
-    catinput_str = event.pattern_match.group(1)
-    check1 = sql.num_broadcastlist_chat(catinput_str)
+async def thanosbroadcast_delete(event):
+    "To delete a thanosegory completely."
+    thanosinput_str = event.pattern_match.group(1)
+    check1 = sql.num_broadcastlist_chat(thanosinput_str)
     if check1 < 1:
         return await edit_delete(
             event,
-            f"Are you sure that there is category {catinput_str}",
+            f"Are you sure that there is thanosegory {thanosinput_str}",
             parse_mode=_format.parse_pre,
         )
     try:
-        sql.del_keyword_broadcastlist(catinput_str)
+        sql.del_keyword_broadcastlist(thanosinput_str)
         await edit_or_reply(
             event,
-            f"Successfully deleted the category {catinput_str}",
+            f"Successfully deleted the thanosegory {thanosinput_str}",
             parse_mode=_format.parse_pre,
         )
     except Exception as e:

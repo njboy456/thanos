@@ -16,7 +16,7 @@ from ..helpers.functions import get_readable_time
 from ..sql_helper.globals import gvarstatus
 from . import StartTime, THANOSPRO, mention, reply_id
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
 temp_ = "Pong!"
@@ -26,9 +26,9 @@ if Config.THANOSABUSE:
     temp = "__**☞ Pong**__\n➥ `{ping}` **ms**\n➥ __**Bot of **__{mention}"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ping( -a|$)",
-    command=("ping", plugin_category),
+    command=("ping", plugin_thanosegory),
     info={
         "header": "check how long it takes to ping your userbot",
         "flags": {"-a": "average ping"},
@@ -42,17 +42,17 @@ async def _(event):
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
     if flag == " -a":
-        catevent = await edit_or_reply(event, "`!....`")
+        thanosevent = await edit_or_reply(event, "`!....`")
         await asyncio.sleep(0.3)
-        await edit_or_reply(catevent, "`..!..`")
+        await edit_or_reply(thanosevent, "`..!..`")
         await asyncio.sleep(0.3)
-        await edit_or_reply(catevent, "`....!`")
+        await edit_or_reply(thanosevent, "`....!`")
         end = datetime.now()
         tms = (end - start).microseconds / 1000
         ms = round((tms - 0.6) / 3, 3)
-        await edit_or_reply(catevent, f"Average Ping!\n`{ms} ms`")
+        await edit_or_reply(thanosevent, f"Average Ping!\n`{ms} ms`")
     else:
-        catevent = await edit_or_reply(event, temp_)
+        thanosevent = await edit_or_reply(event, temp_)
         end = datetime.now()
         ms = (end - start).microseconds / 1000
         ANIME = None
@@ -74,14 +74,14 @@ async def _(event):
                 await event.client.send_file(
                     event.chat_id, PIC, caption=caption, reply_to=reply_to_id
                 )
-                await catevent.delete()
+                await thanosevent.delete()
             except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
                 return await edit_or_reply(
-                    catevent,
+                    thanosevent,
                     f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
                 )
         else:
             await edit_or_reply(
-                catevent,
+                thanosevent,
                 caption,
             )

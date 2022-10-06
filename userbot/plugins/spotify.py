@@ -54,7 +54,7 @@ SPOTIFY_CLIENT_SECRET = Config.SPOTIFY_CLIENT_SECRET
 LOGS = logging.getLogger(__name__)
 
 
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 
 SP_DATABASE = None  # Main DB (Class Database)
@@ -153,9 +153,9 @@ def ms_converter(millis):
     return f"{minutes}:{str(seconds)}"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spsetup$",
-    command=("spsetup", plugin_category),
+    command=("spsetup", plugin_thanosegory),
     info={
         "header": "Setup for Spotify Auth",
         "description": "Login in your spotify account before doing this\nIn BOT Logger Group do .spsetup then follow the instruction.",
@@ -168,7 +168,7 @@ async def spotify_setup(event):
     if not BOTLOG:
         return await edit_delete(
             event,
-            "For authencation you need to set `PRIVATE_GROUP_BOT_API_ID` in heroku",
+            "For authenthanosion you need to set `PRIVATE_GROUP_BOT_API_ID` in heroku",
             7,
         )
     if not (SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET):
@@ -186,7 +186,7 @@ async def spotify_setup(event):
     async with event.client.conversation(BOTLOG_CHATID) as conv:
         msg = await conv.send_message(
             "Go to the following link in "
-            f"your browser: {authurl.format(SPOTIFY_CLIENT_ID)} and reply this msg with the Page Url you got after giving authencation."
+            f"your browser: {authurl.format(SPOTIFY_CLIENT_ID)} and reply this msg with the Page Url you got after giving authenthanosion."
         )
         res = conv.wait_event(events.NewMessage(outgoing=True, chats=BOTLOG_CHATID))
         res = await res
@@ -484,9 +484,9 @@ async def sp_var_check(event):
     return True
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spbio$",
-    command=("spbio", plugin_category),
+    command=("spbio", plugin_thanosegory),
     info={
         "header": "To Enable or Disable the spotify current playing to bio",
         "usage": "{tr}spbio",
@@ -555,14 +555,14 @@ async def telegraph_lyrics(event, tittle, artist):
 
 
 def file_check():
-    logo = "temp/cat_music.png"
+    logo = "temp/thanos_music.png"
     font_bold = "temp/ArialUnicodeMS.ttf"
     font_mid = "temp/GoogleSans-Medium.ttf"
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     if not os.path.exists(logo):
         urllib.request.urlretrieve(
-            "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Spotify/cat.png",
+            "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Spotify/thanos.png",
             logo,
         )
     if not os.path.exists(font_mid):
@@ -611,17 +611,17 @@ def sp_data(API):
 async def make_thumb(url, client, song, artist, now, full):
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
-    pic_name = "./temp/cat.png"
+    pic_name = "./temp/thanos.png"
     urllib.request.urlretrieve(url, pic_name)
     background = Image.open(pic_name).resize((1024, 1024))
     background = background.filter(ImageFilter.GaussianBlur(5))
     enhancer = ImageEnhance.Brightness(background)
     background = enhancer.enhance(0.5)
     logo, bfont, mfont = file_check()
-    cat = Image.open(logo, "r").resize((1024 // 5, 1024 // 5))
+    thanos = Image.open(logo, "r").resize((1024 // 5, 1024 // 5))
     thumbmask = Image.new("RGBA", (1024, 1024), 0)
     thumbmask.paste(background, (0, 0))
-    thumbmask.paste(cat, (-30, 840), mask=cat)
+    thumbmask.paste(thanos, (-30, 840), mask=thanos)
     thumb_lay = ellipse_layout_create(pic_name, 1.5, 40)
     thumbmask.paste(thumb_lay, (170, 30), thumb_lay)
     thumb, x = ellipse_create(pic_name, 1.6, 0)
@@ -676,9 +676,9 @@ async def get_spotify(event, response):
     return f"https://telegra.ph{url[0]}", tittle, dic, lyrics, symbol
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spnow$",
-    command=("spnow", plugin_category),
+    command=("spnow", plugin_thanosegory),
     info={
         "header": "To fetch scrobble data from spotify",
         "description": "Shows currently playing song. If spbio is on then it send song preview",
@@ -690,23 +690,23 @@ async def spotify_now(event):
     if not await sp_var_check(event):
         return
     msg_id = await reply_id(event)
-    catevent = await edit_or_reply(event, "🎶 `Fetching...`")
+    thanosevent = await edit_or_reply(event, "🎶 `Fetching...`")
     r = sp_data("https://api.spotify.com/v1/me/player/currently-playing")
     if r.status_code == 204:
         return await edit_delete(
-            catevent, "\n**I'm not listening anything right now  ;)**"
+            thanosevent, "\n**I'm not listening anything right now  ;)**"
         )
     if SP_DATABASE.SPOTIFY_MODE:
         info = f"🎶 Vibing ; [{spotify_bio.title}]({spotify_bio.link}) - {spotify_bio.interpret}"
         return await edit_or_reply(event, info, link_preview=True)
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, "spotify")
     await results[0].click(event.chat_id, reply_to=msg_id, hide_via=True)
-    await catevent.delete()
+    await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spinfo$",
-    command=("spinfo", plugin_category),
+    command=("spinfo", plugin_thanosegory),
     info={
         "header": "To fetch Info of current spotify user",
         "description": "Shows user info, if any songs playing then show device also. ",
@@ -740,9 +740,9 @@ async def spotify_now(event):
     await edit_or_reply(event, result, link_preview=True)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="sprecent$",
-    command=("sprecent", plugin_category),
+    command=("sprecent", plugin_thanosegory),
     info={
         "header": "To fetch list of recently played songs",
         "description": "Shows 15 recently played songs form spotify",
@@ -763,9 +763,9 @@ async def spotify_now(event):
     await edit_or_reply(event, song)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(i|)now(?:\s|$)([\s\S]*)",
-    command=("now", plugin_category),
+    command=("now", plugin_thanosegory),
     info={
         "header": "To get song from spotify",
         "description": "Send the currently playing song of spotify or song from a spotify link.",
@@ -780,20 +780,20 @@ async def spotify_now(event):
         ],
     },
 )
-async def spotify_now(event):  # sourcery skip: remove-duplicate-dict-key
+async def spotify_now(event):  # sourcery skip: remove-duplithanose-dict-key
     "Send spotify song"
     chat = "@THANOSMusicRobot"
     await reply_id(event)
     cmd = event.pattern_match.group(1).lower()
     link = event.pattern_match.group(2)
-    catevent = await edit_or_reply(event, "🎶 `Fetching...`")
+    thanosevent = await edit_or_reply(event, "🎶 `Fetching...`")
     if not link:
         if not await sp_var_check(event):
             return
         r = sp_data("https://api.spotify.com/v1/me/player/currently-playing")
         if r.status_code == 204:
             return await edit_delete(
-                catevent, "**I'm not listening anything right now  ;)**"
+                thanosevent, "**I'm not listening anything right now  ;)**"
             )
         received = r.json()
         if received["currently_playing_type"] == "track":
@@ -807,8 +807,8 @@ async def spotify_now(event):  # sourcery skip: remove-duplicate-dict-key
             purgeflag = await conv.send_message(link)
         song = await conv.get_response()
         if not song.media:
-            return await edit_delete(catevent, "**Sorry unable to find the song.  ;!**")
+            return await edit_delete(thanosevent, "**Sorry unable to find the song.  ;!**")
         await event.client.send_read_acknowledge(conv.chat_id)
-        await catevent.delete()
+        await thanosevent.delete()
         await event.client.forward_messages(event.chat_id, song)
         await delete_conv(event, chat, purgeflag)

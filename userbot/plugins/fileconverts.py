@@ -29,9 +29,9 @@ from ..helpers.functions import (
     ud_frames,
     unsavegif,
 )
-from ..helpers.utils import _catutils, _format, parse_pre, reply_id
+from ..helpers.utils import _thanosutils, _format, parse_pre, reply_id
 
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 
 if not os.path.isdir("./temp"):
@@ -44,9 +44,9 @@ PATH = os.path.join("./temp", "temp_vid.mp4")
 thumb_loc = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="spin(?: |$)((-)?(s)?)$",
-    command=("spin", plugin_category),
+    command=("spin", plugin_thanosegory),
     info={
         "header": "To convert replied image or sticker to spining round video.",
         "flags": {
@@ -64,7 +64,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     reply = await event.get_reply_message()
     if not (reply and reply.media):
         return await edit_delete(event, "`Reply to supported Media...`")
-    catevent = await edit_or_reply(event, "__Making round spin video wait a sec.....__")
+    thanosevent = await edit_or_reply(event, "__Making round spin video wait a sec.....__")
     output = await Convert.to_image(
         event, reply, dirct="./temp", file="spin.png", noedits=True
     )
@@ -88,7 +88,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
         outfile.write(output.getbuffer())
     final = await Convert.to_gif(event, "Output.gif", file="spin.mp4", noedits=True)
     if final[1] is None:
-        return await edit_delete(catevent, "__Unable to make spin gif.__")
+        return await edit_delete(thanosevent, "__Unable to make spin gif.__")
     media_info = MediaInfo.parse(final[1])
     aspect_ratio = 1
     for track in media_info.tracks:
@@ -99,7 +99,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     PATH = os.path.join(Config.TEMP_DIR, "round.gif")
     if aspect_ratio != 1:
         crop_by = min(height, width)
-        await _catutils.runcmd(
+        await _thanosutils.runcmd(
             f'ffmpeg -i {final[1]} -vf "crop={crop_by}:{crop_by}" {PATH}'
         )
     else:
@@ -134,27 +134,27 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     )
     if not args:
         await unsavegif(event, sandy)
-    await catevent.delete()
+    await thanosevent.delete()
     for i in [final[1], "Output.gif", meme_file, PATH]:
         if os.path.exists(i):
             os.remove(i)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="circle ?((-)?s)?$",
-    command=("circle", plugin_category),
+    command=("circle", plugin_thanosegory),
     info={
         "header": "To make circular video note/sticker.",
         "description": "crcular video note supports atmost 60 sec so give appropariate video.",
         "usage": "{tr}circle <reply to video/sticker/image>",
     },
 )
-async def video_catfile(event):  # sourcery no-metrics
+async def video_thanosfile(event):  # sourcery no-metrics
     # sourcery skip: low-code-quality
     "To make circular video note."
     reply = await event.get_reply_message()
     args = event.pattern_match.group(1)
-    catid = await reply_id(event)
+    thanosid = await reply_id(event)
     if not reply or not reply.media:
         return await edit_delete(event, "`Reply to supported media`")
     mediatype = await media_type(reply)
@@ -166,14 +166,14 @@ async def video_catfile(event):  # sourcery no-metrics
     if mediatype not in ["Photo", "Audio", "Voice", "Gif", "Sticker", "Video"]:
         return await edit_delete(event, "```Supported Media not found...```")
     flag = True
-    catevent = await edit_or_reply(event, "`Converting to round format..........`")
-    catfile = await reply.download_media(file="./temp/")
+    thanosevent = await edit_or_reply(event, "`Converting to round format..........`")
+    thanosfile = await reply.download_media(file="./temp/")
     if mediatype in ["Gif", "Video", "Sticker"]:
-        if not catfile.endswith((".webp")):
-            if catfile.endswith((".tgs")):
-                await Convert.to_gif(event, catfile, file="circle.mp4", noedits=True)
-                catfile = "./temp/circle.mp4"
-            media_info = MediaInfo.parse(catfile)
+        if not thanosfile.endswith((".webp")):
+            if thanosfile.endswith((".tgs")):
+                await Convert.to_gif(event, thanosfile, file="circle.mp4", noedits=True)
+                thanosfile = "./temp/circle.mp4"
+            media_info = MediaInfo.parse(thanosfile)
             aspect_ratio = 1
             for track in media_info.tracks:
                 if track.track_type == "Video":
@@ -182,44 +182,44 @@ async def video_catfile(event):  # sourcery no-metrics
                     width = track.width
             if aspect_ratio != 1:
                 crop_by = min(height, width)
-                await _catutils.runcmd(
-                    f'ffmpeg -i {catfile} -vf "crop={crop_by}:{crop_by}" {PATH}'
+                await _thanosutils.runcmd(
+                    f'ffmpeg -i {thanosfile} -vf "crop={crop_by}:{crop_by}" {PATH}'
                 )
             else:
-                copyfile(catfile, PATH)
-            if str(catfile) != str(PATH):
-                os.remove(catfile)
+                copyfile(thanosfile, PATH)
+            if str(thanosfile) != str(PATH):
+                os.remove(thanosfile)
             try:
-                catthumb = await reply.download_media(thumb=-1)
+                thanosthumb = await reply.download_media(thumb=-1)
             except Exception as e:
                 LOGS.error(f"circle - {e}")
     elif mediatype in ["Voice", "Audio"]:
-        catthumb = None
+        thanosthumb = None
         try:
-            catthumb = await reply.download_media(thumb=-1)
+            thanosthumb = await reply.download_media(thumb=-1)
         except Exception:
-            catthumb = os.path.join("./temp", "thumb.jpg")
-            await thumb_from_audio(catfile, catthumb)
-        if catthumb is not None and not os.path.exists(catthumb):
-            catthumb = os.path.join("./temp", "thumb.jpg")
-            copyfile(thumb_loc, catthumb)
+            thanosthumb = os.path.join("./temp", "thumb.jpg")
+            await thumb_from_audio(thanosfile, thanosthumb)
+        if thanosthumb is not None and not os.path.exists(thanosthumb):
+            thanosthumb = os.path.join("./temp", "thumb.jpg")
+            copyfile(thumb_loc, thanosthumb)
         if (
-            catthumb is not None
-            and not os.path.exists(catthumb)
+            thanosthumb is not None
+            and not os.path.exists(thanosthumb)
             and os.path.exists(thumb_loc)
         ):
             flag = False
-            catthumb = os.path.join("./temp", "thumb.jpg")
-            copyfile(thumb_loc, catthumb)
-        if catthumb is not None and os.path.exists(catthumb):
-            await _catutils.runcmd(
-                f"""ffmpeg -loop 1 -i {catthumb} -i {catfile} -c:v libx264 -tune stillimage -c:a aac -b:a 192k -vf \"scale=\'iw-mod (iw,2)\':\'ih-mod(ih,2)\',format=yuv420p\" -shortest -movflags +faststart {PATH}"""
+            thanosthumb = os.path.join("./temp", "thumb.jpg")
+            copyfile(thumb_loc, thanosthumb)
+        if thanosthumb is not None and os.path.exists(thanosthumb):
+            await _thanosutils.runcmd(
+                f"""ffmpeg -loop 1 -i {thanosthumb} -i {thanosfile} -c:v libx264 -tune stillimage -c:a aac -b:a 192k -vf \"scale=\'iw-mod (iw,2)\':\'ih-mod(ih,2)\',format=yuv420p\" -shortest -movflags +faststart {PATH}"""
             )
-            os.remove(catfile)
+            os.remove(thanosfile)
         else:
-            os.remove(catfile)
+            os.remove(thanosfile)
             return await edit_delete(
-                catevent, "`No thumb found to make it video note`", 5
+                thanosevent, "`No thumb found to make it video note`", 5
             )
     if mediatype in [
         "Voice",
@@ -227,7 +227,7 @@ async def video_catfile(event):  # sourcery no-metrics
         "Gif",
         "Video",
         "Sticker",
-    ] and not catfile.endswith((".webp")):
+    ] and not thanosfile.endswith((".webp")):
         if os.path.exists(PATH):
             c_time = time.time()
             attributes, mime_type = get_attributes(PATH)
@@ -235,7 +235,7 @@ async def video_catfile(event):  # sourcery no-metrics
             uploaded = await event.client.fast_upload_file(
                 file=ul,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, catevent, c_time, "Uploading....")
+                    progress(d, t, thanosevent, c_time, "Uploading....")
                 ),
             )
             ul.close()
@@ -252,12 +252,12 @@ async def video_catfile(event):  # sourcery no-metrics
                     )
                 ],
                 force_file=False,
-                thumb=await event.client.upload_file(catthumb) if catthumb else None,
+                thumb=await event.client.upload_file(thanosthumb) if thanosthumb else None,
             )
             sandy = await event.client.send_file(
                 event.chat_id,
                 media,
-                reply_to=catid,
+                reply_to=thanosid,
                 video_note=True,
                 supports_streaming=True,
             )
@@ -266,8 +266,8 @@ async def video_catfile(event):  # sourcery no-metrics
                 await unsavegif(event, sandy)
             os.remove(PATH)
             if flag:
-                os.remove(catthumb)
-        await catevent.delete()
+                os.remove(thanosthumb)
+        await thanosevent.delete()
         return
     data = reply.photo or reply.media.document
     img = io.BytesIO()
@@ -286,16 +286,16 @@ async def video_catfile(event):  # sourcery no-metrics
     img = ImageOps.fit(img, (w, h))
     img.putalpha(mask)
     im = io.BytesIO()
-    im.name = "cat.webp"
+    im.name = "thanos.webp"
     img.save(im)
     im.seek(0)
-    await event.client.send_file(event.chat_id, im, reply_to=catid)
-    await catevent.delete()
+    await event.client.send_file(event.chat_id, im, reply_to=thanosid)
+    await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(stoi|mtoi)$",
-    command=("mtoi", plugin_category),
+    command=("mtoi", plugin_thanosegory),
     info={
         "header": "Reply this command to a media to get image.",
         "description": "This also converts every media to image. that is if video then extracts image from that video. if audio then extracts thumb.",
@@ -314,7 +314,7 @@ async def _(event):
         event,
         reply,
         dirct="./temp",
-        file="catconverter.png",
+        file="thanosconverter.png",
     )
     if output[1] is None:
         return await edit_delete(
@@ -325,9 +325,9 @@ async def _(event):
     await output[0].delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="itos$",
-    command=("itos", plugin_category),
+    command=("itos", plugin_thanosegory),
     info={
         "header": "Reply this command to image to get sticker.",
         "description": "This also converts every media to sticker. that is if video then extracts image from that video. if audio then extracts thumb.",
@@ -361,9 +361,9 @@ async def _(event):
     await output[0].delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ttf ([\s\S]*)",
-    command=("ttf", plugin_category),
+    command=("ttf", plugin_thanosegory),
     info={
         "header": "Text to file.",
         "description": "Reply this command to a text message to convert it into file with given name.",
@@ -387,9 +387,9 @@ async def get(event):
         await edit_or_reply(event, "reply to text message as `.ttf <file name>`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ftt$",
-    command=("ftt", plugin_category),
+    command=("ftt", plugin_thanosegory),
     info={
         "header": "File to text.",
         "description": "Reply this command to a file to print text in that file to text message.",
@@ -435,9 +435,9 @@ async def get(event):
         os.remove(file_loc)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ftoi$",
-    command=("ftoi", plugin_category),
+    command=("ftoi", plugin_thanosegory),
     info={
         "header": "Reply this command to a image file to convert it to image",
         "usage": "{tr}ftoi",
@@ -456,7 +456,7 @@ async def on_file_to_photo(event):
         return await edit_delete(event, "`For sticker to image use mtoi command`")
     if image.size > 10 * 1024 * 1024:
         return  # We'd get PhotoSaveFileInvalidError otherwise
-    catt = await edit_or_reply(event, "`Converting.....`")
+    thanost = await edit_or_reply(event, "`Converting.....`")
     file = await event.client.download_media(target, file=BytesIO())
     file.seek(0)
     img = await event.client.upload_file(file)
@@ -473,12 +473,12 @@ async def on_file_to_photo(event):
         )
     except PhotoInvalidDimensionsError:
         return
-    await catt.delete()
+    await thanost.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="(gif|vtog)$",
-    command=("gif", plugin_category),
+    command=("gif", plugin_thanosegory),
     info={
         "header": "Converts Given video/animated sticker to gif.",
         "usage": "{tr}gif <reply to animated sticker or video>",
@@ -486,8 +486,8 @@ async def on_file_to_photo(event):
 )
 async def _(event):  # sourcery no-metrics
     "Converts Given animated sticker to gif"
-    catreply = await event.get_reply_message()
-    memetype = await meme_type(catreply)
+    thanosreply = await event.get_reply_message()
+    memetype = await meme_type(thanosreply)
     if memetype == "Gif":
         return await edit_delete(event, "`This is already gif.`")
     if memetype not in [
@@ -499,34 +499,34 @@ async def _(event):  # sourcery no-metrics
         return await edit_delete(
             event, "`Stupid!, This is not animated sticker/video sticker/video.`"
         )
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event,
         "Converting this media to GiF...\n This may takes upto few mins..",
         parse_mode=_format.parse_pre,
     )
     reply_to_id = await reply_id(event)
-    catfile = await event.client.download_media(catreply)
-    final = await Convert.to_gif(event, catfile, file="animation.mp4", noedits=True)
-    catgif = final[1]
-    if catgif is None:
-        return await edit_delete(catevent, "`Sorry couldn't convert the media to gif.`")
+    thanosfile = await event.client.download_media(thanosreply)
+    final = await Convert.to_gif(event, thanosfile, file="animation.mp4", noedits=True)
+    thanosgif = final[1]
+    if thanosgif is None:
+        return await edit_delete(thanosevent, "`Sorry couldn't convert the media to gif.`")
     sandy = await event.client.send_file(
         event.chat_id,
-        catgif,
+        thanosgif,
         support_streaming=True,
         force_document=False,
         reply_to=reply_to_id,
     )
     await unsavegif(event, sandy)
-    await catevent.delete()
-    for files in (catgif, catfile):
+    await thanosevent.delete()
+    for files in (thanosgif, thanosfile):
         if files and os.path.exists(files):
             os.remove(files)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="nfc (mp3|voice)",
-    command=("nfc", plugin_category),
+    command=("nfc", plugin_thanosegory),
     info={
         "header": "Converts the required media file to voice or mp3 file.",
         "usage": [
@@ -613,7 +613,7 @@ async def _(event):
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
-        stdout, stderr = await process.communicate()
+        stdout, stderr = await process.communithanose()
         stderr.decode().strip()
         stdout.decode().strip()
         os.remove(downloaded_file_name)
@@ -635,9 +635,9 @@ async def _(event):
             await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="itog(?: |$)((-)?(r|l|u|d|s|i)?)$",
-    command=("itog", plugin_category),
+    command=("itog", plugin_thanosegory),
     info={
         "header": "To convert replied image or sticker to gif",
         "description": "Bt deafualt will use -i as flag",
@@ -662,14 +662,14 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to make it gif.__")
-    if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
+    if mediatype == "Sticker" and reply.document.mime_type == "applithanosion/i-tgsticker":
         return await edit_delete(
             event,
             "__Reply to photo or sticker to make it gif. Animated sticker is not supported__",
         )
     args = event.pattern_match.group(1)
     args = args.replace("-", "") if args else "i"
-    catevent = await edit_or_reply(event, "__🎞 Making Gif from the replied media...__")
+    thanosevent = await edit_or_reply(event, "__🎞 Making Gif from the replied media...__")
     imag = await Convert.to_image(
         event, reply, dirct="./temp", file="itog.png", noedits=True
     )
@@ -694,7 +694,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
         elif args == "i":
             outframes = await invert_frames(image, w, h, outframes)
     except Exception as e:
-        return await edit_delete(catevent, f"**Error**\n__{e}__")
+        return await edit_delete(thanosevent, f"**Error**\n__{e}__")
     output = io.BytesIO()
     output.name = "Output.gif"
     outframes[0].save(output, save_all=True, append_images=outframes[1:], duration=0.7)
@@ -704,7 +704,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     output = await Convert.to_gif(event, "Output.gif", file="output.mp4", noedits=True)
     if output[0] is None:
         await edit_delete(
-            catevent, "__There was some error in the media. I can't format it to gif.__"
+            thanosevent, "__There was some error in the media. I can't format it to gif.__"
         )
         for i in [output[1], "Output.gif", imag[1]]:
             if os.path.exists(i):
@@ -712,7 +712,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
         return
     sandy = await event.client.send_file(event.chat_id, output, reply_to=reply)
     await unsavegif(event, sandy)
-    await catevent.delete()
+    await thanosevent.delete()
     for i in [output[1], "Output.gif", imag[1]]:
         if os.path.exists(i):
             os.remove(i)

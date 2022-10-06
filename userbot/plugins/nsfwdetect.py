@@ -1,5 +1,5 @@
 # Copyright (C) 2020 BY - GitHub.com/code-rgb [TG - @deleteduser420]
-# ported to cat by @mrconfused (@thanosceo)
+# ported to thanos by @mrconfused (@thanosceo)
 
 import os
 
@@ -10,12 +10,12 @@ from userbot import THANOSPRO
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="detect$",
-    command=("detect", plugin_category),
+    command=("detect", plugin_thanosegory),
     info={
         "header": "To detect the nudity in reply image.",
         "description": "Reply detect command to any image or non animated sticker to detect the nudity in that",
@@ -33,13 +33,13 @@ async def detect(event):
         return await edit_delete(
             event, "`Reply to any image or non animated sticker !`", 5
         )
-    catevent = await edit_or_reply(event, "`Downloading the file to check...`")
+    thanosevent = await edit_or_reply(event, "`Downloading the file to check...`")
     media = await event.client.download_media(reply)
     if not media.endswith(("png", "jpg", "webp")):
         return await edit_delete(
             event, "`Reply to any image or non animated sticker !`", 5
         )
-    catevent = await edit_or_reply(event, "`Detecting NSFW limit...`")
+    thanosevent = await edit_or_reply(event, "`Detecting NSFW limit...`")
     r = requests.post(
         "https://api.deepai.org/api/nsfw-detector",
         files={
@@ -49,7 +49,7 @@ async def detect(event):
     )
     os.remove(media)
     if "status" in r.json():
-        return await edit_delete(catevent, r.json()["status"])
+        return await edit_delete(thanosevent, r.json()["status"])
     r_json = r.json()["output"]
     pic_id = r.json()["id"]
     percentage = r_json["nsfw_score"] * 100
@@ -62,7 +62,7 @@ async def detect(event):
             confidence = int(float(parts["confidence"]) * 100)
             result += f"<b>• {name}:</b>\n   <code>{confidence} %</code>\n"
     await edit_or_reply(
-        catevent,
+        thanosevent,
         result,
         link_preview=False,
         parse_mode="HTML",

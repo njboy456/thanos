@@ -5,12 +5,12 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_or_reply
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="filext(?:\s|$)([\s\S]*)",
-    command=("filext", plugin_category),
+    command=("filext", plugin_thanosegory),
     info={
         "header": "Shows you the detailed information of given extension type.",
         "usage": "{tr}filext <extension>",

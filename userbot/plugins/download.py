@@ -17,7 +17,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import humanbytes, progress
 from ..helpers.utils import _format
 
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 NAME = "untitled"
 
@@ -28,9 +28,9 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     return str(path.absolute()) if full else path.stem + path.suffix
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="d(own)?l(oad)?(?:\s|$)([\s\S]*)",
-    command=("download", plugin_category),
+    command=("download", plugin_thanosegory),
     info={
         "header": "To download the replied telegram file",
         "description": "Will download the replied telegram file to server .",
@@ -104,7 +104,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         else:
             dl = io.FileIO(file_name.absolute(), "a")
             await event.client.fast_download_file(
-                location=reply.document,
+                lothanosion=reply.document,
                 out=dl,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(d, t, mone, c_time, "trying to download")
@@ -164,7 +164,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         ms = (end - start).seconds
         if downloader.isSuccessful():
             await mone.edit(
-                f"**•  Downloaded in {ms} seconds.**\n**•  Downloaded file location :- ** `{os.path.relpath(downloaded_file_name,os.getcwd())}`"
+                f"**•  Downloaded in {ms} seconds.**\n**•  Downloaded file lothanosion :- ** `{os.path.relpath(downloaded_file_name,os.getcwd())}`"
             )
         else:
             await mone.edit("Incorrect URL\n {}".format(input_str))
@@ -172,9 +172,9 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         await mone.edit("`Reply to a message to download to my local server.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="d(own)?l(oad)?to(?:\s|$)([\s\S]*)",
-    command=("dlto", plugin_category),
+    command=("dlto", plugin_thanosegory),
     info={
         "header": "To download the replied telegram file to specific directory",
         "description": "Will download the replied telegram file to server that is your custom folder.",
@@ -197,9 +197,9 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             parse_mode=_format.parse_pre,
         )
 
-    location = os.path.join(pwd, input_str)
-    if not os.path.isdir(location):
-        os.makedirs(location)
+    lothanosion = os.path.join(pwd, input_str)
+    if not os.path.isdir(lothanosion):
+        os.makedirs(lothanosion)
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(
@@ -214,7 +214,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     for attr in getattr(reply.document, "attributes", []):
         if isinstance(attr, types.DocumentAttributeFilename):
             name = attr.file_name
-    path = pathlib.Path(os.path.join(location, name))
+    path = pathlib.Path(os.path.join(lothanosion, name))
     ext = get_extension(reply.document)
     if path and not path.suffix and ext:
         path = path.with_suffix(ext)
@@ -228,11 +228,11 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         else:
             file_name = path / name
     elif path and not path.suffix and ext:
-        file_name = location / path.with_suffix(ext)
+        file_name = lothanosion / path.with_suffix(ext)
     elif path:
         file_name = path
     else:
-        file_name = location / name
+        file_name = lothanosion / name
     file_name.parent.mkdir(parents=True, exist_ok=True)
     c_time = time.time()
     if (
@@ -251,7 +251,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
     elif not reply.document:
         file_name = await reply.download_media(
-            file=location,
+            file=lothanosion,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(d, t, mone, c_time, "trying to download")
             ),
@@ -259,7 +259,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     else:
         dl = io.FileIO(file_name.absolute(), "a")
         await event.client.fast_download_file(
-            location=reply.document,
+            lothanosion=reply.document,
             out=dl,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(d, t, mone, c_time, "trying to download")

@@ -16,14 +16,14 @@ from . import reply_id
 
 LOGS = logging.getLogger(os.path.basename(__name__))
 ppath = os.path.join(os.getcwd(), "temp", "githubuser.jpg")
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 GIT_TEMP_DIR = "./temp/"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="repo$",
-    command=("repo", plugin_category),
+    command=("repo", plugin_thanosegory),
     info={
         "header": "Source code link of userbot",
         "usage": [
@@ -39,9 +39,9 @@ async def source(e):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="github( -l(\d+))? ([\s\S]*)",
-    command=("github", plugin_category),
+    command=("github", plugin_thanosegory),
     info={
         "header": "Shows the information about an user on GitHub of given username",
         "flags": {"-l": "repo limit : default to 5"},
@@ -58,7 +58,7 @@ async def _(event):
         async with session.get(URL) as request:
             if request.status == 404:
                 return await edit_delete(event, f"`{username} not found`")
-            catevent = await edit_or_reply(event, "`fetching github info ...`")
+            thanosevent = await edit_or_reply(event, "`fetching github info ...`")
             result = await request.json()
             photo = result["avatar_url"]
             if result["bio"]:
@@ -78,7 +78,7 @@ async def _(event):
                 \n🔧 **Type:** `{type}`\
                 \n🏢 **Company:** `{company}`\
                 \n🔭 **Blog** : {blog}\
-                \n📍 **Location** : `{location}`\
+                \n📍 **Lothanosion** : `{lothanosion}`\
                 \n📝 **Bio** : __{bio}__\
                 \n❤️ **Followers** : `{followers}`\
                 \n👁 **Following** : `{following}`\
@@ -102,12 +102,12 @@ async def _(event):
                 reply_to=reply_to,
             )
             os.remove(ppath)
-            await catevent.delete()
+            await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="commit$",
-    command=("commit", plugin_category),
+    command=("commit", plugin_thanosegory),
     info={
         "header": "To commit the replied plugin to github.",
         "description": "It uploads the given file to your github repo in **userbot/plugins** folder\

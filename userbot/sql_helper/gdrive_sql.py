@@ -18,11 +18,11 @@ from . import BASE, SESSION
 
 
 class Gdrive(BASE):
-    __tablename__ = "catgdrive"
-    cat = Column(String(50), primary_key=True)
+    __tablename__ = "thanosgdrive"
+    thanos = Column(String(50), primary_key=True)
 
-    def __init__(self, cat):
-        self.cat = cat
+    def __init__(self, thanos):
+        self.thanos = thanos
 
 
 Gdrive.__table__.create(checkfirst=True)
@@ -30,7 +30,7 @@ Gdrive.__table__.create(checkfirst=True)
 
 def is_folder(folder_id):
     try:
-        return SESSION.query(Gdrive).filter(Gdrive.cat == str(folder_id))
+        return SESSION.query(Gdrive).filter(Gdrive.thanos == str(folder_id))
     except BaseException:
         return None
     finally:
@@ -55,6 +55,6 @@ def get_parent_id():
 
 
 def rmparent_id(folder_id):
-    if note := SESSION.query(Gdrive).filter(Gdrive.cat == folder_id):
+    if note := SESSION.query(Gdrive).filter(Gdrive.thanos == folder_id):
         note.delete()
         SESSION.commit()

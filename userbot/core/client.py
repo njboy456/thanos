@@ -49,7 +49,7 @@ sudo_enabledcmds = sudo_enabled_cmds()
 
 
 class THANOSBOTClient(TelegramClient):
-    def cat_cmd(
+    def thanos_cmd(
         self: TelegramClient,
         pattern: str or tuple = None,
         info: Union[str, Dict[str, Union[str, List[str], Dict[str, str]]]]

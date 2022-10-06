@@ -7,12 +7,12 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="magisk$",
-    command=("magisk", plugin_category),
+    command=("magisk", plugin_thanosegory),
     info={
         "header": "To Get latest Magisk releases",
         "usage": "{tr}magisk",
@@ -37,9 +37,9 @@ async def kakashi(event):
     await edit_or_reply(event, releases)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="device(?: |$)(\S*)",
-    command=("device", plugin_category),
+    command=("device", plugin_thanosegory),
     info={
         "header": "To get android device name/model from its codename",
         "usage": "{tr}device <codename>",
@@ -74,9 +74,9 @@ async def device_info(event):
     await edit_or_reply(event, reply)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="codename(?: |)([\S]*)(?: |)([\s\S]*)",
-    command=("codename", plugin_category),
+    command=("codename", plugin_thanosegory),
     info={
         "header": "To Search for android device codename",
         "usage": "{tr}codename <brand> <device>",
@@ -125,9 +125,9 @@ async def codename_info(event):
     await edit_or_reply(event, reply)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="twrp(?: |$)(\S*)",
-    command=("twrp", plugin_category),
+    command=("twrp", plugin_thanosegory),
     info={
         "header": "To Get latest twrp download links for android device.",
         "usage": "{tr}twrp <codename>",

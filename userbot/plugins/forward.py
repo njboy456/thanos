@@ -8,7 +8,7 @@ from userbot.core.logger import logging
 from ..Config import Config
 from ..core.managers import edit_or_reply
 
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 LOGS = logging.getLogger(__name__)
 
@@ -22,18 +22,18 @@ class FPOST:
 FPOST_ = FPOST()
 
 
-async def all_groups_id(cat):
-    catgroups = []
-    async for dialog in cat.client.iter_dialogs():
+async def all_groups_id(thanos):
+    thanosgroups = []
+    async for dialog in thanos.client.iter_dialogs():
         entity = dialog.entity
         if isinstance(entity, Channel) and entity.megagroup:
-            catgroups.append(entity.id)
-    return catgroups
+            thanosgroups.append(entity.id)
+    return thanosgroups
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="frwd$",
-    command=("frwd", plugin_category),
+    command=("frwd", plugin_thanosegory),
     info={
         "header": "To get view counter for the message. that is will delete old message and send new message where you can see how any people saw your message",
         "usage": "{tr}frwd",
@@ -61,9 +61,9 @@ async def _(event):
             LOGS.info(str(e))
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="resend$",
-    command=("resend", plugin_category),
+    command=("resend", plugin_thanosegory),
     info={
         "header": "To resend the message again. Useful to remove forword tag",
         "usage": "{tr}resend",
@@ -83,9 +83,9 @@ async def _(event):
     await event.client.send_message(event.chat_id, m.text)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="fpost ([\s\S]*)",
-    command=("fpost", plugin_category),
+    command=("fpost", plugin_thanosegory),
     info={
         "header": "Split the word and forwards each letter from previous messages in that group",
         "usage": "{tr}fpost <text>",

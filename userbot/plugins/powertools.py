@@ -15,12 +15,12 @@ from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, HEROKU_APP
 
 LOGS = logging.getLogger(__name__)
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="restart$",
-    command=("restart", plugin_category),
+    command=("restart", plugin_thanosegory),
     info={
         "header": "Restarts the bot !!",
         "usage": "{tr}restart",
@@ -54,9 +54,9 @@ async def _(event):
         LOGS.error(e)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="shutdown$",
-    command=("shutdown", plugin_category),
+    command=("shutdown", plugin_thanosegory),
     info={
         "header": "Shutdowns the bot !!",
         "description": "To turn off the dyno of heroku. you cant turn on by bot you need to got to heroku and turn on or use @hk_heroku_bot",
@@ -74,9 +74,9 @@ async def _(event):
         os._exit(143)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="sleep( [0-9]+)?$",
-    command=("sleep", plugin_category),
+    command=("sleep", plugin_thanosegory),
     info={
         "header": "Userbot will stop working for the mentioned time.",
         "usage": "{tr}sleep <seconds>",
@@ -98,9 +98,9 @@ async def _(event):
     await event.edit("`OK, I'm awake now.`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="notify (on|off)$",
-    command=("notify", plugin_category),
+    command=("notify", plugin_thanosegory),
     info={
         "header": "To update the your chat after restart or reload .",
         "description": "Will send the ping cmd as reply to the previous last msg of (restart/reload/update cmds).",

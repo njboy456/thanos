@@ -15,7 +15,7 @@ from ..sql_helper import global_collectionjson as sql
 from ..sql_helper import global_list as sqllist
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 LOGS = logging.getLogger(__name__)
 ENV = bool(os.environ.get("ENV", False))
@@ -36,9 +36,9 @@ def get_key(val):
     return None
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="sudo (on|off)$",
-    command=("sudo", plugin_category),
+    command=("sudo", plugin_thanosegory),
     info={
         "header": "To enable or disable sudo of your THANOSBOT.",
         "description": "Initially all sudo commands are disabled, you need to enable them by addscmd\n Check `{tr}help -c addscmd`",
@@ -88,9 +88,9 @@ async def chat_blacklist(event):
     await edit_delete(event, "It was turned off already")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="addsudo(?:\s|$)([\s\S]*)",
-    command=("addsudo", plugin_category),
+    command=("addsudo", plugin_thanosegory),
     info={
         "header": "To add user as your sudo.",
         "usage": "{tr}addsudo <username/reply/mention>",
@@ -128,9 +128,9 @@ async def add_sudo_user(event):
     await event.client.reload(msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="delsudo(?:\s|$)([\s\S]*)",
-    command=("delsudo", plugin_category),
+    command=("delsudo", plugin_thanosegory),
     info={
         "header": "To remove user from your sudo.",
         "usage": "{tr}delsudo <username/reply/mention>",
@@ -159,9 +159,9 @@ async def _(event):
     await event.client.reload(msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="vsudo$",
-    command=("vsudo", plugin_category),
+    command=("vsudo", plugin_thanosegory),
     info={
         "header": "To list users for whom you are sudo.",
         "usage": "{tr}vsudo",
@@ -188,9 +188,9 @@ async def _(event):
     await edit_or_reply(event, result)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="addscmd(s)?(?:\s|$)([\s\S]*)",
-    command=("addscmd", plugin_category),
+    command=("addscmd", plugin_thanosegory),
     info={
         "header": "To enable cmds for sudo users.",
         "flags": {
@@ -221,7 +221,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
     input_str = input_str.split()
     if input_str[0] == "-all":
-        catevent = await edit_or_reply(event, "__Enabling all safe cmds for sudo....__")
+        thanosevent = await edit_or_reply(event, "__Enabling all safe cmds for sudo....__")
         totalcmds = CMD_INFO.keys()
         flagcmds = (
             PLG_INFO["botcontrols"]
@@ -244,14 +244,14 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         if len(sudocmds) > 0:
             sqllist.del_keyword_list("sudo_enabled_cmds")
     elif input_str[0] == "-full":
-        catevent = await edit_or_reply(
+        thanosevent = await edit_or_reply(
             event, "__Enabling compelete sudo for users....__"
         )
         loadcmds = CMD_INFO.keys()
         if len(sudocmds) > 0:
             sqllist.del_keyword_list("sudo_enabled_cmds")
     elif input_str[0] == "-p":
-        catevent = event
+        thanosevent = event
         input_str.remove("-p")
         loadcmds = []
         for plugin in input_str:
@@ -262,7 +262,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             else:
                 loadcmds += PLG_INFO[plugin]
     else:
-        catevent = event
+        thanosevent = event
         loadcmds = []
         for cmd in input_str:
             if cmd not in CMD_INFO:
@@ -279,13 +279,13 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     )
     if errors != "":
         output += "\n**Errors:**\n" + errors
-    msg = await edit_or_reply(catevent, output)
+    msg = await edit_or_reply(thanosevent, output)
     await event.client.reload(msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="rmscmd(s)?(?:\s|$)([\s\S]*)?",
-    command=("rmscmd", plugin_category),
+    command=("rmscmd", plugin_thanosegory),
     info={
         "header": "To disable given cmds for sudo.",
         "flags": {
@@ -316,12 +316,12 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
     input_str = input_str.split()
     if input_str[0] == "-all":
-        catevent = await edit_or_reply(
+        thanosevent = await edit_or_reply(
             event, "__Disabling all enabled cmds for sudo....__"
         )
         flagcmds = sudocmds
     elif input_str[0] == "-flag":
-        catevent = await edit_or_reply(
+        thanosevent = await edit_or_reply(
             event, "__Disabling all flagged cmds for sudo.....__"
         )
         flagcmds = (
@@ -342,7 +342,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         )
         flagcmds = flagcmds + PLG_INFO["heroku"] if ENV else flagcmds + PLG_INFO["vps"]
     elif input_str[0] == "-p":
-        catevent = event
+        thanosevent = event
         input_str.remove("-p")
         flagcmds = []
         for plugin in input_str:
@@ -353,7 +353,7 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
             else:
                 flagcmds += PLG_INFO[plugin]
     else:
-        catevent = event
+        thanosevent = event
         flagcmds = []
         for cmd in input_str:
             if cmd not in CMD_INFO:
@@ -373,13 +373,13 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     )
     if errors != "":
         output += "\n**Errors:**\n" + errors
-    msg = await edit_or_reply(catevent, output)
+    msg = await edit_or_reply(thanosevent, output)
     await event.client.reload(msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="vscmds( -d)?$",
-    command=("vscmds", plugin_category),
+    command=("vscmds", plugin_thanosegory),
     info={
         "header": "To show list of enabled cmds for sudo.",
         "description": "will show you the list of all enabled commands",

@@ -1,4 +1,4 @@
-# reverse search and google search  plugin for cat
+# reverse search and google search  plugin for thanos
 import contextlib
 import os
 import re
@@ -21,7 +21,7 @@ opener = urllib.request.build_opener()
 useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
 opener.addheaders = [("User-agent", useragent)]
 
-plugin_category = "tools"
+plugin_thanosegory = "tools"
 
 
 async def ParseSauce(googleurl):
@@ -56,9 +56,9 @@ async def scam(results, lim):
     return imglinks
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gs ([\s\S]*)",
-    command=("gs", plugin_category),
+    command=("gs", plugin_thanosegory),
     info={
         "header": "Google search command.",
         "flags": {
@@ -79,7 +79,7 @@ async def scam(results, lim):
 )
 async def gsearch(q_event):
     "Google search command."
-    catevent = await edit_or_reply(q_event, "`searching........`")
+    thanosevent = await edit_or_reply(q_event, "`searching........`")
     match = q_event.pattern_match.group(1)
     page = re.findall(r"-p\d+", match)
     lim = re.findall(r"-l\d+", match)
@@ -113,7 +113,7 @@ async def gsearch(q_event):
             try:
                 gresults = await ysearch.async_search(*search_args)
             except Exception as e:
-                return await edit_delete(catevent, f"**Error:**\n`{e}`", time=10)
+                return await edit_delete(thanosevent, f"**Error:**\n`{e}`", time=10)
     msg = ""
     for i in range(lim):
         if i > len(gresults["links"]):
@@ -126,7 +126,7 @@ async def gsearch(q_event):
         except IndexError:
             break
     await edit_or_reply(
-        catevent,
+        thanosevent,
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg,
         link_preview=False,
         aslink=True,
@@ -139,22 +139,22 @@ async def gsearch(q_event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gis ([\s\S]*)",
-    command=("gis", plugin_category),
+    command=("gis", plugin_thanosegory),
     info={
         "header": "Google search in image format",
         "usage": "{tr}gis <query>",
-        "examples": "{tr}gis cat",
+        "examples": "{tr}gis thanos",
     },
 )
 async def gis(event):
     "To search in google and send result in picture."
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="grs$",
-    command=("grs", plugin_category),
+    command=("grs", plugin_thanosegory),
     info={
         "header": "Google reverse search command.",
         "description": "reverse search replied image or sticker in google and shows results.",
@@ -166,7 +166,7 @@ async def grs(event):
     start = datetime.now()
     OUTPUT_STR = "Reply to an image to do Google Reverse Search"
     if event.reply_to_msg_id:
-        catevent = await edit_or_reply(event, "Pre Processing Media")
+        thanosevent = await edit_or_reply(event, "Pre Processing Media")
         previous_message = await event.get_reply_message()
         previous_message_text = previous_message.message
         BASE_URL = "http://www.google.com"
@@ -193,19 +193,19 @@ async def grs(event):
             google_rs_response = requests.post(
                 SEARCH_URL, files=multipart, allow_redirects=False
             )
-            the_location = google_rs_response.headers.get("Location")
+            the_lothanosion = google_rs_response.headers.get("Lothanosion")
             os.remove(photo[1])
         else:
             previous_message_text = previous_message.message
             SEARCH_URL = "{}/searchbyimage?image_url={}"
             request_url = SEARCH_URL.format(BASE_URL, previous_message_text)
             google_rs_response = requests.get(request_url, allow_redirects=False)
-            the_location = google_rs_response.headers.get("Location")
-        await catevent.edit("Found Google Result. Pouring some soup on it!")
+            the_lothanosion = google_rs_response.headers.get("Lothanosion")
+        await thanosevent.edit("Found Google Result. Pouring some soup on it!")
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0"
         }
-        response = requests.get(the_location, headers=headers)
+        response = requests.get(the_lothanosion, headers=headers)
         soup = BeautifulSoup(response.text, "html.parser")
         # document.getElementsByClassName("r5a77d"): PRS
         try:
@@ -218,24 +218,24 @@ async def grs(event):
             img_size = img_size_div.find_all("div")
         except Exception:
             return await edit_delete(
-                catevent, "`Sorry. I am unable to find similar images`"
+                thanosevent, "`Sorry. I am unable to find similar images`"
             )
         end = datetime.now()
         ms = (end - start).seconds
         OUTPUT_STR = """{img_size}
 <b>Possible Related Search : </b> <a href="{prs_url}">{prs_text}</a> 
-<b>More Info : </b> Open this <a href="{the_location}">Link</a> 
+<b>More Info : </b> Open this <a href="{the_lothanosion}">Link</a> 
 <i>fetched in {ms} seconds</i>""".format(
             **locals()
         )
     else:
-        catevent = event
-    await edit_or_reply(catevent, OUTPUT_STR, parse_mode="HTML", link_preview=False)
+        thanosevent = event
+    await edit_or_reply(thanosevent, OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="reverse(?:\s|$)([\s\S]*)",
-    command=("reverse", plugin_category),
+    command=("reverse", plugin_thanosegory),
     info={
         "header": "Google reverse search command.",
         "description": "reverse search replied image or sticker in google and shows results. if count is not used then it send 1 image by default.",
@@ -260,12 +260,12 @@ async def reverse(event):
         return await edit_delete(
             photo[0], "__Unable to extract image from the replied message.__"
         )
-    catevent = await edit_or_reply(event, "`Processing...`")
+    thanosevent = await edit_or_reply(event, "`Processing...`")
     try:
         image = Image.open(photo[1])
         os.remove(photo[1])
     except OSError:
-        return await catevent.edit("`Unsupported , most likely.`")
+        return await thanosevent.edit("`Unsupported , most likely.`")
     name = "okgoogle.png"
     image.save(name, "PNG")
     image.close()
@@ -279,16 +279,16 @@ async def reverse(event):
             "\n`Parsing source now. Maybe.`"
         )
     else:
-        return await catevent.edit("`Unable to perform reverse search.`")
-    fetchUrl = response.headers["Location"]
+        return await thanosevent.edit("`Unable to perform reverse search.`")
+    fetchUrl = response.headers["Lothanosion"]
     os.remove(name)
     match = await ParseSauce(f"{fetchUrl}&preferences?hl=en&fg=1#languages")
     guess = match["best_guess"]
     imgspage = match["similar_images"]
     if guess and imgspage:
-        await catevent.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
+        await thanosevent.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
     else:
-        return await catevent.edit("`Can't find any kind similar images.`")
+        return await thanosevent.edit("`Can't find any kind similar images.`")
     lim = event.pattern_match.group(1) or 3
     images = await scam(match, lim)
     yeet = []
@@ -301,14 +301,14 @@ async def reverse(event):
             file=yeet,
             reply_to=reply_to,
         )
-    await catevent.edit(
+    await thanosevent.edit(
         f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="google(?:\s|$)([\s\S]*)",
-    command=("google", plugin_category),
+    command=("google", plugin_thanosegory),
     info={
         "header": "To get link for google search",
         "description": "Will show google search link as button instead of google search results try {tr}gs for google search results.",

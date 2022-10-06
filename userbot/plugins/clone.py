@@ -8,16 +8,16 @@ from ..Config import Config
 from ..sql_helper.globals import gvarstatus
 from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, THANOSPRO, edit_delete, get_user_from_event
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 DEFAULTUSER = gvarstatus("FIRST_NAME") or ALIVE_NAME
 DEFAULTUSERBIO = (
     gvarstatus("DEFAULT_BIO") or "sıɥʇ ǝpoɔǝp uǝɥʇ llıʇu∩ ˙ǝɔɐds ǝʇɐʌıɹd ǝɯos ǝɯ ǝʌı⅁"
 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="clone(?:\s|$)([\s\S]*)",
-    command=("clone", plugin_category),
+    command=("clone", plugin_thanosegory),
     info={
         "header": "To clone account of mentiond user or replied user",
         "usage": "{tr}clone <username/userid/reply>",
@@ -59,9 +59,9 @@ async def _(event):
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="revert$",
-    command=("revert", plugin_category),
+    command=("revert", plugin_thanosegory),
     info={
         "header": "To revert back to your original name , bio and profile pic",
         "note": "For proper Functioning of this command you need to set DEFAULT_USER in Database",

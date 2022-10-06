@@ -11,12 +11,12 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import get_user_from_event
 from . import ALIVE_NAME
 
-plugin_category = "fun"
+plugin_thanosegory = "fun"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="scam(?:\s|$)([\s\S]*)",
-    command=("scam", plugin_category),
+    command=("scam", plugin_thanosegory),
     info={
         "header": "To show fake actions for a paticular period of time",
         "description": "if time is not mentioned then it may choose random time 5 or 6 mintues for mentioning time use in seconds",
@@ -30,7 +30,7 @@ plugin_category = "fun"
             "typing",
             "contact",
             "game",
-            "location",
+            "lothanosion",
             "voice",
             "round",
             "video",
@@ -44,7 +44,7 @@ async def _(event):
         "typing",
         "contact",
         "game",
-        "location",
+        "lothanosion",
         "voice",
         "round",
         "video",
@@ -80,9 +80,9 @@ async def _(event):
         return
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="prankpromote(?:\s|$)([\s\S]*)",
-    command=("prankpromote", plugin_category),
+    command=("prankpromote", plugin_thanosegory),
     info={
         "header": "To promote a person without admin rights",
         "note": "You need proper rights for this",
@@ -97,8 +97,8 @@ async def _(event):
 async def _(event):
     "To promote a person without admin rights"
     new_rights = ChatAdminRights(other=True)
-    catevent = await edit_or_reply(event, "`Promoting...`")
-    user, rank = await get_user_from_event(event, catevent)
+    thanosevent = await edit_or_reply(event, "`Promoting...`")
+    user, rank = await get_user_from_event(event, thanosevent)
     if not rank:
         rank = "Admin"
     if not user:
@@ -106,15 +106,15 @@ async def _(event):
     try:
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
-        return await catevent.edit("__I think you don't have permission to promote__")
+        return await thanosevent.edit("__I think you don't have permission to promote__")
     except Exception as e:
-        return await edit_delete(catevent, f"__{e}__", time=10)
-    await catevent.edit("`Promoted Successfully! Now gib Party`")
+        return await edit_delete(thanosevent, f"__{e}__", time=10)
+    await thanosevent.edit("`Promoted Successfully! Now gib Party`")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="padmin$",
-    command=("padmin", plugin_category),
+    command=("padmin", plugin_thanosegory),
     info={
         "header": "Fun animation for faking user promotion",
         "description": "An animation that shows enabling all permissions to him that he is admin(fake promotion)",

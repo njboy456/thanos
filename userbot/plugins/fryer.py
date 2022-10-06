@@ -13,7 +13,7 @@ from ..core.managers import edit_or_reply
 from ..helpers.functions import delete_conv
 from ..helpers.utils import reply_id
 
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 
 async def deepfry(img: Image) -> Image:
@@ -76,9 +76,9 @@ async def check_media(reply_message):
     return data
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="frybot",
-    command=("frybot", plugin_category),
+    command=("frybot", plugin_thanosegory),
     info={
         "header": "Fries the given sticker or image.",
         "usage": "{tr}frybot",
@@ -101,13 +101,13 @@ async def frybot(event):
             output[0], "__Unable to extract image from the replied message.__", 10
         )
     chat = "@image_deepfrybot"
-    catevent = await edit_or_reply(event, "```Processing...```")
+    thanosevent = await edit_or_reply(event, "```Processing...```")
     async with event.client.conversation(chat) as conv:
         try:
             msg_flag = await conv.send_message("/start")
         except YouBlockedUserError:
             await edit_or_reply(
-                catevent, "**Error:** Trying to unblock & retry, wait a sec..."
+                thanosevent, "**Error:** Trying to unblock & retry, wait a sec..."
             )
             await THANOSPRO(unblock("image_deepfrybot"))
             msg_flag = await conv.send_message("/start")
@@ -116,15 +116,15 @@ async def frybot(event):
         await event.client.send_file(conv.chat_id, output[1])
         response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
-        await catevent.delete()
+        await thanosevent.delete()
         await event.client.send_file(event.chat_id, response, reply_to=reply_to)
         await delete_conv(event, chat, msg_flag)
         os.remove(output[1])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="deepfry(?: |$)([1-9])?",
-    command=("deepfry", plugin_category),
+    command=("deepfry", plugin_thanosegory),
     info={
         "header": "image fryer",
         "description": "Fries the given sticker or image based on level if you dont give anything then it is default to 1",

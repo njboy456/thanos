@@ -15,7 +15,7 @@ from ..sql_helper import gban_sql_helper as gban_sql
 from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import BOTLOG, BOTLOG_CHATID, admin_groups, get_user_from_event
 
-plugin_category = "admin"
+plugin_thanosegory = "admin"
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -41,36 +41,36 @@ UNBAN_RIGHTS = ChatBannedRights(
 )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gban(?:\s|$)([\s\S]*)",
-    command=("gban", plugin_category),
+    command=("gban", plugin_thanosegory),
     info={
         "header": "To ban user in every group where you are admin.",
         "description": "Will ban the person in every group where you are admin only.",
         "usage": "{tr}gban <username/reply/userid> <reason (optional)>",
     },
 )
-async def catgban(event):  # sourcery no-metrics
+async def thanosgban(event):  # sourcery no-metrics
     "To ban user in every group where you are admin."
-    cate = await edit_or_reply(event, "`gbanning.......`")
+    thanose = await edit_or_reply(event, "`gbanning.......`")
     start = datetime.now()
-    user, reason = await get_user_from_event(event, cate)
+    user, reason = await get_user_from_event(event, thanose)
     if not user:
         return
     if user.id == THANOSPRO.uid:
-        return await edit_delete(cate, "`why would I ban myself`")
+        return await edit_delete(thanose, "`why would I ban myself`")
     if gban_sql.is_gbanned(user.id):
-        await cate.edit(
+        await thanose.edit(
             f"``[{user.first_name}](tg://user?id={user.id})` is already in gbanned list any way checking again`"
         )
     else:
-        gban_sql.catgban(user.id, reason)
+        gban_sql.thanosgban(user.id, reason)
     san = await admin_groups(event.client)
     count = 0
     sandy = len(san)
     if sandy == 0:
-        return await edit_delete(cate, "`you are not admin of atleast one group` ")
-    await cate.edit(
+        return await edit_delete(thanose, "`you are not admin of atleast one group` ")
+    await thanose.edit(
         f"`initiating gban of `[{user.first_name}](tg://user?id={user.id}) `in {len(san)} groups`"
     )
     for i in range(sandy):
@@ -85,14 +85,14 @@ async def catgban(event):  # sourcery no-metrics
                 f"`You don't have required permission in :`\n**Chat :** {get_display_name(achat)}(`{achat.id}`)\n`For banning here`",
             )
     end = datetime.now()
-    cattaken = (end - start).seconds
+    thanostaken = (end - start).seconds
     if reason:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {cattaken} seconds`!!\n**Reason :** `{reason}`"
+        await thanose.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {thanostaken} seconds`!!\n**Reason :** `{reason}`"
         )
     else:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {cattaken} seconds`!!"
+        await thanose.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {thanostaken} seconds`!!"
         )
     if BOTLOG and count != 0:
         reply = await event.get_reply_message()
@@ -105,7 +105,7 @@ async def catgban(event):  # sourcery no-metrics
                 \n**ID : **`{user.id}`\
                 \n**Reason :** `{reason}`\
                 \n__Banned in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
+                \n**Time taken : **`{thanostaken} seconds`",
             )
         else:
             await event.client.send_message(
@@ -115,7 +115,7 @@ async def catgban(event):  # sourcery no-metrics
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Banned in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
+                \n**Time taken : **`{thanostaken} seconds`",
             )
         with contextlib.suppress(BadRequestError):
             if reply:
@@ -123,35 +123,35 @@ async def catgban(event):  # sourcery no-metrics
                 await reply.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ungban(?:\s|$)([\s\S]*)",
-    command=("ungban", plugin_category),
+    command=("ungban", plugin_thanosegory),
     info={
         "header": "To unban the person from every group where you are admin.",
         "description": "will unban and also remove from your gbanned list.",
         "usage": "{tr}ungban <username/reply/userid>",
     },
 )
-async def catgban(event):
+async def thanosgban(event):
     "To unban the person from every group where you are admin."
-    cate = await edit_or_reply(event, "`ungbanning.....`")
+    thanose = await edit_or_reply(event, "`ungbanning.....`")
     start = datetime.now()
-    user, reason = await get_user_from_event(event, cate)
+    user, reason = await get_user_from_event(event, thanose)
     if not user:
         return
     if gban_sql.is_gbanned(user.id):
-        gban_sql.catungban(user.id)
+        gban_sql.thanosungban(user.id)
     else:
         return await edit_delete(
-            cate,
+            thanose,
             f"[{user.first_name}](tg://user?id={user.id}) `is not in your gbanned list`",
         )
     san = await admin_groups(event.client)
     count = 0
     sandy = len(san)
     if sandy == 0:
-        return await edit_delete(cate, "`you are not even admin of atleast one group `")
-    await cate.edit(
+        return await edit_delete(thanose, "`you are not even admin of atleast one group `")
+    await thanose.edit(
         f"initiating ungban of [{user.first_name}](tg://user?id={user.id}) in `{len(san)}` groups"
     )
     for i in range(sandy):
@@ -166,14 +166,14 @@ async def catgban(event):
                 f"`You don't have required permission in :`\n**Chat :** {get_display_name(achat)}(`{achat.id}`)\n`For Unbanning here`",
             )
     end = datetime.now()
-    cattaken = (end - start).seconds
+    thanostaken = (end - start).seconds
     if reason:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}`) was ungbanned in {count} groups in {cattaken} seconds`!!\n**Reason :** `{reason}`"
+        await thanose.edit(
+            f"[{user.first_name}](tg://user?id={user.id}`) was ungbanned in {count} groups in {thanostaken} seconds`!!\n**Reason :** `{reason}`"
         )
     else:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was ungbanned in {count} groups in {cattaken} seconds`!!"
+        await thanose.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was ungbanned in {count} groups in {thanostaken} seconds`!!"
         )
 
     if BOTLOG and count != 0:
@@ -186,7 +186,7 @@ async def catgban(event):
                 \n**ID : **`{user.id}`\
                 \n**Reason :** `{reason}`\
                 \n__Unbanned in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
+                \n**Time taken : **`{thanostaken} seconds`",
             )
         else:
             await event.client.send_message(
@@ -196,13 +196,13 @@ async def catgban(event):
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Unbanned in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
+                \n**Time taken : **`{thanostaken} seconds`",
             )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="listgban$",
-    command=("listgban", plugin_category),
+    command=("listgban", plugin_thanosegory),
     info={
         "header": "Shows you the list of all gbanned users by you.",
         "usage": "{tr}listgban",
@@ -225,9 +225,9 @@ async def gablist(event):
     await edit_or_reply(event, GBANNED_LIST)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gmute(?:\s|$)([\s\S]*)",
-    command=("gmute", plugin_category),
+    command=("gmute", plugin_thanosegory),
     info={
         "header": "To mute a person in all groups where you are admin.",
         "description": "It doesnt change user permissions but will delete all messages sent by him in the groups where you are admin including in private messages.",
@@ -291,9 +291,9 @@ async def startgmute(event):
             await reply.forward_to(BOTLOG_CHATID)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="ungmute(?:\s|$)([\s\S]*)",
-    command=("ungmute", plugin_category),
+    command=("ungmute", plugin_thanosegory),
     info={
         "header": "To unmute the person in all groups where you were admin.",
         "description": "This will work only if you mute that person by your gmute command.",
@@ -353,35 +353,35 @@ async def endgmute(event):
             )
 
 
-@THANOSPRO.cat_cmd(incoming=True)
+@THANOSPRO.thanos_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="gkick(?:\s|$)([\s\S]*)",
-    command=("gkick", plugin_category),
+    command=("gkick", plugin_thanosegory),
     info={
         "header": "kicks the person in all groups where you are admin.",
         "usage": "{tr}gkick <username/reply/userid> <reason (optional)>",
     },
 )
-async def catgkick(event):  # sourcery no-metrics
+async def thanosgkick(event):  # sourcery no-metrics
     "kicks the person in all groups where you are admin"
-    cate = await edit_or_reply(event, "`gkicking.......`")
+    thanose = await edit_or_reply(event, "`gkicking.......`")
     start = datetime.now()
-    user, reason = await get_user_from_event(event, cate)
+    user, reason = await get_user_from_event(event, thanose)
     if not user:
         return
     if user.id == THANOSPRO.uid:
-        return await edit_delete(cate, "`why would I kick myself`")
+        return await edit_delete(thanose, "`why would I kick myself`")
     san = await admin_groups(event.client)
     count = 0
     sandy = len(san)
     if sandy == 0:
-        return await edit_delete(cate, "`you are not admin of atleast one group` ")
-    await cate.edit(
+        return await edit_delete(thanose, "`you are not admin of atleast one group` ")
+    await thanose.edit(
         f"`initiating gkick of the `[user](tg://user?id={user.id}) `in {len(san)} groups`"
     )
     for i in range(sandy):
@@ -396,14 +396,14 @@ async def catgkick(event):  # sourcery no-metrics
                 f"`You don't have required permission in :`\n**Chat :** {get_display_name(achat)}(`{achat.id}`)\n`For kicking there`",
             )
     end = datetime.now()
-    cattaken = (end - start).seconds
+    thanostaken = (end - start).seconds
     if reason:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {cattaken} seconds`!!\n**Reason :** `{reason}`"
+        await thanose.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {thanostaken} seconds`!!\n**Reason :** `{reason}`"
         )
     else:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {cattaken} seconds`!!"
+        await thanose.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {thanostaken} seconds`!!"
         )
 
     if BOTLOG and count != 0:
@@ -417,7 +417,7 @@ async def catgkick(event):  # sourcery no-metrics
                 \n**ID : **`{user.id}`\
                 \n**Reason :** `{reason}`\
                 \n__Kicked in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
+                \n**Time taken : **`{thanostaken} seconds`",
             )
         else:
             await event.client.send_message(
@@ -427,7 +427,7 @@ async def catgkick(event):  # sourcery no-metrics
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Kicked in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
+                \n**Time taken : **`{thanostaken} seconds`",
             )
         if reply:
             await reply.forward_to(BOTLOG_CHATID)

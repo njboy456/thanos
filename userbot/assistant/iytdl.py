@@ -41,12 +41,12 @@ YOUTUBE_REGEX = re.compile(
     r"(?:youtube\.com|youtu\.be)/(?:[\w-]+\?v=|embed/|v/|shorts/)?([\w-]{11})"
 )
 PATH = "./userbot/cache/ytsearch.json"
-plugin_category = "bot"
+plugin_thanosegory = "bot"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="iytdl(?:\s|$)([\s\S]*)",
-    command=("iytdl", plugin_category),
+    command=("iytdl", plugin_thanosegory),
     info={
         "header": "ytdl with inline buttons.",
         "description": "To search and download youtube videos by inline buttons.",
@@ -65,7 +65,7 @@ async def iytdl_inline(event):
         input_url = (reply.text).strip()
     if not input_url:
         return await edit_delete(event, "Give input or reply to a valid youtube URL")
-    catevent = await edit_or_reply(event, f"🔎 Searching Youtube for: `'{input_url}'`")
+    thanosevent = await edit_or_reply(event, f"🔎 Searching Youtube for: `'{input_url}'`")
     flag = True
     cout = 0
     results = None
@@ -81,10 +81,10 @@ async def iytdl_inline(event):
         if cout > 5:
             flag = False
     if results:
-        await catevent.delete()
+        await thanosevent.delete()
         await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     else:
-        await catevent.edit("`Sorry!. Can't find any results`")
+        await thanosevent.edit("`Sorry!. Can't find any results`")
 
 
 @THANOSPRO.tgbot.on(

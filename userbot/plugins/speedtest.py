@@ -11,7 +11,7 @@ from userbot import THANOSPRO
 from ..core.managers import edit_or_reply
 from ..helpers.utils import reply_id
 
-plugin_category = "utils"
+plugin_thanosegory = "utils"
 
 
 def convert_from_bytes(size):
@@ -24,9 +24,9 @@ def convert_from_bytes(size):
     return f"{round(size, 2)} {units[n]}"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="speedtest(?:\s|$)([\s\S]*)",
-    command=("speedtest", plugin_category),
+    command=("speedtest", plugin_thanosegory),
     info={
         "header": "Botserver's speedtest by ookla.",
         "options": {
@@ -51,7 +51,7 @@ async def _(event):
         as_document = False
     elif input_str == "text":
         as_text = True
-    catevent = await edit_or_reply(
+    thanosevent = await edit_or_reply(
         event, "`Calculating my internet speed. Please wait!`"
     )
     start = time()
@@ -73,7 +73,7 @@ async def _(event):
         response = s.results.share()
         speedtest_image = response
         if as_text:
-            await catevent.edit(
+            await thanosevent.edit(
                 """`SpeedTest completed in {} seconds`
 
 `Download: {} (or) {} MB/s`
@@ -103,7 +103,7 @@ async def _(event):
 
             await event.delete()
     except Exception as exc:
-        await catevent.edit(
+        await thanosevent.edit(
             """**SpeedTest** completed in {} seconds
 Download: {} (or) {} MB/s
 Upload: {} (or) {} MB/s

@@ -7,14 +7,14 @@ from PIL import Image, ImageFilter, UnidentifiedImageError
 from ..core.managers import edit_delete, edit_or_reply
 from . import THANOSPRO, reply_id
 
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 name = "Profile Photos"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="poto(?:\s|$)([\s\S]*)",
-    command=("poto", plugin_category),
+    command=("poto", plugin_thanosegory),
     info={
         "header": "To get user or group profile pic.",
         "description": "Reply to a user to get his profile pic or use command along\
@@ -80,9 +80,9 @@ async def potocmd(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="blur(?:\s|$)([\s\S]*)",
-    command=("blur", plugin_category),
+    command=("blur", plugin_thanosegory),
     info={
         "header": "To blur picture.",
         "description": "Reply to a user to blur his profile picture , or reply to a photo to blur that.",

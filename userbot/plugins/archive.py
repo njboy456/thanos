@@ -15,7 +15,7 @@ from ..Config import Config
 from . import THANOSPRO, edit_delete, edit_or_reply, progress
 
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
-plugin_category = "misc"
+plugin_thanosegory = "misc"
 
 
 def zipdir(dirName):
@@ -27,9 +27,9 @@ def zipdir(dirName):
     return filePaths
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="zip(?:\s|$)([\s\S]*)",
-    command=("zip", plugin_category),
+    command=("zip", plugin_thanosegory),
     info={
         "header": "To compress the file/folders",
         "description": "Will create a zip file for the given file path or folder path",
@@ -68,9 +68,9 @@ async def zip_file(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="tar(?:\s|$)([\s\S]*)",
-    command=("tar", plugin_category),
+    command=("tar", plugin_thanosegory),
     info={
         "header": "To compress the file/folders to tar file",
         "description": "Will create a tar file for the given file path or folder path",
@@ -110,9 +110,9 @@ async def tar_file(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="unzip(?:\s|$)([\s\S]*)",
-    command=("unzip", plugin_category),
+    command=("unzip", plugin_thanosegory),
     info={
         "header": "To unpack the given zip file",
         "description": "Reply to a zip file or provide zip file path with command to unzip the given file",
@@ -165,7 +165,7 @@ async def zip_file(event):  # sourcery no-metrics
         try:
             dl = io.FileIO(filename, "a")
             await event.client.fast_download_file(
-                location=reply.document,
+                lothanosion=reply.document,
                 out=dl,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(d, t, mone, c_time, "trying to download")
@@ -194,9 +194,9 @@ async def zip_file(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="untar(?:\s|$)([\s\S]*)",
-    command=("untar", plugin_category),
+    command=("untar", plugin_thanosegory),
     info={
         "header": "To unpack the given tar file",
         "description": "Reply to a tar file or provide tar file path with command to unpack the given tar file",
@@ -247,7 +247,7 @@ async def untar_file(event):  # sourcery no-metrics
         try:
             dl = io.FileIO(filename, "a")
             await event.client.fast_download_file(
-                location=reply.document,
+                lothanosion=reply.document,
                 out=dl,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(d, t, mone, c_time, "trying to download")

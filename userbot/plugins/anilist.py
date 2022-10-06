@@ -47,12 +47,12 @@ headers = {
 ppath = os.path.join(os.getcwd(), "temp", "anilistuser.jpg")
 anime_path = os.path.join(os.getcwd(), "temp", "animeresult.jpg")
 
-plugin_category = "extra"
+plugin_thanosegory = "extra"
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="aq$",
-    command=("aq", plugin_category),
+    command=("aq", plugin_thanosegory),
     info={
         "header": "Get random Anime quotes.",
         "usage": "{tr}aq",
@@ -71,9 +71,9 @@ async def anime_quote(event):
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="aluser(?:\s|$)([\s\S]*)",
-    command=("aluser", plugin_category),
+    command=("aluser", plugin_thanosegory),
     info={
         "header": "Search User profiles in anilist.",
         "usage": "{tr}aluser <username>",
@@ -90,11 +90,11 @@ async def anilist_usersearch(event):
             search_query = reply.text
         else:
             return await edit_delete(event, "__Whom should i search.__")
-    catevent = await edit_or_reply(event, "`Searching user profile in anilist...`")
+    thanosevent = await edit_or_reply(event, "`Searching user profile in anilist...`")
     searchresult = await anilist_user(search_query)
     if len(searchresult) == 1:
         return await edit_or_reply(
-            catevent, f"**Error while searching user profile:**\n{searchresult[0]}"
+            thanosevent, f"**Error while searching user profile:**\n{searchresult[0]}"
         )
     downloader = SmartDL(searchresult[1], ppath, progress_bar=False)
     downloader.start(blocking=False)
@@ -107,12 +107,12 @@ async def anilist_usersearch(event):
         reply_to=reply_to,
     )
     os.remove(ppath)
-    await catevent.delete()
+    await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="mal(?:\s|$)([\s\S]*)",
-    command=("mal", plugin_category),
+    command=("mal", plugin_thanosegory),
     info={
         "header": "Search profiles of MAL.",
         "usage": "{tr}mal <username>",
@@ -176,9 +176,9 @@ async def user(event):
     await event.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="airing(?:\s|$)([\s\S]*)",
-    command=("airing", plugin_category),
+    command=("airing", plugin_thanosegory),
     info={
         "header": "Shows you the time left for the new episode of current running anime show.",
         "usage": "{tr}airing",
@@ -207,9 +207,9 @@ async def anilist(event):
     await edit_or_reply(event, ms_g)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="anime(?:\s|$)([\s\S]*)",
-    command=("anime", plugin_category),
+    command=("anime", plugin_thanosegory),
     info={
         "header": "search anime.",
         "description": "Fetches anime information from anilist",
@@ -258,7 +258,7 @@ async def anilist(event):  # sourcery no-metrics
             event,
             "`anime number must be in between 1 to 10 use -l flag to query results`",
         )
-    catevent = await edit_or_reply(event, "`Searching Anime..`")
+    thanosevent = await edit_or_reply(event, "`Searching Anime..`")
     match = match.replace("-s", "")
     listview = bool(listview)
     match = match.replace("-d", "")
@@ -266,16 +266,16 @@ async def anilist(event):  # sourcery no-metrics
     query = match.strip()
     result, respone = await searchanilist(query)
     if not respone:
-        return await edit_delete(catevent, result)
+        return await edit_delete(thanosevent, result)
     if len(result) == 0:
         return await edit_or_reply(
-            catevent, f"**Search query:** `{query}`\n**Result:** `No results found`"
+            thanosevent, f"**Search query:** `{query}`\n**Result:** `No results found`"
         )
     input_str = result[0]["title"]["english"] or result[0]["title"]["romaji"]
     if myanime:
         result = await callAPI(input_str)
         msg = await formatJSON(result)
-        await catevent.edit(msg, link_preview=True)
+        await thanosevent.edit(msg, link_preview=True)
         return
     if listview:
         msg = f"<b>Search Query: </b> <code>{query}</code>\n\n<b>Results:</b>\n"
@@ -290,12 +290,12 @@ async def anilist(event):  # sourcery no-metrics
             else:
                 msg += f'<b>{i}.</b> <code>{result["title"]["romaji"]}</code> - <a href="{result["siteUrl"]}">{result["title"]["native"]}</a>\n'
             i += 1
-        await catevent.edit(msg, parse_mode="html")
+        await thanosevent.edit(msg, parse_mode="html")
         return
     input_str = result[animeno - 1]["title"]["romaji"] if specific else query
     caption, image = await get_anime_manga(input_str, "anime_anime", event.chat_id)
     if image is None:
-        await edit_or_reply(catevent, caption, parse_mode="html")
+        await edit_or_reply(thanosevent, caption, parse_mode="html")
         return
     try:
         downloader = SmartDL(image, anime_path, progress_bar=False)
@@ -309,7 +309,7 @@ async def anilist(event):  # sourcery no-metrics
             parse_mode="html",
             reply_to=reply_to,
         )
-        await catevent.delete()
+        await thanosevent.delete()
         os.remove(anime_path)
     except BaseException:
         image = getBannerLink(first_mal_id, True)
@@ -320,12 +320,12 @@ async def anilist(event):  # sourcery no-metrics
             parse_mode="html",
             reply_to=reply_to,
         )
-        await catevent.delete()
+        await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="manga(?:\s|$)([\s\S]*)",
-    command=("manga", plugin_category),
+    command=("manga", plugin_thanosegory),
     info={
         "header": "search manga.",
         "description": "Fetches manga information from anilist",
@@ -374,7 +374,7 @@ async def anilist(event):  # sourcery no-metrics
             event,
             "`manga number must be in between 1 to 10 use -l flag to query results`",
         )
-    catevent = await edit_or_reply(event, "`Searching manga..`")
+    thanosevent = await edit_or_reply(event, "`Searching manga..`")
     match = match.replace("-s", "")
     listview = bool(listview)
     match = match.replace("-d", "")
@@ -382,16 +382,16 @@ async def anilist(event):  # sourcery no-metrics
     query = match.strip()
     result, respone = await searchanilist(query, manga=True)
     if not respone:
-        return await edit_delete(catevent, result)
+        return await edit_delete(thanosevent, result)
     if len(result) == 0:
         return await edit_or_reply(
-            catevent, f"**Search query:** `{query}`\n**Result:** `No results found`"
+            thanosevent, f"**Search query:** `{query}`\n**Result:** `No results found`"
         )
     input_str = result[0]["title"]["english"] or result[0]["title"]["romaji"]
     if myanime:
         result = await callAPI(input_str)
         msg = await formatJSON(result)
-        await catevent.edit(msg, link_preview=True)
+        await thanosevent.edit(msg, link_preview=True)
         return
     if listview:
         msg = f"<b>Search Query: </b> <code>{query}</code>\n\n<b>Results:</b>\n"
@@ -406,12 +406,12 @@ async def anilist(event):  # sourcery no-metrics
             else:
                 msg += f'<b>{i}.</b> <code>{result["title"]["romaji"]}</code> - <a href="{result["siteUrl"]}">{result["title"]["native"]}</a>\n'
             i += 1
-        await catevent.edit(msg, parse_mode="html")
+        await thanosevent.edit(msg, parse_mode="html")
         return
     input_str = result[animeno - 1]["title"]["romaji"] if specific else query
     caption, image = await get_anime_manga(input_str, "anime_manga", event.chat_id)
     if image is None:
-        await edit_or_reply(catevent, caption, parse_mode="html")
+        await edit_or_reply(thanosevent, caption, parse_mode="html")
         return
     try:
         downloader = SmartDL(image, anime_path, progress_bar=False)
@@ -425,7 +425,7 @@ async def anilist(event):  # sourcery no-metrics
             parse_mode="html",
             reply_to=reply_to,
         )
-        await catevent.delete()
+        await thanosevent.delete()
         os.remove(anime_path)
     except BaseException:
         image = getBannerLink(first_mal_id, True)
@@ -436,12 +436,12 @@ async def anilist(event):  # sourcery no-metrics
             parse_mode="html",
             reply_to=reply_to,
         )
-        await catevent.delete()
+        await thanosevent.delete()
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="fillers(?:\s|$)([\s\S]*)",
-    command=("fillers", plugin_category),
+    command=("fillers", plugin_thanosegory),
     info={
         "header": "To get list of filler episodes.",
         "flags": {
@@ -521,9 +521,9 @@ async def get_anime(event):
     await edit_or_reply(event, msg)
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="char(?:\s|$)([\s\S]*)",
-    command=("char", plugin_category),
+    command=("char", plugin_thanosegory),
     info={
         "header": "search character.",
         "description": "Fetches character information from anilist",
@@ -569,7 +569,7 @@ async def anilist(event):  # sourcery no-metrics
             event,
             "`character number must be in between 1 to 10 use -l flag to query results`",
         )
-    catevent = await edit_or_reply(event, "`Searching character..`")
+    thanosevent = await edit_or_reply(event, "`Searching character..`")
     match = match.replace("-s", "")
     listview = bool(listview)
     query = match.strip()
@@ -578,7 +578,7 @@ async def anilist(event):  # sourcery no-metrics
     result = result["data"]["Page"]["characters"]
     if len(result) == 0:
         return await edit_or_reply(
-            catevent, f"**Search query:** `{query}`\n**Result:** `No results found`"
+            thanosevent, f"**Search query:** `{query}`\n**Result:** `No results found`"
         )
     if listview:
         msg = f"<b>Search Query: </b> <code>{query}</code>\n\n<b>Results:</b>\n"
@@ -589,7 +589,7 @@ async def anilist(event):  # sourcery no-metrics
                 break
             msg += f'<b>{i}.</b> <code>{result["name"]["full"]}</code> - <a href="{result["siteUrl"]}">{result["name"]["first"]}</a>\n'
             i += 1
-        await catevent.edit(msg, parse_mode="html")
+        await thanosevent.edit(msg, parse_mode="html")
         return
     result = result[animeno - 1] if specific else result[0]
     for entity in result:
@@ -638,9 +638,9 @@ async def anilist(event):  # sourcery no-metrics
     )
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="a(kaizoku|kayo|indi)(?: |$)([\S\s]*)",
-    command=("akaizoku", plugin_category),
+    command=("akaizoku", plugin_thanosegory),
     info={
         "header": "Shows you anime download link.",
         "usage": [
@@ -667,7 +667,7 @@ async def anime_download(event):  # sourcery no-metrics
         return await edit_delete(
             event, "__What should i search ? Gib me Something to Search__"
         )
-    catevent = await edit_or_reply(event, "`Searching anime...`")
+    thanosevent = await edit_or_reply(event, "`Searching anime...`")
     search_query = search_query.replace(" ", "+")
     if input_str == "kaizoku":
         search_url = f"https://animekaizoku.com/?s={search_query}"
@@ -713,12 +713,12 @@ async def anime_download(event):  # sourcery no-metrics
                 result += f"• <a href={post_link}>{post_name}</a>\n"
         else:
             result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>IndiAnime</code>"
-    await catevent.edit(result, parse_mode="html")
+    await thanosevent.edit(result, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="upcoming$",
-    command=("upcoming", plugin_category),
+    command=("upcoming", plugin_thanosegory),
     info={
         "header": "Shows you upcoming anime's.",
         "usage": "{tr}upcoming",
@@ -738,9 +738,9 @@ async def upcoming(event):
     await edit_or_reply(event, rep, parse_mode="html")
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="aschedule(?: |$)([\S\s]*)",
-    command=("aschedule", plugin_category),
+    command=("aschedule", plugin_thanosegory),
     info={
         "header": "Shows you animes to be aired on that day.",
         "description": "To get list of animes to be aired on that day use can also use 0 for monday , 1 for tuesday.... 6 for sunday.",
@@ -763,9 +763,9 @@ async def aschedule_fetch(event):
     await edit_or_reply(event, result[0])
 
 
-@THANOSPRO.cat_cmd(
+@THANOSPRO.thanos_cmd(
     pattern="w(hat)?anime$",
-    command=("whatanime", plugin_category),
+    command=("whatanime", plugin_thanosegory),
     info={
         "header": "Reverse search of anime.",
         "usage": [
@@ -805,11 +805,11 @@ async def whatanime(event):
             response = upload_file(output[1])
         except exceptions.TelegraphException as exc:
             return await edit_delete(output[0], f"**Error :**\n__{exc}__")
-    cat = f"https://telegra.ph{response[0]}"
+    thanos = f"https://telegra.ph{response[0]}"
     await output[0].edit("`Searching for result..`")
     async with aiohttp.ClientSession() as session:
         async with session.post(
-            f"https://api.trace.moe/search?anilistInfo&url={quote_plus(cat)}"
+            f"https://api.trace.moe/search?anilistInfo&url={quote_plus(thanos)}"
         ) as raw_resp0:
             resp0 = await raw_resp0.json()
         framecount = resp0["frameCount"]
