@@ -56,7 +56,7 @@ wand
 wget
 yt_dlp
 
-git+https://github.com/thanosceo/Telethon@beta
+git+https://github.com/rishabhanand2/Telethon
 git+https://github.com/goldsmith/Wikipedia
-git+https://github.com/thanosceo/py-googletrans
+git+https://github.com/rishabhanand2/py-googletrans
 git+https://github.com/alexmercerind/youtube-search-python
