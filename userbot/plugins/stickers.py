@@ -10,7 +10,7 @@ import string
 import urllib.request
 
 import cloudscraper
-import emoji as thanosemoji
+import emoji as catemoji
 from bs4 import BeautifulSoup as bs
 from PIL import Image
 from telethon import events
@@ -32,7 +32,7 @@ from ..helpers.functions import crop_and_divide
 from ..helpers.tools import media_type, meme_type
 from ..sql_helper.globals import gvarstatus
 
-plugin_thanosegory = "fun"
+plugin_category = "fun"
 
 # modified and developed by @mrconfused , @jisan7509
 
@@ -63,8 +63,8 @@ KANGING_STR = [
 ]
 
 
-def verify_cond(thanosarray, text):
-    return any(i in text for i in thanosarray)
+def verify_cond(catarray, text):
+    return any(i in text for i in catarray)
 
 
 def pack_name(userid, pack, is_anim, is_video):
@@ -76,7 +76,7 @@ def pack_name(userid, pack, is_anim, is_video):
 
 
 def char_is_emoji(character):
-    return character in thanosemoji.UNICODE_EMOJI["en"]
+    return character in catemoji.UNICODE_EMOJI["en"]
 
 
 def pack_nick(username, pack, is_anim, is_video):
@@ -94,7 +94,7 @@ def pack_nick(username, pack, is_anim, is_video):
     return f"@{username} Vol.{pack}"
 
 
-async def delpack(thanosevent, conv, args, packname):
+async def delpack(catevent, conv, args, packname):
     try:
         await conv.send_message("/delpack")
     except YouBlockedUserError:
@@ -135,7 +135,7 @@ async def resize_photo(photo):
 
 
 async def newpacksticker(
-    thanosevent,
+    catevent,
     conv,
     cmd,
     args,
@@ -169,7 +169,7 @@ async def newpacksticker(
         await conv.send_file(stfile, force_document=True)
     rsp = await conv.get_response()
     if not verify_cond(EMOJI_SEN, rsp.text):
-        await thanosevent.edit(
+        await catevent.edit(
             f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp.text}"
         )
         if not pkang:
@@ -197,7 +197,7 @@ async def newpacksticker(
 
 
 async def add_to_pack(
-    thanosevent,
+    catevent,
     conv,
     args,
     packname,
@@ -237,12 +237,12 @@ async def add_to_pack(
             pack = 1
         packname = pack_name(userid, pack, is_anim, is_video)
         packnick = pack_nick(username, pack, is_anim, is_video)
-        await thanosevent.edit(f"`Switching to Pack {pack} due to insufficient space`")
+        await catevent.edit(f"`Switching to Pack {pack} due to insufficient space`")
         await conv.send_message(packname)
         x = await conv.get_response()
         if x.message == "Invalid set selected.":
             return await newpacksticker(
-                thanosevent,
+                catevent,
                 conv,
                 cmd,
                 args,
@@ -268,7 +268,7 @@ async def add_to_pack(
         await conv.send_file(stfile, force_document=True)
         rsp = await conv.get_response()
     if not verify_cond(EMOJI_SEN, rsp.message):
-        await thanosevent.edit(
+        await catevent.edit(
             f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp.message}"
         )
         if not pkang:
@@ -285,9 +285,9 @@ async def add_to_pack(
     return pack, packname
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="kang(?:\s|$)([\s\S]*)",
-    command=("kang", plugin_thanosegory),
+    command=("kang", plugin_category),
     info={
         "header": "To kang a sticker.",
         "description": "Kang's the sticker/image/video/gif/webm file to the specified pack and uses the emoji('s) you picked",
@@ -308,25 +308,25 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
             user.first_name.encode("utf-8").decode("ascii")
             username = user.first_name
         except UnicodeDecodeError:
-            username = f"thanos_{user.id}"
+            username = f"cat_{user.id}"
     else:
         username = user.username
     userid = user.id
     if message and message.media:
         memetype = await meme_type(message)
         if memetype == "Photo":
-            thanosevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
+            catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             photo = io.BytesIO()
             photo = await args.client.download_media(message.photo, photo)
         elif memetype == "Static Sticker":
-            thanosevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
+            catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             photo = io.BytesIO()
             await args.client.download_media(message.media.document, photo)
             if message.media.document.attributes[1].alt:
                 emoji = message.media.document.attributes[1].alt
                 emojibypass = True
         elif memetype == "Animated Sticker":
-            thanosevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
+            catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             await args.client.download_media(
                 message.media.document, "AnimatedSticker.tgs"
             )
@@ -346,7 +346,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 for attribute in attributes:
                     if isinstance(attribute, DocumentAttributeSticker):
                         if message.media.document.size > 261120:
-                            thanosevent = await edit_or_reply(
+                            catevent = await edit_or_reply(
                                 args, "__🎞Converting into Animated sticker..__"
                             )
                             sticker = (
@@ -359,10 +359,10 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                                 )
                             )[1]
                             await edit_or_reply(
-                                thanosevent, f"`{random.choice(KANGING_STR)}`"
+                                catevent, f"`{random.choice(KANGING_STR)}`"
                             )
                         else:
-                            thanosevent = await edit_or_reply(
+                            catevent = await edit_or_reply(
                                 args, f"`{random.choice(KANGING_STR)}`"
                             )
                             sticker = await args.client.download_media(
@@ -371,7 +371,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                         emoji = attribute.alt
                         emojibypass = True
             else:
-                thanosevent = await edit_or_reply(
+                catevent = await edit_or_reply(
                     args, "__🎞Converting into Animated sticker..__"
                 )
                 sticker = (
@@ -379,7 +379,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                         args, message, dirct="./", file="animate.webm", noedits=True
                     )
                 )[1]
-                await edit_or_reply(thanosevent, f"`{random.choice(KANGING_STR)}`")
+                await edit_or_reply(catevent, f"`{random.choice(KANGING_STR)}`")
         else:
             await edit_delete(args, "`Unsupported File!`")
             return
@@ -393,14 +393,14 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
         if len(splat) == 2:
             if char_is_emoji(splat[0][0]):
                 if char_is_emoji(splat[1][0]):
-                    return await thanosevent.edit("check `.info stickers`")
+                    return await catevent.edit("check `.info stickers`")
                 pack = splat[1]  # User sent both
                 emoji = splat[0]
             elif char_is_emoji(splat[1][0]):
                 pack = splat[0]  # User sent both
                 emoji = splat[1]
             else:
-                return await thanosevent.edit("check `.info stickers`")
+                return await catevent.edit("check `.info stickers`")
         elif len(splat) == 1:
             if char_is_emoji(splat[0][0]):
                 emoji = splat[0]
@@ -428,7 +428,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
         ):
             async with args.client.conversation("@Stickers") as conv:
                 packname, emoji = await add_to_pack(
-                    thanosevent,
+                    catevent,
                     conv,
                     args,
                     packname,
@@ -444,17 +444,17 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
             if packname is None:
                 return
             await edit_delete(
-                thanosevent,
+                catevent,
                 f"`Sticker kanged successfully!\
                     \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
                 parse_mode="md",
                 time=10,
             )
         else:
-            await thanosevent.edit("`Brewing a new Pack...`")
+            await catevent.edit("`Brewing a new Pack...`")
             async with args.client.conversation("@Stickers") as conv:
                 otherpack, packname, emoji = await newpacksticker(
-                    thanosevent,
+                    catevent,
                     conv,
                     cmd,
                     args,
@@ -472,7 +472,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 return
             if otherpack:
                 await edit_delete(
-                    thanosevent,
+                    catevent,
                     f"`Sticker kanged to a Different Pack !\
                     \nAnd Newly created pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
                     parse_mode="md",
@@ -480,7 +480,7 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 )
             else:
                 await edit_delete(
-                    thanosevent,
+                    catevent,
                     f"`Sticker kanged successfully!\
                     \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
                     parse_mode="md",
@@ -488,9 +488,9 @@ async def kang(args):  # sourcery no-metrics  # sourcery skip: low-code-quality
                 )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pkang(?:\s|$)([\s\S]*)",
-    command=("pkang", plugin_thanosegory),
+    command=("pkang", plugin_category),
     info={
         "header": "To kang entire sticker sticker.",
         "description": "Kang's the entire sticker pack of replied sticker to the specified pack",
@@ -508,14 +508,14 @@ async def pack_kang(event):  # sourcery no-metrics
             user.first_name.encode("utf-8").decode("ascii")
             username = user.first_name
         except UnicodeDecodeError:
-            username = f"thanos_{user.id}"
+            username = f"cat_{user.id}"
     photo = None
     userid = user.id
     is_anim = False
     is_video = False
     emoji = None
     reply = await event.get_reply_message()
-    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if (
         not reply
         or await media_type(reply) is None
@@ -526,7 +526,7 @@ async def pack_kang(event):  # sourcery no-metrics
         )
     try:
         stickerset_attr = reply.document.attributes[1]
-        thanosevent = await edit_or_reply(
+        catevent = await edit_or_reply(
             event, "`Fetching details of the sticker pack, please wait..`"
         )
     except BaseException:
@@ -545,7 +545,7 @@ async def pack_kang(event):  # sourcery no-metrics
         )
     except Exception:
         return await edit_delete(
-            thanosevent,
+            catevent,
             "`I guess this sticker is not part of any pack. So, i cant kang this sticker pack try kang for this sticker`",
         )
     kangst = 1
@@ -564,7 +564,7 @@ async def pack_kang(event):  # sourcery no-metrics
     for message in reqd_sticker_set.documents:
         if "image" in message.mime_type.split("/"):
             await edit_or_reply(
-                thanosevent,
+                catevent,
                 f"`This sticker pack is kanging now . Status of kang process : {kangst}/{noofst}`",
             )
             photo = io.BytesIO()
@@ -576,7 +576,7 @@ async def pack_kang(event):  # sourcery no-metrics
                 emoji = message.attributes[1].alt
         elif "tgsticker" in message.mime_type:
             await edit_or_reply(
-                thanosevent,
+                catevent,
                 f"`This sticker pack is kanging now . Status of kang process : {kangst}/{noofst}`",
             )
             await event.client.download_media(message, "AnimatedSticker.tgs")
@@ -588,7 +588,7 @@ async def pack_kang(event):  # sourcery no-metrics
             photo = 1
         elif "video/webm" in message.mime_type:
             await edit_or_reply(
-                thanosevent,
+                catevent,
                 f"`This sticker pack is kanging now . Status of kang process : {kangst}/{noofst}`",
             )
             if message.size > 261120:
@@ -604,7 +604,7 @@ async def pack_kang(event):  # sourcery no-metrics
             is_video = True
             photo = 1
         else:
-            await edit_delete(thanosevent, "`Unsupported File!`")
+            await edit_delete(catevent, "`Unsupported File!`")
             return
         if photo:
             splat = ("".join(event.text.split(maxsplit=1)[1:])).split()
@@ -615,12 +615,12 @@ async def pack_kang(event):  # sourcery no-metrics
                     pack = splat[0]
                 elif len(splat) > 1:
                     return await edit_delete(
-                        thanosevent,
+                        catevent,
                         "`Sorry the given name cant be used for pack or there is no pack with that name`",
                     )
             with contextlib.suppress(BaseException):
-                thanos = Get(thanos)
-                await event.client(thanos)
+                cat = Get(cat)
+                await event.client(cat)
             packnick = pack_nick(username, pack, is_anim, is_video)
             packname = pack_name(userid, pack, is_anim, is_video)
             cmd = "/newpack"
@@ -642,8 +642,8 @@ async def pack_kang(event):  # sourcery no-metrics
                 in htmlstr
             ):
                 async with event.client.conversation("@Stickers") as conv:
-                    pack, thanospackname = await newpacksticker(
-                        thanosevent,
+                    pack, catpackname = await newpacksticker(
+                        catevent,
                         conv,
                         cmd,
                         event,
@@ -658,8 +658,8 @@ async def pack_kang(event):  # sourcery no-metrics
                     )
             else:
                 async with event.client.conversation("@Stickers") as conv:
-                    pack, thanospackname = await add_to_pack(
-                        thanosevent,
+                    pack, catpackname = await add_to_pack(
+                        catevent,
                         conv,
                         event,
                         packname,
@@ -673,10 +673,10 @@ async def pack_kang(event):  # sourcery no-metrics
                         cmd,
                         pkang=True,
                     )
-            if thanospackname is None:
+            if catpackname is None:
                 return
-            if thanospackname not in blablapacks:
-                blablapacks.append(thanospackname)
+            if catpackname not in blablapacks:
+                blablapacks.append(catpackname)
                 blablapacknames.append(pack)
         kangst += 1
         await asyncio.sleep(2)
@@ -685,19 +685,19 @@ async def pack_kang(event):  # sourcery no-metrics
         result += (
             f"  •  [pack {blablapacknames[i[0]]}](t.me/addstickers/{blablapacks[i[0]]})"
         )
-    await thanosevent.edit(result)
+    await catevent.edit(result)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="vas$",
-    command=("vas", plugin_thanosegory),
+    command=("vas", plugin_category),
     info={
         "header": "Converts video/gif to animated sticker",
         "description": "Converts video/gif to .webm file and send a temporary animated sticker of that file",
         "usage": "{tr}vas <Reply to Video/Gif>",
     },
 )
-async def pussythanos(event):
+async def pussycat(event):
     "Convert to animated sticker."  # scam :('  Dom't kamg :/@Jisan7509
     message = await event.get_reply_message()
     user = await event.client.get_me()
@@ -759,9 +759,9 @@ async def pussythanos(event):
         os.remove(sticker[1])
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gridpack(?:\s|$)([\s\S]*)",
-    command=("gridpack", plugin_thanosegory),
+    command=("gridpack", plugin_category),
     info={
         "header": "To split the replied image and make sticker pack.",
         "flags": {
@@ -782,7 +782,7 @@ async def pic2packcmd(event):
     mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to make pack.__")
-    if mediatype == "Sticker" and reply.document.mime_type == "applithanosion/x-tgsticker":
+    if mediatype == "Sticker" and reply.document.mime_type == "application/x-tgsticker":
         return await edit_delete(
             event,
             "__Reply to photo or sticker to make pack. Animated sticker is not supported__",
@@ -792,7 +792,7 @@ async def pic2packcmd(event):
         return await edit_delete(
             event, "__What's your packname ?. pass along with cmd.__"
         )
-    thanosevent = await edit_or_reply(event, "__🔪Cropping and adjusting the image...__")
+    catevent = await edit_or_reply(event, "__🔪Cropping and adjusting the image...__")
     try:
         emoji = (re.findall(r"-e[\U00010000-\U0010ffff]+", args))[0]
         args = args.replace(emoji, "")
@@ -805,7 +805,7 @@ async def pic2packcmd(event):
         for _ in range(16)
     )
     image = await Convert.to_image(
-        thanosevent, reply, dirct="./temp", file="stickers.png", noedits=True
+        catevent, reply, dirct="./temp", file="stickers.png", noedits=True
     )
     if image[1] is None:
         return await edit_delete(
@@ -822,7 +822,7 @@ async def pic2packcmd(event):
     images = await crop_and_divide(img)
     newimg.save(new_img)
     new_img.seek(0)
-    thanosevent = await event.edit("__Making the pack.__")
+    catevent = await event.edit("__Making the pack.__")
     async with event.client.conversation(chat) as conv:
         i = 0
         try:
@@ -846,7 +846,7 @@ async def pic2packcmd(event):
             await event.client.send_read_acknowledge(conv.chat_id)
             await asyncio.sleep(1)
             i += 1
-            await thanosevent.edit(f"__Making the pack.\nProgress: {i}/{len(images)}__")
+            await catevent.edit(f"__Making the pack.\nProgress: {i}/{len(images)}__")
         await event.client.send_message(chat, "/publish")
         await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
         await event.client.send_file(chat, new_img, force_document=True)
@@ -860,14 +860,14 @@ async def pic2packcmd(event):
             stick_pack_name = packname
             if stick_pack_name.startswith("https://t.me/"):
                 break
-        await thanosevent.edit(
+        await catevent.edit(
             f"__successfully created the pack for the replied media : __[{args}]({stick_pack_name})"
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stkrinfo$",
-    command=("stkrinfo", plugin_thanosegory),
+    command=("stkrinfo", plugin_category),
     info={
         "header": "To get information about a sticker pick.",
         "description": "Gets info about the sticker packk",
@@ -887,7 +887,7 @@ async def get_pack_info(event):
         )
     try:
         stickerset_attr = rep_msg.document.attributes[1]
-        thanosevent = await edit_or_reply(
+        catevent = await edit_or_reply(
             event, "`Fetching details of the sticker pack, please wait..`"
         )
     except BaseException:
@@ -895,7 +895,7 @@ async def get_pack_info(event):
             event, "`This is not a sticker. Reply to a sticker.`", 5
         )
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
-        return await thanosevent.edit("`This is not a sticker. Reply to a sticker.`")
+        return await catevent.edit("`This is not a sticker. Reply to a sticker.`")
     get_stickerset = await event.client(
         GetStickerSetRequest(
             InputStickerSetID(
@@ -917,12 +917,12 @@ async def get_pack_info(event):
         f"**Stickers In Pack:** `{get_stickerset.set.count}`\n"
         f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
     )
-    await thanosevent.edit(OUTPUT)
+    await catevent.edit(OUTPUT)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stickers ?([\s\S]*)",
-    command=("stickers", plugin_thanosegory),
+    command=("stickers", plugin_category),
     info={
         "header": "To get list of sticker packs with given name.",
         "description": "shows you the list of non-animated sticker packs with that name.",
@@ -934,13 +934,13 @@ async def cb_sticker(event):
     split = event.pattern_match.group(1)
     if not split:
         return await edit_delete(event, "`Provide some name to search for pack.`", 5)
-    thanosevent = await edit_or_reply(event, "`Searching sticker packs....`")
+    catevent = await edit_or_reply(event, "`Searching sticker packs....`")
     scraper = cloudscraper.create_scraper()
     text = scraper.get(combot_stickers_url + split).text
     soup = bs(text, "lxml")
     results = soup.find_all("div", {"class": "sticker-pack__header"})
     if not results:
-        return await edit_delete(thanosevent, "`No results found :(.`", 5)
+        return await edit_delete(catevent, "`No results found :(.`", 5)
     reply = f"**Sticker packs found for {split} are :**"
     for pack in results:
         if pack.button:
@@ -948,4 +948,4 @@ async def cb_sticker(event):
             packlink = (pack.a).get("href")
             packid = (pack.button).get("data-popup")
             reply += f"\n **• ID: **`{packid}`\n [{packtitle}]({packlink})"
-    await thanosevent.edit(reply)
+    await catevent.edit(reply)

@@ -8,12 +8,12 @@ from ..helpers import AioHttp
 from ..helpers.utils import _format
 
 LOGS = logging.getLogger(__name__)
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ud ([\s\S]*)",
-    command=("ud", plugin_thanosegory),
+    command=("ud", plugin_category),
     info={
         "header": "To fetch meaning of the given word from urban dictionary.",
         "usage": "{tr}ud <word>",
@@ -42,9 +42,9 @@ async def _(event):
         LOGS.info(e)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="meaning ([\s\S]*)",
-    command=("meaning", plugin_thanosegory),
+    command=("meaning", plugin_category),
     info={
         "header": "To fetch meaning of the given word from dictionary.",
         "usage": "{tr}meaning <word>",

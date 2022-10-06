@@ -1,4 +1,4 @@
-# \\ Created by-@mrconfused -- Github.com/thanosceo //
+# \\ Created by-@mrconfused -- Github.com/catceo //
 # \\ Modified by-@Jisan7509 -- Github.com/Jisan09 //
 #  \\    https://github.com/rishabhanand2/THANOS-V2   //
 #   \\        Plugin for @THANOSBOT            //
@@ -13,12 +13,12 @@ from . import LyricsGen, THANOSPRO
 
 GENIUS = Config.GENIUS_API_TOKEN
 
-plugin_thanosegory = "extra"
+plugin_category = "extra"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lyrics(?:\s|$)([\s\S]*)",
-    command=("lyrics", plugin_thanosegory),
+    command=("lyrics", plugin_category),
     info={
         "header": "Song lyrics searcher using genius api.",
         "description": "if you want to provide artist name with song name then use this format {tr}lyrics <artist name> - <song name> . if you use this format in your query then flags won't work. by default it will show first query.",
@@ -72,13 +72,13 @@ async def lyrics(event):  # sourcery no-metrics
         artist = args[0].strip(" ")
         song = args[1].strip(" ")
         songinfo = f"{artist} - {song}"
-        thanosevent = await edit_or_reply(event, f"`Searching lyrics for {songinfo}...`")
+        catevent = await edit_or_reply(event, f"`Searching lyrics for {songinfo}...`")
         lyrics = await LyricsGen.lyrics(event, song, artist)
         if lyrics is None:
-            return await thanosevent.edit(f"Song **{songinfo}** not found!")
+            return await catevent.edit(f"Song **{songinfo}** not found!")
         result = f"**Search query**: \n`{songinfo}`\n\n```{lyrics}```"
     else:
-        thanosevent = await edit_or_reply(event, f"`Searching lyrics for {query}...`")
+        catevent = await edit_or_reply(event, f"`Searching lyrics for {query}...`")
         response = LyricsGen.songs(song)
         msg = f"**The songs found for the given query:** `{query}`\n\n"
         for i, an in enumerate(response, start=1):
@@ -89,9 +89,9 @@ async def lyrics(event):  # sourcery no-metrics
             result = f"**The song found for the given query:** `{query}`\n\n"
             if songno > len(response):
                 return await edit_or_reply(
-                    thanosevent,
+                    catevent,
                     f"**Invalid song selection for the query select proper number**\n{msg}",
                 )
             songtitle = response[songno - 1]["result"]["title"]
             result += f"`{await LyricsGen.lyrics(event, songtitle)}`"
-    await edit_or_reply(thanosevent, result)
+    await edit_or_reply(catevent, result)

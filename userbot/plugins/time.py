@@ -12,7 +12,7 @@ from ..Config import Config
 from ..core.managers import edit_or_reply
 from . import reply_id
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
@@ -42,9 +42,9 @@ async def get_tz(con):
         return
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="time(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
-    command=("time", plugin_thanosegory),
+    command=("time", plugin_category),
     info={
         "header": "To get current time of a paticular country",
         "note": "For country names check [this link](https://telegra.ph/country-names-10-24)",
@@ -109,9 +109,9 @@ async def time_func(tdata):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(s|p|c)time(?:\s|$)([\s\S]*)",
-    command=("stime", plugin_thanosegory),
+    command=("stime", plugin_category),
     info={
         "header": "To show current time.",
         "description": "shows current default time you can change by changing TZ in heroku vars.",

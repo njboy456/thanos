@@ -3,12 +3,12 @@ from userbot import THANOSPRO
 from ..core.managers import edit_or_reply
 from ..helpers.utils import _format
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 # yaml_format is ported from uniborg
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="json$",
-    command=("json", plugin_thanosegory),
+    command=("json", plugin_category),
     info={
         "header": "To get details of that message in json format.",
         "usage": "{tr}json reply to message",
@@ -16,14 +16,14 @@ plugin_thanosegory = "tools"
 )
 async def _(event):
     "To get details of that message in json format."
-    thanosevent = await event.get_reply_message() if event.reply_to_msg_id else event
-    the_real_message = thanosevent.stringify()
+    catevent = await event.get_reply_message() if event.reply_to_msg_id else event
+    the_real_message = catevent.stringify()
     await edit_or_reply(event, the_real_message, parse_mode=_format.parse_pre)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="yaml$",
-    command=("yaml", plugin_thanosegory),
+    command=("yaml", plugin_category),
     info={
         "header": "To get details of that message in yaml format.",
         "usage": "{tr}yaml reply to message",
@@ -31,6 +31,6 @@ async def _(event):
 )
 async def _(event):
     "To get details of that message in yaml format."
-    thanosevent = await event.get_reply_message() if event.reply_to_msg_id else event
-    the_real_message = _format.yaml_format(thanosevent)
+    catevent = await event.get_reply_message() if event.reply_to_msg_id else event
+    the_real_message = _format.yaml_format(catevent)
     await edit_or_reply(event, the_real_message, parse_mode=_format.parse_pre)

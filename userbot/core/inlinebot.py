@@ -114,7 +114,7 @@ async def article_builder(event, method):
         thumb = get_thumb("filemanager.jpg")
         media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/filemanager.jpg"
     elif method == "deploy":
-        media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/thanoslogo.png"
+        media = "https://github.com/rishabhanand2/THANOS-V2-Resources/raw/master/Resources/Inline/catlogo.png"
         title = "ᴛʜᴀɴᴏꜱ-ᴠᄅ"
         description = "Deploy yourself."
         query = "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 тнαησѕ-ν❷."
@@ -142,9 +142,9 @@ async def article_builder(event, method):
             )
         ]
         try:
-            from userbot.plugins.alive import thanosalive_text
+            from userbot.plugins.alive import catalive_text
 
-            query = thanosalive_text()
+            query = catalive_text()
         except Exception:
             return None
         title = "THANOS Alive"
@@ -206,10 +206,10 @@ async def article_builder(event, method):
         prev = 0
         note_data = ""
         buttons_list = []
-        thanosmedia = MEDIA_PATH_REGEX.search(markdown_note)
-        if thanosmedia:
-            media = thanosmedia.group(2)
-            markdown_note = markdown_note.replace(thanosmedia.group(0), "")
+        catmedia = MEDIA_PATH_REGEX.search(markdown_note)
+        if catmedia:
+            media = catmedia.group(2)
+            markdown_note = markdown_note.replace(catmedia.group(0), "")
         for match in BTN_URL_REGEX.finditer(markdown_note):
             n_escapes = 0
             to_check = match.start(1) - 1
@@ -260,7 +260,7 @@ async def article_builder(event, method):
     return result
 
 
-def command_in_thanosegory(cname):
+def command_in_category(cname):
     cmds = 0
     for i in GRP_INFO[cname]:
         for _ in PLG_INFO[i]:
@@ -273,8 +273,8 @@ def paginate_help(
     loaded_plugins,
     prefix,
     plugins=True,
-    thanosegory_plugins=None,
-    thanosegory_pgno=0,
+    category_plugins=None,
+    category_pgno=0,
 ):  # sourcery no-metrics  # sourcery skip: low-code-quality
     try:
         number_of_rows = int(gvarstatus("NO_OF_ROWS_IN_HELP") or 5)
@@ -300,7 +300,7 @@ def paginate_help(
             modules = [
                 Button.inline(
                     f"{HELP_EMOJI[0]} {x} {HELP_EMOJI[1]}",
-                    data=f"{x}_cmdhelp_{prefix}_{page_number}_{thanosegory_plugins}_{thanosegory_pgno}",
+                    data=f"{x}_cmdhelp_{prefix}_{page_number}_{category_plugins}_{category_pgno}",
                 )
                 for x in helpable_plugins
             ]
@@ -316,7 +316,7 @@ def paginate_help(
         modules = [
             Button.inline(
                 f"{HELP_EMOJI} {x} {HELP_EMOJI}",
-                data=f"{x}_cmdhelp_{prefix}_{page_number}_{thanosegory_plugins}_{thanosegory_pgno}",
+                data=f"{x}_cmdhelp_{prefix}_{page_number}_{category_plugins}_{category_pgno}",
             )
             for x in helpable_plugins
         ]
@@ -353,34 +353,34 @@ def paginate_help(
         else:
             pairs = pairs + [(Button.inline("⚙️ Main Menu", data="mainmenu"),)]
     elif len(pairs) > number_of_rows:
-        if thanosegory_pgno < 0:
-            thanosegory_pgno = len(pairs) + thanosegory_pgno
+        if category_pgno < 0:
+            category_pgno = len(pairs) + category_pgno
         pairs = pairs[
             modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
         ] + [
             (
                 Button.inline(
                     "⌫",
-                    data=f"{prefix}_prev({modulo_page})_command_{thanosegory_plugins}_{thanosegory_pgno}",
+                    data=f"{prefix}_prev({modulo_page})_command_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
                     "⬅️ Back ",
-                    data=f"back_plugin_{thanosegory_plugins}_{thanosegory_pgno}",
+                    data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
                     "⌦",
-                    data=f"{prefix}_next({modulo_page})_command_{thanosegory_plugins}_{thanosegory_pgno}",
+                    data=f"{prefix}_next({modulo_page})_command_{category_plugins}_{category_pgno}",
                 ),
             )
         ]
     else:
-        if thanosegory_pgno < 0:
-            thanosegory_pgno = len(pairs) + thanosegory_pgno
+        if category_pgno < 0:
+            category_pgno = len(pairs) + category_pgno
         pairs = pairs + [
             (
                 Button.inline(
                     "⬅️ Back ",
-                    data=f"back_plugin_{thanosegory_plugins}_{thanosegory_pgno}",
+                    data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
             )
         ]
@@ -552,10 +552,10 @@ async def inline_handler(event):  # sourcery no-metrics
                         )
                     ]
                 )
-        elif string == "age_verifithanosion_alert":
+        elif string == "age_verification_alert":
             buttons = [
-                Button.inline(text="Yes I'm 18+", data="age_verifithanosion_true"),
-                Button.inline(text="No I'm Not", data="age_verifithanosion_false"),
+                Button.inline(text="Yes I'm 18+", data="age_verification_true"),
+                Button.inline(text="No I'm Not", data="age_verification_false"),
             ]
             markup = event.client.build_reply_markup(buttons)
             photo = types.InputWebDocument(
@@ -570,7 +570,7 @@ async def inline_handler(event):  # sourcery no-metrics
             result = types.InputBotInlineResult(
                 id=str(uuid4()),
                 type="photo",
-                title="Age verifithanosion",
+                title="Age verification",
                 thumb=photo,
                 content=photo,
                 send_message=types.InputBotInlineMessageMediaAuto(
@@ -699,11 +699,11 @@ async def on_plugin_callback_query_handler(event):
 @THANOSPRO.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
-    thanosegory = str(event.pattern_match.group(1).decode("UTF-8"))
-    buttons = paginate_help(0, GRP_INFO[thanosegory], thanosegory)
-    text = f"**THANOSegory: **{thanosegory}\
-        \n**Total plugins :** {len(GRP_INFO[thanosegory])}\
-        \n**Total Commands:** {command_in_thanosegory(thanosegory)}"
+    category = str(event.pattern_match.group(1).decode("UTF-8"))
+    buttons = paginate_help(0, GRP_INFO[category], category)
+    text = f"**THANOSegory: **{category}\
+        \n**Total plugins :** {len(GRP_INFO[category])}\
+        \n**Total Commands:** {command_in_category(category)}"
     await event.edit(text, buttons=buttons)
 
 
@@ -715,27 +715,27 @@ async def on_plug_in_callback_query_handler(event):
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     mtype = str(event.pattern_match.group(1).decode("UTF-8"))
-    thanosegory = str(event.pattern_match.group(2).decode("UTF-8"))
+    category = str(event.pattern_match.group(2).decode("UTF-8"))
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
-        buttons = paginate_help(pgno, GRP_INFO[thanosegory], thanosegory)
-        text = f"**THANOSegory: **`{thanosegory}`\
-            \n**Total plugins :** __{len(GRP_INFO[thanosegory])}__\
-            \n**Total Commands:** __{command_in_thanosegory(thanosegory)}__"
+        buttons = paginate_help(pgno, GRP_INFO[category], category)
+        text = f"**THANOSegory: **`{category}`\
+            \n**Total plugins :** __{len(GRP_INFO[category])}__\
+            \n**Total Commands:** __{command_in_category(category)}__"
     else:
-        thanosegory_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
-        thanosegory_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
+        category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
+        category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
         buttons = paginate_help(
             pgno,
-            PLG_INFO[thanosegory],
-            thanosegory,
+            PLG_INFO[category],
+            category,
             plugins=False,
-            thanosegory_plugins=thanosegory_plugins,
-            thanosegory_pgno=thanosegory_pgno,
+            category_plugins=category_plugins,
+            category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{thanosegory}`\
-                \n**THANOSegory: **__{getkey(thanosegory)}__\
-                \n**Total Commands:** __{len(PLG_INFO[thanosegory])}__"
+        text = f"**Plugin: **`{category}`\
+                \n**THANOSegory: **__{getkey(category)}__\
+                \n**Total Commands:** __{len(PLG_INFO[category])}__"
     await event.edit(text, buttons=buttons)
 
 
@@ -751,25 +751,25 @@ async def on_plug_in_callback_query_handler(event):
 )
 @check_owner
 async def on_plug_in_callback_query_handler(event):
-    thanosegory = str(event.pattern_match.group(1).decode("UTF-8"))
+    category = str(event.pattern_match.group(1).decode("UTF-8"))
     current_page_number = int(event.data_match.group(2).decode("UTF-8"))
     htype = str(event.pattern_match.group(3).decode("UTF-8"))
     if htype == "plugin":
-        buttons = paginate_help(current_page_number - 1, GRP_INFO[thanosegory], thanosegory)
+        buttons = paginate_help(current_page_number - 1, GRP_INFO[category], category)
     else:
-        thanosegory_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
-        thanosegory_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
+        category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
+        category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
         buttons = paginate_help(
             current_page_number - 1,
-            PLG_INFO[thanosegory],
-            thanosegory,
+            PLG_INFO[category],
+            category,
             plugins=False,
-            thanosegory_plugins=thanosegory_plugins,
-            thanosegory_pgno=thanosegory_pgno,
+            category_plugins=category_plugins,
+            category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{thanosegory}`\
-                \n**THANOSegory: **__{getkey(thanosegory)}__\
-                \n**Total Commands:** __{len(PLG_INFO[thanosegory])}__"
+        text = f"**Plugin: **`{category}`\
+                \n**THANOSegory: **__{getkey(category)}__\
+                \n**Total Commands:** __{len(PLG_INFO[category])}__"
         try:
             return await event.edit(text, buttons=buttons)
         except Exception as e:
@@ -782,25 +782,25 @@ async def on_plug_in_callback_query_handler(event):
 )
 @check_owner
 async def on_plug_in_callback_query_handler(event):
-    thanosegory = str(event.pattern_match.group(1).decode("UTF-8"))
+    category = str(event.pattern_match.group(1).decode("UTF-8"))
     current_page_number = int(event.data_match.group(2).decode("UTF-8"))
     htype = str(event.pattern_match.group(3).decode("UTF-8"))
-    thanosegory_plugins = event.pattern_match.group(4)
-    if thanosegory_plugins:
-        thanosegory_plugins = str(thanosegory_plugins.decode("UTF-8"))
-    thanosegory_pgno = event.pattern_match.group(5)
-    if thanosegory_pgno:
-        thanosegory_pgno = int(thanosegory_pgno.decode("UTF-8"))
+    category_plugins = event.pattern_match.group(4)
+    if category_plugins:
+        category_plugins = str(category_plugins.decode("UTF-8"))
+    category_pgno = event.pattern_match.group(5)
+    if category_pgno:
+        category_pgno = int(category_pgno.decode("UTF-8"))
     if htype == "plugin":
-        buttons = paginate_help(current_page_number + 1, GRP_INFO[thanosegory], thanosegory)
+        buttons = paginate_help(current_page_number + 1, GRP_INFO[category], category)
     else:
         buttons = paginate_help(
             current_page_number + 1,
-            PLG_INFO[thanosegory],
-            thanosegory,
+            PLG_INFO[category],
+            category,
             plugins=False,
-            thanosegory_plugins=thanosegory_plugins,
-            thanosegory_pgno=thanosegory_pgno,
+            category_plugins=category_plugins,
+            category_pgno=category_pgno,
         )
     await event.edit(buttons=buttons)
 
@@ -813,22 +813,22 @@ async def on_plug_in_callback_query_handler(event):
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     cmd = str(event.pattern_match.group(1).decode("UTF-8"))
-    thanosegory = str(event.pattern_match.group(2).decode("UTF-8"))
+    category = str(event.pattern_match.group(2).decode("UTF-8"))
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
-    thanosegory_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
-    thanosegory_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
+    category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
+    category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
     buttons = [
         (
             Button.inline(
                 "⬅️ Back ",
-                data=f"back_command_{thanosegory}_{pgno}_{thanosegory_plugins}_{thanosegory_pgno}",
+                data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
             Button.inline("⚙️ Main Menu", data="mainmenu"),
         )
     ]
     text = f"**Command :** `{tr}{cmd}`\
-        \n**Plugin :** `{thanosegory}`\
-        \n**THANOSegory :** `{thanosegory_plugins}`\
+        \n**Plugin :** `{category}`\
+        \n**THANOSegory :** `{category_plugins}`\
         \n\n**✘ Intro :**\n{CMD_INFO[cmd][0]}"
     await event.edit(text, buttons=buttons)
 

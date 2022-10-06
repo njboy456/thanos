@@ -15,7 +15,7 @@ from ..helpers.utils import _format
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import THANOSPRO, edit_or_reply, logging, reply_id
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 LOGS = logging.getLogger(__name__)
 # Get time zone of the given country. Credits: @aragon12 and @zakaryan2004.
@@ -44,9 +44,9 @@ def sun(unix, ctimezone):
     return datetime.fromtimestamp(unix, tz=ctimezone).strftime("%I:%M %p")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="climate(?:\s|$)([\s\S]*)",
-    command=("climate", plugin_thanosegory),
+    command=("climate", plugin_category),
     info={
         "header": "To get the weather report of a city.",
         "description": "Shows you the weather report of a city. By default it is Delhi, you can change it by {tr}setcity command.",
@@ -132,9 +132,9 @@ async def get_weather(event):  # sourcery no-metrics
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="setcity(?:\s|$)([\s\S]*)",
-    command=("setcity", plugin_thanosegory),
+    command=("setcity", plugin_category),
     info={
         "header": "To set default city for climate cmd",
         "description": "Sets your default city so you can just use .weather or .climate when ever you neededwithout typing city name each time",
@@ -181,9 +181,9 @@ async def set_default_city(event):
     await edit_or_reply(event, f"`Set default event as {cityname}, {fullc_n}.`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="weather(?:\s|$)([\s\S]*)",
-    command=("weather", plugin_thanosegory),
+    command=("weather", plugin_category),
     info={
         "header": "To get the weather report of a city.",
         "description": "Shows you the weather report of a city . By default it is Delhi, you can change it by {tr}setcity command.",
@@ -202,9 +202,9 @@ async def _(event):
     await edit_or_reply(event, output, parse_mode=_format.parse_pre)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="wttr(?:\s|$)([\s\S]*)",
-    command=("wttr", plugin_thanosegory),
+    command=("wttr", plugin_category),
     info={
         "header": "To get the weather report of a city.",
         "description": "Shows you the weather report of a city for next 3 days . By default it is Delhi, you can change it by {tr}setcity command.",

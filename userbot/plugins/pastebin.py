@@ -21,7 +21,7 @@ from ..helpers.utils import pastetext, reply_id
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import hmention
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 extractor = URLExtract()
 
@@ -71,9 +71,9 @@ def text_chunk_list(query, bits=29900):
     return text_list
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="rayso(?:\s|$)([\s\S]*)",
-    command=("rayso", plugin_thanosegory),
+    command=("rayso", plugin_category),
     info={
         "header": "Create beautiful images of your code",
         "notes": "Available Themes: | `breeze` | `candy` | `crimson` | `falcon` | `meadow` | `midnight` | `raindrop` | `random` | `sunset` |",
@@ -171,9 +171,9 @@ async def rayso_by_pro_odi(event):  # By @feelded
         os.remove(name)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pcode(?:\s|$)([\s\S]*)",
-    command=("pcode", plugin_thanosegory),
+    command=("pcode", plugin_category),
     info={
         "header": "Will paste the entire text on the blank white image.",
         "flags": {
@@ -186,7 +186,7 @@ async def paste_img(event):
     "To paste text to image."
     reply_to = await reply_id(event)
     d_file_name = None
-    thanosevent = await edit_or_reply(event, "`Pasting the text on image`")
+    catevent = await edit_or_reply(event, "`Pasting the text on image`")
     input_str = event.pattern_match.group(1)
     reply = await event.get_reply_message()
     ext = re.findall(r"-f", input_str)
@@ -208,7 +208,7 @@ async def paste_img(event):
             text_to_print = reply.raw_text
         else:
             return await edit_delete(
-                thanosevent,
+                catevent,
                 "`Either reply to text/code file or reply to text message or give text along with command`",
             )
     pygments.highlight(
@@ -224,17 +224,17 @@ async def paste_img(event):
             force_document=bool(extension),
             reply_to=reply_to,
         )
-        await thanosevent.delete()
+        await catevent.delete()
         os.remove("out.png")
         if d_file_name is not None:
             os.remove(d_file_name)
     except Exception as e:
-        await edit_delete(thanosevent, f"**Error:**\n`{e}`", time=10)
+        await edit_delete(catevent, f"**Error:**\n`{e}`", time=10)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(d|p|s|n)?(paste|neko)(?:\s|$)([\S\s]*)",
-    command=("paste", plugin_thanosegory),
+    command=("paste", plugin_category),
     info={
         "header": "To paste text to a paste bin.",
         "description": "Uploads the given text to website so that you can share text/code with others easily. If no flag is used then it will use p as default",
@@ -255,7 +255,7 @@ async def paste_img(event):
 )
 async def paste_bin(event):
     "To paste text to a paste bin."
-    thanosevent = await edit_or_reply(event, "`pasting text to paste bin....`")
+    catevent = await edit_or_reply(event, "`pasting text to paste bin....`")
     input_str = event.pattern_match.group(3)
     reply = await event.get_reply_message()
     ext = re.findall(r"-\w+", input_str)
@@ -282,7 +282,7 @@ async def paste_bin(event):
             text_to_print = reply.raw_text
         else:
             return await edit_delete(
-                thanosevent,
+                catevent,
                 "`Either reply to text/code file or reply to text message or give text along with command`",
             )
     if extension and extension.startswith("."):
@@ -291,7 +291,7 @@ async def paste_bin(event):
         response = await pastetext(text_to_print, pastetype, extension)
         if "error" in response:
             return await edit_delete(
-                thanosevent,
+                catevent,
                 "**Error while pasting text:**\n`Unable to process your request may be pastebins are down.`",
             )
 
@@ -301,13 +301,13 @@ async def paste_bin(event):
         result += f"<b>Pasted to: <a href={response['url']}>{response['bin']}</a></b>"
         if response["raw"] != "":
             result += f"\n<b>Raw link: <a href={response['raw']}>Raw</a></b>"
-        await thanosevent.edit(result, link_preview=False, parse_mode="html")
+        await catevent.edit(result, link_preview=False, parse_mode="html")
     except Exception as e:
-        await edit_delete(thanosevent, f"**Error while pasting text:**\n`{e}`")
+        await edit_delete(catevent, f"**Error while pasting text:**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(
-    command=("neko", plugin_thanosegory),
+@THANOSPRO.cat_cmd(
+    command=("neko", plugin_category),
     info={
         "header": "To paste text to a neko bin.",
         "description": "Uploads the given text to nekobin so that you can share text/code with others easily.",
@@ -323,9 +323,9 @@ async def _(event):
     # just to show in help menu as seperate
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="g(et)?paste(?:\s|$)([\s\S]*)",
-    command=("getpaste", plugin_thanosegory),
+    command=("getpaste", plugin_category),
     info={
         "header": "To paste text into telegram from pastebin link.",
         "description": "Gets the content of a pastebin. You can provide link along with cmd or reply to link.",
@@ -344,13 +344,13 @@ async def get_dogbin_content(event):
                 ("pasty" in iurl)
                 or ("spaceb" in iurl)
                 or ("nekobin" in iurl)
-                or ("thanosbin" in iurl)
+                or ("catbin" in iurl)
             ):
                 url = iurl
                 break
     if not url:
         return await edit_delete(event, "__I can't find any pastebin link.__")
-    thanosevent = await edit_or_reply(event, "`Getting Contents of pastebin.....`")
+    catevent = await edit_or_reply(event, "`Getting Contents of pastebin.....`")
     rawurl = url if "raw" in url else None
     if rawurl is None:
         fid = os.path.splitext((os.path.basename(url)))
@@ -360,32 +360,32 @@ async def get_dogbin_content(event):
             rawurl = f"https://spaceb.in/api/v1/documents/{fid[0]}/raw"
         elif "nekobin" in url:
             rawurl = f"nekobin.com/raw/{fid[0]}"
-        elif "thanosbin" in url:
-            rawurl = f"http://thanosbin.up.railway.app/raw/{fid[0]}"
+        elif "catbin" in url:
+            rawurl = f"http://catbin.up.railway.app/raw/{fid[0]}"
         else:
             return await edit_delete(event, "__This pastebin is not supported.__")
     resp = requests.get(rawurl)
     try:
         resp.raise_for_status()
     except requests.exceptions.HTTPError as HTTPErr:
-        return await thanosevent.edit(
+        return await catevent.edit(
             f"**Request returned an unsuccessful status code.**\n\n__{str(HTTPErr)}__"
         )
     except requests.exceptions.Timeout as TimeoutErr:
-        return await thanosevent.edit(f"**Request timed out.**__{str(TimeoutErr)}__")
+        return await catevent.edit(f"**Request timed out.**__{str(TimeoutErr)}__")
     except requests.exceptions.TooManyRedirects as RedirectsErr:
-        return await thanosevent.edit(
+        return await catevent.edit(
             (
                 f"**Request exceeded the configured number of maximum redirections.**__{str(RedirectsErr)}__"
             )
         )
     reply_text = f"**Fetched dogbin URL content successfully!**\n\n**Content:** \n```{resp.text}```"
-    await edit_or_reply(thanosevent, reply_text)
+    await edit_or_reply(catevent, reply_text)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="paster(?:\s|$)([\s\S]*)",
-    command=("paster", plugin_thanosegory),
+    command=("paster", plugin_category),
     info={
         "header": "Create a instant view or a paste it in telegraph file.",
         "usage": ["{tr}paster <reply>", "{tr}paster text"],
@@ -393,7 +393,7 @@ async def get_dogbin_content(event):
 )
 async def _(event):
     "Create a instant view or a paste it in telegraph file."
-    thanosevent = await edit_or_reply(event, "`pasting text to paste bin....`")
+    catevent = await edit_or_reply(event, "`pasting text to paste bin....`")
     input_str = event.pattern_match.group(1)
     reply = await event.get_reply_message()
     pastetype = "d"
@@ -409,22 +409,22 @@ async def _(event):
             text_to_print = reply.raw_text
         else:
             return await edit_delete(
-                thanosevent,
+                catevent,
                 "`Either reply to text/code file or reply to text message or give text along with command`",
             )
     try:
         response = await pastetext(text_to_print, pastetype, extension="txt")
         if "error" in response:
             return await edit_delete(
-                thanosevent,
+                catevent,
                 "**Error while pasting text:**\n`Unable to process your request may be pastebins are down.`",
             )
 
     except Exception as e:
-        return await edit_delete(thanosevent, f"**Error while pasting text:**\n`{e}`")
+        return await edit_delete(catevent, f"**Error while pasting text:**\n`{e}`")
     url = response["url"]
     chat = "@CorsaBot"
-    await thanosevent.edit("`Making instant view...`")
+    await catevent.edit("`Making instant view...`")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -433,7 +433,7 @@ async def _(event):
             await event.client.send_message(chat, url)
             response = await response
         except YouBlockedUserError:
-            return await thanosevent.edit("```Please unblock me (@CorsaBot) and try```")
+            return await catevent.edit("```Please unblock me (@CorsaBot) and try```")
         result = ""
         if response:
             await event.client.send_read_acknowledge(conv.chat_id)
@@ -441,4 +441,4 @@ async def _(event):
                 result = f"The instant preview is [here]({urls[0]})"
         if result == "":
             result = "I can't make it as instant view"
-        await thanosevent.edit(result, link_preview=True)
+        await catevent.edit(result, link_preview=True)

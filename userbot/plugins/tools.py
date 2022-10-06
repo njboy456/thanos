@@ -21,17 +21,17 @@ from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import AioHttp
 from ..helpers.functions import delete_conv
-from ..helpers.utils import _thanosutils, reply_id
+from ..helpers.utils import _catutils, reply_id
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cur(?:\s|$)([\s\S]*)",
-    command=("cur", plugin_thanosegory),
+    command=("cur", plugin_category),
     info={
         "header": "To convert one currency value to other.",
         "description": "To find exchange rates of currencies.",
@@ -88,9 +88,9 @@ async def currency(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="scan( -i)?$",
-    command=("scan", plugin_thanosegory),
+    command=("scan", plugin_category),
     info={
         "header": "To scan the replied file for virus.",
         "flag": {"i": "to get output as image."},
@@ -105,13 +105,13 @@ async def scan(event):
     if not reply_message.media:
         return await edit_or_reply(event, "```reply to a media message```")
     chat = "@VS_Robot"
-    thanosevent = await edit_or_reply(event, " `Sliding my tip, of fingers over it`")
+    catevent = await edit_or_reply(event, " `Sliding my tip, of fingers over it`")
     async with event.client.conversation(chat) as conv:
         try:
             flag = await conv.send_message("/start")
         except YouBlockedUserError:
             await edit_or_reply(
-                thanosevent, "**Error:** Trying to unblock & retry, wait a sec..."
+                catevent, "**Error:** Trying to unblock & retry, wait a sec..."
             )
             await THANOSPRO(unblock("VS_Robot"))
             flag = await conv.send_message("/start")
@@ -121,7 +121,7 @@ async def scan(event):
         if response1.text:
             await event.client.send_read_acknowledge(conv.chat_id)
             sec = "".join([num for num in response1.text if num.isdigit()])
-            await edit_delete(thanosevent, f"**Please wait for {sec}s before retry**", 15)
+            await edit_delete(catevent, f"**Please wait for {sec}s before retry**", 15)
         else:
             await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
@@ -129,18 +129,18 @@ async def scan(event):
             response3 = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
             if not input_str:
-                await edit_or_reply(thanosevent, response3.text[30:])
+                await edit_or_reply(catevent, response3.text[30:])
             else:
-                await thanosevent.delete()
+                await catevent.delete()
                 await event.client.send_file(
                     event.chat_id, response2.media, reply_to=(await reply_id(event))
                 )
         await delete_conv(event, chat, flag)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="decode$",
-    command=("decode", plugin_thanosegory),
+    command=("decode", plugin_category),
     info={
         "header": "To decode qrcode or barcode",
         "description": "Reply to qrcode or barcode to decode it and get text.",
@@ -149,28 +149,28 @@ async def scan(event):
 )
 async def parseqr(event):
     "To decode qrcode or barcode"
-    thanosevent = await edit_or_reply(event, "`Decoding....`")
+    catevent = await edit_or_reply(event, "`Decoding....`")
     reply = await event.get_reply_message()
     downloaded_file_name = await reply.download_media()
     # parse the Official ZXing webpage to decode the QRCode
     command_to_exec = f"curl -s -F f=@{downloaded_file_name} https://zxing.org/w/decode"
-    t_response, e_response = (await _thanosutils.runcmd(command_to_exec))[:2]
+    t_response, e_response = (await _catutils.runcmd(command_to_exec))[:2]
     if os.path.exists(downloaded_file_name):
         os.remove(downloaded_file_name)
     soup = BeautifulSoup(t_response, "html.parser")
     try:
         qr_contents = soup.find_all("pre")[0].text
-        await edit_or_reply(thanosevent, f"**The decoded message is :**\n`{qr_contents}`")
+        await edit_or_reply(catevent, f"**The decoded message is :**\n`{qr_contents}`")
     except IndexError:
         result = soup.text
-        await edit_or_reply(thanosevent, f"**Failed to Decode:**\n`{result}`")
+        await edit_or_reply(catevent, f"**Failed to Decode:**\n`{result}`")
     except Exception as e:
-        await edit_or_reply(thanosevent, f"**Error:**\n`{e}`")
+        await edit_or_reply(catevent, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="barcode ?([\s\S]*)",
-    command=("barcode", plugin_thanosegory),
+    command=("barcode", plugin_category),
     info={
         "header": "To get barcode of given text.",
         "usage": "{tr}barcode <text>",
@@ -179,7 +179,7 @@ async def parseqr(event):
 )
 async def _(event):
     "to make barcode of given content."
-    thanosevent = await edit_or_reply(event, "...")
+    catevent = await edit_or_reply(event, "...")
     start = datetime.now()
     input_str = event.pattern_match.group(1)
     message = "SYNTAX: `.barcode <long text to include>`"
@@ -214,15 +214,15 @@ async def _(event):
         )
         os.remove(filename)
     except Exception as e:
-        return await thanosevent.edit(str(e))
+        return await catevent.edit(str(e))
     end = datetime.now()
     ms = (end - start).seconds
-    await edit_delete(thanosevent, f"Created BarCode in {ms} seconds")
+    await edit_delete(catevent, f"Created BarCode in {ms} seconds")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="makeqr(?: |$)([\s\S]*)",
-    command=("makeqr", plugin_thanosegory),
+    command=("makeqr", plugin_category),
     info={
         "header": "To get makeqr of given text.",
         "usage": "{tr}makeqr <text>",
@@ -264,9 +264,9 @@ async def make_qr(makeqr):
     await makeqr.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cal ([\s\S]*)",
-    command=("cal", plugin_thanosegory),
+    command=("cal", plugin_category),
     info={
         "header": "To get calendar of given month and year.",
         "usage": "{tr}cal year ; month",
@@ -289,9 +289,9 @@ async def _(event):
         await edit_delete(event, f"**Error:**\n`{e}`", 5)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ip(?:\s|$)([\s\S]*)",
-    command=("ip", plugin_thanosegory),
+    command=("ip", plugin_category),
     info={
         "header": "Find details of an IP address",
         "description": "To check detailed info of provided ip address.",
@@ -375,9 +375,9 @@ async def spy(event):
     await edit_or_reply(event, string, parse_mode="html")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ifsc ([\s\S]*)",
-    command=("ifsc", plugin_thanosegory),
+    command=("ifsc", plugin_category),
     info={
         "header": "to get details of the relevant bank or branch.",
         "usage": "{tr}ifsc <ifsc code>",
@@ -397,9 +397,9 @@ async def _(event):
     await edit_or_reply(event, str(a))
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="color ([\s\S]*)",
-    command=("color", plugin_thanosegory),
+    command=("color", plugin_category),
     info={
         "header": "To get color pic of given hexa color code.",
         "usage": "{tr}color <colour code>",
@@ -420,22 +420,22 @@ async def _(event):
         return await event.edit(str(e))
     else:
         im = Image.new(mode="RGB", size=(1280, 720), color=usercolor)
-        im.save("thanos.png", "PNG")
+        im.save("cat.png", "PNG")
         input_str = input_str.replace("#", "#COLOR_")
         await event.client.send_file(
             event.chat_id,
-            "thanos.png",
+            "cat.png",
             force_document=False,
             caption=input_str,
             reply_to=message_id,
         )
-        os.remove("thanos.png")
+        os.remove("cat.png")
         await event.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="xkcd(?:\s|$)([\s\S]*)",
-    command=("xkcd", plugin_thanosegory),
+    command=("xkcd", plugin_category),
     info={
         "header": "Searches for the query for the relevant XKCD comic.",
         "usage": "{tr}xkcd <query>",
@@ -443,7 +443,7 @@ async def _(event):
 )
 async def _(event):
     "Searches for the query for the relevant XKCD comic."
-    thanosevent = await edit_or_reply(event, "`processiong...........`")
+    catevent = await edit_or_reply(event, "`processiong...........`")
     input_str = event.pattern_match.group(1)
     xkcd_id = None
     if input_str:
@@ -461,7 +461,7 @@ async def _(event):
         xkcd_url = f"https://xkcd.com/{xkcd_id}/info.0.json"
     r = requests.get(xkcd_url)
     if not r.ok:
-        return await thanosevent.edit(f"xkcd n.{xkcd_id} not found!")
+        return await catevent.edit(f"xkcd n.{xkcd_id} not found!")
     data = r.json()
     year = data.get("year")
     month = data["month"].zfill(2)
@@ -481,4 +481,4 @@ Month: {}
 Year: {}""".format(
         img, input_str, xkcd_link, safe_title, alt, day, month, year
     )
-    await thanosevent.edit(output_str, link_preview=True)
+    await catevent.edit(output_str, link_preview=True)

@@ -14,7 +14,7 @@ from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 
 LOGS = logging.getLogger(__name__)
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
 # ====================== CONSTANT ===============================
@@ -29,9 +29,9 @@ USERNAME_TAKEN = "```This username is already taken.```"
 # ===============================================================
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pbio ([\s\S]*)",
-    command=("pbio", plugin_thanosegory),
+    command=("pbio", plugin_category),
     info={
         "header": "To set bio for this account.",
         "usage": "{tr}pbio <your bio>",
@@ -47,9 +47,9 @@ async def _(event):
         await edit_or_reply(event, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pname ([\s\S]*)",
-    command=("pname", plugin_thanosegory),
+    command=("pname", plugin_category),
     info={
         "header": "To set/change name for this account.",
         "usage": ["{tr}pname firstname ; last name", "{tr}pname firstname"],
@@ -73,9 +73,9 @@ async def _(event):
         await edit_or_reply(event, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ppic$",
-    command=("ppic", plugin_thanosegory),
+    command=("ppic", plugin_category),
     info={
         "header": "To set profile pic for this account.",
         "usage": "{tr}ppic <reply to image or gif>",
@@ -84,7 +84,7 @@ async def _(event):
 async def _(event):
     "To set profile pic for this account."
     reply_message = await event.get_reply_message()
-    thanosevent = await edit_or_reply(
+    catevent = await edit_or_reply(
         event, "`Downloading Profile Picture to my local ...`"
     )
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -95,33 +95,33 @@ async def _(event):
             reply_message, Config.TMP_DOWNLOAD_DIRECTORY
         )
     except Exception as e:
-        await thanosevent.edit(str(e))
+        await catevent.edit(str(e))
     else:
         if photo:
-            await thanosevent.edit("`now, Uploading to Telegram ...`")
+            await catevent.edit("`now, Uploading to Telegram ...`")
             if photo.endswith((".mp4", ".MP4")):
                 # https://t.me/tgbetachat/324694
                 size = os.stat(photo).st_size
                 if size > 2097152:
-                    await thanosevent.edit("`size must be less than 2 mb`")
+                    await catevent.edit("`size must be less than 2 mb`")
                     os.remove(photo)
                     return
-                thanospic = None
-                thanosvideo = await event.client.upload_file(photo)
+                catpic = None
+                catvideo = await event.client.upload_file(photo)
             else:
-                thanospic = await event.client.upload_file(photo)
-                thanosvideo = None
+                catpic = await event.client.upload_file(photo)
+                catvideo = None
             try:
                 await event.client(
                     functions.photos.UploadProfilePhotoRequest(
-                        file=thanospic, video=thanosvideo, video_start_ts=0.01
+                        file=catpic, video=catvideo, video_start_ts=0.01
                     )
                 )
             except Exception as e:
-                await thanosevent.edit(f"**Error:**\n`{e}`")
+                await catevent.edit(f"**Error:**\n`{e}`")
             else:
                 await edit_or_reply(
-                    thanosevent, "`My profile picture was successfully changed`"
+                    catevent, "`My profile picture was successfully changed`"
                 )
     try:
         os.remove(photo)
@@ -129,9 +129,9 @@ async def _(event):
         LOGS.info(str(e))
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pusername ([\s\S]*)",
-    command=("pusername", plugin_thanosegory),
+    command=("pusername", plugin_category),
     info={
         "header": "To set/update username for this account.",
         "usage": "{tr}pusername <new username>",
@@ -149,9 +149,9 @@ async def update_username(event):
         await edit_or_reply(event, f"**Error:**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="count$",
-    command=("count", plugin_thanosegory),
+    command=("count", plugin_category),
     info={
         "header": "To get your profile stats for this account.",
         "usage": "{tr}count",
@@ -165,7 +165,7 @@ async def count(event):
     bc = 0
     b = 0
     result = ""
-    thanosevent = await edit_or_reply(event, "`Processing..`")
+    catevent = await edit_or_reply(event, "`Processing..`")
     dialogs = await event.client.get_dialogs(limit=None, ignore_migrated=True)
     for d in dialogs:
         currrent_entity = d.entity
@@ -190,12 +190,12 @@ async def count(event):
     result += f"`Channels:`\t**{bc}**\n"
     result += f"`Bots:`\t**{b}**"
 
-    await thanosevent.edit(result)
+    await catevent.edit(result)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="delpfp ?([\s\S]*)",
-    command=("delpfp", plugin_thanosegory),
+    command=("delpfp", plugin_category),
     info={
         "header": "To delete profile pic for this account.",
         "description": "If you havent mentioned no of profile pics then only 1 will be deleted.",
@@ -228,9 +228,9 @@ async def remove_profilepic(delpfp):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="myusernames$",
-    command=("myusernames", plugin_thanosegory),
+    command=("myusernames", plugin_category),
     info={
         "header": "To list public channels or groups created by this account.",
         "usage": "{tr}myusernames",

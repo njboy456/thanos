@@ -6,7 +6,7 @@ from . import BASE, SESSION
 
 
 class THANOSGloballist(BASE):
-    __tablename__ = "thanosglobal_list"
+    __tablename__ = "catglobal_list"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String, primary_key=True, nullable=False)
 

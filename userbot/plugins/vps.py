@@ -13,9 +13,9 @@ from validators.url import url
 from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import _thanosutils
+from ..helpers.utils import _catutils
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 
 # ============================@ Constants @===============================
@@ -55,22 +55,22 @@ async def switch_branch():
             else THANOSABUSE
         )
     if REPO:
-        await _thanosutils.runcmd(f"git clone -b {BRANCH} {REPO} TempTHANOS")
+        await _catutils.runcmd(f"git clone -b {BRANCH} {REPO} TempTHANOS")
         file_list = os.listdir("TempTHANOS")
         for file in file_list:
-            await _thanosutils.runcmd(f"rm -rf {file}")
-            await _thanosutils.runcmd(f"mv ./TempTHANOS/{file} ./")
-        await _thanosutils.runcmd("pip3 install --no-cache-dir -r requirements.txt")
-        await _thanosutils.runcmd("rm -rf TempTHANOS")
-    if not THANOSABUSE and os.path.exists("badthanosext"):
-        await _thanosutils.runcmd("rm -rf badthanosext")
+            await _catutils.runcmd(f"rm -rf {file}")
+            await _catutils.runcmd(f"mv ./TempTHANOS/{file} ./")
+        await _catutils.runcmd("pip3 install --no-cache-dir -r requirements.txt")
+        await _catutils.runcmd("rm -rf TempTHANOS")
+    if not THANOSABUSE and os.path.exists("badcatext"):
+        await _catutils.runcmd("rm -rf badcatext")
     if not EXTERNAL and os.path.exists("xtraplugins"):
-        await _thanosutils.runcmd("rm -rf xtraplugins")
+        await _catutils.runcmd("rm -rf xtraplugins")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
-    command=("var", plugin_thanosegory),
+    command=("var", plugin_category),
     info={
         "header": "To manage config vars.",
         "flags": {
@@ -103,34 +103,34 @@ async def variable(event):  # sourcery no-metrics
     with open(config, "r") as f:
         configs = f.readlines()
     if cmd == "get":
-        thanos = await edit_or_reply(event, "`Getting information...`")
+        cat = await edit_or_reply(event, "`Getting information...`")
         await asyncio.sleep(1)
         variable = event.pattern_match.group(2).split()[0]
         for i in configs:
             if variable in i:
                 _, val = i.split("= ")
                 return await edit_or_reply(
-                    thanos, "**ConfigVars**:" f"\n\n`{variable}` = `{val}`"
+                    cat, "**ConfigVars**:" f"\n\n`{variable}` = `{val}`"
                 )
         await edit_or_reply(
-            thanos, "**ConfigVars**:" f"\n\n__Error:\n-> __`{variable}`__ doesn't exists__"
+            cat, "**ConfigVars**:" f"\n\n__Error:\n-> __`{variable}`__ doesn't exists__"
         )
     elif cmd == "set":
         variable = "".join(event.text.split(maxsplit=2)[2:])
-        thanos = await edit_or_reply(event, "`Setting information...`")
+        cat = await edit_or_reply(event, "`Setting information...`")
         if not variable:
-            return await thanos.edit("`.set var <ConfigVars-name> <value>`")
+            return await cat.edit("`.set var <ConfigVars-name> <value>`")
         value = "".join(variable.split(maxsplit=1)[1:])
         variable = "".join(variable.split(maxsplit=1)[0])
         if not value:
-            return await edit_or_reply(thanos, "`.set var <ConfigVars-name> <value>`")
+            return await edit_or_reply(cat, "`.set var <ConfigVars-name> <value>`")
         if variable not in var_checker:
             if variable == "EXTERNAL_REPO":
                 if bool(value and (value.lower() != "false")) and not url(value):
-                    value = "https://github.com/rishabhanand2/thanos_plugins"
+                    value = "https://github.com/rishabhanand2/cat_plugins"
                 else:
                     return await edit_or_reply(
-                        thanos,
+                        cat,
                         f"**There no point in setting `{variable}` with `{value}`\nUse `.del var` to delete instead.**",
                     )
             value = f"'{value}'"
@@ -143,20 +143,20 @@ async def variable(event):  # sourcery no-metrics
                 string += f"{i}"
         if match:
             await edit_or_reply(
-                thanos, f"`{variable}` **successfully changed to  ->  **`{value}`"
+                cat, f"`{variable}` **successfully changed to  ->  **`{value}`"
             )
         else:
             string += f"    {variable} = {value}\n"
             await edit_or_reply(
-                thanos, f"`{variable}`**  successfully added with value  ->  **`{value}`"
+                cat, f"`{variable}`**  successfully added with value  ->  **`{value}`"
             )
         with open(config, "w") as f1:
             f1.write(string)
             f1.close()
         await switch_branch()
-        await event.client.reload(thanos)
+        await event.client.reload(cat)
     if cmd == "del":
-        thanos = await edit_or_reply(event, "`Deleting information...`")
+        cat = await edit_or_reply(event, "`Deleting information...`")
         await asyncio.sleep(1)
         variable = event.pattern_match.group(2).split()[0]
         for i in configs:
@@ -169,17 +169,17 @@ async def variable(event):  # sourcery no-metrics
             f1.close()
         if not match:
             return await edit_or_reply(
-                thanos,
+                cat,
                 "**ConfigVars**:" f"\n\n__Error:\n-> __`{variable}`__ doesn't exists__",
             )
-        await edit_or_reply(thanos, f"`{variable}` **successfully deleted.**")
+        await edit_or_reply(cat, f"`{variable}` **successfully deleted.**")
         await switch_branch()
-        await event.client.reload(thanos)
+        await event.client.reload(cat)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(re|clean)load$",
-    command=("reload", plugin_thanosegory),
+    command=("reload", plugin_category),
     info={
         "header": "To reload your bot in vps/ similar to restart",
         "flags": {
@@ -195,13 +195,13 @@ async def variable(event):  # sourcery no-metrics
 async def _(event):
     "To reload Your bot"
     cmd = event.pattern_match.group(1)
-    thanos = await edit_or_reply(event, "`Wait 2-3 min, reloading...`")
+    cat = await edit_or_reply(event, "`Wait 2-3 min, reloading...`")
     if cmd == "clean":
         for file in exts:
             removing = glob.glob(f"./*.{file}")
             for i in removing:
                 os.remove(i)
         for i in cmds:
-            await _thanosutils.runcmd(i)
+            await _catutils.runcmd(i)
     await switch_branch()
-    await event.client.reload(thanos)
+    await event.client.reload(cat)

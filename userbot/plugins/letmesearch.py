@@ -4,12 +4,12 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lmg(?: |$)([\s\S]*)",
-    command=("lmg", plugin_thanosegory),
+    command=("lmg", plugin_category),
     info={
         "header": "Searches the given query in Google and shows you the link of that query.",
         "usage": "{tr}lmg <Query>",
@@ -32,9 +32,9 @@ async def googal(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lmy(?: |$)([\s\S]*)",
-    command=("lmy", plugin_thanosegory),
+    command=("lmy", plugin_category),
     info={
         "header": "Searches the given query in youtube and shows you the link of that query.",
         "usage": "{tr}lmy <Query>",
@@ -59,9 +59,9 @@ async def uthoob(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ddg(?: |$)([\s\S]*)",
-    command=("ddg", plugin_thanosegory),
+    command=("ddg", plugin_category),
     info={
         "header": "Searches the given query in Duck buck go and shows you the link of that query.",
         "usage": "{tr}ddg <Query>",
@@ -86,9 +86,9 @@ async def dukdukgo(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lmalt(?: |$)([\s\S]*)",
-    command=("lmalt", plugin_thanosegory),
+    command=("lmalt", plugin_category),
     info={
         "header": "Searches the given query in altnews and shows you the link of that query.",
         "usage": "{tr}lmalt <Query>",
@@ -111,9 +111,9 @@ async def news(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lmvar ([\s\S]*)",
-    command=("lmvar", plugin_thanosegory),
+    command=("lmvar", plugin_category),
     info={
         "header": "Searches the given app name in heroku and show that app vars page link .",
         "usage": "{tr}lmvar <app name>",
@@ -133,9 +133,9 @@ async def var(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lmlog ([\s\S]*)",
-    command=("lmlog", plugin_thanosegory),
+    command=("lmlog", plugin_category),
     info={
         "header": "Searches the given app name in heroku and shows you logs page link of that app.",
         "usage": "{tr}lmlog <app name>",
@@ -153,9 +153,9 @@ async def log(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="dyno ([\s\S]*)",
-    command=("dyno", plugin_thanosegory),
+    command=("dyno", plugin_category),
     info={
         "header": "Searches the given app name in heroku and shows you dyno page link of that app.",
         "usage": "{tr}dyno <Query>",
@@ -179,9 +179,9 @@ async def dyno(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lmkp(?: |$)([\s\S]*)",
-    command=("lmkp", plugin_thanosegory),
+    command=("lmkp", plugin_category),
     info={
         "header": "Searches the given query in indian kanoon and shows you the link of that query.",
         "usage": "{tr}lmkp <Query>",
@@ -204,9 +204,9 @@ async def kanun(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gem(?: |$)([\s\S]*)",
-    command=("gem", plugin_thanosegory),
+    command=("gem", plugin_category),
     info={
         "header": "Searches the given query in Government e marketplace and shows you the link of that query.",
         "usage": "{tr}gem <Query>",
@@ -229,9 +229,9 @@ async def gem(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="archive(?: |$)([\s\S]*)",
-    command=("archive", plugin_thanosegory),
+    command=("archive", plugin_category),
     info={
         "header": "Searches the given query in web archive and shows you the link of that query.",
         "usage": "{tr}archive <Query>",

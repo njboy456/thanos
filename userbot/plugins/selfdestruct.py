@@ -3,13 +3,13 @@ from asyncio import sleep
 from userbot import THANOSPRO
 from userbot.core.logger import logging
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sdm (\d*) ([\s\S]*)",
-    command=("sdm", plugin_thanosegory),
+    command=("sdm", plugin_category),
     info={
         "header": "To self destruct the message after paticualr time.",
         "description": "Suppose if you use .sdm 10 hi then message will be immediately send new message as hi and then after 10 sec this message will auto delete.",
@@ -19,18 +19,18 @@ LOGS = logging.getLogger(__name__)
 )
 async def selfdestruct(destroy):
     "To self destruct the sent message"
-    thanos = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = thanos[1]
-    ttl = int(thanos[0])
+    cat = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = cat[1]
+    ttl = int(cat[0])
     await destroy.delete()
     smsg = await destroy.client.send_message(destroy.chat_id, message)
     await sleep(ttl)
     await smsg.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="selfdm (\d*) ([\s\S]*)",
-    command=("selfdm", plugin_thanosegory),
+    command=("selfdm", plugin_category),
     info={
         "header": "To self destruct the message after paticualr time. and in message will show the time.",
         "description": "Suppose if you use .sdm 10 hi then message will be immediately will send new message as hi and then after 10 sec this message will auto delete.",
@@ -40,9 +40,9 @@ async def selfdestruct(destroy):
 )
 async def selfdestruct(destroy):
     "To self destruct the sent message"
-    thanos = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = thanos[1]
-    ttl = int(thanos[0])
+    cat = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = cat[1]
+    ttl = int(cat[0])
     text = f"{message}\n\n`This message shall be self-destructed in {ttl} seconds`"
 
     await destroy.delete()

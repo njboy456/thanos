@@ -9,7 +9,7 @@ from ..helpers.functions import getTranslate
 from ..sql_helper.globals import gvarstatus
 from . import Convert, THANOSPRO, soft_deEmojify
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
 async def ocr_space_file(
@@ -42,9 +42,9 @@ async def ocr_space_file(
     return r.json()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|t)ocr(?:\s|$)([\s\S]*)",
-    command=("ocr", plugin_thanosegory),
+    command=("ocr", plugin_category),
     info={
         "header": "To read text in image/gif/sticker/video and print it.",
         "description": "Reply to an image or sticker to extract text from it.\n\nGet language codes from [here](https://ocr.space/ocrapi).",
@@ -57,7 +57,7 @@ async def ocr(event):
     reply = await event.get_reply_message()
     if not event.reply_to_msg_id or not reply.media:
         return await edit_delete(event, "__Reply to a media to read text on it__")
-    thanosevent = await edit_or_reply(event, "`Reading...`")
+    catevent = await edit_or_reply(event, "`Reading...`")
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
     cmd = event.pattern_match.group(1)
@@ -67,19 +67,19 @@ async def ocr(event):
     )
     if not output_file[1]:
         return await edit_delete(
-            thanosevent, "`Couldn't find image. Are you sure you replied to image?`"
+            catevent, "`Couldn't find image. Are you sure you replied to image?`"
         )
     test_file = await ocr_space_file(filename=output_file[1], language=lang_code)
     try:
         ParsedText = test_file["ParsedResults"][0]["ParsedText"]
     except BaseException:
         await edit_delete(
-            thanosevent, "`Couldn't read it.`\n`I guess I need new glasses.`"
+            catevent, "`Couldn't read it.`\n`I guess I need new glasses.`"
         )
     else:
         if cmd == "":
             await edit_or_reply(
-                thanosevent, f"**Here's what I could read from it:**\n\n`{ParsedText}`"
+                catevent, f"**Here's what I could read from it:**\n\n`{ParsedText}`"
             )
         if cmd == "t":
             TRT_LANG = gvarstatus("TOCR_LANG") or "en"
@@ -88,21 +88,21 @@ async def ocr(event):
                     soft_deEmojify(ParsedText), dest=TRT_LANG
                 )
             except ValueError:
-                return await edit_delete(thanosevent, "`Invalid destination language.`")
+                return await edit_delete(catevent, "`Invalid destination language.`")
             source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
             transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
             tran_text = f"📜**Translate :-\nFrom {source_lan.title()}({reply_text.src.lower()}) to {transl_lan.title()}({reply_text.dest.lower()}) :**\n\n`{reply_text.text}`"
             await edit_or_reply(
-                thanosevent,
+                catevent,
                 f"🧧**Here's what I could read from it:**\n\n`{ParsedText}`\n\n{tran_text}",
             )
     if os.path.exists(output_file[1]):
         os.remove(output_file[1])
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="tocr",
-    command=("tocr", plugin_thanosegory),
+    command=("tocr", plugin_category),
     info={
         "header": "To read text in image/gif/sticker/video and print it with its translation.",
         "description": "Reply to an image/gif/sticker/video to extract text from it and print it with its translation.\n\nGet language codes from [here](https://ocr.space/ocrapi).",

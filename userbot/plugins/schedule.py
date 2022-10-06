@@ -2,12 +2,12 @@ from asyncio import sleep
 
 from userbot import THANOSPRO
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="schd (\d*) ([\s\S]*)",
-    command=("schd", plugin_thanosegory),
+    command=("schd", plugin_category),
     info={
         "header": "To schedule a message after given time(in seconds).",
         "usage": "{tr}schd <time_in_seconds>  <message to send>",
@@ -16,9 +16,9 @@ plugin_thanosegory = "utils"
 )
 async def _(event):
     "To schedule a message after given time"
-    thanos = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = thanos[1]
-    ttl = int(thanos[0])
+    cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = cat[1]
+    ttl = int(cat[0])
     await event.delete()
     await sleep(ttl)
     await event.respond(message)

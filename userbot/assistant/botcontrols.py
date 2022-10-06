@@ -23,7 +23,7 @@ from .botmanagers import (
 
 LOGS = logging.getLogger(__name__)
 
-plugin_thanosegory = "bot"
+plugin_category = "bot"
 botusername = Config.TG_BOT_USERNAME
 cmhd = Config.COMMAND_HAND_LER
 
@@ -112,9 +112,9 @@ async def bot_broadcast(event):
     await br_cast.edit(b_info, parse_mode="html")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="bot_users$",
-    command=("bot_users", plugin_thanosegory),
+    command=("bot_users", plugin_category),
     info={
         "header": "To get users list who started bot.",
         "description": "To get compelete list of users who started your bot",
@@ -187,9 +187,9 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="bblist$",
-    command=("bblist", plugin_thanosegory),
+    command=("bblist", plugin_category),
     info={
         "header": "To get users list who are banned in bot.",
         "description": "To get list of users who are banned in bot.",
@@ -207,9 +207,9 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="bot_antif (on|off)$",
-    command=("bot_antif", plugin_thanosegory),
+    command=("bot_antif", plugin_category),
     info={
         "header": "To enable or disable bot antiflood.",
         "description": "if it was turned on then after 10 messages or 10 edits of same messages in less time then your bot auto loacks them.",

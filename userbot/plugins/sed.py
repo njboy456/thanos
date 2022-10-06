@@ -9,7 +9,7 @@ from userbot import THANOSPRO
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 HEADER = "「sed」\n"
 KNOWN_RE_BOTS = re.compile(Config.GROUP_REG_SED_EX_BOT_S, flags=re.IGNORECASE)
@@ -89,9 +89,9 @@ async def on_edit(event):
             break
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="^s/((?:\\/|[^/])+)/((?:\\/|[^/])*)(/.*)?",
-    command=("sed", plugin_thanosegory),
+    command=("sed", plugin_category),
     info={
         "header": "Replaces a word or words with other words.",
         "description": "Tag any sentence and type s/a/b. where is required word to replace and b is correct word.",

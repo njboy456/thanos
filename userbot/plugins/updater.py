@@ -14,14 +14,14 @@ from userbot import HEROKU_APP, UPSTREAM_REPO_URL, THANOSPRO
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import _thanosutils
+from ..helpers.utils import _catutils
 from ..sql_helper.global_collection import (
     add_to_collectionlist,
     del_keyword_collectionlist,
     get_collectionlist_items,
 )
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 cmdhd = Config.COMMAND_HAND_LER
 ENV = bool(os.environ.get("ENV", False))
 LOGS = logging.getLogger(__name__)
@@ -37,9 +37,9 @@ UPSTREAM_REPO_BRANCH = Config.UPSTREAM_REPO_BRANCH
 
 REPO_REMOTE_NAME = "temponame"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
-NO_HEROKU_APP_CFGD = "no heroku applithanosion found, but a key given? 😕 "
+NO_HEROKU_APP_CFGD = "no heroku application found, but a key given? 😕 "
 HEROKU_GIT_REF_SPEC = "HEAD:refs/heads/master"
-RESTARTING_APP = "re-starting heroku applithanosion"
+RESTARTING_APP = "re-starting heroku application"
 IS_SELECTED_DIFFERENT_BRANCH = (
     "looks like a custom branch {branch_name} "
     "is being used:\n"
@@ -96,7 +96,7 @@ async def update_requirements():
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
-        await process.communithanose()
+        await process.communicate()
         return process.returncode
     except Exception as e:
         return repr(e)
@@ -118,7 +118,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
         return await event.edit("`Please set up`  **HEROKU_API_KEY**  ` Var...`")
     heroku = heroku3.from_key(HEROKU_API_KEY)
-    heroku_applithanosions = heroku.apps()
+    heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
         await event.edit(
             "`Please set up the` **HEROKU_APP_NAME** `Var`"
@@ -127,7 +127,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         repo.__del__()
         return
     heroku_app = next(
-        (app for app in heroku_applithanosions if app.name == HEROKU_APP_NAME),
+        (app for app in heroku_applications if app.name == HEROKU_APP_NAME),
         None,
     )
 
@@ -183,9 +183,9 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             HEROKU_APP.restart()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="update(| now)?$",
-    command=("update", plugin_thanosegory),
+    command=("update", plugin_category),
     info={
         "header": "To update userbot.",
         "description": "I recommend you to do update deploy atlest once a week.",
@@ -275,7 +275,7 @@ async def upstream(event):
     return
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="update deploy$",
 )
 async def upstream(event):
@@ -321,19 +321,19 @@ async def upstream(event):
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
-@THANOSPRO.thanos_cmd(
-    pattern="(good|bad)thanos$",
-    command=("switch", plugin_thanosegory),
+@THANOSPRO.cat_cmd(
+    pattern="(good|bad)cat$",
+    command=("switch", plugin_category),
     info={
-        "header": "To switch between goodthanos & badthanos(For extra nsfw and gali).",
+        "header": "To switch between goodcat & badcat(For extra nsfw and gali).",
         "usage": [
-            "{tr}goodthanos",
-            "{tr}badthanos",
+            "{tr}goodcat",
+            "{tr}badcat",
         ],
     },
 )
 async def variable(event):  # sourcery skip: low-code-quality
-    "To switch between good & bad thanos"
+    "To switch between good & bad cat"
     switch = "THANOSABUSE"
     config = "config.py"
     cmd = event.pattern_match.group(1).lower()
@@ -348,7 +348,7 @@ async def variable(event):  # sourcery skip: low-code-quality
         if cmd == "good":
             if THANOSABUSE:
                 await edit_or_reply(
-                    event, "`Changing badthanos to goodthanos wait for 2-3 minutes.`"
+                    event, "`Changing badcat to goodcat wait for 2-3 minutes.`"
                 )
                 del heroku_var[switch]
                 return
@@ -357,7 +357,7 @@ async def variable(event):  # sourcery skip: low-code-quality
             if THANOSABUSE:
                 return await edit_delete(event, "`You already using BadTHANOS`", 6)
             await edit_or_reply(
-                event, "`Changing goodthanos to badthanos wait for 2-3 minutes.`"
+                event, "`Changing goodcat to badcat wait for 2-3 minutes.`"
             )
             heroku_var[switch] = "True"
     elif os.path.exists(config):
@@ -372,25 +372,25 @@ async def variable(event):  # sourcery skip: low-code-quality
                 string += f"{i}"
         if cmd == "good":
             if match and not THANOSABUSE:
-                thanos = await edit_or_reply(
-                    event, "`Changing badthanos to goodthanos wait for 2-3 minutes.`"
+                cat = await edit_or_reply(
+                    event, "`Changing badcat to goodcat wait for 2-3 minutes.`"
                 )
                 with open(config, "w") as f1:
                     f1.write(string)
                     f1.close()
-                await _thanosutils.runcmd("rm -rf badthanosext")
-                return await event.client.reload(thanos)
+                await _catutils.runcmd("rm -rf badcatext")
+                return await event.client.reload(cat)
             await edit_delete(event, "`You already using GoodTHANOS`")
         elif cmd == "bad":
             if match and THANOSABUSE:
                 return await edit_or_reply(event, "`You already using BadTHANOS`")
             string += f'    {switch} = "True"\n'
-            thanos = await edit_or_reply(
-                event, "`Changing goodthanos to badthanos wait for 2-3 minutes.`"
+            cat = await edit_or_reply(
+                event, "`Changing goodcat to badcat wait for 2-3 minutes.`"
             )
             with open(config, "w") as f1:
                 f1.write(string)
                 f1.close()
-            await event.client.reload(thanos)
+            await event.client.reload(cat)
     else:
         await edit_delete(event, "`There no Config file , You can't use this plugin.`")

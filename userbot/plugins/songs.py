@@ -1,4 +1,4 @@
-# by  @thanosceo ( https://t.me/mrconfused  )
+# by  @catceo ( https://t.me/mrconfused  )
 
 # songs finder for THANOSBOT
 import base64
@@ -20,7 +20,7 @@ from ..helpers.tools import media_type
 from ..helpers.utils import reply_id
 from . import THANOSPRO, song_download
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
 
 # =========================================================== #
@@ -34,9 +34,9 @@ SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
 # =========================================================== #
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="song(320)?(?:\s|$)([\s\S]*)",
-    command=("song", plugin_thanosegory),
+    command=("song", plugin_category),
     info={
         "header": "To get songs from youtube.",
         "description": "Basically this command searches youtube and send the first video as audio file.",
@@ -57,34 +57,34 @@ async def song(event):
         query = reply.message
     else:
         return await edit_or_reply(event, "`What I am Supposed to find `")
-    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await thanosevent.edit(
+        return await catevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
     cmd = event.pattern_match.group(1)
     q = "320k" if cmd == "320" else "128k"
-    song_file, thanosthumb, title = await song_download(video_link, thanosevent, quality=q)
+    song_file, catthumb, title = await song_download(video_link, catevent, quality=q)
     await event.client.send_file(
         event.chat_id,
         song_file,
         force_document=False,
         caption=f"**Title:** `{title}`",
-        thumb=thanosthumb,
+        thumb=catthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
     )
-    await thanosevent.delete()
-    for files in (thanosthumb, song_file):
+    await catevent.delete()
+    for files in (catthumb, song_file):
         if files and os.path.exists(files):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="vsong(?:\s|$)([\s\S]*)",
-    command=("vsong", plugin_thanosegory),
+    command=("vsong", plugin_category),
     info={
         "header": "To get video songs from youtube.",
         "description": "Basically this command searches youtube and sends the first video",
@@ -102,34 +102,34 @@ async def vsong(event):
         query = reply.message
     else:
         return await edit_or_reply(event, "`What I am Supposed to find`")
-    thanos = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await thanosevent.edit(
+        return await catevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
     with contextlib.suppress(BaseException):
-        thanos = Get(thanos)
-        await event.client(thanos)
-    vsong_file, thanosthumb, title = await song_download(video_link, thanosevent, video=True)
+        cat = Get(cat)
+        await event.client(cat)
+    vsong_file, catthumb, title = await song_download(video_link, catevent, video=True)
     await event.client.send_file(
         event.chat_id,
         vsong_file,
         caption=f"**Title:** `{title}`",
-        thumb=thanosthumb,
+        thumb=catthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
     )
-    await thanosevent.delete()
-    for files in (thanosthumb, vsong_file):
+    await catevent.delete()
+    for files in (catthumb, vsong_file):
         if files and os.path.exists(files):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(s(ha)?z(a)?m)(?:\s|$)([\s\S]*)",
-    command=("shazam", plugin_thanosegory),
+    command=("shazam", plugin_category),
     info={
         "header": "To reverse search song.",
         "description": "Reverse search audio file using shazam api",
@@ -152,15 +152,15 @@ async def shazamcmd(event):
         return await edit_delete(
             event, "__Reply to Voice clip or Audio clip to reverse search that song.__"
         )
-    thanosevent = await edit_or_reply(event, "__Downloading the audio clip...__")
-    name = "thanos.mp3"
+    catevent = await edit_or_reply(event, "__Downloading the audio clip...__")
+    name = "cat.mp3"
     try:
         for attr in getattr(reply.document, "attributes", []):
             if isinstance(attr, types.DocumentAttributeFilename):
                 name = attr.file_name
         dl = io.FileIO(name, "a")
         await event.client.fast_download_file(
-            lothanosion=reply.document,
+            location=reply.document,
             out=dl,
         )
         dl.close()
@@ -171,7 +171,7 @@ async def shazamcmd(event):
     except Exception as e:
         LOGS.error(e)
         return await edit_delete(
-            thanosevent, f"**Error while reverse searching song:**\n__{e}__"
+            catevent, f"**Error while reverse searching song:**\n__{e}__"
         )
 
     file = track["images"]["background"]
@@ -202,14 +202,14 @@ async def shazamcmd(event):
         reply_to=reply,
         parse_mode="html",
     )
-    await thanosevent.delete()
+    await catevent.delete()
     if delete:
         await delete_conv(event, chat, purgeflag)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="song2(?:\s|$)([\s\S]*)",
-    command=("song2", plugin_thanosegory),
+    command=("song2", plugin_category),
     info={
         "header": "To search songs and upload to telegram",
         "description": "Searches the song you entered in query and sends it quality of it is 320k",
@@ -222,7 +222,7 @@ async def song2(event):
     song = event.pattern_match.group(1)
     chat = "@THANOSMusicRobot"
     reply_id_ = await reply_id(event)
-    thanosevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
+    catevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
     async with event.client.conversation(chat) as conv:
         try:
             purgeflag = await conv.send_message(song)
@@ -232,7 +232,7 @@ async def song2(event):
         music = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
         if not music.media:
-            return await edit_delete(thanosevent, SONG_NOT_FOUND, parse_mode="html")
+            return await edit_delete(catevent, SONG_NOT_FOUND, parse_mode="html")
         await event.client.send_read_acknowledge(conv.chat_id)
         await event.client.send_file(
             event.chat_id,
@@ -241,5 +241,5 @@ async def song2(event):
             parse_mode="html",
             reply_to=reply_id_,
         )
-        await thanosevent.delete()
+        await catevent.delete()
         await delete_conv(event, chat, purgeflag)

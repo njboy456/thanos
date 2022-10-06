@@ -19,11 +19,11 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import progress
 from ..helpers.utils import reply_id
 
-plugin_thanosegory = "misc"
+plugin_category = "misc"
 
 PATH = os.path.join("./temp", "temp_vid.mp4")
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
-plugin_thanosegory = "misc"
+plugin_category = "misc"
 downloads = pathlib.Path("./downloads/").absolute()
 NAME = "untitled"
 
@@ -36,7 +36,7 @@ class UPLOAD:
 UPLOAD_ = UPLOAD()
 
 
-async def thanoslst_of_files(path):
+async def catlst_of_files(path):
     files = []
     for dirname, dirnames, filenames in os.walk(path):
         # print path to all filenames.
@@ -63,39 +63,39 @@ def get_video_thumb(file, output=None, width=320):
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
     )
-    p.communithanose()
+    p.communicate()
     if not p.returncode and os.path.lexists(file):
         return output
 
 
 def sortthings(contents, path):
-    thanossort = []
+    catsort = []
     contents.sort()
     for file in contents:
-        thanospath = os.path.join(path, file)
-        if os.path.isfile(thanospath):
-            thanossort.append(file)
+        catpath = os.path.join(path, file)
+        if os.path.isfile(catpath):
+            catsort.append(file)
     for file in contents:
-        thanospath = os.path.join(path, file)
-        if os.path.isdir(thanospath):
-            thanossort.append(file)
-    return thanossort
+        catpath = os.path.join(path, file)
+        if os.path.isdir(catpath):
+            catsort.append(file)
+    return catsort
 
 
 async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     return str(path.absolute()) if full else path.stem + path.suffix
 
 
-async def upload(path, event, udir_event, thanosflag=None):  # sourcery no-metrics
-    thanosflag = thanosflag or False
+async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
+    catflag = catflag or False
     reply_to_id = await reply_id(event)
     if os.path.isdir(path):
         await event.client.send_message(event.chat_id, f"**Folder : **`{path}`")
         Files = os.listdir(path)
         Files = sortthings(Files, path)
         for file in Files:
-            thanospath = os.path.join(path, file)
-            await upload(Path(thanospath), event, udir_event)
+            catpath = os.path.join(path, file)
+            await upload(Path(catpath), event, udir_event)
     elif os.path.isfile(path):
         fname = os.path.basename(path)
         c_time = time.time()
@@ -114,7 +114,7 @@ async def upload(path, event, udir_event, thanosflag=None):  # sourcery no-metri
             file=uploaded,
             mime_type=mime_type,
             attributes=attributes,
-            force_file=thanosflag,
+            force_file=catflag,
             thumb=await event.client.upload_file(thumb) if thumb else None,
         )
         await event.client.send_file(
@@ -127,9 +127,9 @@ async def upload(path, event, udir_event, thanosflag=None):  # sourcery no-metri
         UPLOAD_.uploaded += 1
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="upload( -f)? ([\s\S]*)",
-    command=("upload", plugin_thanosegory),
+    command=("upload", plugin_category),
     info={
         "header": "To upload files from server to telegram",
         "description": "To upload files which are downloaded in your bot.",
@@ -156,7 +156,7 @@ async def uploadir(event):
     if os.path.isdir(path):
         await edit_or_reply(udir_event, f"`Gathering file details in directory {path}`")
         UPLOAD_.uploaded = 0
-        await upload(path, event, udir_event, thanosflag=flag)
+        await upload(path, event, udir_event, catflag=flag)
         end = datetime.now()
         ms = (end - start).seconds
         await edit_delete(
@@ -166,7 +166,7 @@ async def uploadir(event):
     else:
         await edit_or_reply(udir_event, "`Uploading file .....`")
         UPLOAD_.uploaded = 0
-        await upload(path, event, udir_event, thanosflag=flag)
+        await upload(path, event, udir_event, catflag=flag)
         end = datetime.now()
         ms = (end - start).seconds
         await edit_delete(

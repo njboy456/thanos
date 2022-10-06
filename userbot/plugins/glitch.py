@@ -1,6 +1,6 @@
 """
 designed By @Krishna_Singhal in userge
-ported to telethon by @mrconfused and @thanosceo
+ported to telethon by @mrconfused and @catceo
 """
 
 import os
@@ -13,12 +13,12 @@ from userbot import Convert, THANOSPRO
 from ..core.managers import edit_delete
 from ..helpers import reply_id, unsavegif
 
-plugin_thanosegory = "fun"
+plugin_category = "fun"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="glitch(s)?(?: |$)([1-8])?",
-    command=("glitch", plugin_thanosegory),
+    command=("glitch", plugin_category),
     info={
         "header": "Glitches the given Image.",
         "description": "Glitches the given mediafile (gif , stickers , image, videos) to a sticker/image and glitch range is from 1 to 8.\
@@ -33,14 +33,14 @@ plugin_thanosegory = "fun"
 async def glitch(event):
     "Glitches the given Image."
     cmd = event.pattern_match.group(1)
-    thanosinput = event.pattern_match.group(2)
+    catinput = event.pattern_match.group(2)
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
-    thanosinput = int(thanosinput) if thanosinput else 2
+    catinput = int(catinput) if catinput else 2
     glitch_file = await Convert.to_image(
         event,
         reply,
@@ -55,12 +55,12 @@ async def glitch(event):
     img = Image.open(glitch_file[1])
     if cmd:
         glitched = os.path.join("./temp", "glitched.webp")
-        glitch_img = glitcher.glitch_image(img, thanosinput, color_offset=True)
+        glitch_img = glitcher.glitch_image(img, catinput, color_offset=True)
         glitch_img.save(glitched)
-        await event.client.send_file(event.chat_id, glitched, reply_to=thanosid)
+        await event.client.send_file(event.chat_id, glitched, reply_to=catid)
     else:
         glitched = os.path.join("./temp", "glitched.gif")
-        glitch_img = glitcher.glitch_image(img, thanosinput, color_offset=True, gif=True)
+        glitch_img = glitcher.glitch_image(img, catinput, color_offset=True, gif=True)
         DURATION = 200
         LOOP = 0
         glitch_img[0].save(
@@ -71,7 +71,7 @@ async def glitch(event):
             duration=DURATION,
             loop=LOOP,
         )
-        sandy = await event.client.send_file(event.chat_id, glitched, reply_to=thanosid)
+        sandy = await event.client.send_file(event.chat_id, glitched, reply_to=catid)
         await unsavegif(event, sandy)
     await glitch_file[0].delete()
     for files in (glitch_file[1], glitched):

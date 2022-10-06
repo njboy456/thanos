@@ -35,9 +35,9 @@ print(f"Licensed under the terms of the {userbot.__license__}")
 async def rishabh():
     THANOS_USER = bot.me.first_name
     The_THANOSBOY = bot.uid
-    thanos_mention = f"[{THANOS_USER}](tg://user?id={The_THANOSBOY})"
-    name = f"{thanos_mention}'s Assistant"
-    description = f"I am Assistant Of {thanos_mention}.This Bot Can Help U To Chat With My Master"
+    cat_mention = f"[{THANOS_USER}](tg://user?id={The_THANOSBOY})"
+    name = f"{cat_mention}'s Assistant"
+    description = f"I am Assistant Of {cat_mention}.This Bot Can Help U To Chat With My Master"
     starkbot = await THANOSPRO.tgbot.get_me()
     bot_name = starkbot.first_name
     botname = f"@{starkbot.username}"
@@ -98,7 +98,7 @@ async def startup_process():
     print("Yay your userbot is officially working.!!!")
     print(
         f"Congratulation, now type {cmdhr}alive to see message if THANOSPRO is live\
-        \nIf you need assistance, head to https://t.me/thanosprosss"
+        \nIf you need assistance, head to https://t.me/catprosss"
     )
     print("============================================================")
     await verifyLoggerGroup()
@@ -116,11 +116,11 @@ async def externalrepo():
         #)
     #if Config.THANOSABUSE:
        # await install_externalrepo(
-           # Config.THANOSABUSE_REPO, Config.THANOSABUSE_REPOBRANCH, "badthanosext"
+           # Config.THANOSABUSE_REPO, Config.THANOSABUSE_REPOBRANCH, "badcatext"
         #)
     if Config.VCMODE:
         await install_externalrepo(
-            "https://github.com/thanosuser/THANOS-PRO", "test", "thanosvc"
+            "https://github.com/catuser/THANOS-PRO", "test", "catvc"
         )
 
 

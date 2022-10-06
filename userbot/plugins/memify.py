@@ -1,4 +1,4 @@
-# Made by @mrconfused and @thanosceo
+# Made by @mrconfused and @catceo
 # memify plugin for THANOSBOT
 import asyncio
 import base64
@@ -14,7 +14,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from userbot import Convert, THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers import asciiart, thanos_meeme, thanos_meme, media_type
+from ..helpers import asciiart, cat_meeme, cat_meme, media_type
 from ..helpers.functions import (
     add_frame,
     crop,
@@ -27,7 +27,7 @@ from ..helpers.functions import (
 from ..helpers.utils import reply_id
 from ..sql_helper.globals import addgvar, gvarstatus
 
-plugin_thanosegory = "fun"
+plugin_category = "fun"
 
 
 def random_color():
@@ -48,9 +48,9 @@ font_list = [
 ]
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pframe(f|-f)?$",
-    command=("pframe", plugin_thanosegory),
+    command=("pframe", plugin_category),
     info={
         "header": "Adds frame for the replied image.",
         "flags": {
@@ -68,17 +68,17 @@ async def maccmd(event):  # sourcery no-metrics
     mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to frame it.__")
-    if mediatype == "Sticker" and reply.document.mime_type == "applithanosion/i-tgsticker":
+    if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
         return await edit_delete(
             event,
             "__Reply to photo or sticker to frame it. Animated sticker is not supported__",
         )
-    thanosevent = await event.edit("__Adding frame for media....__")
+    catevent = await event.edit("__Adding frame for media....__")
     args = event.pattern_match.group(1)
     force = bool(args)
     try:
         imag = await Convert.to_image(
-            thanosevent, reply, dirct="./temp", file="pframe.png", noedits=True
+            catevent, reply, dirct="./temp", file="pframe.png", noedits=True
         )
         if imag[1] is None:
             return await edit_delete(
@@ -86,7 +86,7 @@ async def maccmd(event):  # sourcery no-metrics
             )
         image = Image.open(imag[1])
     except Exception as e:
-        return await edit_delete(thanosevent, f"**Error in identifying image:**\n__{e}__")
+        return await edit_delete(catevent, f"**Error in identifying image:**\n__{e}__")
     wid, hgt = image.size
     img = Image.new("RGBA", (wid, hgt))
     scale = min(wid // 100, hgt // 100)
@@ -124,12 +124,12 @@ async def maccmd(event):  # sourcery no-metrics
     await event.client.send_file(
         event.chat_id, output, reply_to=reply, force_document=force
     )
-    await thanosevent.delete()
+    await catevent.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(mmf|mms)(?:\s|$)([\s\S]*)",
-    command=("mmf", plugin_thanosegory),
+    command=("mmf", plugin_category),
     info={
         "header": "To write text on stickers or images.",
         "description": "To create memes.",
@@ -151,20 +151,20 @@ async def maccmd(event):  # sourcery no-metrics
 async def memes(event):
     "To write text on stickers or image"
     cmd = event.pattern_match.group(1)
-    thanosinput = event.pattern_match.group(2)
+    catinput = event.pattern_match.group(2)
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    if not thanosinput:
+    if not catinput:
         return await edit_delete(
             event, "`what should i write on that u idiot give text to memify`"
         )
-    if ";" in thanosinput:
-        top, bottom = thanosinput.split(";", 1)
+    if ";" in catinput:
+        top, bottom = catinput.split(";", 1)
     else:
-        top = thanosinput
+        top = catinput
         bottom = ""
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
@@ -179,21 +179,21 @@ async def memes(event):
         san = Get(san)
         await event.client(san)
     meme_file = output[1]
-    meme = os.path.join("./temp", "thanosmeme.jpg")
+    meme = os.path.join("./temp", "catmeme.jpg")
     if gvarstatus("CNG_FONTS") is None:
         CNG_FONTS = "userbot/helpers/styles/impact.ttf"
     else:
         CNG_FONTS = gvarstatus("CNG_FONTS")
     if max(len(top), len(bottom)) < 21:
-        await thanos_meme(CNG_FONTS, top, bottom, meme_file, meme)
+        await cat_meme(CNG_FONTS, top, bottom, meme_file, meme)
     else:
-        await thanos_meeme(top, bottom, CNG_FONTS, meme_file, meme)
+        await cat_meeme(top, bottom, CNG_FONTS, meme_file, meme)
     if cmd != "mmf":
         meme = (await Convert.to_sticker(event, meme, file="memes.webp", noedits=True))[
             1
         ]
     await event.client.send_file(
-        event.chat_id, meme, reply_to=thanosid, force_document=False
+        event.chat_id, meme, reply_to=catid, force_document=False
     )
     await output[0].delete()
     for files in (meme, meme_file):
@@ -201,9 +201,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cfont(?:\s|$)([\s\S]*)",
-    command=("cfont", plugin_thanosegory),
+    command=("cfont", plugin_category),
     info={
         "header": "Change the font style use for memify.To get font list use cfont command as it is without input.",
         "usage": "{tr}.cfont <Font Name>",
@@ -217,18 +217,18 @@ async def lang(event):
         await event.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
         return
     if input_str not in font_list:
-        thanosevent = await edit_or_reply(event, "`Give me a correct font name...`")
+        catevent = await edit_or_reply(event, "`Give me a correct font name...`")
         await asyncio.sleep(1)
-        await thanosevent.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
+        await catevent.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
     else:
         arg = f"userbot/helpers/styles/{input_str}"
         addgvar("CNG_FONTS", arg)
         await edit_or_reply(event, f"**Fonts for Memify changed to :-** `{input_str}`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ascii(?:\s|$)([\s\S]*)",
-    command=("ascii", plugin_thanosegory),
+    command=("ascii", plugin_category),
     info={
         "header": "To get ascii image of replied image.",
         "description": "pass hexa colou code along with the cmd to change custom background colour",
@@ -240,12 +240,12 @@ async def lang(event):
 )
 async def memes(event):
     "To get ascii image of replied image."
-    thanosinput = event.pattern_match.group(1)
+    catinput = event.pattern_match.group(1)
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -273,10 +273,10 @@ async def memes(event):
     c_list = random_color()
     color1 = c_list[0]
     color2 = c_list[1]
-    bgcolor = thanosinput or "#080808"
+    bgcolor = catinput or "#080808"
     asciiart(meme_file, 0.3, 1.9, outputfile, color1, color2, bgcolor)
     await event.client.send_file(
-        event.chat_id, outputfile, reply_to=thanosid, force_document=False
+        event.chat_id, outputfile, reply_to=catid, force_document=False
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -284,9 +284,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="invert$",
-    command=("invert", plugin_thanosegory),
+    command=("invert", plugin_category),
     info={
         "header": "To invert colours of given image or sticker.",
         "usage": "{tr}invert",
@@ -298,7 +298,7 @@ async def memes(event):
         await edit_or_reply(event, "`Reply to supported Media...`")
         return
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
     jisanidea = None
@@ -325,7 +325,7 @@ async def memes(event):
     )
     await invert_colors(meme_file, outputfile)
     await event.client.send_file(
-        event.chat_id, outputfile, force_document=False, reply_to=thanosid
+        event.chat_id, outputfile, force_document=False, reply_to=catid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -333,9 +333,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="solarize$",
-    command=("solarize", plugin_thanosegory),
+    command=("solarize", plugin_category),
     info={
         "header": "To sun burn the colours of given image or sticker.",
         "usage": "{tr}solarize",
@@ -347,7 +347,7 @@ async def memes(event):
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -374,7 +374,7 @@ async def memes(event):
     )
     await solarize(meme_file, outputfile)
     await event.client.send_file(
-        event.chat_id, outputfile, force_document=False, reply_to=thanosid
+        event.chat_id, outputfile, force_document=False, reply_to=catid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -382,9 +382,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="mirror$",
-    command=("mirror", plugin_thanosegory),
+    command=("mirror", plugin_category),
     info={
         "header": "shows you the reflection of the media file.",
         "usage": "{tr}mirror",
@@ -396,7 +396,7 @@ async def memes(event):
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -423,7 +423,7 @@ async def memes(event):
     )
     await mirror_file(meme_file, outputfile)
     await event.client.send_file(
-        event.chat_id, outputfile, force_document=False, reply_to=thanosid
+        event.chat_id, outputfile, force_document=False, reply_to=catid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -431,9 +431,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="flip$",
-    command=("flip", plugin_thanosegory),
+    command=("flip", plugin_category),
     info={
         "header": "shows you the upside down image of the given media file.",
         "usage": "{tr}flip",
@@ -445,7 +445,7 @@ async def memes(event):
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -472,7 +472,7 @@ async def memes(event):
     )
     await flip_image(meme_file, outputfile)
     await event.client.send_file(
-        event.chat_id, outputfile, force_document=False, reply_to=thanosid
+        event.chat_id, outputfile, force_document=False, reply_to=catid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -480,9 +480,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gray$",
-    command=("gray", plugin_thanosegory),
+    command=("gray", plugin_category),
     info={
         "header": "makes your media file to black and white.",
         "usage": "{tr}gray",
@@ -494,7 +494,7 @@ async def memes(event):
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -521,7 +521,7 @@ async def memes(event):
     )
     await grayscale(meme_file, outputfile)
     await event.client.send_file(
-        event.chat_id, outputfile, force_document=False, reply_to=thanosid
+        event.chat_id, outputfile, force_document=False, reply_to=catid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -529,9 +529,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="zoom ?([\s\S]*)",
-    command=("zoom", plugin_thanosegory),
+    command=("zoom", plugin_category),
     info={
         "header": "zooms your media file,",
         "usage": ["{tr}zoom", "{tr}zoom range"],
@@ -539,13 +539,13 @@ async def memes(event):
 )
 async def memes(event):
     "zooms your media file."
-    thanosinput = event.pattern_match.group(1)
-    thanosinput = int(thanosinput) if thanosinput else 50
+    catinput = event.pattern_match.group(1)
+    catinput = int(catinput) if catinput else 50
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -571,12 +571,12 @@ async def memes(event):
         else os.path.join("./temp", "zoomimage.jpg")
     )
     try:
-        await crop(meme_file, outputfile, thanosinput)
+        await crop(meme_file, outputfile, catinput)
     except Exception as e:
         return await output[0].edit(f"`{e}`")
     try:
         await event.client.send_file(
-            event.chat_id, outputfile, force_document=False, reply_to=thanosid
+            event.chat_id, outputfile, force_document=False, reply_to=catid
         )
     except Exception as e:
         return await output[0].edit(f"`{e}`")
@@ -586,9 +586,9 @@ async def memes(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="frame ?([\s\S]*)",
-    command=("frame", plugin_thanosegory),
+    command=("frame", plugin_category),
     info={
         "header": "make a frame for your media file.",
         "fill": "This defines the pixel fill value or color value to be applied. The default value is 0 which means the color is black.",
@@ -597,14 +597,14 @@ async def memes(event):
 )
 async def memes(event):
     "make a frame for your media file"
-    thanosinput = event.pattern_match.group(1)
-    if not thanosinput:
-        thanosinput = "50"
-    if ";" in str(thanosinput):
-        thanosinput, colr = thanosinput.split(";", 1)
+    catinput = event.pattern_match.group(1)
+    if not catinput:
+        catinput = "50"
+    if ";" in str(catinput):
+        catinput, colr = catinput.split(";", 1)
     else:
         colr = 0
-    thanosinput = int(thanosinput)
+    catinput = int(catinput)
     try:
         colr = int(colr)
     except Exception as e:
@@ -613,7 +613,7 @@ async def memes(event):
     if not reply:
         return await edit_delete(event, "`Reply to supported Media...`")
     san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     jisanidea = None
@@ -639,12 +639,12 @@ async def memes(event):
         else os.path.join("./temp", "framed.jpg")
     )
     try:
-        await add_frame(meme_file, outputfile, thanosinput, colr)
+        await add_frame(meme_file, outputfile, catinput, colr)
     except Exception as e:
         return await output[0].edit(f"`{e}`")
     try:
         await event.client.send_file(
-            event.chat_id, outputfile, force_document=False, reply_to=thanosid
+            event.chat_id, outputfile, force_document=False, reply_to=catid
         )
     except Exception as e:
         return await output[0].edit(f"`{e}`")

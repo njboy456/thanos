@@ -70,7 +70,7 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
     time = time or 5
     if event.sender_id in sudo_users:
         reply_to = await event.get_reply_message()
-        thanosevent = (
+        catevent = (
             await reply_to.reply(text, link_preview=link_preview, parse_mode=parse_mode)
             if reply_to
             else await event.reply(
@@ -78,8 +78,8 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
             )
         )
     else:
-        thanosevent = await event.edit(
+        catevent = await event.edit(
             text, link_preview=link_preview, parse_mode=parse_mode
         )
     await asyncio.sleep(time)
-    return await thanosevent.delete()
+    return await catevent.delete()

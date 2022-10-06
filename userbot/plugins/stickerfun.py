@@ -29,7 +29,7 @@ from ..helpers.functions import (
 )
 from ..helpers.utils import reply_id
 
-plugin_thanosegory = "fun"
+plugin_category = "fun"
 
 
 async def get_font_file(client, channel_id, search_kw=""):
@@ -52,7 +52,7 @@ async def get_font_file(client, channel_id, search_kw=""):
 def file_checker(template):
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
-    tempname = "./temp/thanos_temp.png"
+    tempname = "./temp/cat_temp.png"
     fontname = "./temp/ArialUnicodeMS.ttf"
     urllib.request.urlretrieve(template, tempname)
     if not os.path.exists(fontname):
@@ -63,9 +63,9 @@ def file_checker(template):
     return tempname, fontname
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(?:st|sttxt)(?:\s|$)([\s\S]*)",
-    command=("sttxt", plugin_thanosegory),
+    command=("sttxt", plugin_category),
     info={
         "header": "Anime that makes your writing fun.",
         "usage": "{tr}sttxt <text>",
@@ -89,9 +89,9 @@ async def waifu(animu):
 
 
 # 12 21 28 30
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stcr ?(?:(.*?) ?; )?([\s\S]*)",
-    command=("stcr", plugin_thanosegory),
+    command=("stcr", plugin_category),
     info={
         "header": "your text as sticker.",
         "usage": [
@@ -130,7 +130,7 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    FONT_FILE = await get_font_file(event.client, "@thanosfonts", font_file_name)
+    FONT_FILE = await get_font_file(event.client, "@catfonts", font_file_name)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
         fontsize -= 3
@@ -147,7 +147,7 @@ async def sticklet(event):
     await event.client.send_file(
         event.chat_id,
         image_stream,
-        caption="thanos's Sticklet",
+        caption="cat's Sticklet",
         reply_to=reply_to_id,
     )
     # cleanup
@@ -155,9 +155,9 @@ async def sticklet(event):
         os.remove(FONT_FILE)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="honk(?:\s|$)([\s\S]*)",
-    command=("honk", plugin_thanosegory),
+    command=("honk", plugin_category),
     info={
         "header": "Make honk say anything.",
         "usage": "{tr}honk <text/reply to msg>",
@@ -181,9 +181,9 @@ async def honk(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="twt(?:\s|$)([\s\S]*)",
-    command=("twt", plugin_thanosegory),
+    command=("twt", plugin_category),
     info={
         "header": "Make a cool tweet of your account",
         "usage": "{tr}twt <text/reply to msg>",
@@ -207,9 +207,9 @@ async def twt(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="glax(|r)(?:\s|$)([\s\S]*)",
-    command=("glax", plugin_thanosegory),
+    command=("glax", plugin_category),
     info={
         "header": "Make glax the dragon scream your text.",
         "flags": {
@@ -246,9 +246,9 @@ async def glax(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|b)quby(?:\s|$)([\s\S]*)",
-    command=("quby", plugin_thanosegory),
+    command=("quby", plugin_category),
     info={
         "header": "Make doge say anything.",
         "flags": {
@@ -320,11 +320,11 @@ async def quby(event):
             stroke_width=1,
         )
     if cmd == "b":
-        thanos = (
+        cat = (
             await Convert.to_sticker(event, file[0], file="quby.webp", noedits=True)
         )[1]
         await event.client.send_file(
-            event.chat_id, thanos, reply_to=reply_to_id, force_document=False
+            event.chat_id, cat, reply_to=reply_to_id, force_document=False
         )
     else:
         await clippy(event.client, file[0], event.chat_id, reply_to_id)
@@ -334,9 +334,9 @@ async def quby(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|b)(blob|kirby)(?:\s|$)([\s\S]*)",
-    command=("blob", plugin_thanosegory),
+    command=("blob", plugin_category),
     info={
         "header": "Give the sticker on background.",
         "flags": {
@@ -387,11 +387,11 @@ async def knife(event):
         direction="upwards",
     )
     if cmd == "b":
-        thanos = (
+        cat = (
             await Convert.to_sticker(event, file[0], file="knife.webp", noedits=True)
         )[1]
         await event.client.send_file(
-            event.chat_id, thanos, reply_to=reply_to_id, force_document=False
+            event.chat_id, cat, reply_to=reply_to_id, force_document=False
         )
     else:
         await clippy(event.client, file[0], event.chat_id, reply_to_id)
@@ -401,9 +401,9 @@ async def knife(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="doge(?:\s|$)([\s\S]*)",
-    command=("doge", plugin_thanosegory),
+    command=("doge", plugin_category),
     info={
         "header": "Make doge say anything.",
         "usage": "{tr}doge <text/reply to msg>",
@@ -467,9 +467,9 @@ async def doge(event):
             stroke_width=1,
             stroke_fill="black",
         )
-    thanos = (await Convert.to_sticker(event, file[0], file="doge.webp", noedits=True))[1]
+    cat = (await Convert.to_sticker(event, file[0], file="doge.webp", noedits=True))[1]
     await event.client.send_file(
-        event.chat_id, thanos, reply_to=reply_to_id, force_document=False
+        event.chat_id, cat, reply_to=reply_to_id, force_document=False
     )
     await event.delete()
     for files in (temp_name, file[0]):
@@ -477,9 +477,9 @@ async def doge(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|h)penguin(?:\s|$)([\s\S]*)",
-    command=("penguin", plugin_thanosegory),
+    command=("penguin", plugin_category),
     info={
         "header": "To make penguin meme sticker. ",
         "flags": {
@@ -535,11 +535,11 @@ async def penguin(event):
         stroke_width=1,
         stroke_fill=fg,
     )
-    thanos = (await Convert.to_sticker(event, file[0], file="penguin.webp", noedits=True))[
+    cat = (await Convert.to_sticker(event, file[0], file="penguin.webp", noedits=True))[
         1
     ]
     await event.client.send_file(
-        event.chat_id, thanos, reply_to=reply_to_id, force_document=False
+        event.chat_id, cat, reply_to=reply_to_id, force_document=False
     )
     await event.delete()
     for files in (temp_name, file[0]):
@@ -547,9 +547,9 @@ async def penguin(event):
             os.remove(files)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|h)gandhi(?:\s|$)([\s\S]*)",
-    command=("gandhi", plugin_thanosegory),
+    command=("gandhi", plugin_category),
     info={
         "header": "Make gandhi text sticker.",
         "flags": {
@@ -605,11 +605,11 @@ async def gandhi(event):
         stroke_width=1,
         stroke_fill=fg,
     )
-    thanos = (await Convert.to_sticker(event, file[0], file="gandhi.webp", noedits=True))[
+    cat = (await Convert.to_sticker(event, file[0], file="gandhi.webp", noedits=True))[
         1
     ]
     await event.client.send_file(
-        event.chat_id, thanos, reply_to=reply_to_id, force_document=False
+        event.chat_id, cat, reply_to=reply_to_id, force_document=False
     )
     await event.delete()
     for files in (temp_name, file[0]):

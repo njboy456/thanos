@@ -11,19 +11,19 @@ from userbot import THANOSPRO
 
 from ..core.logger import logging
 from ..core.managers import edit_delete
-from ..helpers.functions import age_verifithanosion, unsavegif
+from ..helpers.functions import age_verification, unsavegif
 from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID
 
 LOGS = logging.getLogger(__name__)
 API = "https://meme-api.herokuapp.com/gimme"
 
-plugin_thanosegory = "misc"
+plugin_category = "misc"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="reddit(?:\s|$)([\s\S]*)",
-    command=("reddit", plugin_thanosegory),
+    command=("reddit", plugin_category),
     info={
         "header": "get a random reddit post.",
         "usage": "{tr}reddit <subreddit>",
@@ -68,7 +68,7 @@ async def reddit_fetch(event):
         if r["nsfw"]:
             captionx += "🔞 Post marked Adult \n"
 
-            if await age_verifithanosion(event, reply_to):
+            if await age_verification(event, reply_to):
                 return
 
         await event.delete()

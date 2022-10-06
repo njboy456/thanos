@@ -9,12 +9,12 @@ from userbot import THANOSPRO
 from ..core.managers import edit_or_reply
 from . import Build_Poll, reply_id
 
-plugin_thanosegory = "extra"
+plugin_category = "extra"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="poll(?:\s|$)([\s\S]*)",
-    command=("poll", plugin_thanosegory),
+    command=("poll", plugin_category),
     info={
         "header": "To create a poll.",
         "description": "If you doesnt give any input it sends a default poll",
@@ -22,46 +22,46 @@ plugin_thanosegory = "extra"
         "examples": "{tr}poll Are you an early bird or a night owl ;Early bird ; Night owl",
     },
 )
-async def pollcreator(thanospoll):
+async def pollcreator(catpoll):
     "To create a poll"
-    reply_to_id = await reply_id(thanospoll)
-    if string := "".join(thanospoll.text.split(maxsplit=1)[1:]):
-        thanosinput = string.split(";")
-        if len(thanosinput) > 2 and len(thanosinput) < 12:
-            options = Build_Poll(thanosinput[1:])
+    reply_to_id = await reply_id(catpoll)
+    if string := "".join(catpoll.text.split(maxsplit=1)[1:]):
+        catinput = string.split(";")
+        if len(catinput) > 2 and len(catinput) < 12:
+            options = Build_Poll(catinput[1:])
             try:
-                await thanospoll.client.send_message(
-                    thanospoll.chat_id,
+                await catpoll.client.send_message(
+                    catpoll.chat_id,
                     file=InputMediaPoll(
                         poll=Poll(
                             id=random.getrandbits(32),
-                            question=thanosinput[0],
+                            question=catinput[0],
                             answers=options,
                         )
                     ),
                     reply_to=reply_to_id,
                 )
-                await thanospoll.delete()
+                await catpoll.delete()
             except PollOptionInvalidError:
                 await edit_or_reply(
-                    thanospoll,
+                    catpoll,
                     "`A poll option used invalid data (the data may be too long).`",
                 )
             except ForbiddenError:
-                await edit_or_reply(thanospoll, "`This chat has forbidden the polls`")
+                await edit_or_reply(catpoll, "`This chat has forbidden the polls`")
             except Exception as e:
-                await edit_or_reply(thanospoll, str(e))
+                await edit_or_reply(catpoll, str(e))
         else:
             await edit_or_reply(
-                thanospoll,
+                catpoll,
                 "Make sure that you used Correct syntax `.poll question ; option1 ; option2`",
             )
 
     else:
         options = Build_Poll(["Yah sure 😊✌️", "Nah 😏😕", "Whatever die sur 🥱🙄"])
         try:
-            await thanospoll.client.send_message(
-                thanospoll.chat_id,
+            await catpoll.client.send_message(
+                catpoll.chat_id,
                 file=InputMediaPoll(
                     poll=Poll(
                         id=random.getrandbits(32),
@@ -71,12 +71,12 @@ async def pollcreator(thanospoll):
                 ),
                 reply_to=reply_to_id,
             )
-            await thanospoll.delete()
+            await catpoll.delete()
         except PollOptionInvalidError:
             await edit_or_reply(
-                thanospoll, "`A poll option used invalid data (the data may be too long).`"
+                catpoll, "`A poll option used invalid data (the data may be too long).`"
             )
         except ForbiddenError:
-            await edit_or_reply(thanospoll, "`This chat has forbidden the polls`")
+            await edit_or_reply(catpoll, "`This chat has forbidden the polls`")
         except Exception as e:
-            await edit_or_reply(thanospoll, str(e))
+            await edit_or_reply(catpoll, str(e))

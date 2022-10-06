@@ -15,18 +15,18 @@ class THANOSConverter:
     async def _media_check(self, reply, dirct, file, memetype):
         if not os.path.isdir(dirct):
             os.mkdir(dirct)
-        thanosfile = os.path.join(dirct, file)
-        if os.path.exists(thanosfile):
-            os.remove(thanosfile)
+        catfile = os.path.join(dirct, file)
+        if os.path.exists(catfile):
+            os.remove(catfile)
         try:
-            thanosmedia = reply if os.path.exists(reply) else None
+            catmedia = reply if os.path.exists(reply) else None
         except TypeError:
             if memetype in ["Video", "Gif"]:
-                dirct = "./temp/thanosfile.mp4"
+                dirct = "./temp/catfile.mp4"
             elif memetype == "Audio":
-                dirct = "./temp/thanosfile.mp3"
-            thanosmedia = await reply.download_media(dirct)
-        return thanosfile, thanosmedia
+                dirct = "./temp/catfile.mp3"
+            catmedia = await reply.download_media(dirct)
+        return catfile, catmedia
 
     async def to_image(
         self, event, reply, dirct="./temp", file="meme.png", noedits=False, rgb=False
@@ -35,42 +35,42 @@ class THANOSConverter:
         mediatype = await media_type(reply)
         if memetype == "Document":
             return event, None
-        thanosevent = (
+        catevent = (
             event
             if noedits
             else await edit_or_reply(
                 event, "`Transfiguration Time! Converting to ....`"
             )
         )
-        thanosfile, thanosmedia = await self._media_check(reply, dirct, file, memetype)
+        catfile, catmedia = await self._media_check(reply, dirct, file, memetype)
         if memetype == "Photo":
-            im = Image.open(thanosmedia)
-            im.save(thanosfile)
+            im = Image.open(catmedia)
+            im.save(catfile)
         elif memetype in ["Audio", "Voice"]:
-            await runcmd(f"ffmpeg -i '{thanosmedia}' -an -c:v copy '{thanosfile}' -y")
+            await runcmd(f"ffmpeg -i '{catmedia}' -an -c:v copy '{catfile}' -y")
         elif memetype in ["Round Video", "Video", "Gif"]:
-            await take_screen_shot(thanosmedia, "00.00", thanosfile)
+            await take_screen_shot(catmedia, "00.00", catfile)
         if mediatype == "Sticker":
             if memetype == "Animated Sticker":
-                thanoscmd = f"lottie_convert.py --frame 0 -if lottie -of png '{thanosmedia}' '{thanosfile}'"
-                stdout, stderr = (await runcmd(thanoscmd))[:2]
+                catcmd = f"lottie_convert.py --frame 0 -if lottie -of png '{catmedia}' '{catfile}'"
+                stdout, stderr = (await runcmd(catcmd))[:2]
                 if stderr:
                     LOGS.info(stdout + stderr)
             elif memetype == "Video Sticker":
-                await take_screen_shot(thanosmedia, "00.00", thanosfile)
+                await take_screen_shot(catmedia, "00.00", catfile)
             elif memetype == "Static Sticker":
-                im = Image.open(thanosmedia)
-                im.save(thanosfile)
-        if thanosmedia and os.path.exists(thanosmedia):
-            os.remove(thanosmedia)
-        if os.path.exists(thanosfile):
+                im = Image.open(catmedia)
+                im.save(catfile)
+        if catmedia and os.path.exists(catmedia):
+            os.remove(catmedia)
+        if os.path.exists(catfile):
             if rgb:
-                img = Image.open(thanosfile)
+                img = Image.open(catfile)
                 if img.mode != "RGB":
                     img = img.convert("RGB")
-                img.save(thanosfile)
-            return thanosevent, thanosfile, mediatype
-        return thanosevent, None
+                img.save(catfile)
+            return catevent, catfile, mediatype
+        return catevent, None
 
     async def to_sticker(
         self, event, reply, dirct="./temp", file="meme.webp", noedits=False, rgb=False
@@ -96,24 +96,24 @@ class THANOSConverter:
             "Video",
         ]:
             return event, None
-        thanosevent = (
+        catevent = (
             event
             if noedits
             else await edit_or_reply(event, "__🎞Converting into Animated sticker..__")
         )
-        thanosfile, thanosmedia = await self._media_check(reply, dirct, file, memetype)
-        media = await fileinfo(thanosmedia)
+        catfile, catmedia = await self._media_check(reply, dirct, file, memetype)
+        media = await fileinfo(catmedia)
         h = media["height"]
         w = media["width"]
         w, h = (-1, 512) if h > w else (512, -1)
         await runcmd(
-            f"ffmpeg -to 00:00:02.900 -i '{thanosmedia}' -vf scale={w}:{h} -c:v libvpx-vp9 -crf 30 -b:v 560k -maxrate 560k -bufsize 256k -an '{thanosfile}'"
+            f"ffmpeg -to 00:00:02.900 -i '{catmedia}' -vf scale={w}:{h} -c:v libvpx-vp9 -crf 30 -b:v 560k -maxrate 560k -bufsize 256k -an '{catfile}'"
         )  # pain
-        if os.path.exists(thanosmedia):
-            os.remove(thanosmedia)
-        if os.path.exists(thanosfile):
-            return thanosevent, thanosfile
-        return thanosevent, None
+        if os.path.exists(catmedia):
+            os.remove(catmedia)
+        if os.path.exists(catfile):
+            return catevent, catfile
+        return catevent, None
 
     async def to_gif(
         self, event, reply, dirct="./temp", file="meme.mp4", maxsize="5M", noedits=False
@@ -128,30 +128,30 @@ class THANOSConverter:
             "Gif",
         ]:
             return event, None
-        thanosevent = (
+        catevent = (
             event
             if noedits
             else await edit_or_reply(
                 event, "`Transfiguration Time! Converting to ....`"
             )
         )
-        thanosfile, thanosmedia = await self._media_check(reply, dirct, file, memetype)
+        catfile, catmedia = await self._media_check(reply, dirct, file, memetype)
         if mediatype == "Sticker":
             if memetype == "Video Sticker":
-                await runcmd(f"ffmpeg -i '{thanosmedia}' -c copy '{thanosfile}'")
+                await runcmd(f"ffmpeg -i '{catmedia}' -c copy '{catfile}'")
             elif memetype == "Animated Sticker":
-                await runcmd(f"lottie_convert.py '{thanosmedia}' '{thanosfile}'")
-        if thanosmedia.endswith(".gif"):
-            await runcmd(f"ffmpeg -f gif -i '{thanosmedia}' -fs {maxsize} -an '{thanosfile}'")
+                await runcmd(f"lottie_convert.py '{catmedia}' '{catfile}'")
+        if catmedia.endswith(".gif"):
+            await runcmd(f"ffmpeg -f gif -i '{catmedia}' -fs {maxsize} -an '{catfile}'")
         else:
             await runcmd(
-                f"ffmpeg -i '{thanosmedia}' -c:v libx264 -fs {maxsize} -an '{thanosfile}'"
+                f"ffmpeg -i '{catmedia}' -c:v libx264 -fs {maxsize} -an '{catfile}'"
             )
-        if thanosmedia and os.path.exists(thanosmedia):
-            os.remove(thanosmedia)
-        if os.path.exists(thanosfile):
-            return thanosevent, thanosfile
-        return thanosevent, None
+        if catmedia and os.path.exists(catmedia):
+            os.remove(catmedia)
+        if os.path.exists(catfile):
+            return catevent, catfile
+        return catevent, None
 
 
 Convert = THANOSConverter()

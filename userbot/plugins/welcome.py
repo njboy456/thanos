@@ -15,7 +15,7 @@ from ..sql_helper.welcome_sql import (
 )
 from . import BOTLOG_CHATID
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
 
 
@@ -85,9 +85,9 @@ async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
         update_previous_welcome(event.chat_id, current_message.id)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="savewelcome(?:\s|$)([\s\S]*)",
-    command=("savewelcome", plugin_thanosegory),
+    command=("savewelcome", plugin_category),
     info={
         "header": "To welcome new users in chat.",
         "description": "Saves the message as a welcome note in the chat. And will send welcome message to every new user in group who ever joins newly in group.",
@@ -147,9 +147,9 @@ async def save_welcome(event):
     await edit_or_reply("Error while setting welcome in this group")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="clearwelcome$",
-    command=("clearwelcome", plugin_thanosegory),
+    command=("clearwelcome", plugin_category),
     info={
         "header": "To turn off welcome message in group.",
         "description": "Deletes the welcome note for the current chat.",
@@ -164,9 +164,9 @@ async def del_welcome(event):
         await edit_or_reply(event, "`Do I have a welcome note here ?`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="listwelcome$",
-    command=("listwelcome", plugin_thanosegory),
+    command=("listwelcome", plugin_category),
     info={
         "header": "To check current welcome message in group.",
         "usage": "{tr}listwelcome",
@@ -192,9 +192,9 @@ async def show_welcome(event):
         await event.reply(cws.reply, link_preview=False)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cleanwelcome (on|off)$",
-    command=("cleanwelcome", plugin_thanosegory),
+    command=("cleanwelcome", plugin_category),
     info={
         "header": "To turn off or turn on of deleting previous welcome message.",
         "description": "if you want to delete previous welcome message and send new one turn on it by deafult it will be on. Turn it off if you need",

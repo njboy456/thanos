@@ -6,7 +6,7 @@ from . import BASE, SESSION
 
 
 class THANOS_GlobalCollection(BASE):
-    __tablename__ = "thanos_globalcollection"
+    __tablename__ = "cat_globalcollection"
     keywoard = Column(UnicodeText, primary_key=True)
     contents = Column(PickleType, primary_key=True, nullable=False)
 

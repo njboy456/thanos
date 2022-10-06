@@ -4,7 +4,7 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory="extra"
+plugin_category="extra"
 ```
 
 ### Formation
@@ -14,11 +14,11 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory="extra"
+plugin_category="extra"
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hibuddy(?:\s|$)([\s\S]*)",
-    command=("hibuddy", plugin_thanosegory),
+    command=("hibuddy", plugin_category),
     info={
         "header": "Just to say hi to other user.",
         "description": "input string along with cmd will be added to your hi text",
@@ -39,11 +39,11 @@ async def hi_buddy(event):
 For more information refer this [Docs](https://docs.telethon.dev/en/latest/)
 
 
-Arguments in thanos_cmd are as follows:
+Arguments in cat_cmd are as follows:
 ```
 
 pattern="Regex for command"
-command=("Just command name", plugin_thanosegory) use plugin_thanosegory name from predefined names (admin,bot,utils,tools,extra,fun,misc)
+command=("Just command name", plugin_category) use plugin_category name from predefined names (admin,bot,utils,tools,extra,fun,misc)
 info={
         "header":string - "intro for command",
         "description": string - "Description for command",

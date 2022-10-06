@@ -14,12 +14,12 @@ from userbot import THANOSPRO
 from ..core.managers import edit_delete, edit_or_reply
 from . import deEmojify, reply_id
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="tts(?:\s|$)([\s\S]*)",
-    command=("tts", plugin_thanosegory),
+    command=("tts", plugin_category),
     info={
         "header": "Text to speech command.",
         "usage": [
@@ -45,7 +45,7 @@ async def _(event):
             return await edit_or_reply(event, "Invalid Syntax. Module stopping.")
         text = input_str
         lan = "en"
-    thanosevent = await edit_or_reply(event, "`Recording......`")
+    catevent = await edit_or_reply(event, "`Recording......`")
     text = deEmojify(text.strip())
     lan = lan.strip()
     if not os.path.isdir("./temp/"):
@@ -75,7 +75,7 @@ async def _(event):
                 command_to_execute, stderr=subprocess.STDOUT
             )
         except (subprocess.CalledProcessError, NameError, FileNotFoundError) as exc:
-            await thanosevent.edit(str(exc))
+            await catevent.edit(str(exc))
             # continue sending required_file_name
         else:
             os.remove(required_file_name)
@@ -91,7 +91,7 @@ async def _(event):
         )
         os.remove(required_file_name)
         await edit_delete(
-            thanosevent, f"`Processed text {text[:20]} into voice in {ms} seconds!`"
+            catevent, f"`Processed text {text[:20]} into voice in {ms} seconds!`"
         )
     except Exception as e:
-        await edit_or_reply(thanosevent, f"**Error:**\n`{e}`")
+        await edit_or_reply(catevent, f"**Error:**\n`{e}`")

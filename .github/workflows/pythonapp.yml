@@ -1,4 +1,4 @@
-name: thanosChecker
+name: catChecker
 
 on: [push, pull_request]
 

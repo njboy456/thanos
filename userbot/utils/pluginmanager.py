@@ -10,7 +10,7 @@ from ..core import LOADED_CMDS, PLG_INFO
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..core.session import THANOSPRO
-from ..helpers.utils import _thanosutils, _format, install_pip, reply_id
+from ..helpers.utils import _catutils, _format, install_pip, reply_id
 from .decorators import admin_cmd, sudo_cmd
 
 LOGS = logging.getLogger("THANOSBOT")
@@ -23,7 +23,7 @@ def load_module(shortname, plugin_path=None):
         path = Path(f"userbot/plugins/{shortname}.py")
         checkplugins(path)
         name = f"userbot.plugins.{shortname}"
-        spec = importlib.util.spec_from_file_lothanosion(name, path)
+        spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         LOGS.info(f"Successfully imported {shortname}")
@@ -35,7 +35,7 @@ def load_module(shortname, plugin_path=None):
             path = Path((f"{plugin_path}/{shortname}.py"))
             name = f"{plugin_path}/{shortname}".replace("/", ".")
         checkplugins(path)
-        spec = importlib.util.spec_from_file_lothanosion(name, path)
+        spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.bot = THANOSPRO
         mod.LOGS = LOGS
@@ -46,7 +46,7 @@ def load_module(shortname, plugin_path=None):
         mod.CMD_HELP = CMD_HELP
         mod.reply_id = reply_id
         mod.admin_cmd = admin_cmd
-        mod._thanosutils = _thanosutils
+        mod._catutils = _catutils
         mod.edit_delete = edit_delete
         mod.install_pip = install_pip
         mod.parse_pre = _format.parse_pre

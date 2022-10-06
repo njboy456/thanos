@@ -4,12 +4,12 @@ import traceback
 
 from . import THANOSPRO, edit_or_reply
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="calc ([\s\S]*)",
-    command=("calc", plugin_thanosegory),
+    command=("calc", plugin_category),
     info={
         "header": "To solve basic mathematics equations.",
         "description": "Solves the given maths equation by BODMAS rule.",

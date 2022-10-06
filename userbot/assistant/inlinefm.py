@@ -13,7 +13,7 @@ from userbot import THANOSPRO
 from userbot.Config import Config
 from userbot.core.decorators import check_owner
 from userbot.helpers import humanbytes, progress
-from userbot.helpers.utils import _thanosutils
+from userbot.helpers.utils import _catutils
 
 CC = []
 PATH = []  # using list method for some reason
@@ -111,7 +111,7 @@ def get_manager(path, num: int):
         time.ctime(os.path.getctime(path))
         time2 = time.ctime(os.path.getmtime(path))
         time3 = time.ctime(os.path.getatime(path))
-        msg += f"**Lothanosion :** `{path}`\n"
+        msg += f"**Location :** `{path}`\n"
         msg += f"**icon :** `{mode}`\n"
         msg += f"**Size :** `{humanbytes(size)}`\n"
         msg += f"**Last Modified Time:** `{time2}`\n"
@@ -227,7 +227,7 @@ async def remove(event):
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
     await event.edit(msg, buttons=buttons)
-    await _thanosutils.runcmd(f"rm -rf '{rpath}'")
+    await _catutils.runcmd(f"rm -rf '{rpath}'")
     await event.answer(f"{rpath} removed successfully...")
 
 
@@ -344,7 +344,7 @@ async def paste(event):
             cmd = f"mv '{CC[1]}' '{path}'"
         else:
             cmd = f"cp '{CC[1]}' '{path}'"
-        await _thanosutils.runcmd(cmd)
+        await _catutils.runcmd(cmd)
         msg, buttons = get_manager(path, n)
         await event.edit(msg, buttons=buttons)
         CC.clear

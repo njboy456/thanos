@@ -7,7 +7,7 @@ from ..sql_helper import antiflood_sql as sql
 from ..utils import is_admin
 from . import THANOSPRO, edit_or_reply
 
-plugin_thanosegory = "admin"
+plugin_category = "admin"
 CHAT_FLOOD = sql.__load_flood_settings()
 
 ANTI_FLOOD_WARN_MODE = ChatBannedRights(
@@ -15,12 +15,12 @@ ANTI_FLOOD_WARN_MODE = ChatBannedRights(
 )
 
 
-@THANOSPRO.thanos_cmd(incoming=True, groups_only=True)
+@THANOSPRO.cat_cmd(incoming=True, groups_only=True)
 async def _(event):
     if not CHAT_FLOOD:
         return
-    thanosadmin = await is_admin(event.client, event.chat_id, event.client.uid)
-    if not thanosadmin:
+    catadmin = await is_admin(event.client, event.chat_id, event.client.uid)
+    if not catadmin:
         return
     if str(event.chat_id) not in CHAT_FLOOD:
         return
@@ -54,9 +54,9 @@ because he reached the defined flood limit.""",
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="setflood(?:\s|$)([\s\S]*)",
-    command=("setflood", plugin_thanosegory),
+    command=("setflood", plugin_category),
     info={
         "header": "To setup antiflood in a group",
         "description": "It warns the user if he spams the chat and if you are an admin with proper rights then it mutes him in that group.",

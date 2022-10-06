@@ -1,5 +1,5 @@
 from . import fonts
-from . import memeshelper as thanosmemes
+from . import memeshelper as catmemes
 from .aiohttp_helper import AioHttp
 from .utils import *
 
@@ -13,7 +13,7 @@ while flag:
         from .progress import *
         from .qhelper import *
         from .tools import *
-        from .utils import _thanosutils, _format
+        from .utils import _catutils, _format
 
         break
     except ModuleNotFoundError as e:

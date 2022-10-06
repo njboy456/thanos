@@ -22,7 +22,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
 purgelist = {}
@@ -42,9 +42,9 @@ purgetype = {
 }
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="del(\s*| \d+)$",
-    command=("del", plugin_thanosegory),
+    command=("del", plugin_category),
     info={
         "header": "To delete replied message.",
         "description": "Deletes the message you replied to in x(count) seconds if count is not used then deletes immediately",
@@ -89,9 +89,9 @@ async def delete_it(event):
         await event.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="purgefrom$",
-    command=("purgefrom", plugin_thanosegory),
+    command=("purgefrom", plugin_category),
     info={
         "header": "To mark the replied message as starting message of purge list.",
         "description": "After using this u must use purgeto command also so that the messages in between this will delete.",
@@ -112,9 +112,9 @@ async def purge_from(event):
         await edit_delete(event, "`Reply to a message to let me know what to delete.`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="purgeto$",
-    command=("purgeto", plugin_thanosegory),
+    command=("purgeto", plugin_category),
     info={
         "header": "To mark the replied message as end message of purge list.",
         "description": "U need to use purgefrom command before using this command to function this.",
@@ -165,9 +165,9 @@ async def purge_to(event):
         await edit_delete(event, f"**Error**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="purgeme",
-    command=("purgeme", plugin_thanosegory),
+    command=("purgeme", plugin_category),
     info={
         "header": "To purge your latest messages.",
         "description": "Deletes x(count) amount of your latest messages.",
@@ -200,9 +200,9 @@ async def purgeme(event):
 
 
 # TODO: only sticker messages.
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="purge(?:\s|$)([\s\S]*)",
-    command=("purge", plugin_thanosegory),
+    command=("purge", plugin_category),
     info={
         "header": "To purge messages from the replied message.",
         "description": "•  Deletes the x(count) amount of messages from the replied message\
@@ -217,7 +217,7 @@ async def purgeme(event):
             "f": "To delete documents.",
             "g": "To delete gif's.",
             "i": "To delete images/photos.",
-            "l": "To delete lothanosions/gps.",
+            "l": "To delete locations/gps.",
             "m": "To delete Audio files(music files).",
             "r": "To delete Round video messages.",
             "t": "To delete stickers and text messages.",
@@ -454,9 +454,9 @@ async def fastpurger(event):  # sourcery no-metrics # sourcery skip: low-code-qu
     await hi.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="upurge( -a)?(?:\s|$)([\s\S]*)",
-    command=("upurge", plugin_thanosegory),
+    command=("upurge", plugin_category),
     info={
         "header": "To purge messages from the replied message of replied user.",
         "description": "•  Deletes the x(count) amount of messages from the replied message of replied user\

@@ -8,12 +8,12 @@ from ..sql_helper import warns_sql as sql
 
 logger = logging.getLogger(__name__)
 
-plugin_thanosegory = "admin"
+plugin_category = "admin"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="warn(?:\s|$)([\s\S]*)",
-    command=("warn", plugin_thanosegory),
+    command=("warn", plugin_category),
     info={
         "header": "To warn a user.",
         "description": "will warn the replied user.",
@@ -45,9 +45,9 @@ async def _(event):
     await edit_or_reply(event, reply)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="warns",
-    command=("warns", plugin_thanosegory),
+    command=("warns", plugin_category),
     info={
         "header": "To get users warns list.",
         "usage": "{tr}warns <reply>",
@@ -74,9 +74,9 @@ async def _(event):
     await event.edit(text)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="r(eset)?warns$",
-    command=("resetwarns", plugin_thanosegory),
+    command=("resetwarns", plugin_category),
     info={
         "header": "To reset warns of the replied user",
         "usage": [

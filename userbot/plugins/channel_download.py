@@ -14,12 +14,12 @@ from ..Config import Config
 from ..helpers.tools import media_type
 from . import THANOSPRO, edit_or_reply
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="getc(?:\s|$)([\s\S]*)",
-    command=("getc", plugin_thanosegory),
+    command=("getc", plugin_category),
     info={
         "header": "To download channel media files",
         "description": "pass username and no of latest messages to check to command \
@@ -29,9 +29,9 @@ plugin_thanosegory = "tools"
     },
 )
 async def get_media(event):
-    thanosty = event.pattern_match.group(1)
-    limit = int(thanosty.split(" ")[0])
-    channel_username = str(thanosty.split(" ")[1])
+    catty = event.pattern_match.group(1)
+    limit = int(catty.split(" ")[0])
+    channel_username = str(catty.split(" ")[1])
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
     with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
@@ -57,9 +57,9 @@ async def get_media(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="geta(?:\s|$)([\s\S]*)",
-    command=("geta", plugin_thanosegory),
+    command=("geta", plugin_category),
     info={
         "header": "To download channel all media files",
         "description": "pass username to command so the bot will download all media files from that latest no of messages to server ",

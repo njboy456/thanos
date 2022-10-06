@@ -18,7 +18,7 @@ from userbot import THANOSPRO
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # =================
@@ -29,9 +29,9 @@ HEROKU_APP_NAME = Config.HEROKU_APP_NAME
 HEROKU_API_KEY = Config.HEROKU_API_KEY
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
-    command=("var", plugin_thanosegory),
+    command=("var", plugin_category),
     info={
         "header": "To manage heroku vars.",
         "flags": {
@@ -62,17 +62,17 @@ async def variable(var):  # sourcery no-metrics
     exe = var.pattern_match.group(1)
     heroku_var = app.config()
     if exe == "get":
-        thanos = await edit_or_reply(var, "`Getting information...`")
+        cat = await edit_or_reply(var, "`Getting information...`")
         await asyncio.sleep(1.0)
         try:
             variable = var.pattern_match.group(2).split()[0]
             if variable in heroku_var:
                 return await edit_or_reply(
-                    thanos,
+                    cat,
                     "**ConfigVars**:" f"\n\n`{variable}` = `{heroku_var[variable]}`\n",
                 )
             await edit_or_reply(
-                thanos,
+                cat,
                 "**ConfigVars**:" f"\n\n__Error:\n-> __`{variable}`__ don't exists__",
             )
         except IndexError:
@@ -82,7 +82,7 @@ async def variable(var):  # sourcery no-metrics
             with open("configs.json", "r") as fp:
                 result = fp.read()
                 await edit_or_reply(
-                    thanos,
+                    cat,
                     "`[HEROKU]` ConfigVars:\n\n"
                     "================================"
                     f"\n```{result}```\n"
@@ -91,42 +91,42 @@ async def variable(var):  # sourcery no-metrics
             os.remove("configs.json")
     elif exe == "set":
         variable = "".join(var.text.split(maxsplit=2)[2:])
-        thanos = await edit_or_reply(var, "`Setting information...`")
+        cat = await edit_or_reply(var, "`Setting information...`")
         if not variable:
-            return await edit_or_reply(thanos, "`.set var <ConfigVars-name> <value>`")
+            return await edit_or_reply(cat, "`.set var <ConfigVars-name> <value>`")
         value = "".join(variable.split(maxsplit=1)[1:])
         variable = "".join(variable.split(maxsplit=1)[0])
         if not value:
-            return await edit_or_reply(thanos, "`.set var <ConfigVars-name> <value>`")
+            return await edit_or_reply(cat, "`.set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
             await edit_or_reply(
-                thanos, f"`{variable}` **successfully changed to  ->  **`{value}`"
+                cat, f"`{variable}` **successfully changed to  ->  **`{value}`"
             )
         else:
             await edit_or_reply(
-                thanos, f"`{variable}`**  successfully added with value`  ->  **{value}`"
+                cat, f"`{variable}`**  successfully added with value`  ->  **{value}`"
             )
         heroku_var[variable] = value
     elif exe == "del":
-        thanos = await edit_or_reply(var, "`Getting information to deleting variable...`")
+        cat = await edit_or_reply(var, "`Getting information to deleting variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
             return await edit_or_reply(
-                thanos, "`Please specify ConfigVars you want to delete`"
+                cat, "`Please specify ConfigVars you want to delete`"
             )
         await asyncio.sleep(1.5)
         if variable not in heroku_var:
-            return await edit_or_reply(thanos, f"`{variable}`**  does not exist**")
+            return await edit_or_reply(cat, f"`{variable}`**  does not exist**")
 
-        await edit_or_reply(thanos, f"`{variable}`  **successfully deleted**")
+        await edit_or_reply(cat, f"`{variable}`  **successfully deleted**")
         del heroku_var[variable]
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="usage$",
-    command=("usage", plugin_thanosegory),
+    command=("usage", plugin_category),
     info={
         "header": "To Check dyno usage of userbot and also to know how much left.",
         "usage": "{tr}usage",
@@ -151,7 +151,7 @@ async def dyno_usage(dyno):
     headers = {
         "User-Agent": useragent,
         "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
-        "Accept": "applithanosion/vnd.heroku+json; version=3.account-quotas",
+        "Accept": "application/vnd.heroku+json; version=3.account-quotas",
     }
     path = f"/accounts/{user_id}/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
@@ -194,9 +194,9 @@ async def dyno_usage(dyno):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(herokulogs|logs)$",
-    command=("logs", plugin_thanosegory),
+    command=("logs", plugin_category),
     info={
         "header": "To get recent 100 lines logs from heroku.",
         "usage": ["{tr}herokulogs", "{tr}logs"],
@@ -223,7 +223,7 @@ async def _(dyno):
 
 
 def prettyjson(obj, indent=2, maxlinelength=80):
-    """Renders JSON content with indentation and line splits/conthanosenations to fit maxlinelength.
+    """Renders JSON content with indentation and line splits/concatenations to fit maxlinelength.
     Only dicts, lists and basic types are supported"""
     items, _ = getsubitems(
         obj,
@@ -235,9 +235,9 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     return indentitems(items, indent, level=0)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|add|del)buildpack(?:\s|$)([\s\S]*)",
-    command=("buildpack", plugin_thanosegory),
+    command=("buildpack", plugin_category),
     info={
         "header": "To manage heroku buildpacks.",
         "flags": {

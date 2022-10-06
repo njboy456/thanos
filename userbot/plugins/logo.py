@@ -37,7 +37,7 @@ vars_list = {
 rand_bg = ["total random", "anime", "frame", "mcu/dcu", "neon"]
 # ======================================================================================================================================================================================
 
-plugin_thanosegory = "extra"
+plugin_category = "extra"
 
 
 def random_checker(Font, Color, Background):
@@ -66,9 +66,9 @@ def random_loader(Font, Color, Background, collection):
     return Font, Color, Background
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|f|s)logo(?: |$)([\s\S]*)",
-    command=("logo", plugin_thanosegory),
+    command=("logo", plugin_category),
     info={
         "header": "Make a logo in image or sticker",
         "description": "Just a fun purpose plugin to create logo in image or in sticker.",
@@ -108,7 +108,7 @@ async def very(event):  # sourcery no-metrics
         text = reply.text
     if not text:
         return await edit_delete(event, "**ಠ∀ಠ Gimmi text to make logo**")
-    thanosevent = await edit_or_reply(event, "Processing...")
+    catevent = await edit_or_reply(event, "Processing...")
     reply_to_id = await reply_id(event)
     LOGO_FONT_SIZE = gvarstatus("LOGO_FONT_SIZE") or 200
     LOGO_FONT_WIDTH = gvarstatus("LOGO_FONT_WIDTH") or 2
@@ -131,7 +131,7 @@ async def very(event):  # sourcery no-metrics
         ).json()
     if count > 1 and not rcheck:
         count = 1
-        thanosevent = await edit_or_reply(
+        catevent = await edit_or_reply(
             event, "Not using random value,Changing limit to 1.."
         )
     output = []
@@ -145,7 +145,7 @@ async def very(event):  # sourcery no-metrics
             template = requests.get(LOGO_BACKGROUND)
             temp_img = Image.open(BytesIO(template.content))
         except Exception as e:
-            await edit_or_reply(thanosevent, f"**Bad Url:** {LOGO_BACKGROUND}\n\n{e}")
+            await edit_or_reply(catevent, f"**Bad Url:** {LOGO_BACKGROUND}\n\n{e}")
         raw_width, raw_height = temp_img.size
         resized_width, resized_height = (
             (1024, int(1024 * raw_height / raw_width))
@@ -187,7 +187,7 @@ async def very(event):  # sourcery no-metrics
                 stroke_width=0,
                 stroke_fill=None,
             )
-        file_name = f"badthanos{i}.png"
+        file_name = f"badcat{i}.png"
         img.save(file_name, "png")
         output.append(file_name)
         captionlist.append("")
@@ -210,14 +210,14 @@ async def very(event):  # sourcery no-metrics
         )
     else:
         await clippy(event.client, output[0], event.chat_id, reply_to_id)
-    await thanosevent.delete()
+    await catevent.delete()
     for i in output:
         os.remove(i)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|c)lbg(?:\s|$)([\s\S]*)",
-    command=("lbg", plugin_thanosegory),
+    command=("lbg", plugin_category),
     info={
         "header": "Change the background of logo",
         "description": "To change the background on which logo will created, in **bg** there few built-in backgrounds.",
@@ -269,9 +269,9 @@ async def bad(event):
     await edit_delete(event, f"**Background for logo changed to :-** `{input_str}`", 10)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="lf(|c|s|h|w|sc|sw)(?:\s|$)([\s\S]*)",
-    command=("lf", plugin_thanosegory),
+    command=("lf", plugin_category),
     info={
         "header": "Change text style for logo.",
         "description": "Customise logo font, font size, font position like text hight or width.",
@@ -317,9 +317,9 @@ async def pussy(event):  # sourcery no-metrics
         logo_font = []
         font_name = "**Available font names are here:-**\n\n**0.** `Random`\n\n"
         for i, each in enumerate(links, start=1):
-            thanos = os.path.splitext(each.text)[0]
-            logo_font.append(thanos)
-            font_name += f"**{i}.**  `{thanos}`\n"
+            cat = os.path.splitext(each.text)[0]
+            logo_font.append(cat)
+            font_name += f"**{i}.**  `{cat}`\n"
         logo_font.append("Random")
         if not input_str or input_str not in logo_font:
             return await edit_delete(event, font_name, 80)
@@ -357,8 +357,8 @@ async def pussy(event):  # sourcery no-metrics
         return await edit_delete(
             event, f"**Stroke color for logo changed to :-** `{input_str}`", 10
         )
-    thanos = re.compile(r"^\-?[1-9][0-9]*\.?[0-9]*")
-    isint = re.match(thanos, input_str)
+    cat = re.compile(r"^\-?[1-9][0-9]*\.?[0-9]*")
+    isint = re.match(cat, input_str)
     if not input_str or not isint:
         return await edit_delete(event, "**Give an integer value to set**", 10)
     if cmd == "s":
@@ -411,9 +411,9 @@ async def pussy(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(g|d|r)lvar(?:\s|$)([\s\S]*)",
-    command=("lvar", plugin_thanosegory),
+    command=("lvar", plugin_category),
     info={
         "header": "Manage values which set for logo",
         "description": "To see which value have been set, or to delete a value , or to reset all values.",
@@ -433,7 +433,7 @@ async def pussy(event):  # sourcery no-metrics
         ],
     },
 )
-async def thanos(event):
+async def cat(event):
     "Manage all values of logo"
     cmd = event.pattern_match.group(1).lower()
     input_str = event.pattern_match.group(2)

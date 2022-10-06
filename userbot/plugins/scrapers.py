@@ -12,13 +12,13 @@ from ..helpers.functions import get_cast, get_moviecollections, imdb, mov_titles
 from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 moviepath = os.path.join(os.getcwd(), "temp", "moviethumb.jpg")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="wiki ([\s\S]*)",
-    command=("wiki", plugin_thanosegory),
+    command=("wiki", plugin_category),
     info={
         "header": "To get wikipedia data about query.",
         "usage": "{tr}wiki <query>",
@@ -64,9 +64,9 @@ async def wiki(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="imdb ([\s\S]*)",
-    command=("imdb", plugin_thanosegory),
+    command=("imdb", plugin_category),
     info={
         "header": "To fetch imdb data about the given movie or series.",
         "usage": "{tr}imdb <movie/series name>",
@@ -75,7 +75,7 @@ async def wiki(event):
 async def imdb_query(event):  # sourcery no-metrics
     # sourcery skip: low-code-quality
     """To fetch imdb data about the given movie or series."""
-    thanosevent = await edit_or_reply(event, "`searching........`")
+    catevent = await edit_or_reply(event, "`searching........`")
     reply_to = await reply_id(event)
     try:
         movie_name = event.pattern_match.group(1)
@@ -157,13 +157,13 @@ async def imdb_query(event):  # sourcery no-metrics
                 parse_mode="HTML",
             )
             os.remove(moviepath)
-            return await thanosevent.delete()
-        await thanosevent.edit(
+            return await catevent.delete()
+        await catevent.edit(
             resulttext,
             link_preview=False,
             parse_mode="HTML",
         )
     except IndexError:
-        await thanosevent.edit(f"__No movie found with name {movie_name}.__")
+        await catevent.edit(f"__No movie found with name {movie_name}.__")
     except Exception as e:
-        await thanosevent.edit(f"**Error:**\n__{e}__")
+        await catevent.edit(f"**Error:**\n__{e}__")

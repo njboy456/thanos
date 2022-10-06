@@ -12,12 +12,12 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import progress
 from ..helpers.tools import media_type
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hash ([\s\S]*)",
-    command=("hash", plugin_thanosegory),
+    command=("hash", plugin_category),
     info={
         "header": "Find the md5, sha1, sha256, sha512 of the string when written into a txt file.",
         "usage": "{tr}hash <text>",
@@ -52,9 +52,9 @@ async def gethash(hash_q):
     await edit_or_reply(hash_q, ans)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hbase (en|de) ([\s\S]*)",
-    command=("hbase", plugin_thanosegory),
+    command=("hbase", plugin_category),
     info={
         "header": "Find the base64 encoding or decoding of the given string.",
         "flags": {
@@ -68,7 +68,7 @@ async def gethash(hash_q):
 async def endecrypt(event):
     "To encode or decode the string using base64"
     string = "".join(event.text.split(maxsplit=2)[2:])
-    thanosevent = event
+    catevent = event
     if event.pattern_match.group(1) == "en":
         if string:
             result = base64.b64encode(bytes(string, "utf-8")).decode("utf-8")
@@ -82,21 +82,21 @@ async def endecrypt(event):
                 result = base64.b64encode(bytes(reply.text, "utf-8")).decode("utf-8")
                 result = f"**Shhh! It's Encoded : **\n`{result}`"
             else:
-                thanosevent = await edit_or_reply(event, "`Encoding ...`")
+                catevent = await edit_or_reply(event, "`Encoding ...`")
                 c_time = time.time()
                 downloaded_file_name = await event.client.download_media(
                     reply,
                     Config.TMP_DOWNLOAD_DIRECTORY,
                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, thanosevent, c_time, "trying to download")
+                        progress(d, t, catevent, c_time, "trying to download")
                     ),
                 )
-                thanosevent = await edit_or_reply(event, "`Encoding ...`")
+                catevent = await edit_or_reply(event, "`Encoding ...`")
                 with open(downloaded_file_name, "rb") as image_file:
                     result = base64.b64encode(image_file.read()).decode("utf-8")
                 os.remove(downloaded_file_name)
         await edit_or_reply(
-            thanosevent, result, file_name="encodedfile.txt", caption="It's Encoded"
+            catevent, result, file_name="encodedfile.txt", caption="It's Encoded"
         )
     else:
         try:

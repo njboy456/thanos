@@ -1,5 +1,5 @@
 # plugin by @deleteduser420
-# ported to telethon by @mrconfused (@thanosceo)
+# ported to telethon by @mrconfused (@catceo)
 import contextlib
 import os
 
@@ -9,9 +9,9 @@ from userbot.core.logger import logging
 from ..Config import Config
 from ..core.managers import edit_or_reply
 from ..helpers import humanbytes, post_to_telegraph
-from ..helpers.utils import _thanosutils, _format
+from ..helpers.utils import _catutils, _format
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
 
 
@@ -53,9 +53,9 @@ async def file_data(reply):
     return hmm
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="minfo$",
-    command=("minfo", plugin_thanosegory),
+    command=("minfo", plugin_category),
     info={
         "header": "To get media information.",
         "description": "reply to media to get information about it",
@@ -72,13 +72,13 @@ async def mediainfo(event):
     if not reply.media:
         await edit_or_reply(event, "reply to media to get info")
         return
-    thanosevent = await edit_or_reply(event, "`Gathering ...`")
+    catevent = await edit_or_reply(event, "`Gathering ...`")
     X_MEDIA = reply.file.mime_type
     if (not X_MEDIA) or (X_MEDIA.startswith(("text"))):
-        return await thanosevent.edit("Reply To a supported Media Format")
+        return await catevent.edit("Reply To a supported Media Format")
     hmm = await file_data(reply)
     file_path = await reply.download_media(Config.TEMP_DIR)
-    out, err, ret, pid = await _thanosutils.runcmd(f"mediainfo '{file_path}'")
+    out, err, ret, pid = await _catutils.runcmd(f"mediainfo '{file_path}'")
     if not out:
         out = "Not Supported"
     body_text = f"""
@@ -91,7 +91,7 @@ async def mediainfo(event):
 {out} 
 </code>"""
     link = await post_to_telegraph(f"{X_MEDIA}", body_text)
-    await thanosevent.edit(
+    await catevent.edit(
         f"ℹ️  <b>MEDIA INFO:  <a href ='{link}' > {X_MEDIA}</a></b>",
         parse_mode="HTML",
         link_preview=True,

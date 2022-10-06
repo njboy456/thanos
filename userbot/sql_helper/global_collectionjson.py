@@ -5,7 +5,7 @@ from . import BASE, SESSION
 
 
 class THANOS_GlobalCollection_Json(BASE):
-    __tablename__ = "thanos_globalcollectionjson"
+    __tablename__ = "cat_globalcollectionjson"
     keywoard = Column(UnicodeText, primary_key=True)
     json = Column(MutableJson)
     njson = Column(NestedMutableJson)

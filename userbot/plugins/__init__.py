@@ -14,7 +14,7 @@ from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..core.session import THANOSPRO
 from ..helpers import *
-from ..helpers.utils import _thanosutils, _format, install_pip, reply_id
+from ..helpers.utils import _catutils, _format, install_pip, reply_id
 from ..sql_helper.globals import gvarstatus
 
 # =================== CONSTANT ===================

@@ -14,10 +14,10 @@ from ..sql_helper.filter_sql import (
 )
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(incoming=True)
+@THANOSPRO.cat_cmd(incoming=True)
 async def filter_incoming_handler(event):  # sourcery no-metrics
     if event.sender_id == event.client.uid:
         return
@@ -78,9 +78,9 @@ async def filter_incoming_handler(event):  # sourcery no-metrics
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="filter (.*)",
-    command=("filter", plugin_thanosegory),
+    command=("filter", plugin_category),
     info={
         "header": "To save filter for the given keyword.",
         "description": "If any user sends that filter then your bot will reply.",
@@ -143,9 +143,9 @@ async def add_new_filter(event):
     await edit_or_reply(event, f"Error while setting filter for {keyword}")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="filters$",
-    command=("filters", plugin_thanosegory),
+    command=("filters", plugin_category),
     info={
         "header": "To list all filters in that chat.",
         "description": "Lists all active (of your userbot) filters in a chat.",
@@ -168,9 +168,9 @@ async def on_snip_list(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stop ([\s\S]*)",
-    command=("stop", plugin_thanosegory),
+    command=("stop", plugin_category),
     info={
         "header": "To delete that filter . so if user send that keyword bot will not reply",
         "usage": "{tr}stop <keyword>",
@@ -185,9 +185,9 @@ async def remove_a_filter(event):
         await event.edit(f"Filter `{filt} `was deleted successfully")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="rmfilters$",
-    command=("rmfilters", plugin_thanosegory),
+    command=("rmfilters", plugin_category),
     info={
         "header": "To delete all filters in that group.",
         "usage": "{tr}rmfilters",

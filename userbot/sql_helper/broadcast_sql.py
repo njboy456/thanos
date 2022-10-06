@@ -6,7 +6,7 @@ from . import BASE, SESSION
 
 
 class THANOSBroadcast(BASE):
-    __tablename__ = "thanosbroadcast"
+    __tablename__ = "catbroadcast"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String(14), primary_key=True, nullable=False)
 

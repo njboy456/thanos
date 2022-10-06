@@ -27,7 +27,7 @@ async def reply_id(event):
     return reply_to_id
 
 
-async def get_chatinfo(event, match, thanosevent):
+async def get_chatinfo(event, match, catevent):
     if not match and event.reply_to_msg_id:
         replied_msg = await event.get_reply_message()
         if replied_msg.fwd_from and replied_msg.fwd_from.channel_id is not None:
@@ -42,32 +42,32 @@ async def get_chatinfo(event, match, thanosevent):
         try:
             chat_info = await event.client(GetFullChannelRequest(match))
         except ChannelInvalidError:
-            await thanosevent.edit("`Invalid channel/group`")
+            await catevent.edit("`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await thanosevent.edit(
+            await catevent.edit(
                 "`This is a private channel/group or I am banned from there`"
             )
             return None
         except ChannelPublicGroupNaError:
-            await thanosevent.edit("`The given Channel or Supergroup doesn't exist`")
+            await catevent.edit("`The given Channel or Supergroup doesn't exist`")
             return None
         except (TypeError, ValueError):
-            await thanosevent.edit("**Error:**\n__Can't fetch the chat__")
+            await catevent.edit("**Error:**\n__Can't fetch the chat__")
             return None
     return chat_info
 
 
 async def get_user_from_event(
     event,
-    thanosevent=None,
+    catevent=None,
     secondgroup=None,
     thirdgroup=None,
     nogroup=False,
     noedits=False,
 ):  # sourcery no-metrics  # sourcery skip: low-code-quality
-    if thanosevent is None:
-        thanosevent = event
+    if catevent is None:
+        catevent = event
     if nogroup is False:
         if secondgroup:
             args = event.pattern_match.group(2).split(" ", 1)
@@ -107,25 +107,25 @@ async def get_user_from_event(
             previous_message = await event.get_reply_message()
             if previous_message.from_id is None:
                 if not noedits:
-                    await edit_delete(thanosevent, "`Well that's an anonymous admin !`")
+                    await edit_delete(catevent, "`Well that's an anonymous admin !`")
                 return None, None
             user_obj = await event.client.get_entity(previous_message.sender_id)
             return user_obj, extra
         if not args:
             if not noedits:
                 await edit_delete(
-                    thanosevent, "`Pass the user's username, id or reply!`", 5
+                    catevent, "`Pass the user's username, id or reply!`", 5
                 )
             return None, None
     except Exception as e:
         LOGS.error(str(e))
     if not noedits:
-        await edit_delete(thanosevent, "__Couldn't fetch user to proceed further.__")
+        await edit_delete(catevent, "__Couldn't fetch user to proceed further.__")
     return None, None
 
 
 async def checking(THANOSPRO):
-    thanos_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    cat_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     with contextlib.suppress(BaseException):
-        thanos_channel = Get(thanos_c)
-        await THANOSPRO(thanos_channel)
+        cat_channel = Get(cat_c)
+        await THANOSPRO(cat_channel)

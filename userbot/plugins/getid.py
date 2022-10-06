@@ -5,14 +5,14 @@ from userbot.core.logger import logging
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(get_id|id)(?:\s|$)([\s\S]*)",
-    command=("id", plugin_thanosegory),
+    command=("id", plugin_category),
     info={
         "header": "To get id of the group or user.",
         "description": "if given input then shows id of that given chat/channel/user else if you reply to user then shows id of the replied user \

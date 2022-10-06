@@ -10,14 +10,14 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper import global_collectionjson as sql
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 LOGS = logging.getLogger(__name__)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="chatblacklist (on|off)$",
-    command=("chatblacklist", plugin_thanosegory),
+    command=("chatblacklist", plugin_category),
     info={
         "header": "To enable and disable chats blacklist.",
         "description": "If you turn this on, then your userbot won't work on the chats stored\
@@ -69,9 +69,9 @@ async def chat_blacklist(event):
     await edit_delete(event, "It was turned off already")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="addblkchat(s)?(?:\s|$)([\s\S]*)",
-    command=("addblkchat", plugin_thanosegory),
+    command=("addblkchat", plugin_category),
     info={
         "header": "To add chats to blacklist.",
         "description": "to add the chats to database so your bot doesn't work in\
@@ -148,9 +148,9 @@ async def add_blacklist_chat(event):
     await event.client.reload(msg)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="rmblkchat(s)?(?:\s|$)([\s\S]*)",
-    command=("rmblkchat", plugin_thanosegory),
+    command=("rmblkchat", plugin_category),
     info={
         "header": "To remove chats to blacklist.",
         "description": "to remove the chats from database so your bot will work in\
@@ -212,9 +212,9 @@ async def add_blacklist_chat(event):
     await event.client.reload(msg)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="listblkchats$",
-    command=("listblkchats", plugin_thanosegory),
+    command=("listblkchats", plugin_category),
     info={
         "header": "To list all blacklisted chats.",
         "description": "Will show you the list of all blacklisted chats",

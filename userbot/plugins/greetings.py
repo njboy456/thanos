@@ -3,9 +3,9 @@ import random
 from userbot import THANOSPRO
 
 from ..core.managers import edit_or_reply
-from . import thanosmemes
+from . import catmemes
 
-plugin_thanosegory = "extra"
+plugin_category = "extra"
 
 # ===========================================================================================
 S = (
@@ -64,9 +64,9 @@ X = (
 # =========================================================================================
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="baby$",
-    command=("baby", plugin_thanosegory),
+    command=("baby", plugin_category),
     info={
         "header": "Hi Baby art",
         "usage": "{tr}baby",
@@ -77,9 +77,9 @@ async def baby(event):
     await edit_or_reply(event, S)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hbd(?:\s|$)([\s\S]*)",
-    command=("hbd", plugin_thanosegory),
+    command=("hbd", plugin_category),
     info={
         "header": "Happy birthday art.",
         "usage": "{tr}hbd <text>",
@@ -97,9 +97,9 @@ async def hbd(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="thanks$",
-    command=("thanks", plugin_thanosegory),
+    command=("thanks", plugin_category),
     info={
         "header": "Thanks art.",
         "usage": "{tr}thanks",
@@ -110,9 +110,9 @@ async def gn(event):
     await edit_or_reply(event, X)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gm$",
-    command=("gm", plugin_thanosegory),
+    command=("gm", plugin_category),
     info={
         "header": "Good morning random strings.",
         "usage": "{tr}gm",
@@ -120,13 +120,13 @@ async def gn(event):
 )
 async def morning(morning):
     "Good morning random strings."
-    txt = random.choice(thanosmemes.GDMORNING)
+    txt = random.choice(catmemes.GDMORNING)
     await edit_or_reply(morning, txt)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnoon$",
-    command=("gnoon", plugin_thanosegory),
+    command=("gnoon", plugin_category),
     info={
         "header": "Good afternoon random strings.",
         "usage": "{tr}gnoon",
@@ -134,13 +134,13 @@ async def morning(morning):
 )
 async def noon(noon):
     "Good afternoon random strings."
-    txt = random.choice(thanosmemes.GDNOON)
+    txt = random.choice(catmemes.GDNOON)
     await edit_or_reply(noon, txt)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gn$",
-    command=("gn", plugin_thanosegory),
+    command=("gn", plugin_category),
     info={
         "header": "Good night random strings.",
         "usage": "{tr}gm",
@@ -148,13 +148,13 @@ async def noon(noon):
 )
 async def night(night):
     "Good night random strings."
-    txt = random.choice(thanosmemes.GDNIGHT)
+    txt = random.choice(catmemes.GDNIGHT)
     await edit_or_reply(night, txt)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gmg$",
-    command=("gmg", plugin_thanosegory),
+    command=("gmg", plugin_category),
     info={
         "header": "Good morning art.",
         "usage": "{tr}gmg",
@@ -168,9 +168,9 @@ async def gm(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gmg2$",
-    command=("gmg2", plugin_thanosegory),
+    command=("gmg2", plugin_category),
     info={
         "header": "Good morning art.",
         "usage": "{tr}gmg2",
@@ -184,9 +184,9 @@ async def gm(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gmg3$",
-    command=("gmg3", plugin_thanosegory),
+    command=("gmg3", plugin_category),
     info={
         "header": "Good morning art.",
         "usage": "{tr}gmg3",
@@ -197,9 +197,9 @@ async def gm(event):
     await edit_or_reply(event, W)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnt$",
-    command=("gnt", plugin_thanosegory),
+    command=("gnt", plugin_category),
     info={
         "header": "Good night art.",
         "usage": "{tr}gnt",
@@ -213,9 +213,9 @@ async def gn(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnt2$",
-    command=("gnt2", plugin_thanosegory),
+    command=("gnt2", plugin_category),
     info={
         "header": "Good night art.",
         "usage": "{tr}gnt2",
@@ -229,9 +229,9 @@ async def gn(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gnt3$",
-    command=("gnt3", plugin_thanosegory),
+    command=("gnt3", plugin_category),
     info={
         "header": "Good night art.",
         "usage": "{tr}gnt3",
@@ -245,9 +245,9 @@ async def gn(event):
 # @PhycoNinja13b 's Part begin from here
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hi(?:\s|$)([\s\S]*)",
-    command=("hi", plugin_thanosegory),
+    command=("hi", plugin_category),
     info={
         "header": "Hi text art.",
         "usage": [
@@ -259,18 +259,18 @@ async def gn(event):
 async def hi(event):
     "Hi text art."
     giveVar = event.text
-    thanos = giveVar[4:5]
-    if not thanos:
-        thanos = "🌺"
+    cat = giveVar[4:5]
+    if not cat:
+        cat = "🌺"
     await edit_or_reply(
         event,
-        f"{thanos}✨✨{thanos}✨{thanos}{thanos}{thanos}\n{thanos}✨✨{thanos}✨✨{thanos}✨\n{thanos}{thanos}{thanos}{thanos}✨✨{thanos}✨\n{thanos}✨✨{thanos}✨✨{thanos}✨\n{thanos}✨✨{thanos}✨{thanos}{thanos}{thanos}\n☁☁☁☁☁☁☁☁",
+        f"{cat}✨✨{cat}✨{cat}{cat}{cat}\n{cat}✨✨{cat}✨✨{cat}✨\n{cat}{cat}{cat}{cat}✨✨{cat}✨\n{cat}✨✨{cat}✨✨{cat}✨\n{cat}✨✨{cat}✨{cat}{cat}{cat}\n☁☁☁☁☁☁☁☁",
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cheer$",
-    command=("cheer", plugin_thanosegory),
+    command=("cheer", plugin_category),
     info={
         "header": "Cheer text art.",
         "usage": "{tr}cheer",
@@ -284,9 +284,9 @@ async def cheer(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="getwell$",
-    command=("getwell", plugin_thanosegory),
+    command=("getwell", plugin_category),
     info={
         "header": "Get Well art.",
         "usage": "{tr}getwell",
@@ -299,9 +299,9 @@ async def getwell(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="luck$",
-    command=("luck", plugin_thanosegory),
+    command=("luck", plugin_category),
     info={
         "header": "luck art.",
         "usage": "{tr}luck",
@@ -314,9 +314,9 @@ async def luck(event):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sprinkle$",
-    command=("sprinkle", plugin_thanosegory),
+    command=("sprinkle", plugin_category),
     info={
         "header": "sprinkle art.",
         "usage": "{tr}sprinkle",

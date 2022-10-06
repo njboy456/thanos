@@ -1,5 +1,5 @@
 #    Copyright (C) 2020  sandeep.n(π.$)
-# baning spmmers plugin for THANOSBOT by @thanosceo
+# baning spmmers plugin for THANOSBOT by @catceo
 # included both cas(combot antispam service) and spamwatch (need to add more feaututres)
 
 from requests import get
@@ -14,7 +14,7 @@ from ..utils import is_admin
 from . import BOTLOG, BOTLOG_CHATID, THANOSPRO, edit_or_reply, logging, spamwatch
 
 LOGS = logging.getLogger(__name__)
-plugin_thanosegory = "admin"
+plugin_category = "admin"
 if Config.ANTISPAMBOT_BAN:
 
     @THANOSPRO.on(ChatAction())
@@ -23,10 +23,10 @@ if Config.ANTISPAMBOT_BAN:
         if not event.user_joined and not event.user_added:
             return
         user = await event.get_user()
-        thanosadmin = await is_admin(event.client, event.chat_id, event.client.uid)
-        if not thanosadmin:
+        catadmin = await is_admin(event.client, event.chat_id, event.client.uid)
+        if not catadmin:
             return
-        thanosbanned = None
+        catbanned = None
         adder = None
         ignore = None
         if event.user_added:
@@ -43,10 +43,10 @@ if Config.ANTISPAMBOT_BAN:
         if ignore:
             return
         if is_gbanned(user.id):
-            thanosgban = get_gbanuser(user.id)
-            if thanosgban.reason:
+            catgban = get_gbanuser(user.id)
+            if catgban.reason:
                 hmm = await event.reply(
-                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{thanosgban.reason}`"
+                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{catgban.reason}`"
                 )
             else:
                 hmm = await event.reply(
@@ -56,10 +56,10 @@ if Config.ANTISPAMBOT_BAN:
                 await event.client.edit_permissions(
                     event.chat_id, user.id, view_messages=False
                 )
-                thanosbanned = True
+                catbanned = True
             except Exception as e:
                 LOGS.info(e)
-        if spamwatch and not thanosbanned:
+        if spamwatch and not catbanned:
             if ban := spamwatch.get_ban(user.id):
                 hmm = await event.reply(
                     f"[{user.first_name}](tg://user?id={user.id}) was banned by spamwatch for the reason `{ban.reason}`"
@@ -68,10 +68,10 @@ if Config.ANTISPAMBOT_BAN:
                     await event.client.edit_permissions(
                         event.chat_id, user.id, view_messages=False
                     )
-                    thanosbanned = True
+                    catbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if not thanosbanned:
+        if not catbanned:
             try:
                 casurl = f"https://api.cas.chat/check?user_id={user.id}"
                 data = get(casurl).json()
@@ -89,10 +89,10 @@ if Config.ANTISPAMBOT_BAN:
                     await event.client.edit_permissions(
                         event.chat_id, user.id, view_messages=False
                     )
-                    thanosbanned = True
+                    catbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if BOTLOG and thanosbanned:
+        if BOTLOG and catbanned:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#ANTISPAMBOT\n"
@@ -102,9 +102,9 @@ if Config.ANTISPAMBOT_BAN:
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="cascheck$",
-    command=("cascheck", plugin_thanosegory),
+    command=("cascheck", plugin_category),
     info={
         "header": "To check the users who are banned in cas",
         "description": "When you use this cmd it will check every user in the group where you used whether \
@@ -115,7 +115,7 @@ if Config.ANTISPAMBOT_BAN:
 )
 async def caschecker(event):
     "Searches for cas(combot antispam service) banned users in group and shows you the list"
-    thanosevent = await edit_or_reply(
+    catevent = await edit_or_reply(
         event,
         "`checking any cas(combot antispam service) banned users here, this may take several minutes too......`",
     )
@@ -141,17 +141,17 @@ async def caschecker(event):
         if not cas_count:
             text = "No CAS Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await thanosevent.edit("`CAS check failed: Admin privileges are required`")
+        await catevent.edit("`CAS check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await thanosevent.edit("`CAS check failed`")
+        await catevent.edit("`CAS check failed`")
         return
-    await thanosevent.edit(text)
+    await catevent.edit(text)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="spamcheck$",
-    command=("spamcheck", plugin_thanosegory),
+    command=("spamcheck", plugin_category),
     info={
         "header": "To check the users who are banned in spamwatch",
         "description": "When you use this command it will check every user in the group where you used whether \
@@ -163,7 +163,7 @@ async def caschecker(event):
 async def caschecker(event):
     "Searches for spamwatch federation banned users in group and shows you the list"
     text = ""
-    thanosevent = await edit_or_reply(
+    catevent = await edit_or_reply(
         event,
         "`checking any spamwatch banned users here, this may take several minutes too......`",
     )
@@ -190,12 +190,12 @@ async def caschecker(event):
         if not cas_count:
             text = "No spamwatch Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await thanosevent.edit("`spamwatch check failed: Admin privileges are required`")
+        await catevent.edit("`spamwatch check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await thanosevent.edit("`spamwatch check failed`")
+        await catevent.edit("`spamwatch check failed`")
         return
-    await thanosevent.edit(text)
+    await catevent.edit(text)
 
 
 def banchecker(user_id):

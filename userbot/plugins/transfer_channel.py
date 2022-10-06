@@ -9,15 +9,15 @@ from userbot import THANOSPRO
 
 from ..Config import Config
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="otransfer ([\s\S]*)",
-    command=("otransfer", plugin_thanosegory),
+    command=("otransfer", plugin_category),
     info={
         "header": "To transfer channel ownership.",
-        "description": "Transfers ownership to the given username for this set this var `TG_2STEP_VERIFITHANOSSION_CODE` in heroku with your 2-step verifithanosion code.",
+        "description": "Transfers ownership to the given username for this set this var `TG_2STEP_VERIFITHANOSSION_CODE` in heroku with your 2-step verification code.",
         "usage": "{tr}otransfer <username to whom you want to transfer>",
     },
 )

@@ -8,7 +8,7 @@ from ..helpers.utils import install_pip
 from ..utils import load_module
 from . import BOTLOG, BOTLOG_CHATID, THANOSPRO
 
-plugin_thanosegory = "tools"
+plugin_category = "tools"
 
 if Config.PLUGIN_CHANNEL:
 

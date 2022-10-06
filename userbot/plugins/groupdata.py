@@ -12,7 +12,7 @@ from telethon.tl.types import (
     ChannelParticipantsBots,
     MessageActionChannelMigrateFrom,
 )
-from telethon.utils import get_input_lothanosion
+from telethon.utils import get_input_location
 
 from userbot import THANOSPRO
 
@@ -25,7 +25,7 @@ from ..helpers.utils import format, get_chatinfo
 from . import BOTLOG, BOTLOG_CHATID
 
 LOGS = logging.getLogger(__name__)
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 msgfilter = {
     "p": ["Photo"],
@@ -107,7 +107,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         else None
     )
     try:
-        dc_id, lothanosion = get_input_lothanosion(chat.full_chat.chat_photo)
+        dc_id, location = get_input_location(chat.full_chat.chat_photo)
     except Exception:
         dc_id = "Unknown"
 
@@ -278,9 +278,9 @@ async def fetch_info(chat, event):  # sourcery no-metrics
     return caption
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="admins(?:\s|$)([\s\S]*)",
-    command=("admins", plugin_thanosegory),
+    command=("admins", plugin_category),
     info={
         "header": "To get list of admins.",
         "description": "Will show you the list of admins and if you use this in group then will tag them.",
@@ -328,9 +328,9 @@ async def _(event):
     await event.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="bots(?:\s|$)([\s\S]*)",
-    command=("bots", plugin_thanosegory),
+    command=("bots", plugin_category),
     info={
         "header": "To get list of bots.",
         "description": "Will show you the list of bots.",
@@ -365,9 +365,9 @@ async def _(event):
     await edit_or_reply(event, mentions)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="users(?:\s|$)([\s\S]*)",
-    command=("users", plugin_thanosegory),
+    command=("users", plugin_category),
     info={
         "header": "To get list of users.",
         "description": "Will show you the list of users.",
@@ -390,7 +390,7 @@ async def get_users(show):
             return await edit_delete(show, f"`{e}`", 10)
     elif not show.is_group:
         return await edit_or_reply(show, "`Are you sure this is a group?`")
-    thanosevent = await edit_or_reply(show, "`getting users list wait...`  ")
+    catevent = await edit_or_reply(show, "`getting users list wait...`  ")
     try:
         if show.pattern_match.group(1):
             async for user in show.client.iter_participants(chat.id):
@@ -410,12 +410,12 @@ async def get_users(show):
                     )
     except Exception as e:
         mentions += f" {str(e)}" + "\n"
-    await edit_or_reply(thanosevent, mentions)
+    await edit_or_reply(catevent, mentions)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="chatinfo(?:\s|$)([\s\S]*)",
-    command=("chatinfo", plugin_thanosegory),
+    command=("chatinfo", plugin_category),
     info={
         "header": "To get Group details.",
         "description": "Shows you the total information of the required chat.",
@@ -428,25 +428,25 @@ async def get_users(show):
 )
 async def info(event):
     "To get group information"
-    thanosevent = await edit_or_reply(event, "`Analysing the chat...`")
+    catevent = await edit_or_reply(event, "`Analysing the chat...`")
     match = event.pattern_match.group(1)
-    chat = await get_chatinfo(event, match.strip(), thanosevent)
+    chat = await get_chatinfo(event, match.strip(), catevent)
     if not chat:
         return
     caption = await fetch_info(chat, event)
     try:
-        await thanosevent.edit(caption, parse_mode="html")
+        await catevent.edit(caption, parse_mode="html")
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID, f"**Error in chatinfo : **\n`{e}`"
             )
-        await thanosevent.edit("`An unexpected error has occurred.`")
+        await catevent.edit("`An unexpected error has occurred.`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="grpstat(s)?(?:\s|$)([\s\S]*)",
-    command=("grpstats", plugin_thanosegory),
+    command=("grpstats", plugin_category),
     info={
         "header": "To get stats of the group.",
         "description": "Will show you the list of users who are more active in last required number of messages.",
@@ -478,7 +478,7 @@ async def info(event):
 )
 async def grp_stat(event):  # sourcery skip: low-code-quality
     "To get active user stats of the group"
-    thanosevent = await edit_or_reply(event, "`Analysing the chat...`")
+    catevent = await edit_or_reply(event, "`Analysing the chat...`")
     match = event.pattern_match.group(2)
     quantity = re.findall(r"-q\d+", match)
     limit = re.findall(r"-l\d+", match)
@@ -506,17 +506,17 @@ async def grp_stat(event):  # sourcery skip: low-code-quality
     except IndexError:
         flag = None
     temp = {}
-    chatinfo = await get_chatinfo(event, match.strip(), thanosevent)
+    chatinfo = await get_chatinfo(event, match.strip(), catevent)
     if not chatinfo:
         return
     grpcheck = await event.client.get_entity(chatinfo.full_chat.id)
     if grpcheck.broadcast:
-        await thanosevent.edit(
+        await catevent.edit(
             "**Error**:\n__grpstats command doesn't work on channel, try on group.__"
         )
         return None
     if flag and flag not in msgfilter:
-        await thanosevent.edit(
+        await catevent.edit(
             "**Error**:\n__Given flag {flag} is invalid please check flags mention in help.__"
         )
     async for msg in event.client.iter_messages(chatinfo.full_chat.id, limit=quantity):
@@ -555,4 +555,4 @@ async def grp_stat(event):  # sourcery skip: low-code-quality
         if flag
         else f"<b>The top {check-1} active users of the previous {finalquantity} messages in group {grpcheck.title} are:</b>\n\n{tempstring}"
     )
-    await thanosevent.edit(string, parse_mode="html")
+    await catevent.edit(string, parse_mode="html")

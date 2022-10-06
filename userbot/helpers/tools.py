@@ -20,7 +20,7 @@ async def meme_type(message):
                 return "Gif"
             if message.sticker:
                 mime = message.document.mime_type
-                if mime == "applithanosion/x-tgsticker":
+                if mime == "application/x-tgsticker":
                     return "Animated Sticker"
                 if mime == "video/webm":
                     return "Video Sticker"
@@ -35,7 +35,7 @@ async def meme_type(message):
                     return "Gif"
                 if mime.split("/")[0] == "video":
                     return "Video"
-                if mime == "applithanosion/x-tgsticker":
+                if mime == "application/x-tgsticker":
                     return "Animated Sticker"
                 return "Document"
         except AttributeError:
@@ -76,24 +76,24 @@ async def media_type(message):
 
 async def fileinfo(file):
     x, y, z, s = await runcmd(f"mediainfo '{file}' --Output=JSON")
-    thanos_json = json.loads(x)["media"]["track"]
+    cat_json = json.loads(x)["media"]["track"]
     dic = {
         "path": file,
-        "size": int(thanos_json[0]["FileSize"]),
-        "extension": thanos_json[0]["FileExtension"],
+        "size": int(cat_json[0]["FileSize"]),
+        "extension": cat_json[0]["FileExtension"],
         "type": "None",
         "format": "None",
         "audio": "None",
     }
     with contextlib.suppress(IndexError, KeyError):
-        dic["format"] = thanos_json[0]["Format"]
-        dic["type"] = thanos_json[1]["@type"]
-        if "ImageCount" not in thanos_json[0]:
-            dic["duration"] = int(float(thanos_json[0]["Duration"]))
-            dic["bitrate"] = int(thanos_json[0]["OverallBitRate"]) // 1000
-        dic["height"] = int(thanos_json[1]["Height"])
-        dic["width"] = int(thanos_json[1]["Width"])
-        dic["audio"] = "Present" if thanos_json[0]["AudioCount"] else "None"
+        dic["format"] = cat_json[0]["Format"]
+        dic["type"] = cat_json[1]["@type"]
+        if "ImageCount" not in cat_json[0]:
+            dic["duration"] = int(float(cat_json[0]["Duration"]))
+            dic["bitrate"] = int(cat_json[0]["OverallBitRate"]) // 1000
+        dic["height"] = int(cat_json[1]["Height"])
+        dic["width"] = int(cat_json[1]["Width"])
+        dic["audio"] = "Present" if cat_json[0]["AudioCount"] else "None"
     return dic
 
 

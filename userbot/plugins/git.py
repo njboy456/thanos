@@ -16,14 +16,14 @@ from . import reply_id
 
 LOGS = logging.getLogger(os.path.basename(__name__))
 ppath = os.path.join(os.getcwd(), "temp", "githubuser.jpg")
-plugin_thanosegory = "misc"
+plugin_category = "misc"
 
 GIT_TEMP_DIR = "./temp/"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="repo$",
-    command=("repo", plugin_thanosegory),
+    command=("repo", plugin_category),
     info={
         "header": "Source code link of userbot",
         "usage": [
@@ -39,14 +39,14 @@ async def source(e):
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="github( -l(\d+))? ([\s\S]*)",
-    command=("github", plugin_thanosegory),
+    command=("github", plugin_category),
     info={
         "header": "Shows the information about an user on GitHub of given username",
         "flags": {"-l": "repo limit : default to 5"},
         "usage": ".github [flag] [username]",
-        "examples": [".github thanosuser", ".github -l5 thanosuser"],
+        "examples": [".github catuser", ".github -l5 catuser"],
     },
 )
 async def _(event):
@@ -58,7 +58,7 @@ async def _(event):
         async with session.get(URL) as request:
             if request.status == 404:
                 return await edit_delete(event, f"`{username} not found`")
-            thanosevent = await edit_or_reply(event, "`fetching github info ...`")
+            catevent = await edit_or_reply(event, "`fetching github info ...`")
             result = await request.json()
             photo = result["avatar_url"]
             if result["bio"]:
@@ -78,7 +78,7 @@ async def _(event):
                 \n🔧 **Type:** `{type}`\
                 \n🏢 **Company:** `{company}`\
                 \n🔭 **Blog** : {blog}\
-                \n📍 **Lothanosion** : `{lothanosion}`\
+                \n📍 **Location** : `{location}`\
                 \n📝 **Bio** : __{bio}__\
                 \n❤️ **Followers** : `{followers}`\
                 \n👁 **Following** : `{following}`\
@@ -102,12 +102,12 @@ async def _(event):
                 reply_to=reply_to,
             )
             os.remove(ppath)
-            await thanosevent.delete()
+            await catevent.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="commit$",
-    command=("commit", plugin_thanosegory),
+    command=("commit", plugin_category),
     info={
         "header": "To commit the replied plugin to github.",
         "description": "It uploads the given file to your github repo in **userbot/plugins** folder\

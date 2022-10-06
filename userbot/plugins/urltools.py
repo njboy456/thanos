@@ -5,12 +5,12 @@ from userbot import THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="dns(?:\s|$)([\s\S]*)",
-    command=("dns", plugin_thanosegory),
+    command=("dns", plugin_category),
     info={
         "header": "To get Domain Name System(dns) of the given link.",
         "usage": "{tr}dns <url/reply to url>",
@@ -29,8 +29,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        thanosstr = f"http://{input_str}"
-        check = url(thanosstr)
+        catstr = f"http://{input_str}"
+        check = url(catstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     sample_url = f"https://da.gd/dns/{input_str}"
@@ -42,9 +42,9 @@ async def _(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="short(?:\s|$)([\s\S]*)",
-    command=("short", plugin_thanosegory),
+    command=("short", plugin_category),
     info={
         "header": "To short the given url.",
         "usage": "{tr}short <url/reply to url>",
@@ -63,8 +63,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        thanosstr = f"http://{input_str}"
-        check = url(thanosstr)
+        catstr = f"http://{input_str}"
+        check = url(catstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     if not input_str.startswith("http"):
@@ -78,9 +78,9 @@ async def _(event):
         await edit_or_reply(event, "`Something is wrong, please try again later.`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unshort(?:\s|$)([\s\S]*)",
-    command=("unshort", plugin_thanosegory),
+    command=("unshort", plugin_category),
     info={
         "header": "To unshort the given dagb shorten url.",
         "usage": "{tr}unshort <url/reply to url>",
@@ -99,8 +99,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        thanosstr = f"http://{input_str}"
-        check = url(thanosstr)
+        catstr = f"http://{input_str}"
+        check = url(catstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     if not input_str.startswith("http"):
@@ -109,7 +109,7 @@ async def _(event):
     if str(r.status_code).startswith("3"):
         await edit_or_reply(
             event,
-            f"Input URL: {input_str}\nReDirected URL: {r.headers['Lothanosion']}",
+            f"Input URL: {input_str}\nReDirected URL: {r.headers['Location']}",
             link_preview=False,
         )
     else:
@@ -119,9 +119,9 @@ async def _(event):
 
 
 # By Priyam Kalra
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="hl(?:\s|$)([\s\S]*)",
-    command=("hl", plugin_thanosegory),
+    command=("hl", plugin_category),
     info={
         "header": "To hide the url with white spaces using hyperlink.",
         "usage": "{tr}hl <url/reply to url>",
@@ -140,8 +140,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        thanosstr = f"http://{input_str}"
-        check = url(thanosstr)
+        catstr = f"http://{input_str}"
+        check = url(catstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     await edit_or_reply(event, f"[ㅤㅤㅤㅤㅤㅤㅤ]({input_str})")

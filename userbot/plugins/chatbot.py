@@ -17,7 +17,7 @@ from ..sql_helper.chatbot_sql import (
     remove_users,
 )
 
-plugin_thanosegory = "fun"
+plugin_category = "fun"
 
 tired_response = [
     "I am little tired, Please give me some rest",
@@ -30,9 +30,9 @@ tired_response = [
 ]
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="addai$",
-    command=("addai", plugin_thanosegory),
+    command=("addai", plugin_category),
     info={
         "header": "To add ai chatbot to replied account.",
         "usage": "{tr}addai <reply>",
@@ -44,8 +44,8 @@ async def add_chatbot(event):
         return await edit_or_reply(
             event, "`Reply to a User's message to activate ai on `"
         )
-    thanosevent = await edit_or_reply(event, "`Adding ai to user...`")
-    user, rank = await get_user_from_event(event, thanosevent, nogroup=True)
+    catevent = await edit_or_reply(event, "`Adding ai to user...`")
+    user, rank = await get_user_from_event(event, catevent, nogroup=True)
     if not user:
         return
     reply_msg = await event.get_reply_message()
@@ -64,14 +64,14 @@ async def add_chatbot(event):
     try:
         addai(chat_id, user_id, chat_name, user_name, user_username, chat_type)
     except Exception as e:
-        await edit_delete(thanosevent, f"**Error:**\n`{e}`")
+        await edit_delete(catevent, f"**Error:**\n`{e}`")
     else:
-        await edit_or_reply(thanosevent, "Hi")
+        await edit_or_reply(catevent, "Hi")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="rmai$",
-    command=("rmai", plugin_thanosegory),
+    command=("rmai", plugin_category),
     info={
         "header": "To stop ai for that user messages.",
         "usage": "{tr}rmai <reply>",
@@ -97,9 +97,9 @@ async def remove_chatbot(event):
         await edit_or_reply(event, "The user is not activated with ai")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="delai( -a)?",
-    command=("delai", plugin_thanosegory),
+    command=("delai", plugin_category),
     info={
         "header": "To delete ai in this chat.",
         "description": "To stop ai for all enabled users in this chat only..",
@@ -138,9 +138,9 @@ async def delete_chatbot(event):
             await edit_or_reply(event, "Deleted ai for all enabled users in this chat")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="listai( -a)?$",
-    command=("listai", plugin_thanosegory),
+    command=("listai", plugin_category),
     info={
         "header": "shows the list of users for whom you enabled ai",
         "flags": {
@@ -201,7 +201,7 @@ async def list_chatbot(event):  # sourcery no-metrics
     await edit_or_reply(event, output_str)
 
 
-@THANOSPRO.thanos_cmd(incoming=True, edited=False)
+@THANOSPRO.cat_cmd(incoming=True, edited=False)
 async def ai_reply(event):
     if is_added(event.chat_id, event.sender_id) and (event.message.text):
         response = requests.get(

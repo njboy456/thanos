@@ -10,12 +10,12 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import media_type
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="stt$",
-    command=("stt", plugin_thanosegory),
+    command=("stt", plugin_category),
     info={
         "header": "speech to text module.",
         "usage": "{tr}stt",
@@ -39,9 +39,9 @@ async def _(event):
             event,
             "`Reply to a voice message or Audio, to get the relevant transcript.`",
         )
-    thanosevent = await edit_or_reply(event, "`Downloading to my local, for analysis  🙇`")
+    catevent = await edit_or_reply(event, "`Downloading to my local, for analysis  🙇`")
     required_file_name = await event.client.download_media(reply, Config.TEMP_DIR)
-    await thanosevent.edit("`Starting analysis, using IBM WatSon Speech To Text`")
+    await catevent.edit("`Starting analysis, using IBM WatSon Speech To Text`")
     headers = {
         "Content-Type": reply.media.document.mime_type,
     }
@@ -55,7 +55,7 @@ async def _(event):
 
     r = response.json()
     if "results" not in r:
-        return await thanosevent.edit(r["error"])
+        return await catevent.edit(r["error"])
     # process the json to appropriate string format
     results = r["results"]
     transcript_response = ""
@@ -71,6 +71,6 @@ async def _(event):
         if transcript_response
         else f"**Language : **`{lan}`\n**Time Taken : **`{ms} seconds`\n**No Results Found**"
     )
-    await thanosevent.edit(string_to_show)
+    await catevent.edit(string_to_show)
     # now, remove the temporary file
     os.remove(required_file_name)

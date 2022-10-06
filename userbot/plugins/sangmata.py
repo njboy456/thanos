@@ -8,12 +8,12 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import get_user_from_event, sanga_seperator
 from ..helpers.utils import _format
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="sg(u)?(?:\s|$)([\s\S]*)",
-    command=("sg", plugin_thanosegory),
+    command=("sg", plugin_category),
     info={
         "header": "To get name history of the user.",
         "flags": {
@@ -40,12 +40,12 @@ async def _(event):  # sourcery no-metrics
         return
     uid = user.id
     chat = "@SangMataInfo_bot"
-    thanosevent = await edit_or_reply(event, "`Processing...`")
+    catevent = await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {uid}")
         except YouBlockedUserError:
-            await edit_delete(thanosevent, "`unblock @Sangmatainfo_bot and then try`")
+            await edit_delete(catevent, "`unblock @Sangmatainfo_bot and then try`")
         responses = []
         while True:
             try:
@@ -55,9 +55,9 @@ async def _(event):  # sourcery no-metrics
             responses.append(response.text)
         await event.client.send_read_acknowledge(conv.chat_id)
     if not responses:
-        await edit_delete(thanosevent, "`bot can't fetch results`")
+        await edit_delete(catevent, "`bot can't fetch results`")
     if "No records found" in responses:
-        await edit_delete(thanosevent, "`The user doesn't have any record`")
+        await edit_delete(catevent, "`The user doesn't have any record`")
     names, usernames = await sanga_seperator(responses)
     cmd = event.pattern_match.group(1)
     sandy = None
@@ -67,4 +67,4 @@ async def _(event):  # sourcery no-metrics
             await event.reply(i, parse_mode=_format.parse_pre)
         else:
             sandy = True
-            await thanosevent.edit(i, parse_mode=_format.parse_pre)
+            await catevent.edit(i, parse_mode=_format.parse_pre)

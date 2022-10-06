@@ -29,7 +29,7 @@ from .botmanagers import ban_user_from_bot
 
 LOGS = logging.getLogger(__name__)
 
-plugin_thanosegory = "bot"
+plugin_category = "bot"
 botusername = Config.TG_BOT_USERNAME
 
 
@@ -48,12 +48,12 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notifithanosion = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
                 \n**ID: **`{user.id}`\
                 \n**Name: **{get_display_name(user)}"
     else:
         start_date = check.date
-        notifithanosion = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
                 \n**ID: **`{user.id}`\
                 \n**Name: **{get_display_name(user)}"
     try:
@@ -61,7 +61,7 @@ async def check_bot_started_users(user, event):
     except Exception as e:
         LOGS.error(str(e))
     if BOTLOG:
-        await event.client.send_message(BOTLOG_CHATID, notifithanosion)
+        await event.client.send_message(BOTLOG_CHATID, notification)
 
 
 @THANOSPRO.bot_cmd(

@@ -64,13 +64,13 @@ LOGS = logging.getLogger(__name__)
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
-plugin_thanosegory = "admin"
+plugin_category = "admin"
 # ================================================
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="gpic( -s| -d)$",
-    command=("gpic", plugin_thanosegory),
+    command=("gpic", plugin_category),
     info={
         "header": "For changing group display pic or deleting display pic",
         "description": "Reply to Image for changing display picture",
@@ -130,9 +130,9 @@ async def set_group_photo(event):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="promote(?:\s|$)([\s\S]*)",
-    command=("promote", plugin_thanosegory),
+    command=("promote", plugin_category),
     info={
         "header": "To give admin rights for a person",
         "description": "Provides admin rights to the person in the chat\
@@ -160,12 +160,12 @@ async def promote(event):
         rank = "Admin"
     if not user:
         return
-    thanosevent = await edit_or_reply(event, "`Promoting...`")
+    catevent = await edit_or_reply(event, "`Promoting...`")
     try:
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
-        return await thanosevent.edit(NO_PERM)
-    await thanosevent.edit("`Promoted Successfully! Now gib Party`")
+        return await catevent.edit(NO_PERM)
+    await catevent.edit("`Promoted Successfully! Now gib Party`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -175,9 +175,9 @@ async def promote(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="demote(?:\s|$)([\s\S]*)",
-    command=("demote", plugin_thanosegory),
+    command=("demote", plugin_category),
     info={
         "header": "To remove a person from admin list",
         "description": "Removes all admin rights for that peron in that chat\
@@ -195,7 +195,7 @@ async def demote(event):
     user, _ = await get_user_from_event(event)
     if not user:
         return
-    thanosevent = await edit_or_reply(event, "`Demoting...`")
+    catevent = await edit_or_reply(event, "`Demoting...`")
     newrights = ChatAdminRights(
         add_admins=None,
         invite_users=None,
@@ -208,8 +208,8 @@ async def demote(event):
     try:
         await event.client(EditAdminRequest(event.chat_id, user.id, newrights, rank))
     except BadRequestError:
-        return await thanosevent.edit(NO_PERM)
-    await thanosevent.edit("`Demoted Successfully! Betterluck next time`")
+        return await catevent.edit(NO_PERM)
+    await catevent.edit("`Demoted Successfully! Betterluck next time`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -219,9 +219,9 @@ async def demote(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ban(?:\s|$)([\s\S]*)",
-    command=("ban", plugin_thanosegory),
+    command=("ban", plugin_category),
     info={
         "header": "Will ban the guy in the group where you used this command.",
         "description": "Permanently will remove him from this group and he can't join back\
@@ -241,18 +241,18 @@ async def _ban_person(event):
         return
     if user.id == event.client.uid:
         return await edit_delete(event, "__You cant ban yourself.__")
-    thanosevent = await edit_or_reply(event, "`Whacking the pest!`")
+    catevent = await edit_or_reply(event, "`Whacking the pest!`")
     try:
         await event.client(EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS))
     except BadRequestError:
-        return await thanosevent.edit(NO_PERM)
+        return await catevent.edit(NO_PERM)
     reply = await event.get_reply_message()
     if reason:
-        await thanosevent.edit(
+        await catevent.edit(
             f"{_format.mentionuser(user.first_name ,user.id)}` is banned !!`\n**Reason : **`{reason}`"
         )
     else:
-        await thanosevent.edit(
+        await catevent.edit(
             f"{_format.mentionuser(user.first_name ,user.id)} `is banned !!`"
         )
     if BOTLOG:
@@ -276,14 +276,14 @@ async def _ban_person(event):
                 await reply.forward_to(BOTLOG_CHATID)
                 await reply.delete()
         except BadRequestError:
-            return await thanosevent.edit(
+            return await catevent.edit(
                 "`I dont have message nuking rights! But still he is banned!`"
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unban(?:\s|$)([\s\S]*)",
-    command=("unban", plugin_thanosegory),
+    command=("unban", plugin_category),
     info={
         "header": "Will unban the guy in the group where you used this command.",
         "description": "Removes the user account from the banned list of the group\
@@ -296,15 +296,15 @@ async def _ban_person(event):
     groups_only=True,
     require_admin=True,
 )
-async def nothanos(event):
+async def nocat(event):
     "To unban a person"
     user, _ = await get_user_from_event(event)
     if not user:
         return
-    thanosevent = await edit_or_reply(event, "`Unbanning...`")
+    catevent = await edit_or_reply(event, "`Unbanning...`")
     try:
         await event.client(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
-        await thanosevent.edit(
+        await catevent.edit(
             f"{_format.mentionuser(user.first_name ,user.id)} `is Unbanned Successfully. Granting another chance.`"
         )
         if BOTLOG:
@@ -315,12 +315,12 @@ async def nothanos(event):
                 f"CHAT: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
             )
     except UserIdInvalidError:
-        await thanosevent.edit("`Uh oh my unban logic broke!`")
+        await catevent.edit("`Uh oh my unban logic broke!`")
     except Exception as e:
-        await thanosevent.edit(f"**Error :**\n`{e}`")
+        await catevent.edit(f"**Error :**\n`{e}`")
 
 
-@THANOSPRO.thanos_cmd(incoming=True)
+@THANOSPRO.cat_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         try:
@@ -329,9 +329,9 @@ async def watcher(event):
             LOGS.info(str(e))
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="mute(?:\s|$)([\s\S]*)",
-    command=("mute", plugin_thanosegory),
+    command=("mute", plugin_category),
     info={
         "header": "To stop sending messages from that user",
         "description": "If is is not admin then changes his permission in group,\
@@ -431,9 +431,9 @@ async def startmute(
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unmute(?:\s|$)([\s\S]*)",
-    command=("unmute", plugin_thanosegory),
+    command=("unmute", plugin_category),
     info={
         "header": "To allow user to send messages again",
         "description": "Will change user permissions ingroup to send messages again.\
@@ -499,9 +499,9 @@ async def endmute(event):
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="kick(?:\s|$)([\s\S]*)",
-    command=("kick", plugin_thanosegory),
+    command=("kick", plugin_category),
     info={
         "header": "To kick a person from the group",
         "description": "Will kick the user from the group so he can join back.\
@@ -519,17 +519,17 @@ async def kick(event):
     user, reason = await get_user_from_event(event)
     if not user:
         return
-    thanosevent = await edit_or_reply(event, "`Kicking...`")
+    catevent = await edit_or_reply(event, "`Kicking...`")
     try:
         await event.client.kick_participant(event.chat_id, user.id)
     except Exception as e:
-        return await thanosevent.edit(f"{NO_PERM}\n{e}")
+        return await catevent.edit(f"{NO_PERM}\n{e}")
     if reason:
-        await thanosevent.edit(
+        await catevent.edit(
             f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
         )
     else:
-        await thanosevent.edit(f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
+        await catevent.edit(f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -539,9 +539,9 @@ async def kick(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pin( loud|$)",
-    command=("pin", plugin_thanosegory),
+    command=("pin", plugin_category),
     info={
         "header": "For pining messages in chat",
         "description": "reply to a message to pin it in that in chat\
@@ -581,9 +581,9 @@ async def pin(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unpin( all|$)",
-    command=("unpin", plugin_thanosegory),
+    command=("unpin", plugin_category),
     info={
         "header": "For unpining messages in chat",
         "description": "reply to a message to unpin it in that in chat\
@@ -632,9 +632,9 @@ async def unpin(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="undlt( -u)?(?: |$)(\d*)?",
-    command=("undlt", plugin_thanosegory),
+    command=("undlt", plugin_category),
     info={
         "header": "To get recent deleted messages in group",
         "description": "To check recent deleted messages in group, by default will show 5. you can get 1 to 15 messages.",
@@ -655,7 +655,7 @@ async def unpin(event):
 )
 async def _iundlt(event):  # sourcery no-metrics
     "To check recent deleted messages in group"
-    thanosevent = await edit_or_reply(event, "`Searching recent actions .....`")
+    catevent = await edit_or_reply(event, "`Searching recent actions .....`")
     flag = event.pattern_match.group(1)
     if event.pattern_match.group(2) != "":
         lim = int(event.pattern_match.group(2))
@@ -676,9 +676,9 @@ async def _iundlt(event):  # sourcery no-metrics
                 deleted_msg += f"\n☞ __{msg.old.message}__ **Sent by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
             else:
                 deleted_msg += f"\n☞ __{_media_type}__ **Sent by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
-        await edit_or_reply(thanosevent, deleted_msg)
+        await edit_or_reply(catevent, deleted_msg)
     else:
-        main_msg = await edit_or_reply(thanosevent, deleted_msg)
+        main_msg = await edit_or_reply(catevent, deleted_msg)
         for msg in adminlog:
             ruser = await event.client.get_entity(msg.old.from_id)
             _media_type = await media_type(msg.old)

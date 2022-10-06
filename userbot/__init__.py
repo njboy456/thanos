@@ -23,7 +23,7 @@ LOGS = logging.getLogger("THANOSBOT")
 bot = THANOSPRO
 
 StartTime = time.time()
-thanosversion = "3.2.0"
+catversion = "3.2.0"
 
 
 def close_connection(*_):

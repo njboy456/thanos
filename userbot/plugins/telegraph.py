@@ -19,7 +19,7 @@ from . import BOTLOG, BOTLOG_CHATID, THANOSPRO, reply_id
 
 LOGS = logging.getLogger(__name__)
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 extractor = URLExtract()
 telegraph = Telegraph()
@@ -32,9 +32,9 @@ def resize_image(image):
     im.save(image, "PNG")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(t(ele)?g(raph)?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
-    command=("telegraph", plugin_thanosegory),
+    command=("telegraph", plugin_category),
     info={
         "header": "To get telegraph link.",
         "description": "Reply to text message to paste that text on telegraph you can also pass input along with command \
@@ -53,7 +53,7 @@ def resize_image(image):
 )  # sourcery no-me  # sourcery skip: low-code-quality, low-code-qualitytrics
 async def _(event):
     "To get telegraph link."
-    thanosevent = await edit_or_reply(event, "`processing........`")
+    catevent = await edit_or_reply(event, "`processing........`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -61,7 +61,7 @@ async def _(event):
         )
     optional_title = event.pattern_match.group(5)
     if not event.reply_to_msg_id:
-        return await thanosevent.edit(
+        return await catevent.edit(
             "`Reply to a message to get a permanent telegra.ph link.`",
         )
 
@@ -72,19 +72,19 @@ async def _(event):
         downloaded_file_name = await event.client.download_media(
             r_message, Config.TEMP_DIR
         )
-        await thanosevent.edit(f"`Downloaded to {downloaded_file_name}`")
+        await catevent.edit(f"`Downloaded to {downloaded_file_name}`")
         if downloaded_file_name.endswith((".webp")):
             resize_image(downloaded_file_name)
         try:
             media_urls = upload_file(downloaded_file_name)
         except exceptions.TelegraphException as exc:
-            await thanosevent.edit(f"**Error : **\n`{exc}`")
+            await catevent.edit(f"**Error : **\n`{exc}`")
             os.remove(downloaded_file_name)
         else:
             end = datetime.now()
             ms = (end - start).seconds
             os.remove(downloaded_file_name)
-            await thanosevent.edit(
+            await catevent.edit(
                 f"**link : **[telegraph](https://telegra.ph{media_urls[0]})\
                     \n**Time Taken : **`{ms} seconds.`",
                 link_preview=True,
@@ -120,17 +120,17 @@ async def _(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
         end = datetime.now()
         ms = (end - start).seconds
-        thanos = f"https://telegra.ph/{response['path']}"
-        await thanosevent.edit(
-            f"**link : ** [telegraph]({thanos})\
+        cat = f"https://telegra.ph/{response['path']}"
+        await catevent.edit(
+            f"**link : ** [telegraph]({cat})\
                  \n**Time Taken : **`{ms} seconds.`",
             link_preview=True,
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ctg(?: |$)([\s\S]*)",
-    command=("ctg", plugin_thanosegory),
+    command=("ctg", plugin_category),
     info={
         "header": "Reply to link To get link preview using telegrah.s.",
         "usage": "{tr}ctg <reply/text>",
@@ -149,22 +149,22 @@ async def ctg(event):
     if not urls:
         return await edit_delete(event, "**There no link to search in the text..**", 20)
     chat = "@chotamreaderbot"
-    thanosevent = await edit_or_reply(event, "```Processing...```")
+    catevent = await edit_or_reply(event, "```Processing...```")
     async with event.client.conversation(chat) as conv:
         try:
             msg_flag = await conv.send_message(urls[0])
         except YouBlockedUserError:
             await edit_or_reply(
-                thanosevent, "**Error:** Trying to unblock & retry, wait a sec..."
+                catevent, "**Error:** Trying to unblock & retry, wait a sec..."
             )
             await THANOSPRO(unblock("chotamreaderbot"))
             msg_flag = await conv.send_message(urls[0])
         response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
         if response.text.startswith(""):
-            await edit_or_reply(thanosevent, "Am I Dumb Or Am I Dumb?")
+            await edit_or_reply(catevent, "Am I Dumb Or Am I Dumb?")
         else:
-            await thanosevent.delete()
+            await catevent.delete()
             await event.client.send_message(
                 event.chat_id, response, reply_to=reply_to_id, link_preview=True
             )

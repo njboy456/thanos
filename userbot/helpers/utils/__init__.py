@@ -6,7 +6,7 @@ check = 0
 while flag:
     try:
         from . import format as _format
-        from . import utils as _thanosutils
+        from . import utils as _catutils
         from .events import *
         from .format import *
         from .utils import *

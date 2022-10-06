@@ -32,11 +32,11 @@ name_dl = (
 )
 
 
-async def yt_search(thanos):
+async def yt_search(cat):
     try:
-        thanos = urllib.parse.quote(thanos)
+        cat = urllib.parse.quote(cat)
         html = urllib.request.urlopen(
-            f"https://www.youtube.com/results?search_query={thanos}"
+            f"https://www.youtube.com/results?search_query={cat}"
         )
 
         user_data = re.findall(r"watch\?v=(\S{11})", html.read().decode())
@@ -89,8 +89,8 @@ class YT_Search_X:
 ytsearch_data = YT_Search_X()
 
 """
-async def yt_data(thanos):
-    params = {"format": "json", "url": thanos}
+async def yt_data(cat):
+    params = {"format": "json", "url": cat}
     url = "https://www.youtube.com/oembed"  # https://stackoverflow.com/questions/29069444/returning-the-urls-as-a-list-from-a-youtube-search-query
     query_string = urllib.parse.urlencode(params)
     url = f"{url}?{query_string}"
@@ -281,7 +281,7 @@ def _tubeDl(url: str, starttime, uid: str):
     ydl_opts = {
         "addmetadata": True,
         "geo_bypass": True,
-        "nocheckcertifithanose": True,
+        "nocheckcertificate": True,
         "outtmpl": os.path.join(
             Config.TEMP_DIR, str(starttime), "%(title)s-%(format)s.%(ext)s"
         ),
@@ -318,7 +318,7 @@ def _mp3Dl(url: str, starttime, uid: str):
         "prefer_ffmpeg": True,
         "format": "bestaudio/best",
         "geo_bypass": True,
-        "nocheckcertifithanose": True,
+        "nocheckcertificate": True,
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",

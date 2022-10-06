@@ -37,12 +37,12 @@ def admin_cmd(pattern=None, command=None, **args):  # sourcery no-metrics
                 CMD_LIST.update({file_test: [cmd]})
         else:
             if len(Config.COMMAND_HAND_LER) == 2:
-                thanosreg = f"^{Config.COMMAND_HAND_LER}"
+                catreg = f"^{Config.COMMAND_HAND_LER}"
                 reg = Config.COMMAND_HAND_LER[1]
             elif len(Config.COMMAND_HAND_LER) == 1:
-                thanosreg = f"^\\{Config.COMMAND_HAND_LER}"
+                catreg = f"^\\{Config.COMMAND_HAND_LER}"
                 reg = Config.COMMAND_HAND_LER
-            args["pattern"] = re.compile(thanosreg + pattern)
+            args["pattern"] = re.compile(catreg + pattern)
             if command is not None:
                 cmd = reg + command
             else:
@@ -90,12 +90,12 @@ def sudo_cmd(pattern=None, command=None, **args):  # sourcery no-metrics
                 SUDO_LIST.update({file_test: [cmd]})
         else:
             if len(Config.SUDO_COMMAND_HAND_LER) == 2:
-                thanosreg = f"^{Config.SUDO_COMMAND_HAND_LER}"
+                catreg = f"^{Config.SUDO_COMMAND_HAND_LER}"
                 reg = Config.SUDO_COMMAND_HAND_LER[1]
             elif len(Config.SUDO_COMMAND_HAND_LER) == 1:
-                thanosreg = f"^\\{Config.SUDO_COMMAND_HAND_LER}"
+                catreg = f"^\\{Config.SUDO_COMMAND_HAND_LER}"
                 reg = Config.COMMAND_HAND_LER
-            args["pattern"] = re.compile(thanosreg + pattern)
+            args["pattern"] = re.compile(catreg + pattern)
             if command is not None:
                 cmd = reg + command
             else:

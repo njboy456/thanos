@@ -1,4 +1,4 @@
-# collage plugin for THANOSBOT by @thanosceo
+# collage plugin for THANOSBOT by @catceo
 
 # Copyright (C) 2020 Alfiananda P.A
 #
@@ -10,14 +10,14 @@ import os
 from userbot import Convert, THANOSPRO
 
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers import _thanosutils, meme_type, reply_id
+from ..helpers import _catutils, meme_type, reply_id
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="collage(?:\s|$)([\s\S]*)",
-    command=("collage", plugin_thanosegory),
+    command=("collage", plugin_category),
     info={
         "header": "To create collage from still images extracted from video/gif.",
         "description": "Shows you the grid image of images extracted from video/gif. you can customize the Grid size by giving integer between 1 to 9 to cmd by default it is 3",
@@ -26,9 +26,9 @@ plugin_thanosegory = "utils"
 )
 async def collage(event):
     "To create collage from still images extracted from video/gif."
-    thanosinput = event.pattern_match.group(1)
+    catinput = event.pattern_match.group(1)
     reply = await event.get_reply_message()
-    thanosid = await reply_id(event)
+    catid = await reply_id(event)
     if not (reply and (reply.media)):
         return await edit_delete(event, "`Reply to a media file..`")
     mediacheck = await meme_type(reply)
@@ -42,25 +42,25 @@ async def collage(event):
         return await edit_delete(
             event, "`The replied message media type is not supported.`"
         )
-    if thanosinput:
-        if not thanosinput.isdigit():
+    if catinput:
+        if not catinput.isdigit():
             return await edit_delete(event, "`You input is invalid, check help`")
 
-        thanosinput = int(thanosinput)
-        if not 0 < thanosinput < 10:
+        catinput = int(catinput)
+        if not 0 < catinput < 10:
             await edit_or_reply(
                 event,
                 "__Why big grid you cant see images, use size of grid between 1 to 9\nAnyways changing value to max 9__",
             )
-            thanosinput = 9
+            catinput = 9
     else:
-        thanosinput = 3
+        catinput = 3
     await edit_or_reply(event, "```Collaging this may take several minutes..... 😁```")
     if mediacheck in ["Round Video", "Gif", "Video Sticker", "Video"]:
         if not os.path.isdir("./temp/"):
             os.mkdir("./temp/")
-        thanossticker = await reply.download_media(file="./temp/")
-        collagefile = thanossticker
+        catsticker = await reply.download_media(file="./temp/")
+        collagefile = catsticker
     else:
         collage_file = await Convert.to_gif(
             event, reply, file="collage.mp4", noedits=True
@@ -71,8 +71,8 @@ async def collage(event):
             event, "**Error:-** __Unable to process the replied media__"
         )
     endfile = "./temp/collage.png"
-    thanoscmd = f"vcsi -g {thanosinput}x{thanosinput} '{collagefile}' -o {endfile}"
-    stdout, stderr = (await _thanosutils.runcmd(thanoscmd))[:2]
+    catcmd = f"vcsi -g {catinput}x{catinput} '{collagefile}' -o {endfile}"
+    stdout, stderr = (await _catutils.runcmd(catcmd))[:2]
     if not os.path.exists(endfile) and os.path.exists(collagefile):
         os.remove(collagefile)
         return await edit_delete(
@@ -81,7 +81,7 @@ async def collage(event):
     await event.client.send_file(
         event.chat_id,
         endfile,
-        reply_to=thanosid,
+        reply_to=catid,
     )
     await event.delete()
     for files in (collagefile, endfile):

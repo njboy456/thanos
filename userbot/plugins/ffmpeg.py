@@ -14,7 +14,7 @@ from userbot.core.logger import logging
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import (
-    _thanosutils,
+    _catutils,
     fileinfo,
     humanbytes,
     media_type,
@@ -25,7 +25,7 @@ from ..helpers import (
     time_formatter,
 )
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
@@ -92,7 +92,7 @@ async def convert_video(video_file, output_directory, crf, total_time, bot, mess
             with contextlib.suppress(Exception):
                 await message.edit(text=stats)
     # Wait for the subprocess to finish
-    stdout, stderr = await process.communithanose()
+    stdout, stderr = await process.communicate()
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
     return None
@@ -112,15 +112,15 @@ async def cult_small_video(
         stderr=asyncio.subprocess.PIPE,
     )
     # Wait for the subprocess to finish
-    await process.communithanose()
+    await process.communicate()
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
     return None
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="(|f)compress(?:\s|$)([\s\S]*)",
-    command=("compress", plugin_thanosegory),
+    command=("compress", plugin_category),
     info={
         "header": "Compress the video file.",
         "description": "Will compress the replied video, if not replied to video it will check any video saved by .ffmpegsave or not.",
@@ -149,7 +149,7 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
     start = datetime.now()
     if not crf:
         crf = "23"
-    dlpath = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thanos.media.ffmpeg")
+    dlpath = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "cat.media.ffmpeg")
     if reply_message and reply_message.media:
         media = await media_type(reply_message)
         if (
@@ -157,29 +157,29 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
             or media == "Sticker"
         ):
             return await edit_delete(event, "`Only Video files are supported`")
-        thanosevent = await edit_or_reply(event, "`Saving the file...`")
+        catevent = await edit_or_reply(event, "`Saving the file...`")
         try:
             c_time = time.time()
             dl = io.FileIO(dlpath, "a")
             await event.client.fast_download_file(
-                lothanosion=reply_message.document,
+                location=reply_message.document,
                 out=dl,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, thanosevent, c_time, "Trying to download")
+                    progress(d, t, catevent, c_time, "Trying to download")
                 ),
             )
             dl.close()
         except Exception as e:
-            await edit_or_reply(thanosevent, f"**Error:**\n`{e}`")
+            await edit_or_reply(catevent, f"**Error:**\n`{e}`")
         else:
-            await edit_or_reply(thanosevent, "`Processing...`")
+            await edit_or_reply(catevent, "`Processing...`")
             delete = True
     elif os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
         media = (await fileinfo(FF_MPEG_DOWN_LOAD_MEDIA_PATH))["type"]
         if media not in ["Video"]:
             return await edit_delete(event, "`Only Video files are supported`")
         dlpath = FF_MPEG_DOWN_LOAD_MEDIA_PATH
-        thanosevent = await edit_or_reply(event, "`Processing...`")
+        catevent = await edit_or_reply(event, "`Processing...`")
         delete = False
     else:
         await edit_delete(event, "`Reply to Video file or save video by .ffmpegsave`")
@@ -188,14 +188,14 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
         os.mkdir("./temp")
     cstart = datetime.now()
     compress = await convert_video(
-        dlpath, "./temp", crf, old["duration"], THANOSPRO, thanosevent
+        dlpath, "./temp", crf, old["duration"], THANOSPRO, catevent
     )
     cend = datetime.now()
     cms = (cend - cstart).seconds
     if delete:
         os.remove(dlpath)
     if not compress:
-        return await edit_delete(thanosevent, "**ERROR :: Unalble to Compress**")
+        return await edit_delete(catevent, "**ERROR :: Unalble to Compress**")
     new = await fileinfo(compress)
     osize = old["size"]
     nsize = new["size"]
@@ -203,7 +203,7 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
     if cmd == "f":
         try:
             c_time = time.time()
-            thanost = await event.client.send_file(
+            catt = await event.client.send_file(
                 event.chat_id,
                 compress,
                 thumb=thumb_image_path,
@@ -213,17 +213,17 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
                 allow_cache=False,
                 reply_to=reply_to_id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, thanosevent, c_time, "Trying to upload")
+                    progress(d, t, catevent, c_time, "Trying to upload")
                 ),
             )
             os.remove(compress)
         except Exception as e:
-            return await edit_delete(thanosevent, f"**Error : **`{e}`")
+            return await edit_delete(catevent, f"**Error : **`{e}`")
     else:
         thumb = await take_screen_shot(compress, "00:01")
         try:
             c_time = time.time()
-            thanost = await event.client.send_file(
+            catt = await event.client.send_file(
                 event.chat_id,
                 compress,
                 caption=cap,
@@ -233,22 +233,22 @@ async def ffmpeg_compress(event):  # sourcery skip: low-code-quality
                 allow_cache=False,
                 reply_to=reply_to_id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, thanosevent, c_time, "Trying to upload")
+                    progress(d, t, catevent, c_time, "Trying to upload")
                 ),
             )
             os.remove(compress)
         except Exception as e:
-            return await edit_delete(thanosevent, f"**Error : **`{e}`")
-    await thanosevent.delete()
+            return await edit_delete(catevent, f"**Error : **`{e}`")
+    await catevent.delete()
     end = datetime.now()
     ms = (end - start).seconds
     cap += f"\n**Total :** `{time_formatter(ms)}`"
-    await edit_or_reply(thanost, cap)
+    await edit_or_reply(catt, cap)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ffmpegsave(?:\s|$)([\s\S]*)",
-    command=("ffmpegsave", plugin_thanosegory),
+    command=("ffmpegsave", plugin_category),
     info={
         "header": "Saves the media file in bot to trim mutliple times",
         "description": "Will download the replied media into the bot so that you an trim it as your needs.",
@@ -263,7 +263,7 @@ async def ff_mpeg_trim_cmd(event):
             media = (await fileinfo(mpath))["type"]
             if media not in ["Video", "Audio"]:
                 return await edit_delete(event, "`Only media files are supported`", 5)
-            await _thanosutils.runcmd(f"cp -r {mpath} {FF_MPEG_DOWN_LOAD_MEDIA_PATH}")
+            await _catutils.runcmd(f"cp -r {mpath} {FF_MPEG_DOWN_LOAD_MEDIA_PATH}")
             return await edit_or_reply(
                 event, f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
             )
@@ -281,25 +281,25 @@ async def ff_mpeg_trim_cmd(event):
                 return await edit_delete(
                     event, "`Only Video/Audio files are supported`", 5
                 )
-            thanosevent = await edit_or_reply(event, "`Saving the file...`")
+            catevent = await edit_or_reply(event, "`Saving the file...`")
             try:
                 c_time = time.time()
                 dl = io.FileIO(FF_MPEG_DOWN_LOAD_MEDIA_PATH, "a")
                 await event.client.fast_download_file(
-                    lothanosion=reply_message.document,
+                    location=reply_message.document,
                     out=dl,
                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, thanosevent, c_time, "trying to download")
+                        progress(d, t, catevent, c_time, "trying to download")
                     ),
                 )
                 dl.close()
             except Exception as e:
-                await edit_or_reply(thanosevent, f"**Error:**\n`{e}`")
+                await edit_or_reply(catevent, f"**Error:**\n`{e}`")
             else:
                 end = datetime.now()
                 ms = (end - start).seconds
                 await edit_or_reply(
-                    thanosevent,
+                    catevent,
                     f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}` in `{ms}` seconds.",
                 )
         else:
@@ -311,13 +311,13 @@ async def ff_mpeg_trim_cmd(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="vtrim(?:\s|$)([\s\S]*)",
-    command=("vtrim", plugin_thanosegory),
+    command=("vtrim", plugin_category),
     info={
         "header": "Trims the saved media with specific given time internval and outputs as video if it is video",
         "description": "Will trim the saved media with given time interval.",
-        "note": "if you haven't mentioned time interval and just time then will send screenshot at that lothanosion.",
+        "note": "if you haven't mentioned time interval and just time then will send screenshot at that location.",
         "usage": "{tr}vtrim <time interval>",
         "examples": "{tr}vtrim 00:00 00:10",
     },
@@ -330,7 +330,7 @@ async def ff_mpeg_trim_cmd(event):
             f"a media file needs to be download, and save to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
         )
     reply_to_id = await reply_id(event)
-    thanosevent = await edit_or_reply(event, "`Triming the media......`")
+    catevent = await edit_or_reply(event, "`Triming the media......`")
     current_message_text = event.raw_text
     cmt = current_message_text.split(" ")
     start = datetime.now()
@@ -345,7 +345,7 @@ async def ff_mpeg_trim_cmd(event):
         )
         if o is None:
             return await edit_delete(
-                thanosevent, "**Error : **`Can't complete the process`"
+                catevent, "**Error : **`Can't complete the process`"
             )
         try:
             c_time = time.time()
@@ -358,19 +358,19 @@ async def ff_mpeg_trim_cmd(event):
                 allow_cache=False,
                 reply_to=reply_to_id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, thanosevent, c_time, "trying to upload")
+                    progress(d, t, catevent, c_time, "trying to upload")
                 ),
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(thanosevent, f"**Error : **`{e}`")
+            return await edit_delete(catevent, f"**Error : **`{e}`")
     elif len(cmt) == 2:
         # output should be image
         cmd, start_time = cmt
         o = await take_screen_shot(FF_MPEG_DOWN_LOAD_MEDIA_PATH, start_time)
         if o is None:
             return await edit_delete(
-                thanosevent, "**Error : **`Can't complete the process`"
+                catevent, "**Error : **`Can't complete the process`"
             )
         try:
             c_time = time.time()
@@ -383,23 +383,23 @@ async def ff_mpeg_trim_cmd(event):
                 allow_cache=False,
                 reply_to=event.message.id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, thanosevent, c_time, "trying to upload")
+                    progress(d, t, catevent, c_time, "trying to upload")
                 ),
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(thanosevent, f"**Error : **`{e}`")
+            return await edit_delete(catevent, f"**Error : **`{e}`")
     else:
-        await edit_delete(thanosevent, "RTFM")
+        await edit_delete(catevent, "RTFM")
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await edit_delete(thanosevent, f"`Completed Process in {ms} seconds`", 3)
+    await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="atrim(?:\s|$)([\s\S]*)",
-    command=("atrim", plugin_thanosegory),
+    command=("atrim", plugin_category),
     info={
         "header": "Trims the saved media with specific given time internval and outputs as audio",
         "description": "Will trim the saved media with given time interval. and output only audio part, if no interval given it will trim whole audio",
@@ -418,7 +418,7 @@ async def ff_mpeg_trim_cmd(event):
             f"a media file needs to be download, and save to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
         )
     reply_to_id = await reply_id(event)
-    thanosevent = await edit_or_reply(event, "`Triming the media...........`")
+    catevent = await edit_or_reply(event, "`Triming the media...........`")
     current_message_text = event.raw_text
     cmt = current_message_text.split(" ")
     start = datetime.now()
@@ -439,7 +439,7 @@ async def ff_mpeg_trim_cmd(event):
         out_put_file_name,
     )
     if o is None:
-        return await edit_delete(thanosevent, "**Error : **`Can't complete the process`")
+        return await edit_delete(catevent, "**Error : **`Can't complete the process`")
     try:
         c_time = time.time()
         await event.client.send_file(
@@ -451,20 +451,20 @@ async def ff_mpeg_trim_cmd(event):
             allow_cache=False,
             reply_to=reply_to_id,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, thanosevent, c_time, "trying to upload")
+                progress(d, t, catevent, c_time, "trying to upload")
             ),
         )
         os.remove(o)
     except Exception as e:
-        return await edit_delete(thanosevent, f"**Error : **`{e}`")
+        return await edit_delete(catevent, f"**Error : **`{e}`")
     end = datetime.now()
     ms = (end - start).seconds
-    await edit_delete(thanosevent, f"`Completed Process in {ms} seconds`", 3)
+    await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ffmpegclear$",
-    command=("ffmpegclear", plugin_thanosegory),
+    command=("ffmpegclear", plugin_category),
     info={
         "header": "Deletes the saved media so you can save new one",
         "description": "Only after deleting the old saved file you can add new file",

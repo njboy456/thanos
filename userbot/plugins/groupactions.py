@@ -32,7 +32,7 @@ from ..utils import is_admin
 from . import BOTLOG, BOTLOG_CHATID
 
 LOGS = logging.getLogger(__name__)
-plugin_thanosegory = "admin"
+plugin_category = "admin"
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -55,9 +55,9 @@ async def ban_user(chat_id, i, rights):
         return False, str(exc)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="kickme$",
-    command=("kickme", plugin_thanosegory),
+    command=("kickme", plugin_category),
     info={
         "header": "To kick myself from group.",
         "usage": [
@@ -72,9 +72,9 @@ async def kickme(leave):
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="kickall$",
-    command=("kickall", plugin_thanosegory),
+    command=("kickall", plugin_category),
     info={
         "header": "To kick everyone from group.",
         "description": "To Kick all from the group except admins.",
@@ -92,7 +92,7 @@ async def _(event):
         return await edit_or_reply(
             event, "`It seems like you dont have ban users permission in this group.`"
         )
-    thanosevent = await edit_or_reply(event, "`Kicking...`")
+    catevent = await edit_or_reply(event, "`Kicking...`")
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
     )
@@ -109,14 +109,14 @@ async def _(event):
         except Exception as e:
             LOGS.info(str(e))
             await sleep(0.5)
-    await thanosevent.edit(
+    await catevent.edit(
         f"`Sucessfully i have completed kickall process with {success} members kicked out of {total} members`"
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="banall$",
-    command=("banall", plugin_thanosegory),
+    command=("banall", plugin_category),
     info={
         "header": "To ban everyone from group.",
         "description": "To ban all from the group except admins.",
@@ -134,7 +134,7 @@ async def _(event):
         return await edit_or_reply(
             event, "`It seems like you dont have ban users permission in this group.`"
         )
-    thanosevent = await edit_or_reply(event, "`banning...`")
+    catevent = await edit_or_reply(event, "`banning...`")
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
     )
@@ -153,14 +153,14 @@ async def _(event):
         except Exception as e:
             LOGS.info(str(e))
             await sleep(0.5)
-    await thanosevent.edit(
+    await catevent.edit(
         f"`Sucessfully i have completed banall process with {success} members banned out of {total} members`"
     )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="unbanall$",
-    command=("unbanall", plugin_thanosegory),
+    command=("unbanall", plugin_category),
     info={
         "header": "To unban all banned users from group.",
         "usage": [
@@ -172,7 +172,7 @@ async def _(event):
 )
 async def _(event):
     "To unban all banned users from group."
-    thanosevent = await edit_or_reply(
+    catevent = await edit_or_reply(
         event, "__Unbanning all banned accounts in this group.__"
     )
     succ = 0
@@ -190,13 +190,13 @@ async def _(event):
             )
         except FloodWaitError as e:
             LOGS.warn(f"A flood wait of {e.seconds} occurred.")
-            await thanosevent.edit(
+            await catevent.edit(
                 f"__A wait of {readable_time(e.seconds)} needed again to continue the process.__"
             )
 
             await sleep(e.seconds + 5)
         except Exception as ex:
-            await thanosevent.edit(str(ex))
+            await catevent.edit(str(ex))
         else:
             succ += 1
             if flag:
@@ -205,18 +205,18 @@ async def _(event):
                 await sleep(1)
             with contextlib.suppress(MessageNotModifiedError):
                 if succ % 10 == 0:
-                    await thanosevent.edit(
+                    await catevent.edit(
                         f"__Unbanning all banned accounts...,\n{succ} accounts are unbanned untill now.__"
                     )
-    await thanosevent.edit(
+    await catevent.edit(
         f"**Unbanned :**__{succ}/{total} in the chat {get_display_name(await event.get_chat())}__"
     )
 
 
 # Ported by ©[NIKITA](t.me/kirito6969) and ©[EYEPATCH](t.me/NeoMatrix90)
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="zombies( -r| )? ?([\s\S]*)",
-    command=("zombies", plugin_thanosegory),
+    command=("zombies", plugin_category),
     info={
         "header": "To check deleted accounts and clean",
         "description": "Searches for deleted accounts in a group. Use `.zombies clean` to remove deleted accounts from the group.",
@@ -249,8 +249,8 @@ async def rm_deletedacc(show):  # sourcery no-metrics
                 del_status = f"__Found__ **{del_u}** __ghost/deleted/zombie account(s) in this group,\
                             \nclean them by using__ `.zombies clean`"
         else:
-            thanosadmin = await is_admin(show.client, show.chat_id, show.client.uid)
-            if not thanosadmin:
+            catadmin = await is_admin(show.client, show.chat_id, show.client.uid)
+            if not catadmin:
                 return await edit_delete(
                     event,
                     "`You must be admin to check zombies in restricted users`",
@@ -315,8 +315,8 @@ async def rm_deletedacc(show):  # sourcery no-metrics
             del_status = f"Successfully cleaned **{del_u}** deleted account(s) in the group.\
             \n**{del_a}** deleted admin accounts are not removed"
     else:
-        thanosadmin = await is_admin(show.client, show.chat_id, show.client.uid)
-        if not thanosadmin:
+        catadmin = await is_admin(show.client, show.chat_id, show.client.uid)
+        if not catadmin:
             return await edit_delete(
                 event, "`You must be admin to clean zombies in restricted users`", 10
             )
@@ -381,9 +381,9 @@ async def rm_deletedacc(show):  # sourcery no-metrics
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="ikuck ?([\s\S]*)",
-    command=("ikuck", plugin_thanosegory),
+    command=("ikuck", plugin_category),
     info={
         "header": "To get breif summary of members in the group",
         "description": "To get breif summary of members in the group . Need to add some features in future.",

@@ -1,4 +1,4 @@
-# pm and tagged messages logger for THANOSBOT by @mrconfused (@thanosceo)
+# pm and tagged messages logger for THANOSBOT by @mrconfused (@catceo)
 import asyncio
 
 from userbot import THANOSPRO
@@ -14,7 +14,7 @@ from . import BOTLOG, BOTLOG_CHATID
 
 LOGS = logging.getLogger(__name__)
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 
 
 class LOG_CHATS:
@@ -27,7 +27,7 @@ class LOG_CHATS:
 LOG_CHATS_ = LOG_CHATS()
 
 
-@THANOSPRO.thanos_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@THANOSPRO.cat_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def monito_p_m_s(event):  # sourcery no-metrics
     if Config.PM_LOGGER_GROUP_ID == -100:
         return
@@ -67,7 +67,7 @@ async def monito_p_m_s(event):  # sourcery no-metrics
                 LOGS.warn(str(e))
 
 
-@THANOSPRO.thanos_cmd(incoming=True, func=lambda e: e.mentioned, edited=False, forword=None)
+@THANOSPRO.cat_cmd(incoming=True, func=lambda e: e.mentioned, edited=False, forword=None)
 async def log_tagged_messages(event):
     hmm = await event.get_chat()
     from .afk import AFK_
@@ -106,9 +106,9 @@ async def log_tagged_messages(event):
         )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="save(?:\s|$)([\s\S]*)",
-    command=("save", plugin_thanosegory),
+    command=("save", plugin_category),
     info={
         "header": "To log the replied message to bot log group so you can check later.",
         "description": "Set PRIVATE_GROUP_BOT_API_ID in vars for functioning of this",
@@ -137,9 +137,9 @@ async def log(log_text):
     await log_text.delete()
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="log$",
-    command=("log", plugin_thanosegory),
+    command=("log", plugin_category),
     info={
         "header": "To turn on logging of messages from that chat.",
         "description": "Set PM_LOGGER_GROUP_ID in vars to work this",
@@ -159,9 +159,9 @@ async def set_no_log_p_m(event):
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="nolog$",
-    command=("nolog", plugin_thanosegory),
+    command=("nolog", plugin_category),
     info={
         "header": "To turn off logging of messages from that chat.",
         "description": "Set PM_LOGGER_GROUP_ID in vars to work this",
@@ -181,9 +181,9 @@ async def set_no_log_p_m(event):
             )
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="pmlog (on|off)$",
-    command=("pmlog", plugin_thanosegory),
+    command=("pmlog", plugin_category),
     info={
         "header": "To turn on or turn off logging of Private messages in pmlogger group.",
         "description": "Set PM_LOGGER_GROUP_ID in vars to work this",
@@ -220,9 +220,9 @@ async def set_pmlog(event):
         await event.edit("`Pm logging is already disabled`")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="grplog (on|off)$",
-    command=("grplog", plugin_thanosegory),
+    command=("grplog", plugin_category),
     info={
         "header": "To turn on or turn off group tags logging in pmlogger group.",
         "description": "Set PM_LOGGER_GROUP_ID in vars to work this",

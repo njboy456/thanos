@@ -16,7 +16,7 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import get_user_from_event, reply_id
 from . import spamwatch
 
-plugin_thanosegory = "utils"
+plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
 
 
@@ -71,9 +71,9 @@ async def fetch_info(replied_user, event):
     return photo, caption
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="userinfo(?:\s|$)([\s\S]*)",
-    command=("userinfo", plugin_thanosegory),
+    command=("userinfo", plugin_category),
     info={
         "header": "Gets information of an user such as restrictions ban by spamwatch or cas.",
         "description": "That is like whether he banned is spamwatch or cas and small info like groups in common, dc ..etc.",
@@ -85,7 +85,7 @@ async def _(event):
     replied_user, reason = await get_user_from_event(event)
     if not replied_user:
         return
-    thanosevent = await edit_or_reply(event, "`Fetching userinfo wait....`")
+    catevent = await edit_or_reply(event, "`Fetching userinfo wait....`")
     FullUser = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     user_id = replied_user.id
     # some people have weird HTML in their names
@@ -139,12 +139,12 @@ async def _(event):
         sw,
         cas,
     )
-    await edit_or_reply(thanosevent, caption)
+    await edit_or_reply(catevent, caption)
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="whois(?:\s|$)([\s\S]*)",
-    command=("whois", plugin_thanosegory),
+    command=("whois", plugin_category),
     info={
         "header": "Gets info of an user.",
         "description": "User compelete details.",
@@ -158,11 +158,11 @@ async def who(event):
     replied_user, reason = await get_user_from_event(event)
     if not replied_user:
         return
-    thanos = await edit_or_reply(event, "`Fetching userinfo wait....`")
+    cat = await edit_or_reply(event, "`Fetching userinfo wait....`")
     try:
         photo, caption = await fetch_info(replied_user, event)
     except (AttributeError, TypeError):
-        return await edit_delete(thanos, "`Could not fetch info of that user.`")
+        return await edit_delete(cat, "`Could not fetch info of that user.`")
     message_id_to_reply = await reply_id(event)
     try:
         await event.client.send_file(
@@ -176,14 +176,14 @@ async def who(event):
         )
         if not photo.startswith("http"):
             os.remove(photo)
-        await thanos.delete()
+        await cat.delete()
     except TypeError:
-        await thanos.edit(caption, parse_mode="html")
+        await cat.edit(caption, parse_mode="html")
 
 
-@THANOSPRO.thanos_cmd(
+@THANOSPRO.cat_cmd(
     pattern="link(?:\s|$)([\s\S]*)",
-    command=("link", plugin_thanosegory),
+    command=("link", plugin_category),
     info={
         "header": "Generates a link to the user's PM .",
         "usage": "{tr}link <username/userid/reply>",
