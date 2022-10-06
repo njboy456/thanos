@@ -21,5 +21,5 @@ class Development(Config):
     SUDO_COMMAND_HAND_LER = "."
     # External plugins repo
     EXTERNAL_REPO = "https://github.com/rishabhanand2/thanos_plugins"
-    # if you need badcat plugins set "True"
-    THANOSABUSE = "False"
+    #don't edit this 
+    THANOSABUSE = "False"#don't edit this
