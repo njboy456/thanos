@@ -686,7 +686,7 @@ def get_poster(query):
     # Poster Link
     image = soup.find("link", attrs={"rel": "image_src"}).get("href", None)
     if image is not None:
-        # img_path = wget.download(image, os.path.join(Config.DOWNLOAD_LOCATION, 'imdb_poster.jpg'))
+        # img_path = wget.download(image, os.path.join(Config.DOWNLOAD_LOTHANOSSION, 'imdb_poster.jpg'))
         return image
 
 

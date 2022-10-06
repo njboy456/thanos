@@ -977,7 +977,7 @@ async def generate_credentials(gdrive):
         except json.JSONDecodeError:
             await edit_or_reply(
                 gdrive,
-                "**AUTHENTICATE - ERROR**\n\n"
+                "**AUTHENTITHANOSSE - ERROR**\n\n"
                 "**Status : **`BAD`\n"
                 "**Reason : **`G_DRIVE_DATA entity is not valid!`",
             )
@@ -987,7 +987,7 @@ async def generate_credentials(gdrive):
         if G_DRIVE_CLIENT_ID is None and G_DRIVE_CLIENT_SECRET is None:
             await edit_or_reply(
                 gdrive,
-                "**AUTHENTICATE - ERROR**\n\n"
+                "**AUTHENTITHANOSSE - ERROR**\n\n"
                 "**Status : **`BAD`\n"
                 "**Reason : **`please get your G_DRIVE_DATA`",
             )

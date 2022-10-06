@@ -27,7 +27,7 @@ class THANOSBroadcast(BASE):
 
 THANOSBroadcast.__table__.create(checkfirst=True)
 
-CATBROADCAST_INSERTION_LOCK = threading.RLock()
+THANOSSBROADCAST_INSERTION_LOCK = threading.RLock()
 
 
 class BROADCAST_SQL:
@@ -39,7 +39,7 @@ BROADCAST_SQL_ = BROADCAST_SQL()
 
 
 def add_to_broadcastlist(keywoard, group_id):
-    with CATBROADCAST_INSERTION_LOCK:
+    with THANOSSBROADCAST_INSERTION_LOCK:
         broadcast_group = THANOSBroadcast(keywoard, str(group_id))
 
         SESSION.merge(broadcast_group)
@@ -48,7 +48,7 @@ def add_to_broadcastlist(keywoard, group_id):
 
 
 def rm_from_broadcastlist(keywoard, group_id):
-    with CATBROADCAST_INSERTION_LOCK:
+    with THANOSSBROADCAST_INSERTION_LOCK:
         if broadcast_group := SESSION.query(THANOSBroadcast).get(
             (keywoard, str(group_id))
         ):
@@ -66,13 +66,13 @@ def rm_from_broadcastlist(keywoard, group_id):
 
 
 def is_in_broadcastlist(keywoard, group_id):
-    with CATBROADCAST_INSERTION_LOCK:
+    with THANOSSBROADCAST_INSERTION_LOCK:
         broadcast_group = SESSION.query(THANOSBroadcast).get((keywoard, str(group_id)))
         return bool(broadcast_group)
 
 
 def del_keyword_broadcastlist(keywoard):
-    with CATBROADCAST_INSERTION_LOCK:
+    with THANOSSBROADCAST_INSERTION_LOCK:
         broadcast_group = (
             SESSION.query(THANOSBroadcast.keywoard)
             .filter(THANOSBroadcast.keywoard == keywoard)

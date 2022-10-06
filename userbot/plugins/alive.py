@@ -52,7 +52,7 @@ async def amireallyalive(event):
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or " ✽ "
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✽ ᴛʜᴀɴᴏꜱ-ᴠᄅ ɪꜱ ᴀʟɪᴠᴇ ✽**"
-    CAT_IMG = gvarstatus("ALIVE_PIC")
+    THANOSS_IMG = gvarstatus("ALIVE_PIC")
     caption = cat_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         ANIME=ANIME,
@@ -65,9 +65,9 @@ async def amireallyalive(event):
         dbhealth=check_sgnirts,
         ping=ms,
     )
-    if CAT_IMG:
-        CAT = list(CAT_IMG.split())
-        PIC = random.choice(CAT)
+    if THANOSS_IMG:
+        THANOSS = list(THANOSS_IMG.split())
+        PIC = random.choice(THANOSS)
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=caption, reply_to=reply_to_id

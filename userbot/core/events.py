@@ -130,8 +130,8 @@ async def safe_check_text(msg):  # sourcery no-metrics
                 and Config.IBM_WATSON_CRED_PASSWORD in msg
             )
             or (
-                Config.TG_2STEP_VERIFICATION_CODE
-                and Config.TG_2STEP_VERIFICATION_CODE in msg
+                Config.TG_2STEP_VERIFITHANOSSION_CODE
+                and Config.TG_2STEP_VERIFITHANOSSION_CODE in msg
             )
         )
     )

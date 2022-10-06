@@ -68,8 +68,8 @@ async def _(event):
             ping=ms,
         )
         if PING_PIC:
-            CAT = list(PING_PIC.split())
-            PIC = random.choice(CAT)
+            THANOSS = list(PING_PIC.split())
+            PIC = random.choice(THANOSS)
             try:
                 await event.client.send_file(
                     event.chat_id, PIC, caption=caption, reply_to=reply_to_id

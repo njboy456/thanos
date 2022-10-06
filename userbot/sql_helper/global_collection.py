@@ -30,7 +30,7 @@ class THANOS_GlobalCollection(BASE):
 
 THANOS_GlobalCollection.__table__.create(checkfirst=True)
 
-CAT_GLOBALCOLLECTION = threading.RLock()
+THANOSS_GLOBALCOLLECTION = threading.RLock()
 
 
 class COLLECTION_SQL:
@@ -42,7 +42,7 @@ COLLECTION_SQL_ = COLLECTION_SQL()
 
 
 def add_to_collectionlist(keywoard, contents):
-    with CAT_GLOBALCOLLECTION:
+    with THANOSS_GLOBALCOLLECTION:
         keyword_items = THANOS_GlobalCollection(keywoard, tuple(contents))
 
         SESSION.merge(keyword_items)
@@ -51,7 +51,7 @@ def add_to_collectionlist(keywoard, contents):
 
 
 def rm_from_collectionlist(keywoard, contents):
-    with CAT_GLOBALCOLLECTION:
+    with THANOSS_GLOBALCOLLECTION:
         if keyword_items := SESSION.query(THANOS_GlobalCollection).get(
             (keywoard, tuple(contents))
         ):
@@ -68,13 +68,13 @@ def rm_from_collectionlist(keywoard, contents):
 
 
 def is_in_collectionlist(keywoard, contents):
-    with CAT_GLOBALCOLLECTION:
+    with THANOSS_GLOBALCOLLECTION:
         keyword_items = COLLECTION_SQL_.CONTENTS_LIST.get(keywoard, set())
         return any(tuple(contents) == list1 for list1 in keyword_items)
 
 
 def del_keyword_collectionlist(keywoard):
-    with CAT_GLOBALCOLLECTION:
+    with THANOSS_GLOBALCOLLECTION:
         keyword_items = (
             SESSION.query(THANOS_GlobalCollection.keywoard)
             .filter(THANOS_GlobalCollection.keywoard == keywoard)

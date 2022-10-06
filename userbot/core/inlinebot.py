@@ -130,8 +130,8 @@ async def article_builder(event, method):
         buttons = [Button.inline(text="Show Options.", data="show_pmpermit_options")]
         PM_PIC = gvarstatus("pmpermit_pic")
         if PM_PIC:
-            CAT = [x for x in PM_PIC.split()]
-            PIC = list(CAT)
+            THANOSS = [x for x in PM_PIC.split()]
+            PIC = list(THANOSS)
             media = random.choice(PIC)
 
     elif method == "ialive":
@@ -153,12 +153,12 @@ async def article_builder(event, method):
         ALIVE_PIC = gvarstatus("ALIVE_PIC")
         IALIVE_PIC = gvarstatus("IALIVE_PIC")
         if IALIVE_PIC:
-            CAT = [x for x in IALIVE_PIC.split()]
-            PIC = list(CAT)
+            THANOSS = [x for x in IALIVE_PIC.split()]
+            PIC = list(THANOSS)
             media = random.choice(PIC)
         if not IALIVE_PIC and ALIVE_PIC:
-            CAT = [x for x in ALIVE_PIC.split()]
-            PIC = list(CAT)
+            THANOSS = [x for x in ALIVE_PIC.split()]
+            PIC = list(THANOSS)
             media = random.choice(PIC)
 
     elif method == "spotify":

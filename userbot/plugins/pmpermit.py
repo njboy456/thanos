@@ -149,15 +149,15 @@ Don't spam my inbox. say reason and wait until my response.__"""
             msg = await results[0].click(chat.id, reply_to=reply_to_id, hide_via=True)
         else:
             if PM_PIC := gvarstatus("pmpermit_pic"):
-                CAT = list(PM_PIC.split())
-                PIC = list(CAT)
-                CAT_IMG = random.choice(PIC)
+                THANOSS = list(PM_PIC.split())
+                PIC = list(THANOSS)
+                THANOSS_IMG = random.choice(PIC)
             else:
-                CAT_IMG = None
-            if CAT_IMG is not None:
+                THANOSS_IMG = None
+            if THANOSS_IMG is not None:
                 msg = await event.client.send_file(
                     chat.id,
-                    CAT_IMG,
+                    THANOSS_IMG,
                     caption=USER_BOT_NO_WARN,
                     reply_to=reply_to_id,
                     force_document=False,

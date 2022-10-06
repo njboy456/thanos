@@ -256,16 +256,16 @@ async def verifyLoggerGroup():
 
 
 async def install_externalrepo(repo, branch, cfolder):
-    CATREPO = repo
+    THANOSSREPO = repo
     rpath = os.path.join(cfolder, "requirements.txt")
-    if CATBRANCH := branch:
-        repourl = os.path.join(CATREPO, f"tree/{CATBRANCH}")
-        gcmd = f"git clone -b {CATBRANCH} {CATREPO} {cfolder}"
-        errtext = f"There is no branch with name `{CATBRANCH}` in your external repo {CATREPO}. Recheck branch name and correct it in vars(`EXTERNAL_REPO_BRANCH`)"
+    if THANOSSBRANCH := branch:
+        repourl = os.path.join(THANOSSREPO, f"tree/{THANOSSBRANCH}")
+        gcmd = f"git clone -b {THANOSSBRANCH} {THANOSSREPO} {cfolder}"
+        errtext = f"There is no branch with name `{THANOSSBRANCH}` in your external repo {THANOSSREPO}. Recheck branch name and correct it in vars(`EXTERNAL_REPO_BRANCH`)"
     else:
-        repourl = CATREPO
-        gcmd = f"git clone {CATREPO} {cfolder}"
-        errtext = f"The link({CATREPO}) you provided for `EXTERNAL_REPO` in vars is invalid. please recheck that link"
+        repourl = THANOSSREPO
+        gcmd = f"git clone {THANOSSREPO} {cfolder}"
+        errtext = f"The link({THANOSSREPO}) you provided for `EXTERNAL_REPO` in vars is invalid. please recheck that link"
     response = urllib.request.urlopen(repourl)
     if response.code != 200:
         LOGS.error(errtext)

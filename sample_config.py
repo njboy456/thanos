@@ -120,7 +120,7 @@ class Config(object):
     G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA", None)
     G_DRIVE_INDEX_LINK = os.environ.get("G_DRIVE_INDEX_LINK", None)
     # For transfer channel 2 step verification code of telegram
-    TG_2STEP_VERIFICATION_CODE = os.environ.get("TG_2STEP_VERIFICATION_CODE", None)
+    TG_2STEP_VERIFITHANOSSION_CODE = os.environ.get("TG_2STEP_VERIFITHANOSSION_CODE", None)
     # JustWatch Country for watch plugin
     WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "IN")
     # Last.fm plugin  https://telegra.ph/Guide-for-LASTFM-02-03

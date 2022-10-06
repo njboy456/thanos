@@ -27,7 +27,7 @@ class THANOSGloballist(BASE):
 
 THANOSGloballist.__table__.create(checkfirst=True)
 
-CATGLOBALLIST_INSERTION_LOCK = threading.RLock()
+THANOSSGLOBALLIST_INSERTION_LOCK = threading.RLock()
 
 
 class GLOBALLIST_SQL:
@@ -39,7 +39,7 @@ GLOBALLIST_SQL_ = GLOBALLIST_SQL()
 
 
 def add_to_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
+    with THANOSSGLOBALLIST_INSERTION_LOCK:
         broadcast_group = THANOSGloballist(keywoard, str(group_id))
         SESSION.merge(broadcast_group)
         SESSION.commit()
@@ -47,7 +47,7 @@ def add_to_list(keywoard, group_id):
 
 
 def rm_from_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
+    with THANOSSGLOBALLIST_INSERTION_LOCK:
         if broadcast_group := SESSION.query(THANOSGloballist).get(
             (keywoard, str(group_id))
         ):
@@ -64,13 +64,13 @@ def rm_from_list(keywoard, group_id):
 
 
 def is_in_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
+    with THANOSSGLOBALLIST_INSERTION_LOCK:
         broadcast_group = SESSION.query(THANOSGloballist).get((keywoard, str(group_id)))
         return bool(broadcast_group)
 
 
 def del_keyword_list(keywoard):
-    with CATGLOBALLIST_INSERTION_LOCK:
+    with THANOSSGLOBALLIST_INSERTION_LOCK:
         broadcast_group = (
             SESSION.query(THANOSGloballist.keywoard)
             .filter(THANOSGloballist.keywoard == keywoard)
