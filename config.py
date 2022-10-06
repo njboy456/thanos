@@ -20,6 +20,6 @@ class Development(Config):
     # command hanler for sudo
     SUDO_COMMAND_HAND_LER = "."
     # External plugins repo
-    EXTERNAL_REPO = "https://github.com/rishabhanand2/cat_plugins"
+    EXTERNAL_REPO = "https://github.com/rishabhanand2/tha_plugins"
     #don't edit this 
     THANOSABUSE = "False"#don't edit this

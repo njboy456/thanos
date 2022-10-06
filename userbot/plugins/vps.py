@@ -127,7 +127,7 @@ async def variable(event):  # sourcery no-metrics
         if variable not in var_checker:
             if variable == "EXTERNAL_REPO":
                 if bool(value and (value.lower() != "false")) and not url(value):
-                    value = "https://github.com/rishabhanand2/cat_plugins"
+                    value = "https://github.com/rishabhanand2/tha_plugins"
                 else:
                     return await edit_or_reply(
                         cat,
