@@ -17,6 +17,8 @@ class Development(Config):
     PRIVATE_GROUP_BOT_API_ID = -1001623978356
     # command handler
     COMMAND_HAND_LER = "."
+    VCMODE = "True"
+    VC_SESSION = "1AZWarzwBu2-D4d54xwEvVk3RZWj3KNvOjg5R_wBa-tskXU0Ar5WvaMGABzQIgAWCnzLF_hIZVA-zlyBy5TeLNKqBGj_MddvQ7ZBhzJzAMNqxqq6QqB7EcdYLknN_v_PqB-I3r1NsnJhX8ISf5VIRwg2nBPOh2Kbar0BMPkNjXzNE8orgLKkuAXkdHg84YzAjv1nTKoBznL_9xjnWoCtd5TphbJa2wdw0npaKjq1jFBgmo3iCra3F8C7CgNfQRH3WrxMaemGwn8D8wafAy5CqrfEUCnN8xZvV8x-6twPtIIlCBD3BU3E-oWqoimlZ3KPREGHvs_U-XdTdM8EmAV7162SgcFpkKmo="
     # command hanler for sudo
     SUDO_COMMAND_HAND_LER = "."
     # External plugins repo
