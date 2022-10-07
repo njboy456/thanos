@@ -8,7 +8,7 @@ class Development(Config):
     # the name to display in your alive message
     ALIVE_NAME = "rishabh"
     # create any PostgreSQL database (i recommend to use elephantsql) and paste that link here
-    DB_URI = "postgres://hwtxqqfc:U_QHjE6TByrb8MVJOuEcfDod9FXa1BkN@satao.db.elephantsql.com/hwtxqqfc"
+    DB_URI = "postgres://sphdgasx:XS6xp4XCyq2nO4awAr3GjTnfnuTYUYrK@satao.db.elephantsql.com/sphdgasx"
     # After cloning the repo and installing requirements do python3 stringsetup.py an fill that value with this
     STRING_SESSION = "1BVtsOLcBuyHRWi44e2v7PDIn-F-0cHhfPRVKEzAWzjomfEODbE4IRifTXW9a9Qrg4cFX1aSFCJhfAeg-8GWUVLS1V6mqk2yRB-VbjDa2suVmrnGPfp7HjpPOWSHECee3AKjHFX_nw6gSC_145D5KMWBfYFx-xL02sOeA0gtSZMwM8dUAClbiqTVAxS8x9-ujW4mah2hhomSzCm7c0uMNTdy3Mtuo6jaGEWbt3X8M4DribhQQttHzlzLLR8oICL9ru3ObbLIL4DkwLJtmlgAQcbKLmcO0hOpTzMeAydYhHJSHZZPKtuzrYk35_0ecS13lxfd7WjfH3vqtWIyL6M0WAZlRIBC0scg="
     # create a new bot in @botfather and fill the following vales with bottoken
