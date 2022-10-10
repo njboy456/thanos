@@ -7,8 +7,9 @@
 - and see full video 
 
 
-
-
+# support
+- [group](https://t.me/thanosprosss)
+- [channel](https://t.me/thanos_pro)
 
 credit 
 
