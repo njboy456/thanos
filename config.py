@@ -18,8 +18,8 @@ class Development(Config):
     PRIVATE_GROUP_BOT_API_ID = -1001638681164
     # command handler
     COMMAND_HAND_LER = "."
-    #VCMODE = "True" coming soon
-    #VC_SESSION = "-c0Dd93QxwMmz_NhhCrQO0SAT2rZFwXKBGnCNppbZDFLf7sgGtF9XfPBzxuT1_lOr83jFiD--S7uSEXFagX7Kt3zJEVwDmpd3MhYVZ0lCZbtrIEMMxLEg="
+    VCMODE = "True"
+    VC_SESSION = "your assistant id session"
     # command hanler for sudo
     SUDO_COMMAND_HAND_LER = "."
     # External plugins repo
