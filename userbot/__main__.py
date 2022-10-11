@@ -692,7 +692,7 @@ async def externalrepo():
         #)
     if Config.VCMODE:
         await install_externalrepo(
-            "https://github.com/rishabhanand2/THANOSVCPLAYER", "test", "catvc"
+            "https://github.com/thanospros/THANOS-VC", "test", "catvc"
         )
 
 
